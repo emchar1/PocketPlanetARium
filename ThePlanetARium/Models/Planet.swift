@@ -11,66 +11,62 @@ import SceneKit
 
 struct Planet {
     let name: String
+
+    //Planet properties
     let node: SCNNode
-    let orbitalRadius: Float
     let position: SCNVector3
     let rotation: SCNVector3
     let speed: TimeInterval
+
+    //Orbital center properties
+    let orbitalCenterNode: SCNNode
+    let orbitalCenterPosition: SCNVector3
+    let orbitalCenterRotation: SCNVector3
+    let orbitalCenterSpeed: TimeInterval
+    
     static var coordinateAngles = 16
     
-    init(name: String, planetRadius: Float, orbitalRadius: Float, position: SCNVector3, rotation: SCNVector3, speed: TimeInterval) {
+    
+    init(name: String, radius: Float, position: SCNVector3, rotation: SCNVector3, speed: TimeInterval, orbitalCenterPosition: SCNVector3, orbitalCenterRotation: SCNVector3, orbitalCenterSpeed: TimeInterval) {
+        
         self.name = name
-        self.orbitalRadius = orbitalRadius
         self.position = position
         self.rotation = rotation
         self.speed = speed
-
-        let sphere = SCNSphere(radius: CGFloat(planetRadius))
+        self.orbitalCenterPosition = orbitalCenterPosition
+        self.orbitalCenterRotation = orbitalCenterRotation
+        self.orbitalCenterSpeed = orbitalCenterSpeed
+        
+        //Set up planet
+        let planet = SCNSphere(radius: CGFloat(radius))
         let material = SCNMaterial()
         material.diffuse.contents = UIImage(named: "art.scnassets/" + name.lowercased() + ".jpg") ?? UIColor.white.withAlphaComponent(0.8)
-        sphere.materials = [material]
+        planet.materials = [material]
         
-        //Include orbitalRadius in the z-coordinate, which will place the initial position at the far end of the orbital path, i.e. in front of the camera.
+        //Set up planet node
         self.node = SCNNode()
-        node.position = SCNVector3(position.x, position.y, position.z - orbitalRadius)
-        node.geometry = sphere
+        node.position = position
+        node.geometry = planet
+        
+        //Set up orbital center node
+        self.orbitalCenterNode = SCNNode()
+        orbitalCenterNode.position = orbitalCenterPosition
     }
     
     func animate() {
-        let rotationAction = SCNAction.rotateBy(x: CGFloat(rotation.x), y: CGFloat(rotation.y), z: CGFloat(rotation.z), duration: speed)
-        var groupActions = [SCNAction]()
-
-        print("***** \(name), orbital radius: \(orbitalRadius), initial position: (\(position.x), \(position.z)), initial node position: (\(node.position.x), \(node.position.z))")
-
-        for angle in 1...Planet.coordinateAngles {
-            let angleRad = Float(2 * angle) * (.pi / Float(Planet.coordinateAngles))
-            let revolutionAction = SCNAction.move(to: SCNVector3(position.x + orbitalRadius * sin(angleRad),
-                                                                 position.y,
-                                                                 position.z - orbitalRadius * cos(angleRad)),
-                                                  duration: speed)
-            
-            groupActions.append(SCNAction.group([rotationAction, revolutionAction]))
-
-            debugAnimation(angleRad: angleRad)
-        }
-
-        let moveSequence = SCNAction.sequence(groupActions)
+        let orbitalCenterRotationAction = SCNAction.rotateBy(x: CGFloat(orbitalCenterRotation.x),
+                                                     y: CGFloat(orbitalCenterRotation.y),
+                                                     z: CGFloat(orbitalCenterRotation.z),
+                                                     duration: orbitalCenterSpeed)
+        orbitalCenterNode.runAction(SCNAction.repeatForever(orbitalCenterRotationAction))
         
-        node.runAction(SCNAction.repeatForever(moveSequence))
-    }
-    
-    private func debugAnimation(angleRad: Float) {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        formatter.minimumFractionDigits = 2
-        formatter.maximumFractionDigits = 2
-
-        let angle = formatter.string(from: NSNumber(value: angleRad * 180 / .pi)) ?? "nil"
-        let sinx = formatter.string(from: NSNumber(value: sin(angleRad))) ?? "nil"
-        let cosz = formatter.string(from: NSNumber(value: cos(angleRad))) ?? "nil"
-        let posx = formatter.string(from: NSNumber(value: position.x + orbitalRadius * sin(angleRad))) ?? "nil"
-        let posz = formatter.string(from: NSNumber(value: position.z + orbitalRadius * cos(angleRad))) ?? "nil"
-
-        print("angle: \(angle), sin.x: \(sinx), cos.z: \(cosz), pos.x: \(posx), pos.z: \(posz)")
+        let rotationAction = SCNAction.rotateBy(x: CGFloat(rotation.x),
+                                                y: CGFloat(rotation.y),
+                                                z: CGFloat(rotation.z),
+                                                duration: speed)
+        node.runAction(SCNAction.repeatForever(rotationAction))
+        
+        //This is where the magic happens
+        orbitalCenterNode.addChildNode(node)
     }
 }
