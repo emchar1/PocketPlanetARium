@@ -44,7 +44,7 @@ struct Planet {
         self.node = SCNNode()
         node.position = position
         node.geometry = planet
-        node.runAction(SCNAction.rotateTo(x: 0, y: 0, z: CGFloat(tilt), duration: 0))
+        node.runAction(SCNAction.rotateTo(x: 0, y: 0, z: CGFloat(tilt), duration: 0), forKey: "tiltPlanet")
         
         //Set up orbital center node
         self.orbitalCenterNode = SCNNode()
@@ -74,33 +74,64 @@ struct Planet {
                   orbitalCenterRotationSpeed: orbitalCenterRotationSpeed)
     }
     
+    /**
+     Animates a planet object by setting its rotation and revolution (orbital rotation) actions.
+     */
     func animate() {
         let orbitalCenterRotationAction = SCNAction.rotateBy(x: 0,
                                                              y: orbitalCenterRotationSpeed == nil ? 0 : CGFloat(Planet.revolution),
                                                              z: 0,
                                                              duration: orbitalCenterRotationSpeed == nil ? 1 : orbitalCenterRotationSpeed!)
-        orbitalCenterNode.runAction(SCNAction.repeatForever(orbitalCenterRotationAction))
+        orbitalCenterNode.runAction(SCNAction.repeatForever(orbitalCenterRotationAction), forKey: "revolvePlanet")
         
         let rotationAction = SCNAction.rotateBy(x: 0,
                                                 y: CGFloat(Planet.revolution),
                                                 z: 0,
                                                 duration: rotationSpeed)
-        node.runAction(SCNAction.repeatForever(rotationAction))
+        node.runAction(SCNAction.repeatForever(rotationAction), forKey: "rotatePlanet")
     }
     
+    /**
+     Return the node of the planet's orbital center.
+     */
     func getNode() -> SCNNode {
         return orbitalCenterNode
     }
     
+    /**
+     Returns the SCNVector3 value of the orbital center's position.
+     */
     func getPosition() -> SCNVector3 {
         return orbitalCenterPosition
     }
     
-    mutating func setRotationSpeed(to rotationSpeed: TimeInterval) {
-        self.rotationSpeed = rotationSpeed
+    /**
+     Returns all SCNActions currently tied to the planet.
+     */
+    func getAllPlanetActions() -> [SCNAction] {
+        var actions = [SCNAction]()
+
+        //Get all actions for the orbital center node.
+        for key in orbitalCenterNode.actionKeys {
+            actions.append(orbitalCenterNode.action(forKey: key)!)
+        }
+        
+        //Get all actions for the planet node.
+        for key in node.actionKeys {
+            actions.append(node.action(forKey: key)!)
+        }
+
+        return actions
     }
         
-    func addChildNode(_ node: SCNNode) {
-        self.orbitalCenterNode.addChildNode(node)
+//    mutating func setRotationSpeed(to rotationSpeed: TimeInterval) {
+//        self.rotationSpeed = rotationSpeed
+//    }
+        
+    /**
+     Adds another planet's orbital center node to the current planet's node. This is how you get the moon to revolve around the Earth, for example.
+     */
+    func addChildNode(_ planet: Planet) {
+        self.orbitalCenterNode.addChildNode(planet.getNode())
     }
 }

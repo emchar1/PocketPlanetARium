@@ -13,6 +13,8 @@ import ARKit
 class PlanetARiumController: UIViewController {
 
     @IBOutlet var sceneView: ARSCNView!
+    @IBOutlet weak var speedSlider: UISlider!
+    @IBOutlet weak var scaleSlider: UISlider!
     
     var planetarium = PlanetARium()
     
@@ -24,7 +26,12 @@ class PlanetARiumController: UIViewController {
         sceneView.showsStatistics = true
         sceneView.autoenablesDefaultLighting = true
         
-        planetarium.addPlanets(earthRadius: 0.02, earthDistance: -0.2, earthDay: 3, earthYear: 15, toNode: sceneView)
+        speedSlider.minimumValue = 0.002
+        speedSlider.value = 0.002
+        scaleSlider.minimumValue = 0.002 * 0.1
+        
+        planetarium.addPlanets(earthRadius: 0.02, earthDistance: -0.2, earthYear: 365 / 64, toNode: sceneView)
+        planetarium.resumeActions(at: speedSlider.value)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,14 +46,32 @@ class PlanetARiumController: UIViewController {
         
         sceneView.session.pause()
     }
+    @IBAction func pausePressed(_ sender: UIBarButtonItem) {
+        
+    }
     
+    @IBAction func changeSpeedPressed(_ sender: UISlider) {
+        planetarium.resumeActions(at: speedSlider.value)
+    }
+    
+    @IBAction func changeScalePressed(_ sender: UISlider) {
+//        print(sender.value)
+        if sender.value >= 0 {
+            planetarium.removePlanets(from: sceneView)
+            planetarium.addPlanets(size: sender.value, distance: sender.value, speed: 1, toNode: sceneView)
+            planetarium.resumeActions(at: speedSlider.value)
+        }
+    }
     
     // MARK: - Gesture Interaction
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        planetarium.pauseActions()
+        
 //        guard let touch = touches.first else {
 //            return
 //        }
+//
 //
 //        let touchLocation = touch.location(in: sceneView)
 //        let hitTestResults = sceneView.hitTest(touchLocation, types: .featurePoint)
@@ -63,6 +88,10 @@ class PlanetARiumController: UIViewController {
 //                }
 //            }
 //        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        planetarium.resumeActions(at: speedSlider.value)
     }
 
 }
