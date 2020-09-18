@@ -32,10 +32,11 @@ struct PlanetARium {
         //Set up the sun and planets
         sun.setRotationSpeed(to: earthDay * 27)
         
+        
         planets["Mercury"] = Planet(name: "Mercury",
                                     radius: earthRadius * 0.38,
                                     tilt: 0,
-                                    position: SCNVector3(-sind(0) * earthDistance * 0.39, 0, cosd(0) * earthDistance * 0.39),
+                                    positionAngle: (0, earthDistance * 0.39),
                                     rotationSpeed: earthDay * 58,
                                     orbitalCenterPosition: sun.getPosition(),
                                     orbitalCenterRotationSpeed: earthYear * 0.24)
@@ -43,7 +44,7 @@ struct PlanetARium {
         planets["Venus"] = Planet(name: "Venus",
                                   radius: earthRadius * 0.95,
                                   tilt: toRadians(177),
-                                  position: SCNVector3(-sind(0.8) * earthDistance * 0.72, 0, cosd(0.8) * earthDistance * 0.72),
+                                  positionAngle: (toRadians(0.8), earthDistance * 0.72),
                                   rotationSpeed: earthDay * 243,
                                   orbitalCenterPosition: sun.getPosition(),
                                   orbitalCenterRotationSpeed: earthYear * 0.62)
@@ -51,7 +52,7 @@ struct PlanetARium {
         planets["Earth"] = Planet(name: "Earth",
                                   radius: earthRadius,
                                   tilt: toRadians(23),
-                                  position: SCNVector3(-sind(2) * earthDistance, 0, cosd(2) * earthDistance),
+                                  positionAngle: (toRadians(2), earthDistance),
                                   rotationSpeed: earthDay,
                                   orbitalCenterPosition: sun.getPosition(),
                                   orbitalCenterRotationSpeed: earthYear)
@@ -67,7 +68,7 @@ struct PlanetARium {
         planets["Mars"] = Planet(name: "Mars",
                                  radius: earthRadius * 0.53,
                                  tilt: toRadians(25),
-                                 position: SCNVector3(-sind(2.8) * earthDistance * 1.52, 0, cosd(2.8) * earthDistance * 1.52),
+                                 positionAngle: (toRadians(2.8), earthDistance * 1.52),
                                  rotationSpeed: earthDay * 1.04,
                                  orbitalCenterPosition: sun.getPosition(),
                                  orbitalCenterRotationSpeed: earthYear * 1.88)
@@ -75,7 +76,7 @@ struct PlanetARium {
         planets["Jupiter"] = Planet(name: "Jupiter",
                                     radius: earthRadius * 11.21,
                                     tilt: toRadians(3),
-                                    position: SCNVector3(-sind(4.7) * earthDistance * 5.2, 0, cosd(4.7) * earthDistance * 5.2),
+                                    positionAngle: (toRadians(4.7), earthDistance * 5.2),
                                     rotationSpeed: earthDay * 0.42,
                                     orbitalCenterPosition: sun.getPosition(),
                                     orbitalCenterRotationSpeed: earthYear * 11.87)
@@ -83,7 +84,7 @@ struct PlanetARium {
         planets["Saturn"] = Planet(name: "Saturn",
                                    radius: earthRadius * 9.45,
                                    tilt: toRadians(27),
-                                   position: SCNVector3(-sind(13) * earthDistance * 9.58, 0, cosd(13) * earthDistance * 9.58),
+                                   positionAngle: (toRadians(13), earthDistance * 9.58),
                                    rotationSpeed: earthDay * 0.46,
                                    orbitalCenterPosition: sun.getPosition(),
                                    orbitalCenterRotationSpeed: earthYear * 29.44)
@@ -91,7 +92,7 @@ struct PlanetARium {
         planets["Uranus"] = Planet(name: "Uranus",
                                    radius: earthRadius * 4.01,
                                    tilt: toRadians(98),
-                                   position: SCNVector3(-sind(21) * earthDistance * 19.18, 0, cosd(21) * earthDistance * 19.18),
+                                   positionAngle: (toRadians(21), earthDistance * 19.18),
                                    rotationSpeed: earthDay * 0.71,
                                    orbitalCenterPosition: sun.getPosition(),
                                    orbitalCenterRotationSpeed: earthYear * 83.81)
@@ -99,7 +100,7 @@ struct PlanetARium {
         planets["Neptune"] = Planet(name: "Neptune",
                                     radius: earthRadius * 3.88,
                                     tilt: toRadians(23),
-                                    position: SCNVector3(-sind(29) * earthDistance * 30.03, 0, cosd(29) * earthDistance * 30.03),
+                                    positionAngle: (toRadians(29), earthDistance * 30.03),
                                     rotationSpeed: earthDay * 0.67,
                                     orbitalCenterPosition: sun.getPosition(),
                                     orbitalCenterRotationSpeed: earthYear * 163.84)

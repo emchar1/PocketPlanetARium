@@ -64,6 +64,16 @@ struct Planet {
                   orbitalCenterRotationSpeed: nil)
     }
     
+    init(name: String, radius: Float, tilt: Float, positionAngle: (angle: Float, multiplier: Float), rotationSpeed: TimeInterval, orbitalCenterPosition: SCNVector3, orbitalCenterRotationSpeed: TimeInterval?) {
+        self.init(name: name,
+                  radius: radius,
+                  tilt: tilt,
+                  position: SCNVector3(x: -sin(positionAngle.angle) * positionAngle.multiplier, y: 0, z: cos(positionAngle.angle) * positionAngle.multiplier),
+                  rotationSpeed: rotationSpeed,
+                  orbitalCenterPosition: orbitalCenterPosition,
+                  orbitalCenterRotationSpeed: orbitalCenterRotationSpeed)
+    }
+    
     func animate() {
         let orbitalCenterRotationAction = SCNAction.rotateBy(x: 0,
                                                              y: orbitalCenterRotationSpeed == nil ? 0 : CGFloat(Planet.revolution),
