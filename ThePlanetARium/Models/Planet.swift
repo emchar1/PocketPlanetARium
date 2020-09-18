@@ -10,32 +10,29 @@ import Foundation
 import SceneKit
 
 struct Planet {
-    let name: String
+    private let name: String
 
     //Planet properties
-    let node: SCNNode
-    let position: SCNVector3
-    let rotation: SCNVector3
-    let speed: TimeInterval
+    private let node: SCNNode
+    private let position: SCNVector3
+    private let rotationSpeed: TimeInterval
 
     //Orbital center properties
-    let orbitalCenterNode: SCNNode
-    let orbitalCenterPosition: SCNVector3
-    let orbitalCenterRotation: SCNVector3
-    let orbitalCenterSpeed: TimeInterval
+    private let orbitalCenterNode: SCNNode
+    private let orbitalCenterPosition: SCNVector3
+    private let orbitalCenterRotationSpeed: TimeInterval?
     
     static var coordinateAngles = 16
+    static let revolution = 2 * Float.pi
     
     
-    init(name: String, radius: Float, position: SCNVector3, rotation: SCNVector3, speed: TimeInterval, orbitalCenterPosition: SCNVector3, orbitalCenterRotation: SCNVector3, orbitalCenterSpeed: TimeInterval) {
+    init(name: String, radius: Float, tilt: Float, position: SCNVector3, rotationSpeed: TimeInterval, orbitalCenterPosition: SCNVector3, orbitalCenterRotationSpeed: TimeInterval?) {
         
         self.name = name
         self.position = position
-        self.rotation = rotation
-        self.speed = speed
+        self.rotationSpeed = rotationSpeed
         self.orbitalCenterPosition = orbitalCenterPosition
-        self.orbitalCenterRotation = orbitalCenterRotation
-        self.orbitalCenterSpeed = orbitalCenterSpeed
+        self.orbitalCenterRotationSpeed = orbitalCenterRotationSpeed
         
         //Set up planet
         let planet = SCNSphere(radius: CGFloat(radius))
@@ -47,26 +44,45 @@ struct Planet {
         self.node = SCNNode()
         node.position = position
         node.geometry = planet
+        node.runAction(SCNAction.rotateTo(x: 0, y: 0, z: CGFloat(tilt), duration: 0))
         
         //Set up orbital center node
         self.orbitalCenterNode = SCNNode()
         orbitalCenterNode.position = orbitalCenterPosition
     }
     
+    init(name: String, radius: Float, tilt: Float, position: SCNVector3, rotationSpeed: TimeInterval) {
+        self.init(name: name,
+                  radius: radius,
+                  tilt: tilt,
+                  position: position,
+                  rotationSpeed: rotationSpeed,
+                  orbitalCenterPosition: position,
+                  orbitalCenterRotationSpeed: nil)
+    }
+    
     func animate() {
-        let orbitalCenterRotationAction = SCNAction.rotateBy(x: CGFloat(orbitalCenterRotation.x),
-                                                     y: CGFloat(orbitalCenterRotation.y),
-                                                     z: CGFloat(orbitalCenterRotation.z),
-                                                     duration: orbitalCenterSpeed)
+        let orbitalCenterRotationAction = SCNAction.rotateBy(x: 0,
+                                                             y: orbitalCenterRotationSpeed == nil ? 0 : CGFloat(Planet.revolution),
+                                                             z: 0,
+                                                             duration: orbitalCenterRotationSpeed == nil ? 1 : orbitalCenterRotationSpeed!)
         orbitalCenterNode.runAction(SCNAction.repeatForever(orbitalCenterRotationAction))
         
-        let rotationAction = SCNAction.rotateBy(x: CGFloat(rotation.x),
-                                                y: CGFloat(rotation.y),
-                                                z: CGFloat(rotation.z),
-                                                duration: speed)
+        let rotationAction = SCNAction.rotateBy(x: 0,
+                                                y: CGFloat(Planet.revolution),
+                                                z: 0,
+                                                duration: rotationSpeed)
         node.runAction(SCNAction.repeatForever(rotationAction))
         
         //This is where the magic happens
         orbitalCenterNode.addChildNode(node)
+    }
+    
+    func getNode() -> SCNNode {
+        return orbitalCenterNode
+    }
+        
+    func addChildNode(_ node: SCNNode) {
+        self.orbitalCenterNode.addChildNode(node)
     }
 }
