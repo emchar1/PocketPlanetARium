@@ -15,7 +15,7 @@ struct Planet {
     //Planet properties
     private let node: SCNNode
     private let position: SCNVector3
-    private let rotationSpeed: TimeInterval
+    private var rotationSpeed: TimeInterval
 
     //Orbital center properties
     private let orbitalCenterNode: SCNNode
@@ -49,6 +49,9 @@ struct Planet {
         //Set up orbital center node
         self.orbitalCenterNode = SCNNode()
         orbitalCenterNode.position = orbitalCenterPosition
+        
+        //Add the planet node to orbital center node
+        orbitalCenterNode.addChildNode(node)
     }
     
     init(name: String, radius: Float, tilt: Float, position: SCNVector3, rotationSpeed: TimeInterval) {
@@ -73,9 +76,6 @@ struct Planet {
                                                 z: 0,
                                                 duration: rotationSpeed)
         node.runAction(SCNAction.repeatForever(rotationAction))
-        
-        //This is where the magic happens
-        orbitalCenterNode.addChildNode(node)
     }
     
     func getNode() -> SCNNode {
@@ -84,6 +84,10 @@ struct Planet {
     
     func getPosition() -> SCNVector3 {
         return orbitalCenterPosition
+    }
+    
+    mutating func setRotationSpeed(to rotationSpeed: TimeInterval) {
+        self.rotationSpeed = rotationSpeed
     }
         
     func addChildNode(_ node: SCNNode) {

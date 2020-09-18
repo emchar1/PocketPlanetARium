@@ -24,7 +24,7 @@ class PlanetARiumController: UIViewController {
         sceneView.showsStatistics = true
         sceneView.autoenablesDefaultLighting = true
         
-        planetarium.addPlanets(earthRadius: 4, earthDistance: -20, earthDay: 25, earthYear: 9999, toNode: sceneView)
+        planetarium.addPlanets(earthRadius: 0.02, earthDistance: -0.2, earthDay: 3, earthYear: 15, toNode: sceneView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
