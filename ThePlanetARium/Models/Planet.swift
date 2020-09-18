@@ -81,6 +81,10 @@ struct Planet {
     func getNode() -> SCNNode {
         return orbitalCenterNode
     }
+    
+    func getPosition() -> SCNVector3 {
+        return orbitalCenterPosition
+    }
         
     func addChildNode(_ node: SCNNode) {
         self.orbitalCenterNode.addChildNode(node)

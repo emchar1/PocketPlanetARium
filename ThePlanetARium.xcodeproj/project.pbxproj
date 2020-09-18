@@ -14,6 +14,7 @@
 		EA5B0C00251055B300B1E910 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA5B0BFF251055B300B1E910 /* Assets.xcassets */; };
 		EA5B0C03251055B300B1E910 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA5B0C01251055B300B1E910 /* LaunchScreen.storyboard */; };
 		EA5B0C0B2510677E00B1E910 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5B0C0A2510677E00B1E910 /* Planet.swift */; };
+		EAC1F4D025149BD30097521A /* PlanetARium.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC1F4CF25149BD30097521A /* PlanetARium.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		EA5B0C02251055B300B1E910 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EA5B0C04251055B300B1E910 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA5B0C0A2510677E00B1E910 /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
+		EAC1F4CF25149BD30097521A /* PlanetARium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetARium.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				EA5B0C0A2510677E00B1E910 /* Planet.swift */,
+				EAC1F4CF25149BD30097521A /* PlanetARium.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -168,6 +171,7 @@
 			files = (
 				EA5B0C0B2510677E00B1E910 /* Planet.swift in Sources */,
 				EA5B0BFB251055B300B1E910 /* PlanetARiumController.swift in Sources */,
+				EAC1F4D025149BD30097521A /* PlanetARium.swift in Sources */,
 				EA5B0BF7251055B300B1E910 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
