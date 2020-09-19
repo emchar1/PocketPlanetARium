@@ -14,26 +14,33 @@ struct Planet {
 
     //Planet properties
     private let node: SCNNode
-    private let position: SCNVector3
-    private var rotationSpeed: TimeInterval
+    private let rotationSpeed: TimeInterval
 
     //Orbital center properties
     private let orbitalCenterNode: SCNNode
-    private let orbitalCenterPosition: SCNVector3
     private let orbitalCenterRotationSpeed: TimeInterval?
     
-    static var coordinateAngles = 16
+    static let coordinateAngles = 16
     static let revolution = 2 * Float.pi
     
     
     // MARK: - Initializers
     
+    /**
+     Creates a planet object and sets up the planet sphere, materials, node and orbital center nodes.
+     - parameters:
+        - name: planet's name
+        - radius: planet's radius in m
+        - tilt: planet's axial tilt
+        - position: planet's position with respect to its orbital center
+        - rotationSpeed: time in seconds to complete one rotation around a planet's axis
+        - orbitalCenterPosition: position of a planet's orbital center in space
+        - orbitalCenterRotationSpeed: time it takes planet to complete one revolution around its orbital center.
+     */
     init(name: String, radius: Float, tilt: Float, position: SCNVector3, rotationSpeed: TimeInterval, orbitalCenterPosition: SCNVector3, orbitalCenterRotationSpeed: TimeInterval?) {
         
         self.name = name
-        self.position = position
         self.rotationSpeed = rotationSpeed
-        self.orbitalCenterPosition = orbitalCenterPosition
         self.orbitalCenterRotationSpeed = orbitalCenterRotationSpeed
         
         //Set up planet
@@ -56,6 +63,17 @@ struct Planet {
         orbitalCenterNode.addChildNode(node)
     }
     
+    
+    
+    /**
+     Convenience init that creates a planet where its node = orbital center.
+     - parameters:
+         - name: planet's name
+         - radius: planet's radius in m
+         - tilt: planet's axial tilt
+         - position: planet's position with respect to its orbital center
+         - rotationSpeed: time in seconds to complete one rotation around a planet's axis
+     */
     init(name: String, radius: Float, tilt: Float, position: SCNVector3, rotationSpeed: TimeInterval) {
         self.init(name: name,
                   radius: radius,
@@ -66,11 +84,22 @@ struct Planet {
                   orbitalCenterRotationSpeed: nil)
     }
     
-    init(name: String, radius: Float, tilt: Float, positionAngle: (angle: Float, multiplier: Float), rotationSpeed: TimeInterval, orbitalCenterPosition: SCNVector3, orbitalCenterRotationSpeed: TimeInterval?) {
+    /**
+     Convenience init that sets the planet's position based on angular distance and hypotenuse.
+     - parameters:
+            - name: planet's name
+            - radius: planet's radius in m
+            - tilt: planet's axial tilt
+            - aPosition: planet's position determined by angular distance and hypotenuse
+            - rotationSpeed: time in seconds to complete one rotation around a planet's axis
+            - orbitalCenterPosition: position of a planet's orbital center in space
+            - orbitalCenterRotationSpeed: time it takes planet to complete one revolution around its orbital center.
+     */
+    init(name: String, radius: Float, tilt: Float, aPosition: (angle: Float, hypotenuse: Float), rotationSpeed: TimeInterval, orbitalCenterPosition: SCNVector3, orbitalCenterRotationSpeed: TimeInterval?) {
         self.init(name: name,
                   radius: radius,
                   tilt: tilt,
-                  position: SCNVector3(x: -sin(positionAngle.angle) * positionAngle.multiplier, y: 0, z: cos(positionAngle.angle) * positionAngle.multiplier),
+                  position: SCNVector3(x: -sin(aPosition.angle) * aPosition.hypotenuse, y: 0, z: cos(aPosition.angle) * aPosition.hypotenuse),
                   rotationSpeed: rotationSpeed,
                   orbitalCenterPosition: orbitalCenterPosition,
                   orbitalCenterRotationSpeed: orbitalCenterRotationSpeed)
@@ -101,11 +130,13 @@ struct Planet {
         
     /**
      Adds another planet's orbital center node to the current planet's orbital center node. This is how you get the moon to revolve around the Earth, for example.
+     - parameter planet: Planet object input
      */
     func addSatellite(_ planet: Planet) {
-        self.orbitalCenterNode.addChildNode(planet.getNode())
+        self.orbitalCenterNode.addChildNode(planet.getOrbitalCenterNode())
     }
     
+    //TEST*******
     func addRings(_ saturn: Planet) {
         
     }
@@ -114,19 +145,19 @@ struct Planet {
     // MARK: - Get Properties
     
     /**
-     Return the node of the planet's orbital center.
+     Returns the node of the planet.
      */
-    func getNode() -> SCNNode {
-        return orbitalCenterNode
+    func getnode() -> SCNNode {
+        return node
     }
     
     /**
-     Returns the SCNVector3 value of the orbital center's position.
+     Returns the node of the planet's orbital center.
      */
-    func getPosition() -> SCNVector3 {
-        return orbitalCenterPosition
+    func getOrbitalCenterNode() -> SCNNode {
+        return orbitalCenterNode
     }
-    
+        
     /**
      Returns all SCNActions currently tied to the planet.
      */

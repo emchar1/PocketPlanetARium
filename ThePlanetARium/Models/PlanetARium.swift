@@ -64,25 +64,25 @@ struct PlanetARium {
         planets["Mercury"] = Planet(name: "Mercury",
                                     radius: earthRadius * 0.38,
                                     tilt: 0,
-                                    positionAngle: (toRadians(5), earthDistance * 0.39),
+                                    aPosition: (toRadians(5), earthDistance * 0.39),
                                     rotationSpeed: (earthYear / 365) * 58,
-                                    orbitalCenterPosition: sun.getPosition(),
+                                    orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                                     orbitalCenterRotationSpeed: earthYear * 0.24)
         
         planets["Venus"] = Planet(name: "Venus",
                                   radius: earthRadius * 0.95,
                                   tilt: toRadians(177),
-                                  positionAngle: (toRadians(25), earthDistance * 0.72),
+                                  aPosition: (toRadians(25), earthDistance * 0.72),
                                   rotationSpeed: (earthYear / 365) * 243,
-                                  orbitalCenterPosition: sun.getPosition(),
+                                  orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                                   orbitalCenterRotationSpeed: earthYear * 0.62)
         
         planets["Earth"] = Planet(name: "Earth",
                                   radius: earthRadius,
                                   tilt: toRadians(23),
-                                  positionAngle: (toRadians(50), earthDistance),
+                                  aPosition: (toRadians(50), earthDistance),
                                   rotationSpeed: (earthYear / 365),
-                                  orbitalCenterPosition: sun.getPosition(),
+                                  orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                                   orbitalCenterRotationSpeed: earthYear)
         
         //        planets["Moon"] = Planet(name: "Moon",
@@ -96,45 +96,45 @@ struct PlanetARium {
         planets["Mars"] = Planet(name: "Mars",
                                  radius: earthRadius * 0.53,
                                  tilt: toRadians(25),
-                                 positionAngle: (toRadians(70), earthDistance * 1.52),
+                                 aPosition: (toRadians(70), earthDistance * 1.52),
                                  rotationSpeed: (earthYear / 365) * 1.04,
-                                 orbitalCenterPosition: sun.getPosition(),
+                                 orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                                  orbitalCenterRotationSpeed: earthYear * 1.88)
         
         planets["Jupiter"] = Planet(name: "Jupiter",
                                     radius: earthRadius * 11.21,
                                     tilt: toRadians(3),
-                                    positionAngle: (toRadians(100), earthDistance * 5.2),
+                                    aPosition: (toRadians(100), earthDistance * 5.2),
                                     rotationSpeed: (earthYear / 365) * 0.42,
-                                    orbitalCenterPosition: sun.getPosition(),
+                                    orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                                     orbitalCenterRotationSpeed: earthYear * 11.87)
         
         planets["Saturn"] = Planet(name: "Saturn",
                                    radius: earthRadius * 9.45,
                                    tilt: toRadians(27),
-                                   positionAngle: (toRadians(150), earthDistance * 9.58),
+                                   aPosition: (toRadians(150), earthDistance * 9.58),
                                    rotationSpeed: (earthYear / 365) * 0.46,
-                                   orbitalCenterPosition: sun.getPosition(),
+                                   orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                                    orbitalCenterRotationSpeed: earthYear * 29.44)
         
         planets["Uranus"] = Planet(name: "Uranus",
                                    radius: earthRadius * 4.01,
                                    tilt: toRadians(98),
-                                   positionAngle: (toRadians(180), earthDistance * 19.18),
+                                   aPosition: (toRadians(180), earthDistance * 19.18),
                                    rotationSpeed: (earthYear / 365) * 0.71,
-                                   orbitalCenterPosition: sun.getPosition(),
+                                   orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                                    orbitalCenterRotationSpeed: earthYear * 83.81)
         
         planets["Neptune"] = Planet(name: "Neptune",
                                     radius: earthRadius * 3.88,
                                     tilt: toRadians(23),
-                                    positionAngle: (toRadians(195), earthDistance * 30.03),
+                                    aPosition: (toRadians(195), earthDistance * 30.03),
                                     rotationSpeed: (earthYear / 365) * 0.67,
-                                    orbitalCenterPosition: sun.getPosition(),
+                                    orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                                     orbitalCenterRotationSpeed: earthYear * 163.84)
         
         sun.animate()
-        sceneView.scene.rootNode.addChildNode(sun.getNode())
+        sceneView.scene.rootNode.addChildNode(sun.getOrbitalCenterNode())
         
         for (_, planet) in planets {
             planet.animate()
