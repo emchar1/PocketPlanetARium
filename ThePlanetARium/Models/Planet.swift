@@ -26,6 +26,8 @@ struct Planet {
     static let revolution = 2 * Float.pi
     
     
+    // MARK: - Initializers
+    
     init(name: String, radius: Float, tilt: Float, position: SCNVector3, rotationSpeed: TimeInterval, orbitalCenterPosition: SCNVector3, orbitalCenterRotationSpeed: TimeInterval?) {
         
         self.name = name
@@ -74,6 +76,9 @@ struct Planet {
                   orbitalCenterRotationSpeed: orbitalCenterRotationSpeed)
     }
     
+    
+    // MARK: - Animation
+    
     /**
      Animates a planet object by setting its rotation and revolution (orbital rotation) actions.
      */
@@ -90,6 +95,23 @@ struct Planet {
                                                 duration: rotationSpeed)
         node.runAction(SCNAction.repeatForever(rotationAction), forKey: "rotatePlanet")
     }
+    
+    
+    // MARK: - Planet Customization Functions
+        
+    /**
+     Adds another planet's orbital center node to the current planet's orbital center node. This is how you get the moon to revolve around the Earth, for example.
+     */
+    func addSatellite(_ planet: Planet) {
+        self.orbitalCenterNode.addChildNode(planet.getNode())
+    }
+    
+    func addRings(_ saturn: Planet) {
+        
+    }
+
+    
+    // MARK: - Get Properties
     
     /**
      Return the node of the planet's orbital center.
@@ -122,16 +144,5 @@ struct Planet {
         }
 
         return actions
-    }
-        
-//    mutating func setRotationSpeed(to rotationSpeed: TimeInterval) {
-//        self.rotationSpeed = rotationSpeed
-//    }
-        
-    /**
-     Adds another planet's orbital center node to the current planet's node. This is how you get the moon to revolve around the Earth, for example.
-     */
-    func addChildNode(_ planet: Planet) {
-        self.orbitalCenterNode.addChildNode(planet.getNode())
     }
 }

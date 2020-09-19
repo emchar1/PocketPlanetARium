@@ -26,12 +26,15 @@ class PlanetARiumController: UIViewController {
         sceneView.showsStatistics = true
         sceneView.autoenablesDefaultLighting = true
         
-        speedSlider.minimumValue = 0.002
-        speedSlider.value = 0.002
-        scaleSlider.minimumValue = 0.002 * 0.1
-        
-        planetarium.addPlanets(earthRadius: 0.02, earthDistance: -0.2, earthYear: 365 / 64, toNode: sceneView)
-        planetarium.resumeActions(at: speedSlider.value)
+        scaleSlider.minimumValue = 0.123
+        scaleSlider.maximumValue = 1
+        speedSlider.minimumValue = 0.123
+        speedSlider.maximumValue = 1
+        scaleSlider.value = 0.2
+        speedSlider.value = scaleSlider.maximumValue - scaleSlider.value + scaleSlider.minimumValue
+
+        planetarium.addPlanets(scale: scaleSlider.value, toNode: sceneView)
+//        planetarium.resumeActions(for: speedSlider.value)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,28 +49,35 @@ class PlanetARiumController: UIViewController {
         
         sceneView.session.pause()
     }
+    
+    
+    // MARK: - UI Controls
+    
     @IBAction func pausePressed(_ sender: UIBarButtonItem) {
         
     }
     
-    @IBAction func changeSpeedPressed(_ sender: UISlider) {
-        planetarium.resumeActions(at: speedSlider.value)
+    @IBAction func speedChanged(_ sender: UISlider) {
+        planetarium.resumeActions(for: speedSlider.value)
     }
     
-    @IBAction func changeScalePressed(_ sender: UISlider) {
-//        print(sender.value)
+    @IBAction func scaleChanged(_ sender: UISlider) {
         if sender.value >= 0 {
+            speedSlider.value = scaleSlider.maximumValue - scaleSlider.value + scaleSlider.minimumValue
+            
+            //I don't like this. Is there a better way???
             planetarium.removePlanets(from: sceneView)
-            planetarium.addPlanets(size: sender.value, distance: sender.value, speed: 1, toNode: sceneView)
-            planetarium.resumeActions(at: speedSlider.value)
+            planetarium.addPlanets(scale: sender.value, toNode: sceneView)
+            planetarium.resumeActions(for: speedSlider.value)
         }
     }
     
+    
     // MARK: - Gesture Interaction
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        planetarium.pauseActions()
-        
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        planetarium.pauseActions()
+//
 //        guard let touch = touches.first else {
 //            return
 //        }
@@ -88,11 +98,11 @@ class PlanetARiumController: UIViewController {
 //                }
 //            }
 //        }
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        planetarium.resumeActions(at: speedSlider.value)
-    }
+//    }
+//
+//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        planetarium.resumeActions(at: speedSlider.value)
+//    }
 
 }
 

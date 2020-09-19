@@ -11,8 +11,10 @@ import SceneKit
 import ARKit
 
 struct PlanetARium {
-    var sun = Planet(name: "Sun", radius: 0.008, tilt: 0, position: SCNVector3(0, 0, -0.1), rotationSpeed: 1)
-    var planets: [String: Planet] = [:]
+    private let scaleFactor: Float = 3
+    private let scaleMinimum: Float = 0.123
+    private var sun: Planet?
+    private var planets: [String: Planet] = [:]
     
     
     // MARK: - Add/Remove Planets to Scene
@@ -20,8 +22,13 @@ struct PlanetARium {
     /**
      Convenience method(?) that calls addPlanets but normalizes the input parameters in a range of (0, 1]
      */
-    mutating func addPlanets(size: Float, distance: Float, speed: Float, toNode sceneView: ARSCNView) {
-        self.addPlanets(earthRadius: size * 3 / 0.1, earthDistance: distance * -20 / 0.1, earthYear: TimeInterval(speed) * (365 / 64), toNode: sceneView)
+    mutating func addPlanets(scale: Float, toNode sceneView: ARSCNView) {
+        let adjustedScale = scale < scaleMinimum ? pow(scaleMinimum, scaleFactor) : pow(scale, scaleFactor)
+                
+        self.addPlanets(earthRadius: adjustedScale * 3,
+                        earthDistance: adjustedScale * -20,
+                        earthYear: 365 / 64,
+                        toNode: sceneView)
     }
 
     /**
@@ -44,8 +51,15 @@ struct PlanetARium {
         
         
         //Set up the sun and planets
-        sun = Planet(name: "Sun", radius: 0.008, tilt: 0, position: SCNVector3(0, 0, -0.2), rotationSpeed: (earthYear / 365) * 27)
-//        sun.setRotationSpeed(to: (earthYear / 365) * 27)
+        sun = Planet(name: "Sun",
+                     radius: 0.008,
+                     tilt: 0,
+                     position: SCNVector3(0, 0, -0.2),
+                     rotationSpeed: (earthYear / 365) * 27)
+        guard let sun = sun else {
+            print("Sun was nil (this should not happen).")
+            return
+        }
         
         planets["Mercury"] = Planet(name: "Mercury",
                                     radius: earthRadius * 0.38,
@@ -124,7 +138,7 @@ struct PlanetARium {
         
         for (_, planet) in planets {
             planet.animate()
-            sun.addChildNode(planet)
+            sun.addSatellite(planet)
         }
     }
 
@@ -145,9 +159,9 @@ struct PlanetARium {
      Resumes any SCNActions at the given speed.
      - parameter speed: the speed setting of the SCNActions
      */
-    func resumeActions(at speed: Float = 1) {
+    func resumeActions(for speed: Float = 1) {
         for action in getAllActions() {
-            action.speed = CGFloat(speed)
+            action.speed = CGFloat(pow(speed, scaleFactor))
         }
     }
     
@@ -166,8 +180,10 @@ struct PlanetARium {
     private func getAllActions() -> [SCNAction] {
         var actions = [SCNAction]()
         
-        for action in sun.getAllPlanetActions() {
-            actions.append(action)
+        if let sun = sun {
+            for action in sun.getAllPlanetActions() {
+                actions.append(action)
+            }
         }
         
         for (_, planet) in planets {
