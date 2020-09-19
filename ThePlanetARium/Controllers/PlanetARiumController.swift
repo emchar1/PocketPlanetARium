@@ -15,6 +15,7 @@ class PlanetARiumController: UIViewController {
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var speedSlider: UISlider!
     @IBOutlet weak var scaleSlider: UISlider!
+    @IBOutlet weak var rotateSlider: UISlider!
     
     var planetarium = PlanetARium()
     
@@ -34,7 +35,7 @@ class PlanetARiumController: UIViewController {
         speedSlider.value = scaleSlider.maximumValue - scaleSlider.value + scaleSlider.minimumValue
 
         planetarium.addPlanets(scale: scaleSlider.value, toNode: sceneView)
-//        planetarium.resumeActions(for: speedSlider.value)
+        planetarium.resumeActions(for: speedSlider.value)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,6 +60,10 @@ class PlanetARiumController: UIViewController {
     
     @IBAction func speedChanged(_ sender: UISlider) {
         planetarium.resumeActions(for: speedSlider.value)
+    }
+    
+    @IBAction func rotateChanged(_ sender: UISlider) {
+    
     }
     
     @IBAction func scaleChanged(_ sender: UISlider) {

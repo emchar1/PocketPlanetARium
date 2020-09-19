@@ -20,13 +20,14 @@ struct PlanetARium {
     // MARK: - Add/Remove Planets to Scene
     
     /**
-     Convenience method(?) that calls addPlanets but normalizes the input parameters in a range of (0, 1]
+     Convenience method(?) that calls addPlanets but normalizes the input parameters in a range of (0, 1]. Can be used for slider input.
      */
     mutating func addPlanets(scale: Float, toNode sceneView: ARSCNView) {
         let adjustedScale = scale < scaleMinimum ? pow(scaleMinimum, scaleFactor) : pow(scale, scaleFactor)
                 
         self.addPlanets(earthRadius: adjustedScale * 3,
                         earthDistance: adjustedScale * -20,
+                        earthDay: 3,
                         earthYear: 365 / 64,
                         toNode: sceneView)
     }
@@ -39,7 +40,7 @@ struct PlanetARium {
         - earthYear: length of time it takes for the Earth to make one revolution around the sun, in seconds
         - sceneView: the scene view to add the sun and planets to
      */
-    mutating func addPlanets(earthRadius: Float, earthDistance: Float, earthYear: TimeInterval, toNode sceneView: ARSCNView) {
+    mutating func addPlanets(earthRadius: Float, earthDistance: Float, earthDay: TimeInterval, earthYear: TimeInterval, toNode sceneView: ARSCNView) {
         /**
          Helper function converts degrees value to radians.
          - parameter degrees: The degree value
@@ -55,7 +56,7 @@ struct PlanetARium {
                      radius: 0.008,
                      tilt: 0,
                      position: SCNVector3(0, 0, -0.2),
-                     rotationSpeed: (earthYear / 365) * 27)
+                     rotationSpeed: earthDay * 27)
         guard let sun = sun else {
             print("Sun was nil (this should not happen).")
             return
@@ -65,7 +66,7 @@ struct PlanetARium {
                                     radius: earthRadius * 0.38,
                                     tilt: 0,
                                     aPosition: (toRadians(5), earthDistance * 0.39),
-                                    rotationSpeed: (earthYear / 365) * 58,
+                                    rotationSpeed: earthDay * 58,
                                     orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                                     orbitalCenterRotationSpeed: earthYear * 0.24)
         
@@ -73,7 +74,7 @@ struct PlanetARium {
                                   radius: earthRadius * 0.95,
                                   tilt: toRadians(177),
                                   aPosition: (toRadians(25), earthDistance * 0.72),
-                                  rotationSpeed: (earthYear / 365) * 243,
+                                  rotationSpeed: earthDay * 243,
                                   orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                                   orbitalCenterRotationSpeed: earthYear * 0.62)
         
@@ -81,7 +82,7 @@ struct PlanetARium {
                                   radius: earthRadius,
                                   tilt: toRadians(23),
                                   aPosition: (toRadians(50), earthDistance),
-                                  rotationSpeed: (earthYear / 365),
+                                  rotationSpeed: earthDay,
                                   orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                                   orbitalCenterRotationSpeed: earthYear)
         
@@ -97,7 +98,7 @@ struct PlanetARium {
                                  radius: earthRadius * 0.53,
                                  tilt: toRadians(25),
                                  aPosition: (toRadians(70), earthDistance * 1.52),
-                                 rotationSpeed: (earthYear / 365) * 1.04,
+                                 rotationSpeed: earthDay * 1.04,
                                  orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                                  orbitalCenterRotationSpeed: earthYear * 1.88)
         
@@ -105,7 +106,7 @@ struct PlanetARium {
                                     radius: earthRadius * 11.21,
                                     tilt: toRadians(3),
                                     aPosition: (toRadians(100), earthDistance * 5.2),
-                                    rotationSpeed: (earthYear / 365) * 0.42,
+                                    rotationSpeed: earthDay * 0.42,
                                     orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                                     orbitalCenterRotationSpeed: earthYear * 11.87)
         
@@ -113,7 +114,7 @@ struct PlanetARium {
                                    radius: earthRadius * 9.45,
                                    tilt: toRadians(27),
                                    aPosition: (toRadians(150), earthDistance * 9.58),
-                                   rotationSpeed: (earthYear / 365) * 0.46,
+                                   rotationSpeed: earthDay * 0.46,
                                    orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                                    orbitalCenterRotationSpeed: earthYear * 29.44)
         
@@ -121,7 +122,7 @@ struct PlanetARium {
                                    radius: earthRadius * 4.01,
                                    tilt: toRadians(98),
                                    aPosition: (toRadians(180), earthDistance * 19.18),
-                                   rotationSpeed: (earthYear / 365) * 0.71,
+                                   rotationSpeed: earthDay * 0.71,
                                    orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                                    orbitalCenterRotationSpeed: earthYear * 83.81)
         
@@ -129,7 +130,7 @@ struct PlanetARium {
                                     radius: earthRadius * 3.88,
                                     tilt: toRadians(23),
                                     aPosition: (toRadians(195), earthDistance * 30.03),
-                                    rotationSpeed: (earthYear / 365) * 0.67,
+                                    rotationSpeed: earthDay * 0.67,
                                     orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                                     orbitalCenterRotationSpeed: earthYear * 163.84)
         

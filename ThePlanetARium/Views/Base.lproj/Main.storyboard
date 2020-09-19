@@ -36,14 +36,25 @@
                                     <action selector="speedChanged:" destination="BV1-FR-VrT" eventType="valueChanged" id="Civ-C1-36S"/>
                                 </connections>
                             </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="dKe-Lw-bLy">
+                                <rect key="frame" x="165" y="692" width="84" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="8xf-ov-9Gh"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="rotateChanged:" destination="BV1-FR-VrT" eventType="valueChanged" id="sEL-yE-vMs"/>
+                                </connections>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" id="GsS-dJ-CKf"/>
                             <constraint firstItem="9cc-HX-cQJ" firstAttribute="centerX" secondItem="U0K-SW-4ec" secondAttribute="centerX" id="Q9I-Gp-1ik"/>
+                            <constraint firstItem="dKe-Lw-bLy" firstAttribute="centerX" secondItem="U0K-SW-4ec" secondAttribute="centerX" id="Svw-bW-1m6"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="bottom" secondItem="fQZ-KI-GVf" secondAttribute="bottom" id="VpT-BR-CcM"/>
                             <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="fF2-tk-bDV" secondAttribute="bottom" constant="40" id="Xqf-5G-lf7"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="trailing" secondItem="fQZ-KI-GVf" secondAttribute="trailing" id="XyZ-9z-H8e"/>
+                            <constraint firstItem="9cc-HX-cQJ" firstAttribute="top" secondItem="dKe-Lw-bLy" secondAttribute="bottom" constant="20" id="jVP-0D-JKV"/>
                             <constraint firstItem="fF2-tk-bDV" firstAttribute="top" secondItem="9cc-HX-cQJ" secondAttribute="bottom" constant="20" id="p3b-WV-AtK"/>
                             <constraint firstItem="fF2-tk-bDV" firstAttribute="centerX" secondItem="U0K-SW-4ec" secondAttribute="centerX" id="pOK-xb-gN3"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="top" secondItem="U0K-SW-4ec" secondAttribute="top" id="rJc-2c-zQA"/>
@@ -58,6 +69,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="rotateSlider" destination="dKe-Lw-bLy" id="Jf7-NR-9av"/>
                         <outlet property="scaleSlider" destination="fF2-tk-bDV" id="bRx-Yq-R9i"/>
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
                         <outlet property="speedSlider" destination="9cc-HX-cQJ" id="oc8-Ln-tDq"/>
