@@ -17,8 +17,12 @@
                         <subviews>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BrB-h1-WRS">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="T5Z-3W-eZe" appends="YES" id="1wt-VJ-tWE"/>
+                                </connections>
                             </arscnView>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.123" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="fF2-tk-bDV">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="fF2-tk-bDV">
                                 <rect key="frame" x="80" y="792" width="254" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="3gc-zJ-Yzu"/>
@@ -27,55 +31,30 @@
                                     <action selector="scaleChanged:" destination="BV1-FR-VrT" eventType="valueChanged" id="R2l-s5-YOL"/>
                                 </connections>
                             </slider>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.02" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="9cc-HX-cQJ">
-                                <rect key="frame" x="148" y="742" width="118" height="31"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="114" id="OmZ-oy-oWd"/>
-                                </constraints>
-                                <connections>
-                                    <action selector="speedChanged:" destination="BV1-FR-VrT" eventType="valueChanged" id="Civ-C1-36S"/>
-                                </connections>
-                            </slider>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="dKe-Lw-bLy">
-                                <rect key="frame" x="165" y="692" width="84" height="31"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="8xf-ov-9Gh"/>
-                                </constraints>
-                                <connections>
-                                    <action selector="rotateChanged:" destination="BV1-FR-VrT" eventType="valueChanged" id="sEL-yE-vMs"/>
-                                </connections>
-                            </slider>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" id="GsS-dJ-CKf"/>
-                            <constraint firstItem="9cc-HX-cQJ" firstAttribute="centerX" secondItem="U0K-SW-4ec" secondAttribute="centerX" id="Q9I-Gp-1ik"/>
-                            <constraint firstItem="dKe-Lw-bLy" firstAttribute="centerX" secondItem="U0K-SW-4ec" secondAttribute="centerX" id="Svw-bW-1m6"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="bottom" secondItem="fQZ-KI-GVf" secondAttribute="bottom" id="VpT-BR-CcM"/>
                             <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="fF2-tk-bDV" secondAttribute="bottom" constant="40" id="Xqf-5G-lf7"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="trailing" secondItem="fQZ-KI-GVf" secondAttribute="trailing" id="XyZ-9z-H8e"/>
-                            <constraint firstItem="9cc-HX-cQJ" firstAttribute="top" secondItem="dKe-Lw-bLy" secondAttribute="bottom" constant="20" id="jVP-0D-JKV"/>
-                            <constraint firstItem="fF2-tk-bDV" firstAttribute="top" secondItem="9cc-HX-cQJ" secondAttribute="bottom" constant="20" id="p3b-WV-AtK"/>
                             <constraint firstItem="fF2-tk-bDV" firstAttribute="centerX" secondItem="U0K-SW-4ec" secondAttribute="centerX" id="pOK-xb-gN3"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="top" secondItem="U0K-SW-4ec" secondAttribute="top" id="rJc-2c-zQA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fQZ-KI-GVf"/>
                     </view>
-                    <navigationItem key="navigationItem" id="iqi-dg-1y1">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="play" catalog="system" id="74s-eq-SOt">
-                            <connections>
-                                <action selector="pausePressed:" destination="BV1-FR-VrT" id="dBS-Nr-ODc"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="iqi-dg-1y1"/>
                     <connections>
-                        <outlet property="rotateSlider" destination="dKe-Lw-bLy" id="Jf7-NR-9av"/>
                         <outlet property="scaleSlider" destination="fF2-tk-bDV" id="bRx-Yq-R9i"/>
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
-                        <outlet property="speedSlider" destination="9cc-HX-cQJ" id="oc8-Ln-tDq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
+                <pinchGestureRecognizer id="T5Z-3W-eZe">
+                    <connections>
+                        <action selector="handlePinch:" destination="BV1-FR-VrT" id="g0G-wb-3b6"/>
+                    </connections>
+                </pinchGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1042.0289855072465" y="73.660714285714278"/>
         </scene>
@@ -98,7 +77,4 @@
             <point key="canvasLocation" x="131.8840579710145" y="73.660714285714278"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="play" catalog="system" width="120" height="128"/>
-    </resources>
 </document>

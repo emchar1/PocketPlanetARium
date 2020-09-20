@@ -13,29 +13,29 @@ import ARKit
 class PlanetARiumController: UIViewController {
 
     @IBOutlet var sceneView: ARSCNView!
-    @IBOutlet weak var speedSlider: UISlider!
     @IBOutlet weak var scaleSlider: UISlider!
-    @IBOutlet weak var rotateSlider: UISlider!
     
     var planetarium = PlanetARium()
+
+    //Test for handlePinch
+    var scale = 0.5 {
+        didSet {
+            scale = min(max(scale, 0), 1)
+
+        }
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        scaleSlider.value = 0.5
+
         sceneView.delegate = self
-        sceneView.showsStatistics = true
+//        sceneView.showsStatistics = true
         sceneView.autoenablesDefaultLighting = true
         
-        scaleSlider.minimumValue = 0.123
-        scaleSlider.maximumValue = 1
-        speedSlider.minimumValue = 0.123
-        speedSlider.maximumValue = 1
-        scaleSlider.value = 0.2
-        speedSlider.value = scaleSlider.maximumValue - scaleSlider.value + scaleSlider.minimumValue
-
         planetarium.addPlanets(scale: scaleSlider.value, toNode: sceneView)
-        planetarium.resumeActions(for: speedSlider.value)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,31 +54,17 @@ class PlanetARiumController: UIViewController {
     
     // MARK: - UI Controls
     
-    @IBAction func pausePressed(_ sender: UIBarButtonItem) {
-        
-    }
-    
-    @IBAction func speedChanged(_ sender: UISlider) {
-        planetarium.resumeActions(for: speedSlider.value)
-    }
-    
-    @IBAction func rotateChanged(_ sender: UISlider) {
-    
-    }
-    
     @IBAction func scaleChanged(_ sender: UISlider) {
-        if sender.value >= 0 {
-            speedSlider.value = scaleSlider.maximumValue - scaleSlider.value + scaleSlider.minimumValue
-            
-            //I don't like this. Is there a better way???
-            planetarium.removePlanets(from: sceneView)
-            planetarium.addPlanets(scale: sender.value, toNode: sceneView)
-            planetarium.resumeActions(for: speedSlider.value)
-        }
+        planetarium.addPlanets(scale: sender.value, toNode: sceneView)
     }
     
     
     // MARK: - Gesture Interaction
+    
+    @IBAction func handlePinch(_ sender: UIPinchGestureRecognizer) {
+        print(sender.scale)
+    }
+    
     
 //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 //        planetarium.pauseActions()
@@ -103,10 +89,6 @@ class PlanetARiumController: UIViewController {
 //                }
 //            }
 //        }
-//    }
-//
-//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        planetarium.resumeActions(at: speedSlider.value)
 //    }
 
 }
