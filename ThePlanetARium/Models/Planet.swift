@@ -239,6 +239,19 @@ struct Planet {
         orbitNode.geometry = orbitalPath
         orbitalCenterNode.addChildNode(orbitNode)
     }
+    
+    //TEST**********
+    func addRings(name: String, innerRadius: Float, outerRadius: Float) {
+        let rings = SCNTube(innerRadius: CGFloat(innerRadius), outerRadius: CGFloat(outerRadius), height: 0.001)
+        let material = SCNMaterial()
+        material.diffuse.contents = UIImage(named: "art.scnassets/" + name.lowercased() + ".jpg")
+        rings.materials = [material]
+        
+        let ringNode = SCNNode()
+        ringNode.position = SCNVector3(x: 0, y: 0, z: 0)
+        ringNode.geometry = rings
+        node.addChildNode(ringNode)
+    }
 }
 
 

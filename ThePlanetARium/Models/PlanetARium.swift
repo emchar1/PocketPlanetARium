@@ -162,14 +162,7 @@ struct PlanetARium {
                                    orbitalCenterRotationSpeed: earthYear * 29.44)
         
         if let saturn = planets["Saturn"] {
-            planets["Saturn_Rings"] = Planet(name: "Saturn_Rings",
-            radius: saturn.getRadius() * 2,
-            tilt: saturn.getTilt(),
-            position: saturn.getNode().position,
-            rotationSpeed: saturn.getRotationSpeed(),
-            orbitalCenterTilt: saturn.getOrbitalCenterTilt(),
-            orbitalCenterPosition: sun.getOrbitalCenterNode().position,
-            orbitalCenterRotationSpeed: saturn.getOrbitalCenterRotationSpeed())
+            saturn.addRings(name: "saturn_rings", innerRadius: saturn.getRadius() * 1.1, outerRadius: saturn.getRadius() * 2.2)
         }
         
         planets["Uranus"] = Planet(name: "Uranus",
