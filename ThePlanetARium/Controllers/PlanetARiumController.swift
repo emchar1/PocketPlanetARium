@@ -16,23 +16,16 @@ class PlanetARiumController: UIViewController {
     @IBOutlet weak var scaleSlider: UISlider!
     
     var planetarium = PlanetARium()
-
-    //Test for handlePinch
-    var scale = 0.5 {
-        didSet {
-            scale = min(max(scale, 0), 1)
-
-        }
-    }
+    var pauseAnimation = false
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        scaleSlider.value = 0.5
+        scaleSlider.value = 0.2
 
         sceneView.delegate = self
-//        sceneView.showsStatistics = true
+        sceneView.showsStatistics = true
         sceneView.autoenablesDefaultLighting = true
         
         planetarium.addPlanets(scale: scaleSlider.value, toNode: sceneView)
@@ -56,40 +49,27 @@ class PlanetARiumController: UIViewController {
     
     @IBAction func scaleChanged(_ sender: UISlider) {
         planetarium.addPlanets(scale: sender.value, toNode: sceneView)
+//        planetarium.scalePlanets(to: sender.value)
     }
     
     
     // MARK: - Gesture Interaction
     
     @IBAction func handlePinch(_ sender: UIPinchGestureRecognizer) {
+        planetarium.addPlanets(scale: Float(sender.scale / 6), toNode: sceneView)
         print(sender.scale)
     }
     
-    
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        planetarium.pauseActions()
-//
-//        guard let touch = touches.first else {
-//            return
-//        }
-//
-//
-//        let touchLocation = touch.location(in: sceneView)
-//        let hitTestResults = sceneView.hitTest(touchLocation, types: .featurePoint)
-//
-//        for planet in planets {
-//            if let hitResult = hitTestResults.first {
-//                let planetMin = planet.node.boundingBox.min
-//                let planetMax = planet.node.boundingBox.max
-//                let touchPoint = hitResult.worldTransform.columns.3
-//
-//                if (touchPoint.x < planetMax.x && touchPoint.x > planetMin.x) && (touchPoint.y < planetMax.y && touchPoint.y > planetMin.y) {
-//                    planet.node.removeFromParentNode()
-//                    break
-//                }
-//            }
-//        }
-//    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        pauseAnimation = !pauseAnimation
+        
+        if pauseAnimation {
+            planetarium.pauseAnimation()
+        }
+        else {
+            planetarium.setSpeed(to: scaleSlider.value)
+        }
+    }
 
 }
 

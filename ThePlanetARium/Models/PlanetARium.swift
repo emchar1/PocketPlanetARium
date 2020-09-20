@@ -18,6 +18,7 @@ struct PlanetARium {
     //Don't touch these values!!
     private let scaleFactor: Float = 3
     private let scaleMinimum: Float = 0.123
+    private let scaleMaximum: Float = 1
     
     
     // MARK: - Add/Remove Planets to Scene
@@ -31,7 +32,7 @@ struct PlanetARium {
      - The higher the topSpeed, the faster the animation. Suggested values: 2, 4, 8, 16, 32, 64, 128, 256
      */
     mutating func addPlanets(scale: Float, topSpeed speed: TimeInterval = 128, toNode sceneView: ARSCNView) {
-        let adjustedScale = pow(max(scaleMinimum, scale), scaleFactor)
+        let adjustedScale = pow(min(scaleMaximum, max(scaleMinimum, scale)), scaleFactor)
                 
         self.addPlanets(earthRadius: adjustedScale * 3,
                         earthDistance: adjustedScale * -20,
@@ -68,7 +69,7 @@ struct PlanetARium {
         
         //Set up the solar system
         sun = Planet(name: "Sun",
-                     radius: 0.008,
+                     radius: min(max(0.008, abs(earthDistance) * 0.2), 0.02),
                      tilt: SCNVector3(x: 0, y: 0, z: 0),
                      position: SCNVector3(0, 0, -0.2),
                      rotationSpeed: earthDay * 27)
@@ -129,7 +130,7 @@ struct PlanetARium {
                           orbitalCenterRotationSpeed: earthDay * 27)
 
             if let moon = moon {
-                earth.addSatellite(moon, toOrbitalCenter: true)
+                earth.addSatellite(moon)
             }
         }
                 
@@ -160,6 +161,17 @@ struct PlanetARium {
                                    orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                                    orbitalCenterRotationSpeed: earthYear * 29.44)
         
+        if let saturn = planets["Saturn"] {
+            planets["Saturn_Rings"] = Planet(name: "Saturn_Rings",
+            radius: saturn.getRadius() * 2,
+            tilt: saturn.getTilt(),
+            position: saturn.getNode().position,
+            rotationSpeed: saturn.getRotationSpeed(),
+            orbitalCenterTilt: saturn.getOrbitalCenterTilt(),
+            orbitalCenterPosition: sun.getOrbitalCenterNode().position,
+            orbitalCenterRotationSpeed: saturn.getOrbitalCenterRotationSpeed())
+        }
+        
         planets["Uranus"] = Planet(name: "Uranus",
                                    radius: earthRadius * 4.01,
                                    tilt: SCNVector3(x: 0, y: 0, z: toRadians(98)),
@@ -186,7 +198,9 @@ struct PlanetARium {
         
         for (_, planet) in planets {
             planet.animate()
-            sun.addSatellite(planet, toOrbitalCenter: true)
+            sun.addSatellite(planet)
+            
+            planet.addOrbitPath()
         }
         
         sun.animate()
@@ -195,19 +209,54 @@ struct PlanetARium {
     }
     
     
-    // MARK: - Helper Functions
+    // MARK: - Speed controls
+    
+    /**
+     Is this what I was trying to solve???????????????????????????????????????????
+     */
+    func scalePlanets(to scale: Float) {
+        let adjustedScale = pow(min(scaleMaximum, max(scaleMinimum, scale)), scaleFactor)
+
+        for (_, planet) in planets {
+            let node = planet.getNode()
+            
+            node.simdScale = SIMD3(x: adjustedScale, y: adjustedScale, z: adjustedScale)
+//            node.simdWorldPosition = simd_float3(x: adjustedScale, y: adjustedScale, z: adjustedScale)
+        }
+        
+        if let moon = moon {
+            let node = moon.getNode()
+            
+            node.simdScale = SIMD3(x: adjustedScale, y: adjustedScale, z: adjustedScale)
+//            node.simdPosition = SIMD3(x: adjustedScale * node.position.x, y: adjustedScale * node.position.y, z: adjustedScale * node.position.z)
+        }
+        
+        setSpeed(to: scale)
+    }
     
     /**
      Sets the speed of the animation to the given input value.
      - parameter speed: range from 0 to 1, with 1 being actual speed
      */
-    private func setSpeed(to speed: Float = 1) {
-        let adjustedSpeed = scaleMinimum + 1 - min(max(scaleMinimum, speed * 1.5), 1)
-                
+    func setSpeed(to speed: Float) {
+        let adjustedSpeed = pow(min(scaleMaximum, max(scaleMinimum, 1 - speed)), scaleFactor)
+        
         for action in getAllActions() {
-            action.speed = CGFloat(pow(adjustedSpeed, scaleFactor))
+            action.speed = CGFloat(adjustedSpeed)
         }
     }
+
+    /**
+     Pauses all animations.
+     */
+    func pauseAnimation() {
+        for action in getAllActions() {
+            action.speed = CGFloat(pow(scaleMinimum, scaleFactor + 1))
+        }
+    }
+    
+    
+    // MARK: - Helper Functions
     
     /**
      Iterates through all planet objects and returns all current SCNActions.

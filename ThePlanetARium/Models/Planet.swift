@@ -221,18 +221,23 @@ struct Planet {
      Adds another planet's orbital center node to the current planet's orbital center node. This is how you get the moon to revolve around the Earth, for example.
      - parameter planet: Planet object input
      */
-    func addSatellite(_ planet: Planet, toOrbitalCenter: Bool) {
-        if !toOrbitalCenter {
-            self.node.addChildNode(planet.getOrbitalCenterNode())
-        }
-        else {
-            self.orbitalCenterNode.addChildNode(planet.getOrbitalCenterNode())
-        }
+    func addSatellite(_ planet: Planet) {
+        self.orbitalCenterNode.addChildNode(planet.getOrbitalCenterNode())
     }
+    
+    /**
+     Adds the orbital path of the planet.
+     */
+    func addOrbitPath() {
+        let orbitalPath = SCNTorus(ringRadius: CGFloat(sqrt(pow(node.position.x, 2) + pow(node.position.z, 2))), pipeRadius: 0.001)
+        let material = SCNMaterial()
+        material.diffuse.contents = UIColor.white
+        orbitalPath.materials = [material]
         
-    //TEST*******
-    func addRings(_ saturn: Planet) {
-        
+        let orbitNode = SCNNode()
+        orbitNode.position = SCNVector3(x: 0, y: 0, z: 0)
+        orbitNode.geometry = orbitalPath
+        orbitalCenterNode.addChildNode(orbitNode)
     }
 }
 
