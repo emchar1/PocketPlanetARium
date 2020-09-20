@@ -14,6 +14,7 @@ struct PlanetARium {
     private let scaleFactor: Float = 3
     private let scaleMinimum: Float = 0.123
     private var sun: Planet?
+    private var moon: Planet?
     private var planets: [String: Planet] = [:]
     
     
@@ -27,8 +28,9 @@ struct PlanetARium {
                 
         self.addPlanets(earthRadius: adjustedScale * 3,
                         earthDistance: adjustedScale * -20,
-                        earthDay: 3,
-                        earthYear: 365 / 64,
+                        earthDay: 0.5,
+//            earthDay: 1/64,
+                        earthYear: 365 / 128,
                         toNode: sceneView)
     }
 
@@ -77,6 +79,15 @@ struct PlanetARium {
                                   rotationSpeed: earthDay * 243,
                                   orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                                   orbitalCenterRotationSpeed: earthYear * 0.62)
+
+        planets["Venus_Surface"] = Planet(name: "Venus_Surface",
+                                  radius: earthRadius * 0.20,
+                                  tilt: toRadians(177),
+                                  aPosition: (toRadians(25), earthDistance * 0.72),
+                                  rotationSpeed: earthDay * 243,
+                                  orbitalCenterPosition: sun.getOrbitalCenterNode().position,
+                                  orbitalCenterRotationSpeed: earthYear * 0.62)
+
         
         planets["Earth"] = Planet(name: "Earth",
                                   radius: earthRadius,
@@ -85,15 +96,7 @@ struct PlanetARium {
                                   rotationSpeed: earthDay,
                                   orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                                   orbitalCenterRotationSpeed: earthYear)
-        
-        //        planets["Moon"] = Planet(name: "Moon",
-        //                                 radius: 0.05,
-        //                                 tilt: 0,
-        //                                 position: SCNVector3(0, 0, -5.5),
-        //                                 rotationSpeed: 8,
-        //                                 orbitalCenterPosition: SCNVector3(0, 0, -5),
-        //                                 orbitalCenterRotationSpeed: 5)
-        
+                
         planets["Mars"] = Planet(name: "Mars",
                                  radius: earthRadius * 0.53,
                                  tilt: toRadians(25),
@@ -139,8 +142,37 @@ struct PlanetARium {
         
         for (_, planet) in planets {
             planet.animate()
-            sun.addSatellite(planet)
+            sun.addSatellite(planet, toOrbitalCenter: true)
         }
+        
+
+        //Add the moon to earth's orbit
+        guard let earth = planets["Earth"] else {
+            print("Unable to add moon because earth was nil (this should not happen)")
+            return
+        }
+                        
+        moon = Planet(name: "Moon",
+                      radius: earthRadius * 0.25,
+                      tilt: 0,
+                      position: SCNVector3(0, 0, earthRadius + earthRadius * 0.5),
+                      rotationSpeed: 9999,
+                      orbitalCenterPosition: earth.getNode().position,
+                      orbitalCenterRotationSpeed: earthDay / 4)
+        
+        guard let moon = moon else {
+            print("Moon is nil (this should not happen")
+            return
+        }
+        
+        moon.rotateOrbit(earth.getTilt())
+        moon.animate()
+        earth.addSatellite(moon, toOrbitalCenter: true)
+        
+        print("moon position: \(moon.getNode().position)")
+        print("earth position: \(earth.getNode().position)")
+        print("moon orbital position: \(moon.getOrbitalCenterNode().position)")
+        print("earth orbital position: \(earth.getOrbitalCenterNode().position)")
     }
 
     /**
@@ -189,6 +221,12 @@ struct PlanetARium {
         
         for (_, planet) in planets {
             for action in planet.getAllPlanetActions() {
+                actions.append(action)
+            }
+        }
+        
+        if let moon = moon {
+            for action in moon.getAllPlanetActions() {
                 actions.append(action)
             }
         }

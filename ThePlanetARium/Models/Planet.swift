@@ -11,6 +11,8 @@ import SceneKit
 
 struct Planet {
     private let name: String
+    private let radius: Float
+    private let tilt: Float
 
     //Planet properties
     private let node: SCNNode
@@ -40,6 +42,8 @@ struct Planet {
     init(name: String, radius: Float, tilt: Float, position: SCNVector3, rotationSpeed: TimeInterval, orbitalCenterPosition: SCNVector3, orbitalCenterRotationSpeed: TimeInterval?) {
         
         self.name = name
+        self.radius = radius
+        self.tilt = tilt
         self.rotationSpeed = rotationSpeed
         self.orbitalCenterRotationSpeed = orbitalCenterRotationSpeed
         
@@ -49,11 +53,11 @@ struct Planet {
         material.diffuse.contents = UIImage(named: "art.scnassets/" + name.lowercased() + ".jpg") ?? UIColor.white.withAlphaComponent(0.8)
         planet.materials = [material]
         
-        //Set up planet node
+        //Set up planet node. Added a tilt to the y axis as well because of the stupid moon. The other alternative is to edit the moon image in GIMP/PSD.
         self.node = SCNNode()
         node.position = position
         node.geometry = planet
-        node.runAction(SCNAction.rotateTo(x: 0, y: 0, z: CGFloat(tilt), duration: 0), forKey: "tiltPlanet")
+        node.runAction(SCNAction.rotateTo(x: 0, y: .pi, z: CGFloat(tilt), duration: 0), forKey: "tiltPlanet")
         
         //Set up orbital center node
         self.orbitalCenterNode = SCNNode()
@@ -132,8 +136,20 @@ struct Planet {
      Adds another planet's orbital center node to the current planet's orbital center node. This is how you get the moon to revolve around the Earth, for example.
      - parameter planet: Planet object input
      */
-    func addSatellite(_ planet: Planet) {
-        self.orbitalCenterNode.addChildNode(planet.getOrbitalCenterNode())
+    func addSatellite(_ planet: Planet, toOrbitalCenter: Bool) {        
+        if !toOrbitalCenter {
+            self.node.addChildNode(planet.getOrbitalCenterNode())
+        }
+        else {
+            self.orbitalCenterNode.addChildNode(planet.getOrbitalCenterNode())
+        }
+    }
+    
+    /**
+     Applies an axial tilt to the planet's orbit, i.e. orbital center node.
+     */
+    func rotateOrbit(_ tilt: Float) {
+        self.orbitalCenterNode.runAction(SCNAction.rotateTo(x: 0, y: 0, z: CGFloat(tilt), duration: 0), forKey: "tiltOrbit")
     }
     
     //TEST*******
@@ -145,9 +161,37 @@ struct Planet {
     // MARK: - Get Properties
     
     /**
+     Returns the planet's radius.
+     */
+    func getRadius() -> Float {
+        return radius
+    }
+    
+    /**
+     Returns the planet's axial tilt.
+     */
+    func getTilt() -> Float {
+        return tilt
+    }
+    
+    /**
+     Returns the planet's orbital center rotation speed.
+     */
+    func getRotationSpeed() -> TimeInterval {
+        return rotationSpeed
+    }
+
+    /**
+     Returns the planet's orbital center rotation speed.
+     */
+    func getOrbitalCenterRotationSpeed() -> TimeInterval? {
+        return orbitalCenterRotationSpeed
+    }
+    
+    /**
      Returns the node of the planet.
      */
-    func getnode() -> SCNNode {
+    func getNode() -> SCNNode {
         return node
     }
     
