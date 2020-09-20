@@ -23,9 +23,6 @@ struct Planet {
     private let orbitalCenterTilt: SCNVector3
     private let orbitalCenterRotationSpeed: TimeInterval?
     
-    static let coordinateAngles = 16    //A relic of past programming tribulations.
-    static let revolution = 2 * Float.pi
-    
     
     // MARK: - Initializers
     
@@ -42,7 +39,6 @@ struct Planet {
         - orbitalCenterRotationSpeed: time it takes planet to complete one revolution around its orbital center.
      */
     init(name: String, radius: Float, tilt: SCNVector3, position: SCNVector3, rotationSpeed: TimeInterval, orbitalCenterTilt: SCNVector3, orbitalCenterPosition: SCNVector3, orbitalCenterRotationSpeed: TimeInterval?) {
-        
         self.name = name
         self.radius = radius
         self.tilt = tilt
@@ -70,8 +66,6 @@ struct Planet {
         //Add the planet node to orbital center node
         orbitalCenterNode.addChildNode(node)
     }
-    
-    
     
     /**
      Convenience init that creates a planet where its node = orbital center.
@@ -124,13 +118,13 @@ struct Planet {
      */
     func animate() {
         let orbitalCenterRotationAction = SCNAction.rotateBy(x: 0,
-                                                             y: orbitalCenterRotationSpeed == nil ? 0 : CGFloat(Planet.revolution),
+                                                             y: orbitalCenterRotationSpeed == nil ? 0 : CGFloat(K.period),
                                                              z: 0,
                                                              duration: orbitalCenterRotationSpeed == nil ? 1 : orbitalCenterRotationSpeed!)
         orbitalCenterNode.runAction(SCNAction.repeatForever(orbitalCenterRotationAction), forKey: "revolvePlanet")
         
         let rotationAction = SCNAction.rotateBy(x: 0,
-                                                y: CGFloat(Planet.revolution),
+                                                y: CGFloat(K.period),
                                                 z: 0,
                                                 duration: rotationSpeed)
         node.runAction(SCNAction.repeatForever(rotationAction), forKey: "rotatePlanet")
@@ -229,29 +223,37 @@ struct Planet {
      Adds the orbital path of the planet.
      */
     func addOrbitPath() {
-        let orbitalPath = SCNTorus(ringRadius: CGFloat(sqrt(pow(node.position.x, 2) + pow(node.position.z, 2))), pipeRadius: 0.001)
+        let orbitalPath = SCNTube(innerRadius: CGFloat(K.hypotenuse(x: node.position.x, z: node.position.z)),
+                                  outerRadius: CGFloat(K.hypotenuse(x: node.position.x, z: node.position.z)),
+                                  height: 0.001)
         let material = SCNMaterial()
-        material.diffuse.contents = UIColor.white
+        material.diffuse.contents = UIColor.white.withAlphaComponent(0.8)
         orbitalPath.materials = [material]
         
-        let orbitNode = SCNNode()
-        orbitNode.position = SCNVector3(x: 0, y: 0, z: 0)
-        orbitNode.geometry = orbitalPath
-        orbitalCenterNode.addChildNode(orbitNode)
+        let orbitalPathNode = SCNNode()
+        orbitalPathNode.position = SCNVector3(x: 0, y: 0, z: 0)
+        orbitalPathNode.geometry = orbitalPath
+        orbitalCenterNode.addChildNode(orbitalPathNode)
     }
     
-    //TEST**********
-    func addRings(name: String, innerRadius: Float, outerRadius: Float) {
-        let rings = SCNTube(innerRadius: CGFloat(innerRadius), outerRadius: CGFloat(outerRadius), height: 0.001)
+    /**
+     Adds rings to the planet.
+     - parameters:
+        - imageFileName: the name of the file, without the file path or extensions, e.g. if file path is art.scnassets/saturn_rings.jpg, use "saturn_rings"
+        - innerRadius: innermost ring radius, in m
+        - outerRadius: outermos ring radius, in m
+     */
+    func addRings(imageFileName: String, innerRadius: Float, outerRadius: Float) {
+        let rings = SCNTube(innerRadius: CGFloat(innerRadius),
+                            outerRadius: CGFloat(outerRadius),
+                            height: 0.001)
         let material = SCNMaterial()
-        material.diffuse.contents = UIImage(named: "art.scnassets/" + name.lowercased() + ".jpg")
+        material.diffuse.contents = UIImage(named: "art.scnassets/" + imageFileName.lowercased() + ".jpg") ?? UIColor.lightGray.withAlphaComponent(0.8)
         rings.materials = [material]
         
-        let ringNode = SCNNode()
-        ringNode.position = SCNVector3(x: 0, y: 0, z: 0)
-        ringNode.geometry = rings
-        node.addChildNode(ringNode)
+        let ringsNode = SCNNode()
+        ringsNode.position = SCNVector3(x: 0, y: 0, z: 0)
+        ringsNode.geometry = rings
+        node.addChildNode(ringsNode)
     }
 }
-
-

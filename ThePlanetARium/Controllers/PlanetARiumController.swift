@@ -16,19 +16,29 @@ class PlanetARiumController: UIViewController {
     @IBOutlet weak var scaleSlider: UISlider!
     
     var planetarium = PlanetARium()
-    var pauseAnimation = false
+    
+    //Pinch to zoom properties
+    var pinchBegan: CGFloat?
+    var pinchChanged: CGFloat?
+    var scaleValue: Float = 0.2 {
+        didSet {
+            scaleValue = scaleValue.clamp(min: 0, max: 1)
+            scaleSlider.value = scaleValue
+            print(scaleValue)
+        }
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        scaleSlider.value = 0.2
+        scaleSlider.value = scaleValue
 
         sceneView.delegate = self
         sceneView.showsStatistics = true
         sceneView.autoenablesDefaultLighting = true
         
-        planetarium.addPlanets(scale: scaleSlider.value, toNode: sceneView)
+        planetarium.addPlanets(scale: scaleValue, toNode: sceneView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,7 +58,9 @@ class PlanetARiumController: UIViewController {
     // MARK: - UI Controls
     
     @IBAction func scaleChanged(_ sender: UISlider) {
-        planetarium.addPlanets(scale: sender.value, toNode: sceneView)
+        scaleValue = sender.value
+        
+        planetarium.addPlanets(scale: scaleValue, toNode: sceneView)
 //        planetarium.scalePlanets(to: sender.value)
     }
     
@@ -56,19 +68,31 @@ class PlanetARiumController: UIViewController {
     // MARK: - Gesture Interaction
     
     @IBAction func handlePinch(_ sender: UIPinchGestureRecognizer) {
-        planetarium.addPlanets(scale: Float(sender.scale / 6), toNode: sceneView)
-        print(sender.scale)
+        switch sender.state {
+        case .began:
+            pinchBegan = sender.scale
+        case .changed:
+            pinchChanged = sender.scale
+        case .ended:
+            pinchBegan = nil
+            pinchChanged = nil
+        default:
+            break
+        }
+        
+        if let began = pinchBegan, let changed = pinchChanged {
+            let diff = Float(changed - began)
+            scaleValue += diff / (diff < 0 ? 100 : 200)
+            planetarium.addPlanets(scale: scaleValue, toNode: sceneView)
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        pauseAnimation = !pauseAnimation
-        
-        if pauseAnimation {
-            planetarium.pauseAnimation()
-        }
-        else {
-            planetarium.setSpeed(to: scaleSlider.value)
-        }
+        planetarium.pauseAnimation()
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        planetarium.setSpeed(to: scaleValue)
     }
 
 }
