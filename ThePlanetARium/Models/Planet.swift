@@ -8,6 +8,7 @@
 
 import Foundation
 import SceneKit
+import ARKit
 
 struct Planet {
     private let name: String
@@ -237,6 +238,30 @@ struct Planet {
     }
     
     /**
+     Attaches a light source to the node. Appies light source types, omni and ambient.
+     - parameters:
+        - omniLumens: lumens for the omni value
+        - ambientLumens: lumens for the ambient value
+     */
+    func addLightSource(omniLumens: CGFloat, ambientLumens: CGFloat) {
+        let ambientLight = SCNLight()
+        ambientLight.type = .ambient
+        ambientLight.intensity = ambientLumens
+        let ambientLightNode = SCNNode()
+        ambientLightNode.light = ambientLight
+        ambientLightNode.position = SCNVector3(x: 0, y: 0, z: 0)
+        node.addChildNode(ambientLightNode)
+
+        let omniLight = SCNLight()
+        omniLight.type = .omni
+        omniLight.intensity = omniLumens
+        let omniLightNode = SCNNode()
+        omniLightNode.light = omniLight
+        omniLightNode.position = SCNVector3(x: 0, y: 0, z: 0)
+        node.addChildNode(omniLightNode)
+    }
+    
+    /**
      Adds rings to the planet.
      - parameters:
         - imageFileName: the name of the file, without the file path or extensions, e.g. if file path is art.scnassets/saturn_rings.jpg, use "saturn_rings"
@@ -256,4 +281,26 @@ struct Planet {
         ringsNode.geometry = rings
         node.addChildNode(ringsNode)
     }
+    
+    
+    //*****TEST******
+    static func addSaturnRings(to sceneView: ARSCNView) {
+        let freedomRing = SCNBox(width: 1, height: 0.1, length: 0.001, chamferRadius: 0)
+        let material = SCNMaterial()
+        material.diffuse.contents = UIImage(named: "art.scnassets/saturn_rings.jpg")
+        freedomRing.materials = [material]
+        
+        let rNode = SCNNode(geometry: freedomRing)
+        
+        for i in 1...16 {
+            rNode.position = SCNVector3(x: 0, y: 0, z: -1)
+            rNode.runAction(SCNAction.rotate(by: CGFloat(i) * .pi / 8, around: SCNVector3(0, 0, 0), duration: 1))
+            
+            sceneView.scene.rootNode.addChildNode(rNode)
+        }
+        
+    }
+    
+    
+    
 }

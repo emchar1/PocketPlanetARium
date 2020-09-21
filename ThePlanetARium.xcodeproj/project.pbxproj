@@ -16,6 +16,7 @@
 		EA5B0C03251055B300B1E910 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA5B0C01251055B300B1E910 /* LaunchScreen.storyboard */; };
 		EA5B0C0B2510677E00B1E910 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5B0C0A2510677E00B1E910 /* Planet.swift */; };
 		EAC1F4D025149BD30097521A /* PlanetARium.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC1F4CF25149BD30097521A /* PlanetARium.swift */; };
+		EAE2AFDB251877D800A61C90 /* TestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE2AFDA251877D800A61C90 /* TestController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		EA5B0C04251055B300B1E910 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA5B0C0A2510677E00B1E910 /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
 		EAC1F4CF25149BD30097521A /* PlanetARium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetARium.swift; sourceTree = "<group>"; };
+		EAE2AFDA251877D800A61C90 /* TestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				EA5B0BFA251055B300B1E910 /* PlanetARiumController.swift */,
+				EAE2AFDA251877D800A61C90 /* TestController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -93,9 +96,9 @@
 		EAC1F4CE251320030097521A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EA2BCCA325180317007A13F5 /* Constants.swift */,
 				EA5B0C0A2510677E00B1E910 /* Planet.swift */,
 				EAC1F4CF25149BD30097521A /* PlanetARium.swift */,
-				EA2BCCA325180317007A13F5 /* Constants.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -175,6 +178,7 @@
 				EA2BCCA425180317007A13F5 /* Constants.swift in Sources */,
 				EA5B0C0B2510677E00B1E910 /* Planet.swift in Sources */,
 				EA5B0BFB251055B300B1E910 /* PlanetARiumController.swift in Sources */,
+				EAE2AFDB251877D800A61C90 /* TestController.swift in Sources */,
 				EAC1F4D025149BD30097521A /* PlanetARium.swift in Sources */,
 				EA5B0BF7251055B300B1E910 /* AppDelegate.swift in Sources */,
 			);

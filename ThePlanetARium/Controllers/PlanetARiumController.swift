@@ -24,7 +24,6 @@ class PlanetARiumController: UIViewController {
         didSet {
             scaleValue = scaleValue.clamp(min: 0, max: 1)
             scaleSlider.value = scaleValue
-            print(scaleValue)
         }
     }
     
@@ -33,10 +32,11 @@ class PlanetARiumController: UIViewController {
         super.viewDidLoad()
         
         scaleSlider.value = scaleValue
+        scaleSlider.setThumbImage(UIImage(systemName: "hare.fill"), for: .normal)
 
         sceneView.delegate = self
         sceneView.showsStatistics = true
-        sceneView.autoenablesDefaultLighting = true
+        sceneView.autoenablesDefaultLighting = false
         
         planetarium.addPlanets(scale: scaleValue, toNode: sceneView)
     }
@@ -74,6 +74,7 @@ class PlanetARiumController: UIViewController {
         case .changed:
             pinchChanged = sender.scale
         case .ended:
+            //reset values
             pinchBegan = nil
             pinchChanged = nil
         default:

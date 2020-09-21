@@ -57,10 +57,10 @@ struct PlanetARium {
         sceneView.scene.rootNode.enumerateChildNodes { (node, stop) in
             node.removeFromParentNode()
         }
-        
+
         //Set up the solar system
         sun = Planet(name: "Sun",
-                     radius: (earthDistance * 0.2).clamp(min: 0.008, max: 0.02),
+                     radius: (abs(earthDistance) * 0.2).clamp(min: 0.008, max: 0.02),
                      tilt: SCNVector3(x: 0, y: 0, z: 0),
                      position: SCNVector3(0, 0, -0.2),
                      rotationSpeed: earthDay * 27)
@@ -69,6 +69,7 @@ struct PlanetARium {
             print("Sun was nil (this should not happen).")
             return
         }
+
         
         planets["Mercury"] = Planet(name: "Mercury",
                                     radius: earthRadius * 0.38,
@@ -192,16 +193,15 @@ struct PlanetARium {
         }
         
         sun.animate()
-        
+        sun.addLightSource(omniLumens: 1000, ambientLumens: 300)
+
         sceneView.scene.rootNode.addChildNode(sun.getOrbitalCenterNode())
     }
     
     
     // MARK: - Speed controls
     
-    /**
-     Is this what I was trying to solve???????????????????????????????????????????
-     */
+    //***********TEST***********************
     func scalePlanets(to scale: Float) {
         let adjustedScale = pow(scale.clamp(min: scaleMinimum, max: scaleMaximum), scaleFactor)
         
@@ -239,7 +239,7 @@ struct PlanetARium {
      */
     func pauseAnimation() {
         for action in getAllActions() {
-            action.speed = CGFloat(pow(scaleMinimum, scaleFactor + 1))
+            action.speed = CGFloat(pow(scaleMinimum, scaleFactor + 0.75))
         }
     }
     
