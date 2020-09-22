@@ -20,10 +20,11 @@ class PlanetARiumController: UIViewController {
     //Pinch to zoom properties
     var pinchBegan: CGFloat?
     var pinchChanged: CGFloat?
-    var scaleValue: Float = 0.2 {
+    var scaleValue: Float = 0.218 {
         didSet {
             scaleValue = scaleValue.clamp(min: 0, max: 1)
             scaleSlider.value = scaleValue
+            print(scaleValue)
         }
     }
     

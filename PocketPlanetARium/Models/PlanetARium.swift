@@ -33,7 +33,7 @@ struct PlanetARium {
      */
     mutating func update(scale: Float, topSpeed speed: TimeInterval = 128, toNode sceneView: ARSCNView) {
         let adjustedScale = pow(scale.clamp(min: scaleMinimum, max: scaleMaximum), scaleFactor)
-
+        
         removeAllPlanetNodes(from: sceneView)
         
         addPlanets(earthRadius: adjustedScale * 3,
@@ -49,13 +49,13 @@ struct PlanetARium {
     /**
      Adds the solar system to the sceneView.
      - parameters:
-         - earthRadius: size of the Earth, in meters
-         - earthDistance: distance from the Earth to the sun's center, in meters
-         - earthYear: length of time it takes for the Earth to make one revolution around the sun, in seconds
+     - earthRadius: size of the Earth, in meters
+     - earthDistance: distance from the Earth to the sun's center, in meters
+     - earthYear: length of time it takes for the Earth to make one revolution around the sun, in seconds
      - This function allows for more independent customization regarding size of planets, orbital distances, and speed of animation.
      */
     mutating func addPlanets(earthRadius: Float, earthDistance: Float, earthDay: TimeInterval, earthYear: TimeInterval) {
-
+        
         sun = Planet(name: "Sun",
                      radius: (abs(earthDistance) * 0.2).clamp(min: 0.008, max: 0.02),
                      tilt: SCNVector3(x: 0, y: 0, z: 0),
@@ -72,7 +72,7 @@ struct PlanetARium {
                         tilt: SCNVector3(x: 0, y: 0, z: 0),
                         position: SCNVector3(x: 0, y: 0, z: earthDistance * 0.39),
                         rotationSpeed: earthDay * 58,
-                        orbitalCenterTilt: SCNVector3(x: 0, y: 0, z: 0),
+                        orbitalCenterTilt: SCNVector3(x: 0, y: 0, z: K.degToRad(7)),
                         orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                         orbitalCenterRotationSpeed: earthYear * 0.24)
         
@@ -81,7 +81,7 @@ struct PlanetARium {
                         tilt: SCNVector3(x: 0, y: 0, z: K.degToRad(177)),
                         position: SCNVector3(x: 0, y: 0, z: earthDistance * 0.72),
                         rotationSpeed: earthDay * 243,
-                        orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(25), z: 0),
+                        orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(25), z: K.degToRad(3.4)),
                         orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                         orbitalCenterRotationSpeed: earthYear * 0.62)
         
@@ -127,7 +127,7 @@ struct PlanetARium {
                         tilt: SCNVector3(x: 0, y: 0, z: K.degToRad(25)),
                         position: SCNVector3(x: 0, y: 0, z: earthDistance * 1.52),
                         rotationSpeed: earthDay * 1.04,
-                        orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(70), z: 0),
+                        orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(70), z: K.degToRad(1.9)),
                         orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                         orbitalCenterRotationSpeed: earthYear * 1.88)
         
@@ -136,7 +136,7 @@ struct PlanetARium {
                         tilt: SCNVector3(x: 0, y: 0, z: K.degToRad(3)),
                         position: SCNVector3(x: 0, y: 0, z: earthDistance * 5.2),
                         rotationSpeed: earthDay * 0.42,
-                        orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(100), z: 0),
+                        orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(100), z: K.degToRad(1.3)),
                         orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                         orbitalCenterRotationSpeed: earthYear * 11.87)
         
@@ -145,7 +145,7 @@ struct PlanetARium {
                         tilt: SCNVector3(x: 0, y: 0, z: K.degToRad(27)),
                         position: SCNVector3(x: 0, y: 0, z: earthDistance * 9.58),
                         rotationSpeed: earthDay * 0.46,
-                        orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(150), z: 0),
+                        orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(150), z: K.degToRad(2.5)),
                         orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                         orbitalCenterRotationSpeed: earthYear * 29.44)
         
@@ -158,7 +158,7 @@ struct PlanetARium {
                         tilt: SCNVector3(x: 0, y: 0, z: K.degToRad(98)),
                         position: SCNVector3(x: 0, y: 0, z: earthDistance * 19.18),
                         rotationSpeed: earthDay * 0.71,
-                        orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(180), z: 0),
+                        orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(180), z: K.degToRad(0.8)),
                         orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                         orbitalCenterRotationSpeed: earthYear * 83.81)
         
@@ -171,9 +171,18 @@ struct PlanetARium {
                         tilt: SCNVector3(x: 0, y: 0, z: K.degToRad(23)),
                         position: SCNVector3(x: 0, y: 0, z: earthDistance * 30.03),
                         rotationSpeed: earthDay * 0.67,
-                        orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(195), z: 0),
+                        orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(195), z: K.degToRad(1.8)),
                         orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                         orbitalCenterRotationSpeed: earthYear * 163.84)
+        
+        addPlanetHelper(name: "Pluto",
+                        radius: earthRadius,// * 0.19,
+                        tilt: SCNVector3(x: 0, y: 0, z: K.degToRad(122)),
+                        position: SCNVector3(x: 0, y: 0, z: earthDistance * 39.48),
+                        rotationSpeed: earthDay * 6.38,
+                        orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(200), z: K.degToRad(17.2)),
+                        orbitalCenterPosition: sun.getOrbitalCenterNode().position,
+                        orbitalCenterRotationSpeed: earthYear * 248.1)
     }
     
     /**
@@ -209,33 +218,12 @@ struct PlanetARium {
         
         sun.animate()
         sun.addLightSource(omniLumens: 1000, ambientLumens: 300)
-
+        
         sceneView.scene.rootNode.addChildNode(sun.getOrbitalCenterNode())
     }
     
     
     // MARK: - Speed controls
-    
-    //***********TEST***********************
-    func scalePlanets(to scale: Float) {
-        let adjustedScale = pow(scale.clamp(min: scaleMinimum, max: scaleMaximum), scaleFactor)
-        
-        for (_, planet) in planets {
-            let node = planet.getNode()
-            
-            node.simdScale = SIMD3(x: adjustedScale, y: adjustedScale, z: adjustedScale)
-            //            node.simdWorldPosition = simd_float3(x: adjustedScale, y: adjustedScale, z: adjustedScale)
-        }
-        
-        if let moon = moon {
-            let node = moon.getNode()
-            
-            node.simdScale = SIMD3(x: adjustedScale, y: adjustedScale, z: adjustedScale)
-            //            node.simdPosition = SIMD3(x: adjustedScale * node.position.x, y: adjustedScale * node.position.y, z: adjustedScale * node.position.z)
-        }
-        
-        setSpeed(to: scale)
-    }
     
     /**
      Sets the speed of the animation to the given input value.
