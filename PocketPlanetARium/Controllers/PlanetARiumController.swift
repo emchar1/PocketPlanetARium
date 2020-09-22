@@ -38,7 +38,15 @@ class PlanetARiumController: UIViewController {
         sceneView.showsStatistics = true
         sceneView.autoenablesDefaultLighting = false
         
-        planetarium.addPlanets(scale: scaleValue, toNode: sceneView)
+        planetarium.update(scale: scaleValue, toNode: sceneView)
+        
+//        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (timer) in
+//            print(self.planetarium.planets["Earth"]!.getOrbitalCenterNode().presentation.position)
+//            print(self.planetarium.planets["Earth"]!.getOrbitalCenterNode().position)
+//            print(self.planetarium.planets["Earth"]!.getNode().presentation.position)
+//            print(self.planetarium.planets["Earth"]!.getNode().position)
+//            print()
+//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,7 +68,7 @@ class PlanetARiumController: UIViewController {
     @IBAction func scaleChanged(_ sender: UISlider) {
         scaleValue = sender.value
         
-        planetarium.addPlanets(scale: scaleValue, toNode: sceneView)
+        planetarium.update(scale: scaleValue, toNode: sceneView)
 //        planetarium.scalePlanets(to: sender.value)
     }
     
@@ -84,12 +92,15 @@ class PlanetARiumController: UIViewController {
         if let began = pinchBegan, let changed = pinchChanged {
             let diff = Float(changed - began)
             scaleValue += diff / (diff < 0 ? 100 : 200)
-            planetarium.addPlanets(scale: scaleValue, toNode: sceneView)
+            planetarium.update(scale: scaleValue, toNode: sceneView)
         }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         planetarium.pauseAnimation()
+        print(planetarium.planets["Earth"]!.getNode().eulerAngles)
+//        print(K.radToDeg(planetarium.planets["Earth"]!.getOrbitalCenterNode().rotation.w))
+//        print("    \(planetarium.planets["Earth"]!.getOrbitalCenterNode().rotation)")
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -102,5 +113,5 @@ class PlanetARiumController: UIViewController {
 // MARK: - AR Scene View Delegate
     
 extension PlanetARiumController: ARSCNViewDelegate {
-    
+
 }

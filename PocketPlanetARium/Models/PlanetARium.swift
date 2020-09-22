@@ -13,7 +13,7 @@ import ARKit
 struct PlanetARium {
     private var sun: Planet?
     private var moon: Planet?
-    private var planets: [String: Planet] = [:]
+    var planets: [String: Planet] = [:]
     
     //Don't touch these values!!
     private let scaleFactor: Float = 3
@@ -31,61 +31,58 @@ struct PlanetARium {
      - toNode: the scene view to add the solar system to
      - The higher the topSpeed, the faster the animation. Suggested values: 2, 4, 8, 16, 32, 64, 128, 256
      */
-    mutating func addPlanets(scale: Float, topSpeed speed: TimeInterval = 128, toNode sceneView: ARSCNView) {
+    mutating func update(scale: Float, topSpeed speed: TimeInterval = 128, toNode sceneView: ARSCNView) {
         let adjustedScale = pow(scale.clamp(min: scaleMinimum, max: scaleMaximum), scaleFactor)
+
+        removeAllPlanetNodes(from: sceneView)
         
-        self.addPlanets(earthRadius: adjustedScale * 3,
-                        earthDistance: adjustedScale * -20,
-                        earthDay: 1 / speed,
-                        earthYear: 365 / speed,
-                        toNode: sceneView)
+        addPlanets(earthRadius: adjustedScale * 3,
+                   earthDistance: adjustedScale * -20,
+                   earthDay: 1 / speed,
+                   earthYear: 365 / speed)
+        
+        animatePlanets(to: sceneView)
         
         setSpeed(to: scale)
     }
     
     /**
-     Adds the solar system to the sceneView, and animates them.
+     Adds the solar system to the sceneView.
      - parameters:
-     - earthRadius: size of the Earth, in meters
-     - earthDistance: distance from the Earth to the sun's center, in meters
-     - earthYear: length of time it takes for the Earth to make one revolution around the sun, in seconds
-     - sceneView: the scene view to add the solar system to
+         - earthRadius: size of the Earth, in meters
+         - earthDistance: distance from the Earth to the sun's center, in meters
+         - earthYear: length of time it takes for the Earth to make one revolution around the sun, in seconds
      - This function allows for more independent customization regarding size of planets, orbital distances, and speed of animation.
      */
-    mutating func addPlanets(earthRadius: Float, earthDistance: Float, earthDay: TimeInterval, earthYear: TimeInterval, toNode sceneView: ARSCNView) {
-        //Clears the scene view before setting up the solar system.
-        sceneView.scene.rootNode.enumerateChildNodes { (node, stop) in
-            node.removeFromParentNode()
-        }
+    mutating func addPlanets(earthRadius: Float, earthDistance: Float, earthDay: TimeInterval, earthYear: TimeInterval) {
 
-        //Set up the solar system
         sun = Planet(name: "Sun",
                      radius: (abs(earthDistance) * 0.2).clamp(min: 0.008, max: 0.02),
-                     tilt: SCNVector3(x: 0, y: 0, z: 0),
+                     tilt: 0,
                      position: SCNVector3(0, 0, -0.2),
                      rotationSpeed: earthDay * 27)
         
         guard let sun = sun else {
-            print("Sun was nil (this should not happen).")
+            print("Sun object not found (this should not happen).")
             return
         }
 
         
         planets["Mercury"] = Planet(name: "Mercury",
                                     radius: earthRadius * 0.38,
-                                    tilt: SCNVector3(x: 0, y: 0, z: 0),
+                                    tilt: 0,
                                     aPosition: (K.degToRad(5), earthDistance * 0.39),
                                     rotationSpeed: earthDay * 58,
-                                    orbitalCenterTilt: SCNVector3(x: 0, y: 0, z: 0),
+                                    orbitalCenterTilt: 0,
                                     orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                                     orbitalCenterRotationSpeed: earthYear * 0.24)
         
         planets["Venus"] = Planet(name: "Venus",
                                   radius: earthRadius * 0.95,
-                                  tilt: SCNVector3(x: 0, y: 0, z: K.degToRad(177)),
+                                  tilt: K.degToRad(177),
                                   aPosition: (K.degToRad(25), earthDistance * 0.72),
                                   rotationSpeed: earthDay * 243,
-                                  orbitalCenterTilt: SCNVector3(x: 0, y: 0, z: 0),
+                                  orbitalCenterTilt: 0,
                                   orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                                   orbitalCenterRotationSpeed: earthYear * 0.62)
         
@@ -103,10 +100,10 @@ struct PlanetARium {
         
         planets["Earth"] = Planet(name: "Earth",
                                   radius: earthRadius,
-                                  tilt: SCNVector3(x: 0, y: 0, z: K.degToRad(23)),
+                                  tilt: K.degToRad(23),
                                   aPosition: (K.degToRad(50), earthDistance),
                                   rotationSpeed: earthDay,
-                                  orbitalCenterTilt: SCNVector3(x: 0, y: 0, z: 0),
+                                  orbitalCenterTilt: 0,
                                   orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                                   orbitalCenterRotationSpeed: earthYear)
         
@@ -114,42 +111,44 @@ struct PlanetARium {
         if let earth = planets["Earth"] {
             moon = Planet(name: "Moon",
                           radius: earthRadius * 0.25,
-                          tilt: SCNVector3(x: 0, y: .pi, z: K.degToRad(6.9)),
+                          tilt: K.degToRad(5.9),
                           position: SCNVector3(0, 0, earthRadius + earthRadius * 0.5),
                           rotationSpeed: 9999,
-                          orbitalCenterTilt: SCNVector3(x: 0, y: 0, z: K.degToRad(5.1)),
+                          orbitalCenterTilt: K.degToRad(5.1),
                           orbitalCenterPosition: earth.getNode().position,
                           orbitalCenterRotationSpeed: earthDay * 27)
             
             if let moon = moon {
+                //I don't really like this!!!
+                moon.getNode().runAction(SCNAction.rotateBy(x: 0, y: CGFloat.pi, z: 0, duration: 0))
                 earth.addSatellite(moon)
             }
         }
         
         planets["Mars"] = Planet(name: "Mars",
                                  radius: earthRadius * 0.53,
-                                 tilt: SCNVector3(x: 0, y: 0, z: K.degToRad(25)),
+                                 tilt: K.degToRad(25),
                                  aPosition: (K.degToRad(70), earthDistance * 1.52),
                                  rotationSpeed: earthDay * 1.04,
-                                 orbitalCenterTilt: SCNVector3(x: 0, y: 0, z: 0),
+                                 orbitalCenterTilt: 0,
                                  orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                                  orbitalCenterRotationSpeed: earthYear * 1.88)
         
         planets["Jupiter"] = Planet(name: "Jupiter",
                                     radius: earthRadius * 11.21,
-                                    tilt: SCNVector3(x: 0, y: 0, z: K.degToRad(3)),
+                                    tilt: K.degToRad(3),
                                     aPosition: (K.degToRad(100), earthDistance * 5.2),
                                     rotationSpeed: earthDay * 0.42,
-                                    orbitalCenterTilt: SCNVector3(x: 0, y: 0, z: 0),
+                                    orbitalCenterTilt: 0,
                                     orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                                     orbitalCenterRotationSpeed: earthYear * 11.87)
         
         planets["Saturn"] = Planet(name: "Saturn",
                                    radius: earthRadius * 9.45,
-                                   tilt: SCNVector3(x: 0, y: 0, z: K.degToRad(27)),
+                                   tilt: K.degToRad(27),
                                    aPosition: (K.degToRad(150), earthDistance * 9.58),
                                    rotationSpeed: earthDay * 0.46,
-                                   orbitalCenterTilt: SCNVector3(x: 0, y: 0, z: 0),
+                                   orbitalCenterTilt: 0,
                                    orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                                    orbitalCenterRotationSpeed: earthYear * 29.44)
         
@@ -159,10 +158,10 @@ struct PlanetARium {
         
         planets["Uranus"] = Planet(name: "Uranus",
                                    radius: earthRadius * 4.01,
-                                   tilt: SCNVector3(x: 0, y: 0, z: K.degToRad(98)),
+                                   tilt: K.degToRad(98),
                                    aPosition: (K.degToRad(180), earthDistance * 19.18),
                                    rotationSpeed: earthDay * 0.71,
-                                   orbitalCenterTilt: SCNVector3(x: 0, y: 0, z: 0),
+                                   orbitalCenterTilt: 0,
                                    orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                                    orbitalCenterRotationSpeed: earthYear * 83.81)
         
@@ -172,15 +171,34 @@ struct PlanetARium {
         
         planets["Neptune"] = Planet(name: "Neptune",
                                     radius: earthRadius * 3.88,
-                                    tilt: SCNVector3(x: 0, y: 0, z: K.degToRad(23)),
+                                    tilt: K.degToRad(23),
                                     aPosition: (K.degToRad(195), earthDistance * 30.03),
                                     rotationSpeed: earthDay * 0.67,
-                                    orbitalCenterTilt: SCNVector3(x: 0, y: 0, z: 0),
+                                    orbitalCenterTilt: 0,
                                     orbitalCenterPosition: sun.getOrbitalCenterNode().position,
                                     orbitalCenterRotationSpeed: earthYear * 163.84)
+    }
+    
+    /**
+     Clears the scene view. Should be called before adding the solar system to the scene view.
+     - parameter sceneView: the scene view to remove the solar system from
+     */
+    func removeAllPlanetNodes(from sceneView: ARSCNView) {
+        sceneView.scene.rootNode.enumerateChildNodes { (node, stop) in
+            node.removeFromParentNode()
+        }
+    }
+    
+    /**
+     Adds all the planet nodes and animates them to the scene view.
+     - parameter sceneView: the scene view to add the solar system to
+     */
+    func animatePlanets(to sceneView: ARSCNView) {
+        guard let sun = sun else {
+            print("Sun object not found.")
+            return
+        }
         
-        
-        //Animate the solar system!
         if let moon = moon {
             moon.animate()
         }
