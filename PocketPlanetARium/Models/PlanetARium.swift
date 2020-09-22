@@ -38,7 +38,7 @@ struct PlanetARium {
         
         addPlanets(earthRadius: adjustedScale * 3,
                    earthDistance: adjustedScale * -20,
-                   earthDay: 1 / speed,
+                   earthDay: 8 / speed,
                    earthYear: 365 / speed)
         
         animatePlanets(to: sceneView)
@@ -73,7 +73,7 @@ struct PlanetARium {
                         position: SCNVector3(x: 0, y: 0, z: earthDistance * 0.39),
                         rotationSpeed: earthDay * 58,
                         orbitalCenterTilt: SCNVector3(x: 0, y: 0, z: K.degToRad(7)),
-                        orbitalCenterPosition: sun.getOrbitalCenterNode().position,
+                        orbitalCenterPosition: sun.getNode().position,
                         orbitalCenterRotationSpeed: earthYear * 0.24)
         
         addPlanetHelper(name: "Venus",
@@ -82,7 +82,7 @@ struct PlanetARium {
                         position: SCNVector3(x: 0, y: 0, z: earthDistance * 0.72),
                         rotationSpeed: earthDay * 243,
                         orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(25), z: K.degToRad(3.4)),
-                        orbitalCenterPosition: sun.getOrbitalCenterNode().position,
+                        orbitalCenterPosition: sun.getNode().position,
                         orbitalCenterRotationSpeed: earthYear * 0.62)
         
         //easter egg nested Venus surface skin
@@ -93,7 +93,7 @@ struct PlanetARium {
                                               position: venus.getNode().position,
                                               rotationSpeed: venus.getRotationSpeed(),
                                               orbitalCenterTilt: venus.getOrbitalCenterTilt(),
-                                              orbitalCenterPosition: sun.getOrbitalCenterNode().position,
+                                              orbitalCenterPosition: sun.getNode().position,
                                               orbitalCenterRotationSpeed: venus.getOrbitalCenterRotationSpeed())
         }
         
@@ -103,7 +103,7 @@ struct PlanetARium {
                         position: SCNVector3(x: 0, y: 0, z: earthDistance),
                         rotationSpeed: earthDay,
                         orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(50), z: 0),
-                        orbitalCenterPosition: sun.getOrbitalCenterNode().position,
+                        orbitalCenterPosition: sun.getNode().position,
                         orbitalCenterRotationSpeed: earthYear)
         
         //Add earth's moon.
@@ -128,7 +128,7 @@ struct PlanetARium {
                         position: SCNVector3(x: 0, y: 0, z: earthDistance * 1.52),
                         rotationSpeed: earthDay * 1.04,
                         orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(70), z: K.degToRad(1.9)),
-                        orbitalCenterPosition: sun.getOrbitalCenterNode().position,
+                        orbitalCenterPosition: sun.getNode().position,
                         orbitalCenterRotationSpeed: earthYear * 1.88)
         
         addPlanetHelper(name: "Jupiter",
@@ -137,7 +137,7 @@ struct PlanetARium {
                         position: SCNVector3(x: 0, y: 0, z: earthDistance * 5.2),
                         rotationSpeed: earthDay * 0.42,
                         orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(100), z: K.degToRad(1.3)),
-                        orbitalCenterPosition: sun.getOrbitalCenterNode().position,
+                        orbitalCenterPosition: sun.getNode().position,
                         orbitalCenterRotationSpeed: earthYear * 11.87)
         
         addPlanetHelper(name: "Saturn",
@@ -146,7 +146,7 @@ struct PlanetARium {
                         position: SCNVector3(x: 0, y: 0, z: earthDistance * 9.58),
                         rotationSpeed: earthDay * 0.46,
                         orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(150), z: K.degToRad(2.5)),
-                        orbitalCenterPosition: sun.getOrbitalCenterNode().position,
+                        orbitalCenterPosition: sun.getNode().position,
                         orbitalCenterRotationSpeed: earthYear * 29.44)
         
         if let saturn = planets["Saturn"] {
@@ -159,7 +159,7 @@ struct PlanetARium {
                         position: SCNVector3(x: 0, y: 0, z: earthDistance * 19.18),
                         rotationSpeed: earthDay * 0.71,
                         orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(180), z: K.degToRad(0.8)),
-                        orbitalCenterPosition: sun.getOrbitalCenterNode().position,
+                        orbitalCenterPosition: sun.getNode().position,
                         orbitalCenterRotationSpeed: earthYear * 83.81)
         
         if let uranus = planets["Uranus"] {
@@ -172,7 +172,7 @@ struct PlanetARium {
                         position: SCNVector3(x: 0, y: 0, z: earthDistance * 30.03),
                         rotationSpeed: earthDay * 0.67,
                         orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(195), z: K.degToRad(1.8)),
-                        orbitalCenterPosition: sun.getOrbitalCenterNode().position,
+                        orbitalCenterPosition: sun.getNode().position,
                         orbitalCenterRotationSpeed: earthYear * 163.84)
         
         addPlanetHelper(name: "Pluto",
@@ -181,7 +181,7 @@ struct PlanetARium {
                         position: SCNVector3(x: 0, y: 0, z: earthDistance * 39.48),
                         rotationSpeed: earthDay * 6.38,
                         orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(200), z: K.degToRad(17.2)),
-                        orbitalCenterPosition: sun.getOrbitalCenterNode().position,
+                        orbitalCenterPosition: sun.getNode().position,
                         orbitalCenterRotationSpeed: earthYear * 248.1)
     }
     
