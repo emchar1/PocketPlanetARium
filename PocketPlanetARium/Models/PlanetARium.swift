@@ -15,7 +15,7 @@ struct PlanetARium {
     private var moon: Planet?
     var planets: [String: Planet] = [:]
     
-    //Don't touch these values!!
+    //Don't touch these values!
     private let scaleFactor: Float = 3
     private let scaleMinimum: Float = 0.123
     private let scaleMaximum: Float = 1
@@ -58,7 +58,7 @@ struct PlanetARium {
 
         sun = Planet(name: "Sun",
                      radius: (abs(earthDistance) * 0.2).clamp(min: 0.008, max: 0.02),
-                     tilt: 0,
+                     tilt: SCNVector3(x: 0, y: 0, z: 0),
                      position: SCNVector3(0, 0, -0.2),
                      rotationSpeed: earthDay * 27)
         
@@ -66,25 +66,24 @@ struct PlanetARium {
             print("Sun object not found (this should not happen).")
             return
         }
-
         
-        planets["Mercury"] = Planet(name: "Mercury",
-                                    radius: earthRadius * 0.38,
-                                    tilt: 0,
-                                    aPosition: (K.degToRad(5), earthDistance * 0.39),
-                                    rotationSpeed: earthDay * 58,
-                                    orbitalCenterTilt: 0,
-                                    orbitalCenterPosition: sun.getOrbitalCenterNode().position,
-                                    orbitalCenterRotationSpeed: earthYear * 0.24)
+        addPlanetHelper(name: "Mercury",
+                        radius: earthRadius * 0.38,
+                        tilt: SCNVector3(x: 0, y: 0, z: 0),
+                        position: SCNVector3(x: 0, y: 0, z: earthDistance * 0.39),
+                        rotationSpeed: earthDay * 58,
+                        orbitalCenterTilt: SCNVector3(x: 0, y: 0, z: 0),
+                        orbitalCenterPosition: sun.getOrbitalCenterNode().position,
+                        orbitalCenterRotationSpeed: earthYear * 0.24)
         
-        planets["Venus"] = Planet(name: "Venus",
-                                  radius: earthRadius * 0.95,
-                                  tilt: K.degToRad(177),
-                                  aPosition: (K.degToRad(25), earthDistance * 0.72),
-                                  rotationSpeed: earthDay * 243,
-                                  orbitalCenterTilt: 0,
-                                  orbitalCenterPosition: sun.getOrbitalCenterNode().position,
-                                  orbitalCenterRotationSpeed: earthYear * 0.62)
+        addPlanetHelper(name: "Venus",
+                        radius: earthRadius * 0.95,
+                        tilt: SCNVector3(x: 0, y: 0, z: K.degToRad(177)),
+                        position: SCNVector3(x: 0, y: 0, z: earthDistance * 0.72),
+                        rotationSpeed: earthDay * 243,
+                        orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(25), z: 0),
+                        orbitalCenterPosition: sun.getOrbitalCenterNode().position,
+                        orbitalCenterRotationSpeed: earthYear * 0.62)
         
         //easter egg nested Venus surface skin
         if let venus = planets["Venus"] {
@@ -98,85 +97,83 @@ struct PlanetARium {
                                               orbitalCenterRotationSpeed: venus.getOrbitalCenterRotationSpeed())
         }
         
-        planets["Earth"] = Planet(name: "Earth",
-                                  radius: earthRadius,
-                                  tilt: K.degToRad(23),
-                                  aPosition: (K.degToRad(50), earthDistance),
-                                  rotationSpeed: earthDay,
-                                  orbitalCenterTilt: 0,
-                                  orbitalCenterPosition: sun.getOrbitalCenterNode().position,
-                                  orbitalCenterRotationSpeed: earthYear)
+        addPlanetHelper(name: "Earth",
+                        radius: earthRadius,
+                        tilt: SCNVector3(x: 0, y: 0, z: K.degToRad(23)),
+                        position: SCNVector3(x: 0, y: 0, z: earthDistance),
+                        rotationSpeed: earthDay,
+                        orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(50), z: 0),
+                        orbitalCenterPosition: sun.getOrbitalCenterNode().position,
+                        orbitalCenterRotationSpeed: earthYear)
         
         //Add earth's moon.
         if let earth = planets["Earth"] {
             moon = Planet(name: "Moon",
                           radius: earthRadius * 0.25,
-                          tilt: K.degToRad(5.9),
+                          tilt: moon == nil ? SCNVector3(x: 0, y: .pi, z: K.degToRad(5.9)) : moon!.getNode().eulerAngles,
                           position: SCNVector3(0, 0, earthRadius + earthRadius * 0.5),
                           rotationSpeed: 9999,
-                          orbitalCenterTilt: K.degToRad(5.1),
+                          orbitalCenterTilt: moon == nil ? SCNVector3(x: 0, y:0, z: K.degToRad(5.1)) : moon!.getOrbitalCenterNode().eulerAngles,
                           orbitalCenterPosition: earth.getNode().position,
                           orbitalCenterRotationSpeed: earthDay * 27)
             
             if let moon = moon {
-                //I don't really like this!!!
-                moon.getNode().runAction(SCNAction.rotateBy(x: 0, y: CGFloat.pi, z: 0, duration: 0))
                 earth.addSatellite(moon)
             }
         }
         
-        planets["Mars"] = Planet(name: "Mars",
-                                 radius: earthRadius * 0.53,
-                                 tilt: K.degToRad(25),
-                                 aPosition: (K.degToRad(70), earthDistance * 1.52),
-                                 rotationSpeed: earthDay * 1.04,
-                                 orbitalCenterTilt: 0,
-                                 orbitalCenterPosition: sun.getOrbitalCenterNode().position,
-                                 orbitalCenterRotationSpeed: earthYear * 1.88)
+        addPlanetHelper(name: "Mars",
+                        radius: earthRadius * 0.53,
+                        tilt: SCNVector3(x: 0, y: 0, z: K.degToRad(25)),
+                        position: SCNVector3(x: 0, y: 0, z: earthDistance * 1.52),
+                        rotationSpeed: earthDay * 1.04,
+                        orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(70), z: 0),
+                        orbitalCenterPosition: sun.getOrbitalCenterNode().position,
+                        orbitalCenterRotationSpeed: earthYear * 1.88)
         
-        planets["Jupiter"] = Planet(name: "Jupiter",
-                                    radius: earthRadius * 11.21,
-                                    tilt: K.degToRad(3),
-                                    aPosition: (K.degToRad(100), earthDistance * 5.2),
-                                    rotationSpeed: earthDay * 0.42,
-                                    orbitalCenterTilt: 0,
-                                    orbitalCenterPosition: sun.getOrbitalCenterNode().position,
-                                    orbitalCenterRotationSpeed: earthYear * 11.87)
+        addPlanetHelper(name: "Jupiter",
+                        radius: earthRadius * 11.21,
+                        tilt: SCNVector3(x: 0, y: 0, z: K.degToRad(3)),
+                        position: SCNVector3(x: 0, y: 0, z: earthDistance * 5.2),
+                        rotationSpeed: earthDay * 0.42,
+                        orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(100), z: 0),
+                        orbitalCenterPosition: sun.getOrbitalCenterNode().position,
+                        orbitalCenterRotationSpeed: earthYear * 11.87)
         
-        planets["Saturn"] = Planet(name: "Saturn",
-                                   radius: earthRadius * 9.45,
-                                   tilt: K.degToRad(27),
-                                   aPosition: (K.degToRad(150), earthDistance * 9.58),
-                                   rotationSpeed: earthDay * 0.46,
-                                   orbitalCenterTilt: 0,
-                                   orbitalCenterPosition: sun.getOrbitalCenterNode().position,
-                                   orbitalCenterRotationSpeed: earthYear * 29.44)
+        addPlanetHelper(name: "Saturn",
+                        radius: earthRadius * 9.45,
+                        tilt: SCNVector3(x: 0, y: 0, z: K.degToRad(27)),
+                        position: SCNVector3(x: 0, y: 0, z: earthDistance * 9.58),
+                        rotationSpeed: earthDay * 0.46,
+                        orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(150), z: 0),
+                        orbitalCenterPosition: sun.getOrbitalCenterNode().position,
+                        orbitalCenterRotationSpeed: earthYear * 29.44)
         
         if let saturn = planets["Saturn"] {
             saturn.addRings(imageFileName: "saturn_ringsl", innerRadius: saturn.getRadius() * 1.1, outerRadius: saturn.getRadius() * 2.3)
         }
         
-        planets["Uranus"] = Planet(name: "Uranus",
-                                   radius: earthRadius * 4.01,
-                                   tilt: K.degToRad(98),
-                                   aPosition: (K.degToRad(180), earthDistance * 19.18),
-                                   rotationSpeed: earthDay * 0.71,
-                                   orbitalCenterTilt: 0,
-                                   orbitalCenterPosition: sun.getOrbitalCenterNode().position,
-                                   orbitalCenterRotationSpeed: earthYear * 83.81)
+        addPlanetHelper(name: "Uranus",
+                        radius: earthRadius * 4.01,
+                        tilt: SCNVector3(x: 0, y: 0, z: K.degToRad(98)),
+                        position: SCNVector3(x: 0, y: 0, z: earthDistance * 19.18),
+                        rotationSpeed: earthDay * 0.71,
+                        orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(180), z: 0),
+                        orbitalCenterPosition: sun.getOrbitalCenterNode().position,
+                        orbitalCenterRotationSpeed: earthYear * 83.81)
         
         if let uranus = planets["Uranus"] {
             uranus.addRings(imageFileName: "noimg", innerRadius: uranus.getRadius() * 2, outerRadius: uranus.getRadius() * 2)
         }
         
-        planets["Neptune"] = Planet(name: "Neptune",
-                                    radius: earthRadius * 3.88,
-                                    tilt: K.degToRad(23),
-                                    aPosition: (K.degToRad(195), earthDistance * 30.03),
-                                    rotationSpeed: earthDay * 0.67,
-                                    orbitalCenterTilt: 0,
-                                    orbitalCenterPosition: sun.getOrbitalCenterNode().position,
-                                    orbitalCenterRotationSpeed: earthYear * 163.84)
+        addPlanetHelper(name: "Neptune",
+                        radius: earthRadius * 3.88,
+                        tilt: SCNVector3(x: 0, y: 0, z: K.degToRad(23)),
+                        position: SCNVector3(x: 0, y: 0, z: earthDistance * 30.03),
+                        rotationSpeed: earthDay * 0.67,
+                        orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(195), z: 0),
+                        orbitalCenterPosition: sun.getOrbitalCenterNode().position,
+                        orbitalCenterRotationSpeed: earthYear * 163.84)
     }
     
     /**
@@ -263,6 +260,24 @@ struct PlanetARium {
     
     
     // MARK: - Helper Functions
+    
+    /**
+     Adds a planet to the dictionary. This allows for preservation of the last animated planet tilt and orbital center tilt angles.
+     */
+    private mutating func addPlanetHelper(name: String, radius: Float, tilt: SCNVector3, position: SCNVector3, rotationSpeed: TimeInterval, orbitalCenterTilt: SCNVector3, orbitalCenterPosition: SCNVector3, orbitalCenterRotationSpeed: TimeInterval) {
+        
+        let lastTilt = planets[name] == nil ? tilt : planets[name]!.getNode().eulerAngles
+        let lastOrbitalCenterTilt = planets[name] == nil ? orbitalCenterTilt : planets[name]!.getOrbitalCenterNode().eulerAngles
+        
+        planets[name] = Planet(name: name,
+                               radius: radius,
+                               tilt: lastTilt,
+                               position: position,
+                               rotationSpeed: rotationSpeed,
+                               orbitalCenterTilt: lastOrbitalCenterTilt,
+                               orbitalCenterPosition: orbitalCenterPosition,
+                               orbitalCenterRotationSpeed: orbitalCenterRotationSpeed)
+    }
     
     /**
      Iterates through all planet objects and returns all current SCNActions.

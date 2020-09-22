@@ -38,15 +38,7 @@ class PlanetARiumController: UIViewController {
         sceneView.showsStatistics = true
         sceneView.autoenablesDefaultLighting = false
         
-        planetarium.update(scale: scaleValue, toNode: sceneView)
-        
-//        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (timer) in
-//            print(self.planetarium.planets["Earth"]!.getOrbitalCenterNode().presentation.position)
-//            print(self.planetarium.planets["Earth"]!.getOrbitalCenterNode().position)
-//            print(self.planetarium.planets["Earth"]!.getNode().presentation.position)
-//            print(self.planetarium.planets["Earth"]!.getNode().position)
-//            print()
-//        }
+        planetarium.update(scale: scaleValue, toNode: sceneView)        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -98,9 +90,6 @@ class PlanetARiumController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         planetarium.pauseAnimation()
-        print(planetarium.planets["Earth"]!.getNode().eulerAngles)
-//        print(K.radToDeg(planetarium.planets["Earth"]!.getOrbitalCenterNode().rotation.w))
-//        print("    \(planetarium.planets["Earth"]!.getOrbitalCenterNode().rotation)")
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
