@@ -62,7 +62,7 @@ struct PlanetARium {
                      tilt: SCNVector3(x: 0, y: 0, z: 0),
                      position: SCNVector3(0, 0, -0.2),
                      rotationSpeed: earthDay * 27,
-                     labelColor: #colorLiteral(red: 0.9896742702, green: 0.9995170236, blue: 0.7407678366, alpha: 1))
+                     labelColor: #colorLiteral(red: 0.9924283624, green: 0.6179816127, blue: 0.1147205308, alpha: 1))
         
         guard let sun = sun else {
             print("Sun object not found (this should not happen).")

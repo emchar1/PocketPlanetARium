@@ -71,9 +71,8 @@ class PlanetARiumController: UIViewController {
     }
     
     @IBAction func toggleLabels(_ sender: UIButton) {
-        planetarium.showLabels(showLabels)
-        
         showLabels = !showLabels
+        planetarium.showLabels(showLabels)
     }
     
     // MARK: - Gesture Interaction
