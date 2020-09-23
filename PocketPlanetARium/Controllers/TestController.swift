@@ -26,13 +26,14 @@ class TestController: UIViewController {
         
         
         
-        let freedomRing = SCNBox(width: 8, height: 1, length: 1, chamferRadius: 0)
+//        let freedomRing = SCNBox(width: 8, height: 1, length: 1, chamferRadius: 0)
+        let freedomRing = SCNTube(innerRadius: 0.1, outerRadius: 0.5, height: 0.0001)
         let material = SCNMaterial()
-        material.diffuse.contents = UIImage(named: "art.scnassets/saturn_rings.jpg")
+        material.diffuse.contents = UIImage(named: "art.scnassets/saturn_rings4.png")
         freedomRing.materials = [material]
         
         rNode.geometry = freedomRing
-        rNode.position = SCNVector3(x: 0, y: 0, z: -10)
+        rNode.position = SCNVector3(x: 0, y: 0, z: -1)
         
         centerNode.position = SCNVector3(0, 0, 0)
         centerNode.addChildNode(rNode)
@@ -63,7 +64,7 @@ class TestController: UIViewController {
         formatter.maximumFractionDigits = 2
         formatter.minimumFractionDigits = 2
 
-        let rotate = SCNAction.rotateBy(x: 0.1, y: 0.1, z: 0, duration: 0.5)
+        let rotate = SCNAction.rotateBy(x: 0.1, y: 0, z: 0, duration: 0.5)
         centerNode.runAction(rotate)
         print("center x:\(centerNode.rotation.x), y:\(centerNode.rotation.y), z:\(centerNode.rotation.z), w: \(centerNode.rotation.w * 180 / .pi)")
         print("center x:\(rNode.rotation.x), y:\(rNode.rotation.y), z:\(rNode.rotation.z), w: \(rNode.rotation.w * 180 / .pi)")

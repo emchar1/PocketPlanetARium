@@ -21,6 +21,12 @@ class PlanetARiumController: UIViewController {
     var pinchBegan: CGFloat?
     var pinchChanged: CGFloat?
     var scaleValue: Float = 0.218 {
+        willSet {
+            if newValue < 0 || newValue > 1 {
+                let generator = UIImpactFeedbackGenerator(style: .light)
+                generator.impactOccurred()
+            }
+        }
         didSet {
             scaleValue = scaleValue.clamp(min: 0, max: 1)
             scaleSlider.value = scaleValue
@@ -68,29 +74,30 @@ class PlanetARiumController: UIViewController {
     // MARK: - Gesture Interaction
     
     @IBAction func handlePinch(_ sender: UIPinchGestureRecognizer) {
-//        switch sender.state {
-//        case .began:
-//            pinchBegan = sender.scale
-//        case .changed:
-//            pinchChanged = sender.scale
-//        case .ended:
-//            //reset values
-//            pinchBegan = nil
-//            pinchChanged = nil
-//        default:
-//            break
-//        }
-//
-//        if let began = pinchBegan, let changed = pinchChanged {
-//            let diff = Float(changed - began)
-//            scaleValue += diff / (diff < 0 ? 100 : 200)
-//            planetarium.update(scale: scaleValue, toNode: sceneView)
-//        }
-//
+        switch sender.state {
+        case .began:
+            pinchBegan = sender.scale
+        case .changed:
+            pinchChanged = sender.scale
+        case .ended:
+            //reset values
+            pinchBegan = nil
+            pinchChanged = nil
+        default:
+            break
+        }
+
+        if let began = pinchBegan, let changed = pinchChanged {
+            let diff = Float(changed - began)
+            print(diff)
+            scaleValue += diff / (diff < 0 ? 25 : 100)
+            planetarium.update(scale: scaleValue, toNode: sceneView)
+        }
+
         
-        print(sender.velocity)
-        scaleValue += Float(sender.velocity) / (sender.velocity < 0 ? 50 : 500)
-        planetarium.update(scale: scaleValue, toNode: sceneView)
+//        print(sender.velocity)
+//        scaleValue += Float(sender.velocity) / (sender.velocity < 0 ? 50 : 500)
+//        planetarium.update(scale: scaleValue, toNode: sceneView)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

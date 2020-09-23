@@ -150,7 +150,7 @@ struct PlanetARium {
                         orbitalCenterRotationSpeed: earthYear * 29.44)
         
         if let saturn = planets["Saturn"] {
-            saturn.addRings(imageFileName: "saturn_ringsl", innerRadius: saturn.getRadius() * 1.1, outerRadius: saturn.getRadius() * 2.3)
+            saturn.addRings(imageFileName: "saturn_rings2", innerRadius: saturn.getRadius() * 1.1, outerRadius: saturn.getRadius() * 2.3)
         }
         
         addPlanetHelper(name: "Uranus",
@@ -242,7 +242,7 @@ struct PlanetARium {
      */
     func pauseAnimation() {
         for action in getAllActions() {
-            action.speed = CGFloat(pow(scaleMinimum, scaleFactor + 0.75))
+            action.speed = CGFloat(pow(scaleMinimum, scaleFactor))
         }
     }
     
