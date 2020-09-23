@@ -24,6 +24,12 @@ struct Planet {
     private let orbitalCenterTilt: SCNVector3
     private let orbitalCenterRotationSpeed: TimeInterval?
     
+    //Planet label
+    private let labelNode: SCNNode
+    private let labelColor: UIColor
+    private let labelSize: Float
+    private var showLabel: Bool
+    
     
     // MARK: - Initializers
     
@@ -38,15 +44,19 @@ struct Planet {
         - orbitalCenterTilt: planet's orbital center's axial tilt
         - orbitalCenterPosition: position of a planet's orbital center in space
         - orbitalCenterRotationSpeed: time it takes planet to complete one revolution around its orbital center.
+        - labelColor: color of the planet label
      */
-    init(name: String, radius: Float, tilt: SCNVector3, position: SCNVector3, rotationSpeed: TimeInterval, orbitalCenterTilt: SCNVector3, orbitalCenterPosition: SCNVector3, orbitalCenterRotationSpeed: TimeInterval?) {
+    init(name: String, radius: Float, tilt: SCNVector3, position: SCNVector3, rotationSpeed: TimeInterval, orbitalCenterTilt: SCNVector3, orbitalCenterPosition: SCNVector3, orbitalCenterRotationSpeed: TimeInterval?, labelColor: UIColor) {
         self.name = name
         self.radius = radius
         self.tilt = tilt
         self.rotationSpeed = rotationSpeed
         self.orbitalCenterTilt = orbitalCenterTilt
         self.orbitalCenterRotationSpeed = orbitalCenterRotationSpeed
-        
+        self.labelColor = labelColor
+        self.labelSize = 0.05 * radius + 0.005 * abs(position.z)
+        self.showLabel = false
+
         //Set up planet
         let planet = SCNSphere(radius: CGFloat(radius))
         let material = SCNMaterial()
@@ -63,6 +73,19 @@ struct Planet {
         self.orbitalCenterNode = SCNNode()
         orbitalCenterNode.position = orbitalCenterPosition
         orbitalCenterNode.eulerAngles = orbitalCenterTilt
+        
+        //Set up label node
+        let label = SCNText(string: name, extrusionDepth: 1.0)
+        let labelMaterial = SCNMaterial()
+        labelMaterial.diffuse.contents = labelColor
+        label.materials = [labelMaterial]
+        label.font = UIFont(name: "Futura", size: 11)
+        
+        self.labelNode = SCNNode()
+        labelNode.position = SCNVector3(x: position.x, y: position.y + radius, z: position.z)
+        labelNode.geometry = label
+        labelNode.constraints = [SCNBillboardConstraint()]
+        labelNode.scale = SCNVector3(x: labelSize, y: labelSize, z: labelSize)
 
         //Add the planet node to orbital center node
         orbitalCenterNode.addChildNode(node)
@@ -71,13 +94,14 @@ struct Planet {
     /**
      Convenience init that creates a planet where its planet node equals its orbital center node.
      - parameters:
-         - name: planet's name
-         - radius: planet's radius in m
-         - tilt: planet's axial tilt
-         - position: planet's position with respect to its orbital center
-         - rotationSpeed: time in seconds to complete one rotation around a planet's axis
+        - name: planet's name
+        - radius: planet's radius in m
+        - tilt: planet's axial tilt
+        - position: planet's position with respect to its orbital center
+        - rotationSpeed: time in seconds to complete one rotation around a planet's axis
+        - labelColor: color of the planet label
      */
-    init(name: String, radius: Float, tilt: SCNVector3, position: SCNVector3, rotationSpeed: TimeInterval) {
+    init(name: String, radius: Float, tilt: SCNVector3, position: SCNVector3, rotationSpeed: TimeInterval, labelColor: UIColor) {
         self.init(name: name,
                   radius: radius,
                   tilt: tilt,
@@ -85,7 +109,8 @@ struct Planet {
                   rotationSpeed: rotationSpeed,
                   orbitalCenterTilt: SCNVector3(x: 0, y: 0, z: 0),
                   orbitalCenterPosition: position,
-                  orbitalCenterRotationSpeed: nil)
+                  orbitalCenterRotationSpeed: nil,
+                  labelColor: labelColor)
     }
     
     
@@ -165,6 +190,20 @@ struct Planet {
      */
     func getOrbitalCenterRotationSpeed() -> TimeInterval? {
         return orbitalCenterRotationSpeed
+    }
+    
+    /**
+     Returns the color of the label
+     */
+    func getLabelNode() -> SCNNode {
+        return labelNode
+    }
+    
+    /**
+     Returns the color of the label
+     */
+    func getLabelColor() -> UIColor {
+        return labelColor
     }
 
     /**
@@ -263,7 +302,20 @@ struct Planet {
         node.addChildNode(ringsNode)
     }
     
-    
+    /**
+     Shows or hides the planet label.
+     - parameter show: show (true) or hide (false) the planet's label
+     */
+    mutating func showLabel(_ show: Bool) {
+        self.showLabel = show
+        
+        if show {
+            orbitalCenterNode.addChildNode(labelNode)
+        }
+        else {
+            labelNode.removeFromParentNode()
+        }
+    }
     
     
     

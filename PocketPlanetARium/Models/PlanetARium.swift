@@ -14,6 +14,7 @@ struct PlanetARium {
     private var sun: Planet?
     private var moon: Planet?
     var planets: [String: Planet] = [:]
+    var showLabels: Bool = false
     
     //Don't touch these values!
     private let scaleFactor: Float = 3
@@ -60,7 +61,8 @@ struct PlanetARium {
                      radius: (abs(earthDistance) * 0.2).clamp(min: 0.008, max: 0.02),
                      tilt: SCNVector3(x: 0, y: 0, z: 0),
                      position: SCNVector3(0, 0, -0.2),
-                     rotationSpeed: earthDay * 27)
+                     rotationSpeed: earthDay * 27,
+                     labelColor: #colorLiteral(red: 0.9896742702, green: 0.9995170236, blue: 0.7407678366, alpha: 1))
         
         guard let sun = sun else {
             print("Sun object not found (this should not happen).")
@@ -74,7 +76,8 @@ struct PlanetARium {
                         rotationSpeed: earthDay * 58,
                         orbitalCenterTilt: SCNVector3(x: 0, y: 0, z: K.degToRad(7)),
                         orbitalCenterPosition: sun.getNode().position,
-                        orbitalCenterRotationSpeed: earthYear * 0.24)
+                        orbitalCenterRotationSpeed: earthYear * 0.24,
+                        labelColor: #colorLiteral(red: 0.7803640962, green: 0.7803606391, blue: 0.7846102715, alpha: 1))
         
         addPlanetHelper(name: "Venus",
                         radius: earthRadius * 0.95,
@@ -83,7 +86,8 @@ struct PlanetARium {
                         rotationSpeed: earthDay * 243,
                         orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(25), z: K.degToRad(3.4)),
                         orbitalCenterPosition: sun.getNode().position,
-                        orbitalCenterRotationSpeed: earthYear * 0.62)
+                        orbitalCenterRotationSpeed: earthYear * 0.62,
+                        labelColor: #colorLiteral(red: 0.9863802791, green: 0.8649248481, blue: 0.6479948163, alpha: 1))
         
         //easter egg nested Venus surface skin
         if let venus = planets["Venus"] {
@@ -94,7 +98,8 @@ struct PlanetARium {
                                               rotationSpeed: venus.getRotationSpeed(),
                                               orbitalCenterTilt: venus.getOrbitalCenterTilt(),
                                               orbitalCenterPosition: sun.getNode().position,
-                                              orbitalCenterRotationSpeed: venus.getOrbitalCenterRotationSpeed())
+                                              orbitalCenterRotationSpeed: venus.getOrbitalCenterRotationSpeed(),
+                                              labelColor: UIColor.clear)
         }
         
         addPlanetHelper(name: "Earth",
@@ -104,7 +109,8 @@ struct PlanetARium {
                         rotationSpeed: earthDay,
                         orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(50), z: 0),
                         orbitalCenterPosition: sun.getNode().position,
-                        orbitalCenterRotationSpeed: earthYear)
+                        orbitalCenterRotationSpeed: earthYear,
+                        labelColor: #colorLiteral(red: 0.364506036, green: 0.4846500158, blue: 0.1734416783, alpha: 1))
         
         //Add earth's moon.
         if let earth = planets["Earth"] {
@@ -115,7 +121,8 @@ struct PlanetARium {
                           rotationSpeed: 9999,
                           orbitalCenterTilt: moon == nil ? SCNVector3(x: 0, y:0, z: K.degToRad(5.1)) : moon!.getOrbitalCenterNode().eulerAngles,
                           orbitalCenterPosition: earth.getNode().position,
-                          orbitalCenterRotationSpeed: earthDay * 27)
+                          orbitalCenterRotationSpeed: earthDay * 27,
+                          labelColor: #colorLiteral(red: 0.7616128325, green: 0.7565351129, blue: 0.7696220279, alpha: 1))
             
             if let moon = moon {
                 earth.addSatellite(moon)
@@ -129,7 +136,8 @@ struct PlanetARium {
                         rotationSpeed: earthDay * 1.04,
                         orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(70), z: K.degToRad(1.9)),
                         orbitalCenterPosition: sun.getNode().position,
-                        orbitalCenterRotationSpeed: earthYear * 1.88)
+                        orbitalCenterRotationSpeed: earthYear * 1.88,
+                        labelColor: #colorLiteral(red: 0.8029935956, green: 0.4123460054, blue: 0.2786666751, alpha: 1))
         
         addPlanetHelper(name: "Jupiter",
                         radius: earthRadius * 11.21,
@@ -138,7 +146,8 @@ struct PlanetARium {
                         rotationSpeed: earthDay * 0.42,
                         orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(100), z: K.degToRad(1.3)),
                         orbitalCenterPosition: sun.getNode().position,
-                        orbitalCenterRotationSpeed: earthYear * 11.87)
+                        orbitalCenterRotationSpeed: earthYear * 11.87,
+                        labelColor: #colorLiteral(red: 0.6988996863, green: 0.6137880087, blue: 0.5267551541, alpha: 1))
         
         addPlanetHelper(name: "Saturn",
                         radius: earthRadius * 9.45,
@@ -147,7 +156,8 @@ struct PlanetARium {
                         rotationSpeed: earthDay * 0.46,
                         orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(150), z: K.degToRad(2.5)),
                         orbitalCenterPosition: sun.getNode().position,
-                        orbitalCenterRotationSpeed: earthYear * 29.44)
+                        orbitalCenterRotationSpeed: earthYear * 29.44,
+                        labelColor: #colorLiteral(red: 0.6580071449, green: 0.6360285878, blue: 0.521181643, alpha: 1))
         
         if let saturn = planets["Saturn"] {
             saturn.addRings(imageFileName: "saturn_rings2", innerRadius: saturn.getRadius() * 1.1, outerRadius: saturn.getRadius() * 2.3)
@@ -160,7 +170,8 @@ struct PlanetARium {
                         rotationSpeed: earthDay * 0.71,
                         orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(180), z: K.degToRad(0.8)),
                         orbitalCenterPosition: sun.getNode().position,
-                        orbitalCenterRotationSpeed: earthYear * 83.81)
+                        orbitalCenterRotationSpeed: earthYear * 83.81,
+                        labelColor: #colorLiteral(red: 0.6661632061, green: 0.8760991096, blue: 0.9032817483, alpha: 1))
         
         if let uranus = planets["Uranus"] {
             uranus.addRings(imageFileName: "noimg", innerRadius: uranus.getRadius() * 2, outerRadius: uranus.getRadius() * 2)
@@ -173,7 +184,8 @@ struct PlanetARium {
                         rotationSpeed: earthDay * 0.67,
                         orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(195), z: K.degToRad(1.8)),
                         orbitalCenterPosition: sun.getNode().position,
-                        orbitalCenterRotationSpeed: earthYear * 163.84)
+                        orbitalCenterRotationSpeed: earthYear * 163.84,
+                        labelColor: #colorLiteral(red: 0.2331839204, green: 0.4608405828, blue: 0.8007237315, alpha: 1))
         
         addPlanetHelper(name: "Pluto",
                         radius: earthRadius,// * 0.19,
@@ -182,7 +194,10 @@ struct PlanetARium {
                         rotationSpeed: earthDay * 6.38,
                         orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(200), z: K.degToRad(17.2)),
                         orbitalCenterPosition: sun.getNode().position,
-                        orbitalCenterRotationSpeed: earthYear * 248.1)
+                        orbitalCenterRotationSpeed: earthYear * 248.1,
+                        labelColor: #colorLiteral(red: 0.8180410266, green: 0.6948351264, blue: 0.5951495767, alpha: 1))
+        
+        showLabels(showLabels)
     }
     
     /**
@@ -222,6 +237,23 @@ struct PlanetARium {
         sceneView.scene.rootNode.addChildNode(sun.getOrbitalCenterNode())
     }
     
+    mutating func showLabels(_ show: Bool) {
+        self.showLabels = show
+        
+        if var sun = sun {
+            sun.showLabel(show)
+        }
+        
+        if var moon = moon {
+            moon.showLabel(show)
+        }
+        
+        for (_, planet) in planets {
+            var planetTemp = planet
+            planetTemp.showLabel(show)
+        }
+    }
+    
     
     // MARK: - Speed controls
     
@@ -252,7 +284,7 @@ struct PlanetARium {
     /**
      Adds a planet to the dictionary. This allows for preservation of the last animated planet tilt and orbital center tilt angles.
      */
-    private mutating func addPlanetHelper(name: String, radius: Float, tilt: SCNVector3, position: SCNVector3, rotationSpeed: TimeInterval, orbitalCenterTilt: SCNVector3, orbitalCenterPosition: SCNVector3, orbitalCenterRotationSpeed: TimeInterval) {
+    private mutating func addPlanetHelper(name: String, radius: Float, tilt: SCNVector3, position: SCNVector3, rotationSpeed: TimeInterval, orbitalCenterTilt: SCNVector3, orbitalCenterPosition: SCNVector3, orbitalCenterRotationSpeed: TimeInterval, labelColor: UIColor) {
         
         let lastTilt = planets[name] == nil ? tilt : planets[name]!.getNode().eulerAngles
         let lastOrbitalCenterTilt = planets[name] == nil ? orbitalCenterTilt : planets[name]!.getOrbitalCenterNode().eulerAngles
@@ -264,7 +296,8 @@ struct PlanetARium {
                                rotationSpeed: rotationSpeed,
                                orbitalCenterTilt: lastOrbitalCenterTilt,
                                orbitalCenterPosition: orbitalCenterPosition,
-                               orbitalCenterRotationSpeed: orbitalCenterRotationSpeed)
+                               orbitalCenterRotationSpeed: orbitalCenterRotationSpeed,
+                               labelColor: labelColor)
     }
     
     /**

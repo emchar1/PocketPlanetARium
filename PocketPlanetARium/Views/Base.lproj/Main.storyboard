@@ -31,13 +31,31 @@
                                     <action selector="scaleChanged:" destination="BV1-FR-VrT" eventType="valueChanged" id="R2l-s5-YOL"/>
                                 </connections>
                             </slider>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gtb-s3-YzX">
+                                <rect key="frame" x="352" y="751" width="23" height="22"/>
+                                <state key="normal" image="textformat.alt" catalog="system"/>
+                                <connections>
+                                    <action selector="toggleLabels:" destination="BV1-FR-VrT" eventType="touchUpInside" id="nMj-UO-Fvo"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uzc-c5-uio">
+                                <rect key="frame" x="40" y="749" width="29" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" image="dial" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="medium"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" id="GsS-dJ-CKf"/>
+                            <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="Gtb-s3-YzX" secondAttribute="bottom" constant="40" id="KgZ-xs-e5x"/>
+                            <constraint firstItem="Uzc-c5-uio" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" constant="40" id="MG6-9Z-Ts7"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="bottom" secondItem="fQZ-KI-GVf" secondAttribute="bottom" id="VpT-BR-CcM"/>
                             <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="fF2-tk-bDV" secondAttribute="bottom" constant="40" id="Xqf-5G-lf7"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="trailing" secondItem="fQZ-KI-GVf" secondAttribute="trailing" id="XyZ-9z-H8e"/>
+                            <constraint firstItem="Gtb-s3-YzX" firstAttribute="leading" secondItem="fF2-tk-bDV" secondAttribute="trailing" constant="20" id="eK1-O0-AbE"/>
+                            <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="Uzc-c5-uio" secondAttribute="bottom" constant="40" id="krT-uE-v9Z"/>
                             <constraint firstItem="fF2-tk-bDV" firstAttribute="centerX" secondItem="U0K-SW-4ec" secondAttribute="centerX" id="pOK-xb-gN3"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="top" secondItem="U0K-SW-4ec" secondAttribute="top" id="rJc-2c-zQA"/>
                         </constraints>
@@ -118,4 +136,8 @@
             <point key="canvasLocation" x="849" y="558"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="dial" catalog="system" width="128" height="106"/>
+        <image name="textformat.alt" catalog="system" width="128" height="80"/>
+    </resources>
 </document>

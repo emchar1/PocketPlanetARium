@@ -15,6 +15,7 @@ class PlanetARiumController: UIViewController {
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var scaleSlider: UISlider!
     
+    var showLabels = false
     var planetarium = PlanetARium()
     
     //Pinch to zoom properties
@@ -67,9 +68,13 @@ class PlanetARiumController: UIViewController {
         scaleValue = sender.value
         
         planetarium.update(scale: scaleValue, toNode: sceneView)
-//        planetarium.scalePlanets(to: sender.value)
     }
     
+    @IBAction func toggleLabels(_ sender: UIButton) {
+        planetarium.showLabels(showLabels)
+        
+        showLabels = !showLabels
+    }
     
     // MARK: - Gesture Interaction
     
