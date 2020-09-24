@@ -24,6 +24,7 @@ class PlanetARiumController: UIViewController {
     var scaleValue: Float = 0.218 {
         willSet {
             if newValue < 0 || newValue > 1 {
+                //Add some haptic feedback! This only applies to pinch to zoom, for now.
                 let generator = UIImpactFeedbackGenerator(style: .light)
                 generator.impactOccurred()
             }
@@ -66,7 +67,6 @@ class PlanetARiumController: UIViewController {
     
     @IBAction func scaleChanged(_ sender: UISlider) {
         scaleValue = sender.value
-        
         planetarium.update(scale: scaleValue, toNode: sceneView)
     }
     
@@ -74,6 +74,7 @@ class PlanetARiumController: UIViewController {
         showLabels = !showLabels
         planetarium.showLabels(showLabels)
     }
+    
     
     // MARK: - Gesture Interaction
     

@@ -302,6 +302,21 @@ struct Planet {
         node.addChildNode(ringsNode)
     }
     
+    func addParticles() {
+        let particleSystem = SCNParticleSystem()
+        
+        particleSystem.birthRate = 100
+        particleSystem.particleSize = CGFloat(radius / 10)
+        particleSystem.particleLifeSpan = 2
+        particleSystem.particleColor = .yellow
+        particleSystem.birthLocation = .surface
+        
+        let particlesNode = SCNNode()
+        particlesNode.addParticleSystem(particleSystem)
+        
+        node.addChildNode(particlesNode)
+    }
+    
     /**
      Shows or hides the planet label.
      - parameter show: show (true) or hide (false) the planet's label

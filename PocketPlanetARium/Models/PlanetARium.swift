@@ -69,6 +69,8 @@ struct PlanetARium {
             return
         }
         
+        sun.addParticles()
+        
         addPlanetHelper(name: "Mercury",
                         radius: earthRadius * 0.38,
                         tilt: SCNVector3(x: 0, y: 0, z: 0),
