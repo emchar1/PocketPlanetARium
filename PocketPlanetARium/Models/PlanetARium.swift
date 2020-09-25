@@ -50,9 +50,9 @@ struct PlanetARium {
     /**
      Adds the solar system to the sceneView.
      - parameters:
-     - earthRadius: size of the Earth, in meters
-     - earthDistance: distance from the Earth to the sun's center, in meters
-     - earthYear: length of time it takes for the Earth to make one revolution around the sun, in seconds
+        - earthRadius: size of the Earth, in meters
+        - earthDistance: distance from the Earth to the sun's center, in meters
+        - earthYear: length of time it takes for the Earth to make one revolution around the sun, in seconds
      - This function allows for more independent customization regarding size of planets, orbital distances, and speed of animation.
      */
     mutating func addPlanets(earthRadius: Float, earthDistance: Float, earthDay: TimeInterval, earthYear: TimeInterval) {

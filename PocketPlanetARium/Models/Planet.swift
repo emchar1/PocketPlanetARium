@@ -302,19 +302,20 @@ struct Planet {
         node.addChildNode(ringsNode)
     }
     
+    /**
+     Adds a particle system. For use for the sun, mostly.
+     */
     func addParticles() {
-        let particleSystem = SCNParticleSystem()
+        guard let particleScene = SCNScene(named: "SunParticles.scn"),
+              let particleNode = particleScene.rootNode.childNode(withName: "particles", recursively: true),
+              let particleSystem = particleNode.particleSystems?.first else {
+            print("Unable to load SunParticles.scn/particles")
+            return
+        }
         
-        particleSystem.birthRate = 100
-        particleSystem.particleSize = CGFloat(radius / 10)
-        particleSystem.particleLifeSpan = 2
-        particleSystem.particleColor = .yellow
-        particleSystem.birthLocation = .surface
+        particleSystem.emitterShape = SCNSphere(radius: CGFloat(radius))
         
-        let particlesNode = SCNNode()
-        particlesNode.addParticleSystem(particleSystem)
-        
-        node.addChildNode(particlesNode)
+        node.addParticleSystem(particleSystem)
     }
     
     /**
