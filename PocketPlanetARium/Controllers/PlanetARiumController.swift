@@ -16,6 +16,8 @@ class PlanetARiumController: UIViewController {
     @IBOutlet weak var scaleSlider: UISlider!
     @IBOutlet weak var lowLightWarning: UIView!
     
+    var lowLightTimer: TimeInterval = 0
+    var lowLightTimerBegin = false
     var showLabels = false
     var planetarium = PlanetARium()
     
@@ -134,15 +136,33 @@ extension PlanetARiumController: ARSCNViewDelegate {
         }
         
         if lightEstimate.ambientIntensity < 100 {
-            DispatchQueue.main.async {
-                self.lowLightWarning.isHidden = false
+            if !lowLightTimerBegin {
+                lowLightTimerBegin = true
+                lowLightTimer = time + 3
+            }
+        
+            if time > lowLightTimer {
+                DispatchQueue.main.async {
+                    self.lowLightWarning.isHidden = false
+                }
             }
         }
         
         if lightEstimate.ambientIntensity > 500 {
-            DispatchQueue.main.async {
-                self.lowLightWarning.isHidden = true
+            if lowLightTimerBegin {
+                lowLightTimerBegin = false
+                lowLightTimer = time + 3
+            }
+            
+            lowLightTimerBegin = false
+
+            if time > lowLightTimer {
+                DispatchQueue.main.async {
+                    self.lowLightWarning.isHidden = true
+                }
             }
         }
     }
+    
+    
 }

@@ -62,7 +62,7 @@ struct PlanetARium {
                      tilt: SCNVector3(x: 0, y: 0, z: 0),
                      position: SCNVector3(0, 0, -0.2),
                      rotationSpeed: earthDay * 27,
-                     labelColor: #colorLiteral(red: 0.9924283624, green: 0.6179816127, blue: 0.1147205308, alpha: 1))
+                     labelColor: #colorLiteral(red: 0.9911546111, green: 1, blue: 0.6582027078, alpha: 1))
         
         guard let sun = sun else {
             print("Sun object not found (this should not happen).")
@@ -234,7 +234,7 @@ struct PlanetARium {
         }
         
         sun.animate()
-        sun.addLightSource(omniLumens: 1000, ambientLumens: 300)
+        sun.addLightSource(omniLumens: 1000, ambientLumens: 250)
         
         sceneView.scene.rootNode.addChildNode(sun.getOrbitalCenterNode())
     }

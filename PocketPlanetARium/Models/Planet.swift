@@ -336,26 +336,4 @@ struct Planet {
     }
     
     
-    
-    
-    //*****TEST******
-    static func addSaturnRings(to sceneView: ARSCNView) {
-        let freedomRing = SCNBox(width: 1, height: 0.1, length: 0.001, chamferRadius: 0)
-        let material = SCNMaterial()
-        material.diffuse.contents = UIImage(named: "art.scnassets/saturn_rings.jpg")
-        freedomRing.materials = [material]
-        
-        let rNode = SCNNode(geometry: freedomRing)
-        
-//        for i in 1...16 {
-            rNode.position = SCNVector3(x: 0, y: 0, z: -1)
-            rNode.runAction(SCNAction.move(to: SCNVector3(1, 0, 0), duration: 1))
-            print(rNode.position)
-            sceneView.scene.rootNode.addChildNode(rNode)
-//        }
-        
-    }
-    
-    
-    
 }
