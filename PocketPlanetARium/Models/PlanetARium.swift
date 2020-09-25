@@ -228,9 +228,9 @@ struct PlanetARium {
         
         for (_, planet) in planets {
             planet.animate()
-            sun.addSatellite(planet)
-            
             planet.addOrbitPath()
+
+            sun.addSatellite(planet)
         }
         
         sun.animate()

@@ -14,6 +14,7 @@ class PlanetARiumController: UIViewController {
 
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var scaleSlider: UISlider!
+    @IBOutlet weak var lowLightWarning: UIView!
     
     var showLabels = false
     var planetarium = PlanetARium()
@@ -41,25 +42,32 @@ class PlanetARiumController: UIViewController {
         
         scaleSlider.value = scaleValue
         scaleSlider.setThumbImage(UIImage(systemName: "hare.fill"), for: .normal)
-
-        sceneView.delegate = self
-        sceneView.showsStatistics = true
-        sceneView.autoenablesDefaultLighting = false
         
-        planetarium.update(scale: scaleValue, toNode: sceneView)        
+        lowLightWarning.isHidden = true
+        lowLightWarning.clipsToBounds = true
+        lowLightWarning.layer.cornerRadius = 7
+        
+        planetarium.update(scale: scaleValue, toNode: sceneView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let configuration = ARWorldTrackingConfiguration()
-        sceneView.session.run(configuration)
+        setupSceneView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         sceneView.session.pause()
+    }
+    
+    func setupSceneView() {
+        let configuration = ARWorldTrackingConfiguration()
+        sceneView.session.run(configuration)
+        sceneView.delegate = self
+        sceneView.showsStatistics = true
+        sceneView.autoenablesDefaultLighting = false
     }
     
     
@@ -119,5 +127,22 @@ class PlanetARiumController: UIViewController {
 // MARK: - AR Scene View Delegate
     
 extension PlanetARiumController: ARSCNViewDelegate {
-    
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+        guard let currentFrame = sceneView.session.currentFrame,
+              let lightEstimate = currentFrame.lightEstimate else {
+            return
+        }
+        
+        if lightEstimate.ambientIntensity < 100 {
+            DispatchQueue.main.async {
+                self.lowLightWarning.isHidden = false
+            }
+        }
+        
+        if lightEstimate.ambientIntensity > 500 {
+            DispatchQueue.main.async {
+                self.lowLightWarning.isHidden = true
+            }
+        }
+    }
 }

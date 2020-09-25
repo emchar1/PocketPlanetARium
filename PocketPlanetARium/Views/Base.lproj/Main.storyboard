@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZrR-Fz-BEV">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -40,6 +39,27 @@
                                     <action selector="toggleLabels:" destination="BV1-FR-VrT" eventType="touchUpInside" id="nMj-UO-Fvo"/>
                                 </connections>
                             </button>
+                            <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rda-l7-hc1">
+                                <rect key="frame" x="67" y="398" width="280" height="100"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For optimal results, move to a brighter location." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G7N-6Z-Pug">
+                                        <rect key="frame" x="30" y="28" width="220" height="44.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="220" id="5MY-lA-EYe"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="G7N-6Z-Pug" firstAttribute="centerX" secondItem="Rda-l7-hc1" secondAttribute="centerX" id="g0X-u6-rdt"/>
+                                    <constraint firstAttribute="height" constant="100" id="oyB-cn-p3O"/>
+                                    <constraint firstAttribute="width" constant="280" id="qp8-Ho-CBg"/>
+                                    <constraint firstItem="G7N-6Z-Pug" firstAttribute="centerY" secondItem="Rda-l7-hc1" secondAttribute="centerY" id="soo-vs-vvH"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fQZ-KI-GVf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -50,13 +70,16 @@
                             <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="fF2-tk-bDV" secondAttribute="bottom" constant="40" id="Xqf-5G-lf7"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="trailing" secondItem="fQZ-KI-GVf" secondAttribute="trailing" id="XyZ-9z-H8e"/>
                             <constraint firstItem="Gtb-s3-YzX" firstAttribute="leading" secondItem="fF2-tk-bDV" secondAttribute="trailing" constant="20" id="eK1-O0-AbE"/>
+                            <constraint firstItem="Rda-l7-hc1" firstAttribute="centerY" secondItem="U0K-SW-4ec" secondAttribute="centerY" id="kjC-uI-RXg"/>
                             <constraint firstItem="fF2-tk-bDV" firstAttribute="centerX" secondItem="U0K-SW-4ec" secondAttribute="centerX" id="pOK-xb-gN3"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="top" secondItem="U0K-SW-4ec" secondAttribute="top" id="rJc-2c-zQA"/>
+                            <constraint firstItem="Rda-l7-hc1" firstAttribute="centerX" secondItem="U0K-SW-4ec" secondAttribute="centerX" id="s6x-Co-CO6"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="PlanetARium" id="Brl-zS-gKQ"/>
                     <navigationItem key="navigationItem" id="iqi-dg-1y1"/>
                     <connections>
+                        <outlet property="lowLightWarning" destination="Rda-l7-hc1" id="vzK-tM-GDC"/>
                         <outlet property="scaleSlider" destination="fF2-tk-bDV" id="bRx-Yq-R9i"/>
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
                     </connections>
