@@ -309,11 +309,13 @@ struct Planet {
         guard let particleScene = SCNScene(named: "SunParticles.scn"),
               let particleNode = particleScene.rootNode.childNode(withName: "particles", recursively: true),
               let particleSystem = particleNode.particleSystems?.first else {
-            print("Unable to load SunParticles.scn/particles")
+            print("Unable to load SunParticles.scn: particles")
             return
         }
         
         particleSystem.emitterShape = SCNSphere(radius: CGFloat(radius))
+        particleSystem.particleSize = CGFloat(radius) / 10
+        particleSystem.stretchFactor = CGFloat(radius) * 100
         
         node.addParticleSystem(particleSystem)
     }
