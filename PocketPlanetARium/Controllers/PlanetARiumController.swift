@@ -135,14 +135,24 @@ class PlanetARiumController: UIViewController {
             
             
             
-            //******TEST******Trying to figure out popup View
-            let planetDetailsController = PlanetDetailsController()
-            planetDetailsController.view.bounds = CGRect(x: 0, y: 0, width: view.bounds.width - 24, height: 2 * view.bounds.height / 3)
-            planetDetailsController.view.center = CGPoint(x: view.bounds.midX, y: view.bounds.midY)
-            addChild(planetDetailsController)
-
-            view.addSubviewWithSlideUpAnimation(planetDetailsController.view, duration: 0.5, options: .curveEaseInOut)
-            planetDetailsController.didMove(toParent: self)
+//            //******TEST******Trying to figure out popup View
+//            let planetDetailsController = PlanetDetailsController()
+//            planetDetailsController.view.bounds = CGRect(x: 0, y: 0, width: view.bounds.width - 24, height: 2 * view.bounds.height / 3)
+//            planetDetailsController.view.center = CGPoint(x: view.bounds.midX, y: view.bounds.midY)
+//            addChild(planetDetailsController)
+//
+////            view.addSubviewWithSlideUpAnimation(planetDetailsController.view, duration: 0.5, options: .curveEaseInOut)
+//
+//            planetDetailsController.view.transform = view.transform.scaledBy(x: 0.01, y: 0.01)
+//
+//            view.addSubview(planetDetailsController.view)
+//
+//            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
+//                planetDetailsController.view.transform = CGAffineTransform.identity
+//            }, completion: nil)
+//
+            
+//            planetDetailsController.didMove(toParent: self)
             
             
             
