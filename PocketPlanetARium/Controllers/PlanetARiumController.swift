@@ -117,6 +117,39 @@ class PlanetARiumController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         planetarium.pauseAnimation()
+
+        //Start to work on info graph for each planet.
+        guard let touch = touches.first else {
+            return
+        }
+        
+        let location = touch.location(in: sceneView)
+        let hitResults = sceneView.hitTest(location, options: nil)
+        
+        if hitResults.count > 0 {
+            guard let result = hitResults.first, let planetNodeName = result.node.name else {
+                return
+            }
+            
+
+            
+            
+            
+            //******TEST******Trying to figure out popup View
+            let planetDetailsController = PlanetDetailsController()
+            planetDetailsController.view.bounds = CGRect(x: 0, y: 0, width: view.bounds.width - 24, height: 2 * view.bounds.height / 3)
+            planetDetailsController.view.center = CGPoint(x: view.bounds.midX, y: view.bounds.midY)
+            addChild(planetDetailsController)
+
+            view.addSubviewWithSlideUpAnimation(planetDetailsController.view, duration: 0.5, options: .curveEaseInOut)
+            planetDetailsController.didMove(toParent: self)
+            
+            
+            
+            
+            
+            print(planetNodeName)
+        }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -135,7 +168,7 @@ extension PlanetARiumController: ARSCNViewDelegate {
             return
         }
         
-        if lightEstimate.ambientIntensity < 100 {
+        if lightEstimate.ambientIntensity < 250 {
             if !lowLightTimerBegin {
                 lowLightTimerBegin = true
                 lowLightTimer = time + 3
@@ -165,4 +198,21 @@ extension PlanetARiumController: ARSCNViewDelegate {
     }
     
     
+}
+
+
+
+
+
+//******TEST******
+extension UIView {
+    func addSubviewWithSlideUpAnimation(_ view: UIView, duration: TimeInterval, options: UIView.AnimationOptions) {
+        view.transform = view.transform.scaledBy(x: 0.01, y: 0.01)
+        
+        addSubview(view)
+        
+        UIView.animate(withDuration: duration, delay: 0, options: options, animations: {
+            view.transform = CGAffineTransform.identity
+        }, completion: nil)
+    }
 }

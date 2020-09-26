@@ -65,6 +65,7 @@ struct Planet {
         
         //Set up planet node. Added a tilt to the y axis as well because of the stupid moon. The other alternative is to edit the moon image in GIMP/PSD.
         self.node = SCNNode()
+        node.name = name
         node.position = position
         node.eulerAngles = tilt
         node.geometry = planet
