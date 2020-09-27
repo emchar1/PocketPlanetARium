@@ -11,12 +11,12 @@ import SceneKit
 import ARKit
 
 struct PlanetARium {
-//    var planetGroup = PlanetGroup()
-//    var system: String?
-    
-    private var sun: Planet?
-    private var moon: Planet?
-    var planets: [String: Planet] = [:]
+//    private var sun: Planet?
+//    private var moon: Planet?
+//    var planets: [String: Planet] = [:]
+
+    var planetGroup = PlanetGroup()
+
     var showLabels: Bool = false
     
     //Don't touch these values!
@@ -59,15 +59,26 @@ struct PlanetARium {
      - This function allows for more independent customization regarding size of planets, orbital distances, and speed of animation.
      */
     mutating func addPlanets(earthRadius: Float, earthDistance: Float, earthDay: TimeInterval, earthYear: TimeInterval) {
-        sun = Planet(name: "Sun",
+//        sun = Planet(name: "Sun",
+//                     type: PlanetType.sun,
+//                     radius: (abs(earthDistance) * 0.2).clamp(min: 0.008, max: 0.02),
+//                     tilt: SCNVector3(x: 0, y: 0, z: 0),
+//                     position: SCNVector3(0, 0, -0.2),
+//                     rotationSpeed: earthDay * 27,
+//                     labelColor: #colorLiteral(red: 0.9911546111, green: 1, blue: 0.6582027078, alpha: 1))
+
+        addPlanetHelper(name: "Sun",
                      type: PlanetType.sun,
                      radius: (abs(earthDistance) * 0.2).clamp(min: 0.008, max: 0.02),
                      tilt: SCNVector3(x: 0, y: 0, z: 0),
                      position: SCNVector3(0, 0, -0.2),
                      rotationSpeed: earthDay * 27,
+                     orbitalCenterTilt: SCNVector3(x: 0, y: 0, z: 0),
+                     orbitalCenterPosition: SCNVector3(x: 0, y: 0, z: 0),
+                     orbitalCenterRotationSpeed: nil,
                      labelColor: #colorLiteral(red: 0.9911546111, green: 1, blue: 0.6582027078, alpha: 1))
         
-        guard let sun = sun else {
+        guard let sun = planetGroup.getPlanet(withName: "Sun") else {
             print("Sun not found when trying to addPlanets")
             return
         }
@@ -98,7 +109,8 @@ struct PlanetARium {
                         labelColor: #colorLiteral(red: 0.9863802791, green: 0.8649248481, blue: 0.6479948163, alpha: 1))
         
         //Easter egg nested Venus surface skin.
-        if let venus = planets["Venus"] {
+//        if let venus = planets["Venus"] {
+        if let venus = planetGroup.getPlanet(withName: "Venus") {
             addPlanetHelper(name: "Venus_Surface",
                             type: PlanetType.planet,
                             radius: venus.getRadius() * 0.25,
@@ -123,8 +135,24 @@ struct PlanetARium {
                         labelColor: #colorLiteral(red: 0.364506036, green: 0.4846500158, blue: 0.1734416783, alpha: 1))
         
         //Add earth's moon.
-        if let earth = planets["Earth"] {
-            moon = Planet(name: "Moon",
+//        if let earth = planets["Earth"] {
+        if let earth = planetGroup.getPlanet(withName: "Earth") {
+//            moon = Planet(name: "Moon",
+//                          type: PlanetType.moon,
+//                          radius: earthRadius * 0.25,
+//                          tilt: moon == nil ? SCNVector3(x: 0, y: .pi, z: K.degToRad(5.9)) : moon!.getNode().eulerAngles,
+//                          position: SCNVector3(0, 0, earthRadius + earthRadius * 0.5),
+//                          rotationSpeed: 9999,
+//                          orbitalCenterTilt: moon == nil ? SCNVector3(x: 0, y:0, z: K.degToRad(5.1)) : moon!.getOrbitalCenterNode().eulerAngles,
+//                          orbitalCenterPosition: earth.getNode().position,
+//                          orbitalCenterRotationSpeed: earthDay * 27,
+//                          labelColor: #colorLiteral(red: 0.7616128325, green: 0.7565351129, blue: 0.7696220279, alpha: 1))
+            
+
+
+            let moon = planetGroup.getPlanet(withName: "Moon")
+
+            addPlanetHelper(name: "Moon",
                           type: PlanetType.moon,
                           radius: earthRadius * 0.25,
                           tilt: moon == nil ? SCNVector3(x: 0, y: .pi, z: K.degToRad(5.9)) : moon!.getNode().eulerAngles,
@@ -134,8 +162,10 @@ struct PlanetARium {
                           orbitalCenterPosition: earth.getNode().position,
                           orbitalCenterRotationSpeed: earthDay * 27,
                           labelColor: #colorLiteral(red: 0.7616128325, green: 0.7565351129, blue: 0.7696220279, alpha: 1))
+
             
-            if let moon = moon {
+//            if let moon = moon {
+            if let moon = planetGroup.getPlanet(withName: "Moon") {
                 earth.addSatellite(moon)
             }
         }
@@ -173,7 +203,8 @@ struct PlanetARium {
                         orbitalCenterRotationSpeed: earthYear * 29.44,
                         labelColor: #colorLiteral(red: 0.6580071449, green: 0.6360285878, blue: 0.521181643, alpha: 1))
         
-        if let saturn = planets["Saturn"] {
+//        if let saturn = planets["Saturn"] {
+        if let saturn = planetGroup.getPlanet(withName: "Saturn") {
             saturn.addRings(imageFileName: "saturn_rings2", innerRadius: saturn.getRadius() * 1.1, outerRadius: saturn.getRadius() * 2.3)
         }
         
@@ -188,7 +219,8 @@ struct PlanetARium {
                         orbitalCenterRotationSpeed: earthYear * 83.81,
                         labelColor: #colorLiteral(red: 0.6661632061, green: 0.8760991096, blue: 0.9032817483, alpha: 1))
         
-        if let uranus = planets["Uranus"] {
+//        if let uranus = planets["Uranus"] {
+        if let uranus = planetGroup.getPlanet(withName: "Uranus") {
             uranus.addRings(imageFileName: "noimg", innerRadius: uranus.getRadius() * 2, outerRadius: uranus.getRadius() * 2)
         }
             
@@ -232,38 +264,16 @@ struct PlanetARium {
      - parameter sceneView: the scene view to add the solar system to
      */
     func animatePlanets(to sceneView: ARSCNView) {
-        guard let sun = sun else {
-            print("Sun object not found.")
-            return
-        }
-
-        if let moon = moon {
-            moon.animate()
-        }
-
-        for (_, planet) in planets {
-            planet.animate()
-            planet.addOrbitPath()
-
-            sun.addSatellite(planet)
-        }
-
-        sun.animate()
-        sun.addLightSource(omniLumens: 1000, ambientLumens: 250)
-
-        sceneView.scene.rootNode.addChildNode(sun.getOrbitalCenterNode())
-        
-        
-//        guard let sun = planetGroup.getPlanets(withType: PlanetType.sun).first else {
-//            print("Sun not found.")
+//        guard let sun = sun else {
+//            print("Sun object not found.")
 //            return
 //        }
 //
-//        for moon in planetGroup.getPlanets(withType: PlanetType.moon) {
+//        if let moon = moon {
 //            moon.animate()
 //        }
 //
-//        for planet in planetGroup.getPlanets(withType: PlanetType.planet) {
+//        for (_, planet) in planets {
 //            planet.animate()
 //            planet.addOrbitPath()
 //
@@ -274,28 +284,57 @@ struct PlanetARium {
 //        sun.addLightSource(omniLumens: 1000, ambientLumens: 250)
 //
 //        sceneView.scene.rootNode.addChildNode(sun.getOrbitalCenterNode())
+        
+        
+        guard let sun = planetGroup.getPlanets(withType: PlanetType.sun).first else {
+            print("Sun not found.")
+            return
+        }
+
+        for moon in planetGroup.getPlanets(withType: PlanetType.moon) {
+            moon.animate()
+        }
+
+        for planet in planetGroup.getPlanets(withType: PlanetType.planet) {
+            planet.animate()
+            planet.addOrbitPath()
+
+            sun.addSatellite(planet)
+        }
+
+        sun.animate()
+        sun.addLightSource(omniLumens: 1000, ambientLumens: 250)
+
+        sceneView.scene.rootNode.addChildNode(sun.getOrbitalCenterNode())
     }
     
     mutating func showLabels(_ show: Bool) {
         self.showLabels = show
         
-        if var sun = sun {
-            sun.showLabel(show)
-        }
-
-        if var moon = moon {
-            moon.showLabel(show)
-        }
-
-        for (_, planet) in planets {
-            var planetTemp = planet
-            planetTemp.showLabel(show)
-        }
-        
-//        for planet in planetGroup.getAllPlanets() {
+//        if var sun = sun {
+//            sun.showLabel(show)
+//        }
+//
+//        if var moon = moon {
+//            moon.showLabel(show)
+//        }
+//
+//        for (_, planet) in planets {
 //            var planetTemp = planet
 //            planetTemp.showLabel(show)
 //        }
+        
+        for planet in planetGroup.getAllPlanets() {
+            var planetTemp = planet
+            planetTemp.showLabel(show)
+        }
+    }
+    
+    /**
+     Resets all planet positions by clearing the group.
+     */
+    mutating func resetPlanets() {
+        planetGroup = PlanetGroup()
     }
     
     
@@ -329,16 +368,16 @@ struct PlanetARium {
      Return the requested planet, sun, or moon. (This will grow inefficiently. Have a struct to house the planets? PlanetDirectory.
      */
     func getPlanet(withName planetName: String) -> Planet? {
-        switch planetName.lowercased() {
-        case "sun":
-            return sun
-        case "moon":
-            return moon
-        default:
-            return planets[planetName]
-        }
+//        switch planetName.lowercased() {
+//        case "sun":
+//            return sun
+//        case "moon":
+//            return moon
+//        default:
+//            return planets[planetName]
+//        }
         
-//        return planetGroup.getPlanet(withName: planetName)
+        return planetGroup.getPlanet(withName: planetName)
     }
     
     
@@ -367,34 +406,34 @@ struct PlanetARium {
      */
     private mutating func addPlanetHelper(name: String, type: PlanetType, radius: Float, tilt: SCNVector3, position: SCNVector3, rotationSpeed: TimeInterval, orbitalCenterTilt: SCNVector3, orbitalCenterPosition: SCNVector3, orbitalCenterRotationSpeed: TimeInterval?, labelColor: UIColor) {
         
-        let lastTilt = planets[name] == nil ? tilt : planets[name]!.getNode().eulerAngles
-        let lastOrbitalCenterTilt = planets[name] == nil ? orbitalCenterTilt : planets[name]!.getOrbitalCenterNode().eulerAngles
-        
-        planets[name] = Planet(name: name,
-                               type: type,
-                               radius: radius,
-                               tilt: lastTilt,
-                               position: position,
-                               rotationSpeed: rotationSpeed,
-                               orbitalCenterTilt: lastOrbitalCenterTilt,
-                               orbitalCenterPosition: orbitalCenterPosition,
-                               orbitalCenterRotationSpeed: orbitalCenterRotationSpeed,
-                               labelColor: labelColor)
-        
-//        let planet = planetGroup.getPlanet(withName: name)
-//        let lastTilt = planet == nil ? tilt : planet!.getNode().eulerAngles
-//        let lastOrbitalCenterTilt = planet == nil ? orbitalCenterTilt : planet!.getOrbitalCenterNode().eulerAngles
+//        let lastTilt = planets[name] == nil ? tilt : planets[name]!.getNode().eulerAngles
+//        let lastOrbitalCenterTilt = planets[name] == nil ? orbitalCenterTilt : planets[name]!.getOrbitalCenterNode().eulerAngles
 //
-//        planetGroup.addPlanet(Planet(name: name,
-//                                       type: type,
-//                                       radius: radius,
-//                                       tilt: lastTilt,
-//                                       position: position,
-//                                       rotationSpeed: rotationSpeed,
-//                                       orbitalCenterTilt: lastOrbitalCenterTilt,
-//                                       orbitalCenterPosition: orbitalCenterPosition,
-//                                       orbitalCenterRotationSpeed: orbitalCenterRotationSpeed,
-//                                       labelColor: labelColor))
+//        planets[name] = Planet(name: name,
+//                               type: type,
+//                               radius: radius,
+//                               tilt: lastTilt,
+//                               position: position,
+//                               rotationSpeed: rotationSpeed,
+//                               orbitalCenterTilt: lastOrbitalCenterTilt,
+//                               orbitalCenterPosition: orbitalCenterPosition,
+//                               orbitalCenterRotationSpeed: orbitalCenterRotationSpeed,
+//                               labelColor: labelColor)
+        
+        let planet = planetGroup.getPlanet(withName: name)
+        let lastTilt = planet == nil ? tilt : planet!.getNode().eulerAngles
+        let lastOrbitalCenterTilt = planet == nil ? orbitalCenterTilt : planet!.getOrbitalCenterNode().eulerAngles
+
+        planetGroup.addPlanet(Planet(name: name,
+                                       type: type,
+                                       radius: radius,
+                                       tilt: lastTilt,
+                                       position: position,
+                                       rotationSpeed: rotationSpeed,
+                                       orbitalCenterTilt: lastOrbitalCenterTilt,
+                                       orbitalCenterPosition: orbitalCenterPosition,
+                                       orbitalCenterRotationSpeed: orbitalCenterRotationSpeed,
+                                       labelColor: labelColor))
     }
     
     /**
@@ -403,32 +442,32 @@ struct PlanetARium {
     private func getAllActions() -> [SCNAction] {
         var actions = [SCNAction]()
         
-        if let sun = sun {
-            for action in sun.getAllPlanetActions() {
-                actions.append(action)
-            }
-        }
-
-        for (_, planet) in planets {
-            for action in planet.getAllPlanetActions() {
-                actions.append(action)
-            }
-        }
-
-        if let moon = moon {
-            for action in moon.getAllPlanetActions() {
-                actions.append(action)
-            }
-        }
+//        if let sun = sun {
+//            for action in sun.getAllPlanetActions() {
+//                actions.append(action)
+//            }
+//        }
 //
-//
-//
-//        actions = [SCNAction]()
-//        for planet in planetGroup.getAllPlanets() {
+//        for (_, planet) in planets {
 //            for action in planet.getAllPlanetActions() {
 //                actions.append(action)
 //            }
 //        }
+//
+//        if let moon = moon {
+//            for action in moon.getAllPlanetActions() {
+//                actions.append(action)
+//            }
+//        }
+
+
+
+        actions = [SCNAction]()
+        for planet in planetGroup.getAllPlanets() {
+            for action in planet.getAllPlanetActions() {
+                actions.append(action)
+            }
+        }
         
         return actions
     }

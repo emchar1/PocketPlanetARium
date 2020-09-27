@@ -150,6 +150,7 @@ class PlanetARiumController: UIViewController {
     }
     
     
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "PlanetInfoSegue" {
             let controller = segue.destination as! PlanetDetailsController
