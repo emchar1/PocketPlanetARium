@@ -212,7 +212,7 @@ struct PlanetARium {
                         orbitalCenterRotationSpeed: earthYear * 248.1,
                         labelColor: #colorLiteral(red: 0.8180410266, green: 0.6948351264, blue: 0.5951495767, alpha: 1))
         
-        showLabels(showLabels)
+        showAllLabels(showLabels)
     }
     
     /**
@@ -252,13 +252,29 @@ struct PlanetARium {
         sceneView.scene.rootNode.addChildNode(sun.getOrbitalCenterNode())
     }
     
-    mutating func showLabels(_ show: Bool) {
+    /**
+     Shows or hides the label for all planets in the PlanetGroup.
+     - parameter show: determines whether to show or hide the labels
+     - This function also sets the showLabels property based on the value of show passed in, which is why this is a mutating function.
+     */
+    mutating func showAllLabels(_ show: Bool) {
         self.showLabels = show
                 
         for planet in planets.getAllPlanets() {
             var planetTemp = planet
             planetTemp.showLabel(show)
         }
+    }
+    
+    /**
+     Shows or hides the label for a particular Planet.
+     - parameters:
+        - show: determines whether to show or hide the label
+        - planet: the Planet for which to show its label
+     */
+    func showLabel(_ show: Bool, forPlanet planet: Planet) {
+        var planetTemp = planet
+        planetTemp.showLabel(show)
     }
     
     /**

@@ -11,11 +11,21 @@ import SceneKit
 import ARKit
 
 
+/**
+ PlanetType enumeration. Cases include sun, moon, planet, etc.
+ */
 enum PlanetType {
     case sun, moon, planet, comet, asteroid, spacestation, miscellany
 }
 
+
+/**
+ Planet structure. Houses various information pertaining to a Planet object, such as the planet's name, type, size, node information and orbital center node information.
+ */
 struct Planet {
+    
+    // MARK: - Properties
+    
     private let name: String
     private let type: PlanetType
     private let radius: Float
@@ -34,8 +44,6 @@ struct Planet {
     private let labelNode: SCNNode
     private let labelColor: UIColor
     private let labelSize: Float
-    private var showLabel: Bool
-
 
     
     // MARK: - Initializers
@@ -63,7 +71,6 @@ struct Planet {
         self.orbitalCenterRotationSpeed = orbitalCenterRotationSpeed
         self.labelColor = labelColor
         self.labelSize = 0.05 * radius + 0.005 * abs(position.z)
-        self.showLabel = false
 
         //Set up planet
         let planet = SCNSphere(radius: CGFloat(radius))
@@ -277,8 +284,6 @@ struct Planet {
      - parameter show: show (true) or hide (false) the planet's label
      */
     mutating func showLabel(_ show: Bool) {
-        self.showLabel = show
-        
         if show {
             orbitalCenterNode.addChildNode(labelNode)
         }

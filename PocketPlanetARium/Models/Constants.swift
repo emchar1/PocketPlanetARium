@@ -9,7 +9,6 @@
 import UIKit
 
 struct K {
-    
     /**
      Period of a planetary orbit.
      */
@@ -44,6 +43,16 @@ struct K {
     static func radToDeg(_ radians: Float) -> Float {
         return 180 * radians / Float.pi
     }
+    
+    /**
+     Adds a haptic feedback vibration.
+     - parameter style: style of feedback to produce
+     */
+    static func addHapticFeedback(withStyle style: UIImpactFeedbackGenerator.FeedbackStyle) {
+        let generator = UIImpactFeedbackGenerator(style: style)
+        generator.impactOccurred()
+    }
+
 }
 
 

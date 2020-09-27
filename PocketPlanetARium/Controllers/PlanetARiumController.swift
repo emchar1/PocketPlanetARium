@@ -31,9 +31,7 @@ class PlanetARiumController: UIViewController {
     var scaleValue: Float = 0.218 {
         willSet {
             if newValue < 0 || newValue > 1 {
-                //Add some haptic feedback! This only applies to pinch to zoom, for now.
-                let generator = UIImpactFeedbackGenerator(style: .light)
-                generator.impactOccurred()
+                K.addHapticFeedback(withStyle: .light)
             }
         }
         didSet {
@@ -87,12 +85,11 @@ class PlanetARiumController: UIViewController {
     
     @IBAction func toggleLabels(_ sender: UIButton) {
         showLabels = !showLabels
-        planetarium.showLabels(showLabels)
+        planetarium.showAllLabels(showLabels)
     }
     
     @IBAction func resetPlanets(_ sender: UIButton) {
         setupSceneView()
-
         planetarium.resetPlanets(withScale: scaleValue, toNode: sceneView)
     }
     
@@ -118,48 +115,69 @@ class PlanetARiumController: UIViewController {
             scaleValue += diff / (diff < 0 ? 25 : 100)
             planetarium.update(scale: scaleValue, toNode: sceneView)
         }
-
-        
-//        print(sender.velocity)
-//        scaleValue += Float(sender.velocity) / (sender.velocity < 0 ? 50 : 500)
-//        planetarium.update(scale: scaleValue, toNode: sceneView)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         planetarium.pauseAnimation()
-
-        //Start to work on info graph for each planet.
+        
+        
+        
+        
+        //*******BETA****This will eventually handle a peek and pop with animation
         guard let touch = touches.first else {
             return
         }
-        
+
         let location = touch.location(in: sceneView)
         let hitResults = sceneView.hitTest(location, options: nil)
-        
+
         if hitResults.count > 0 {
             guard let result = hitResults.first,
                   let planetNodeName = result.node.name,
                   let tappedPlanet = planetarium.getPlanet(withName: planetNodeName) else {
                 return
             }
-            
-            self.tappedPlanet = tappedPlanet
-            performSegue(withIdentifier: "PlanetInfoSegue", sender: nil)
 
-            print(tappedPlanet.getName())
+            self.tappedPlanet = tappedPlanet
+            planetarium.showLabel(true, forPlanet: tappedPlanet)
         }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         planetarium.setSpeed(to: scaleValue)
+        
+        if let tappedPlanet = tappedPlanet {
+            planetarium.showLabel(showLabels, forPlanet: tappedPlanet)
+        }
+    }
+
+    
+    
+    
+    //**************BETA****Start to work on info graph for each planet.
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first, view.traitCollection.forceTouchCapability == .available else {
+            print("3D Touch not available on this device")
+            return
+        }
+
+        let location = touch.location(in: sceneView)
+        let hitResults = sceneView.hitTest(location, options: nil)
+
+        if hitResults.count > 0 {
+            guard let result = hitResults.first,
+                  let planetNodeName = result.node.name,
+                  let tappedPlanet = planetarium.getPlanet(withName: planetNodeName),
+                  touch.force == touch.maximumPossibleForce else {
+                return
+            }
+
+            self.tappedPlanet = tappedPlanet
+            performSegue(withIdentifier: "PlanetInfoSegue", sender: nil)
+            K.addHapticFeedback(withStyle: .heavy)
+        }
     }
     
-    
-    
-    
-    
-    
-    //*******BETA TESTING
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "PlanetInfoSegue" {
             let controller = segue.destination as! PlanetDetailsController
@@ -232,7 +250,13 @@ extension PlanetARiumController: ARSCNViewDelegate {
 
 extension PlanetARiumController: PlanetDetailsControllerDelegate {
     func didDismiss(_ controller: PlanetDetailsController) {
+        //Resume planetarium animation
         planetarium.setSpeed(to: scaleValue)
+        
+        //Reset label to it's current state
+        if let tappedPlanet = tappedPlanet {
+            planetarium.showLabel(showLabels, forPlanet: tappedPlanet)
+        }
     }
 }
 
