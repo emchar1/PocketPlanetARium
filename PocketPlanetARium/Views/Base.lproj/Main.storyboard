@@ -88,6 +88,8 @@
                         <outlet property="lowLightWarning" destination="Rda-l7-hc1" id="vzK-tM-GDC"/>
                         <outlet property="scaleSlider" destination="fF2-tk-bDV" id="bRx-Yq-R9i"/>
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
+                        <segue destination="Zct-LL-3e1" kind="presentation" identifier="PlanetInfoSegue" id="KTr-VH-x6O"/>
+                        <segue destination="4c5-bX-tws" kind="presentation" identifier="TestSegue" id="Tqv-NF-g4l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
@@ -99,16 +101,67 @@
             </objects>
             <point key="canvasLocation" x="1952.1739130434785" y="73.660714285714278"/>
         </scene>
+        <!--Test Planet Info Controller-->
+        <scene sceneID="QVD-Rp-egy">
+            <objects>
+                <viewController id="4c5-bX-tws" customClass="TestPlanetInfoController" customModule="PocketPlanetARium" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TMm-wu-nL2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SCq-RM-rJW">
+                                <rect key="frame" x="20" y="100" width="374" height="608"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LVr-L5-8Uu">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="608"/>
+                                        <mutableString key="text">Closures Are Reference Types
+
+In the example above, incrementBySeven and incrementByTen are constants, but the closures these constants refer to are still able to increment the runningTotal variables that they have captured. This is because functions and closures are reference types.
+
+Whenever you assign a function or a closure to a constant or a variable, you are actually setting that constant or variable to be a reference to the function or closure. In the example above, it is the choice of closure that incrementByTen refers to that is constant, and not the contents of the closure itself.
+
+This also means that if you assign a closure to two different constants or variables, both of those constants or variables refer to the same closure.</mutableString>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="LVr-L5-8Uu" secondAttribute="bottom" id="9G4-1e-gjX"/>
+                                    <constraint firstAttribute="trailing" secondItem="LVr-L5-8Uu" secondAttribute="trailing" id="WXa-W1-b0U"/>
+                                    <constraint firstItem="LVr-L5-8Uu" firstAttribute="leading" secondItem="SCq-RM-rJW" secondAttribute="leading" id="j3K-D1-eLe"/>
+                                    <constraint firstItem="LVr-L5-8Uu" firstAttribute="top" secondItem="SCq-RM-rJW" secondAttribute="top" id="wY1-ha-8dM"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="bIs-gJ-ITD"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="SCq-RM-rJW" firstAttribute="leading" secondItem="bIs-gJ-ITD" secondAttribute="leading" constant="20" id="Viv-J2-Cqd"/>
+                            <constraint firstItem="SCq-RM-rJW" firstAttribute="top" secondItem="bIs-gJ-ITD" secondAttribute="top" constant="100" id="ei5-5E-rpT"/>
+                            <constraint firstItem="bIs-gJ-ITD" firstAttribute="bottom" secondItem="SCq-RM-rJW" secondAttribute="bottom" constant="100" id="ekn-GQ-2jI"/>
+                            <constraint firstItem="bIs-gJ-ITD" firstAttribute="trailing" secondItem="SCq-RM-rJW" secondAttribute="trailing" constant="20" id="hHW-Uc-uH4"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="label" destination="LVr-L5-8Uu" id="rYo-gc-OON"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IDu-Fk-Rkw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2951" y="-701"/>
+        </scene>
         <!--Planet Details Controller-->
         <scene sceneID="8lZ-GG-5kB">
             <objects>
                 <viewController storyboardIdentifier="PlanetDetails" id="Zct-LL-3e1" customClass="PlanetDetailsController" customModule="PocketPlanetARium" customModuleProvider="target" sceneMemberID="viewController">
                     <scrollView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" id="hP8-Lr-kqE">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="QmK-15-crn" userLabel="MainStackView">
-                                <rect key="frame" x="12" y="-32" width="390" height="838"/>
+                                <rect key="frame" x="12" y="12" width="390" height="784"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="RZb-A8-C04" userLabel="SubStackView">
                                         <rect key="frame" x="0.0" y="0.0" width="390" height="300"/>
@@ -154,10 +207,10 @@
                                         </constraints>
                                     </stackView>
                                     <view contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="j00-tE-7SB" userLabel="DetailsView">
-                                        <rect key="frame" x="0.0" y="312" width="390" height="526"/>
+                                        <rect key="frame" x="0.0" y="312" width="390" height="472"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7zo-2U-813">
-                                                <rect key="frame" x="0.0" y="0.0" width="390" height="526"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="390" height="472"/>
                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -174,6 +227,8 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="RZb-A8-C04" firstAttribute="top" secondItem="QmK-15-crn" secondAttribute="top" id="C1x-xg-rb9"/>
+                                    <constraint firstAttribute="width" constant="390" id="MhR-gw-Tzr"/>
+                                    <constraint firstAttribute="height" constant="784" id="P2B-ms-9kn"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -187,9 +242,6 @@
                         <viewLayoutGuide key="contentLayoutGuide" id="0fY-i8-Rxn"/>
                         <viewLayoutGuide key="frameLayoutGuide" id="F0Y-Vz-3Mc"/>
                     </scrollView>
-                    <nil key="simulatedTopBarMetrics"/>
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="planetDetailsLabel" destination="7zo-2U-813" id="12o-YB-6ZE"/>
                         <outlet property="planetStatsLabel" destination="bmT-6h-Ffv" id="Q1e-Ki-Dmp"/>
@@ -271,6 +323,9 @@
         </systemColor>
         <systemColor name="systemTealColor">
             <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -19,6 +19,8 @@
 		EA89D9D7251D621D002B82F3 /* SunParticles.scn in Resources */ = {isa = PBXBuildFile; fileRef = EA89D9D6251D621D002B82F3 /* SunParticles.scn */; };
 		EAC1F4D025149BD30097521A /* PlanetARium.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC1F4CF25149BD30097521A /* PlanetARium.swift */; };
 		EAE2AFDB251877D800A61C90 /* TestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE2AFDA251877D800A61C90 /* TestController.swift */; };
+		EAF7BEA6251FAE7200C0D1A6 /* TestPlanetInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF7BEA5251FAE7200C0D1A6 /* TestPlanetInfoController.swift */; };
+		EAF7BEA925203CAE00C0D1A6 /* PlanetGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF7BEA825203CAE00C0D1A6 /* PlanetGroup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		EA89D9D6251D621D002B82F3 /* SunParticles.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = SunParticles.scn; sourceTree = "<group>"; };
 		EAC1F4CF25149BD30097521A /* PlanetARium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetARium.swift; sourceTree = "<group>"; };
 		EAE2AFDA251877D800A61C90 /* TestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestController.swift; sourceTree = "<group>"; };
+		EAF7BEA5251FAE7200C0D1A6 /* TestPlanetInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPlanetInfoController.swift; sourceTree = "<group>"; };
+		EAF7BEA825203CAE00C0D1A6 /* PlanetGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetGroup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +90,7 @@
 				EA5B0BFA251055B300B1E910 /* PlanetARiumController.swift */,
 				EA58D012251F3D79007A8DB5 /* PlanetDetailsController.swift */,
 				EAE2AFDA251877D800A61C90 /* TestController.swift */,
+				EAF7BEA5251FAE7200C0D1A6 /* TestPlanetInfoController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -103,6 +108,7 @@
 			children = (
 				EA2BCCA325180317007A13F5 /* Constants.swift */,
 				EA5B0C0A2510677E00B1E910 /* Planet.swift */,
+				EAF7BEA825203CAE00C0D1A6 /* PlanetGroup.swift */,
 				EAC1F4CF25149BD30097521A /* PlanetARium.swift */,
 				EA89D9D6251D621D002B82F3 /* SunParticles.scn */,
 			);
@@ -186,7 +192,9 @@
 				EA5B0C0B2510677E00B1E910 /* Planet.swift in Sources */,
 				EA5B0BFB251055B300B1E910 /* PlanetARiumController.swift in Sources */,
 				EA58D013251F3D79007A8DB5 /* PlanetDetailsController.swift in Sources */,
+				EAF7BEA925203CAE00C0D1A6 /* PlanetGroup.swift in Sources */,
 				EAE2AFDB251877D800A61C90 /* TestController.swift in Sources */,
+				EAF7BEA6251FAE7200C0D1A6 /* TestPlanetInfoController.swift in Sources */,
 				EAC1F4D025149BD30097521A /* PlanetARium.swift in Sources */,
 				EA5B0BF7251055B300B1E910 /* AppDelegate.swift in Sources */,
 			);

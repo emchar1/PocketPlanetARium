@@ -21,6 +21,12 @@ class PlanetARiumController: UIViewController {
     var showLabels = false
     var planetarium = PlanetARium()
     
+    
+    
+//    var selectedNode: SCNNode?
+    var tappedPlanet: Planet?
+    
+    
     //Pinch to zoom properties
     var pinchBegan: CGFloat?
     var pinchChanged: CGFloat?
@@ -127,43 +133,41 @@ class PlanetARiumController: UIViewController {
         let hitResults = sceneView.hitTest(location, options: nil)
         
         if hitResults.count > 0 {
-            guard let result = hitResults.first, let planetNodeName = result.node.name else {
+            guard let result = hitResults.first,
+                  let planetNodeName = result.node.name,
+                  let tappedPlanet = planetarium.getPlanet(named: planetNodeName) else {
                 return
             }
             
+            self.tappedPlanet = tappedPlanet
+            performSegue(withIdentifier: "PlanetInfoSegue", sender: nil)
 
-            
-            
-            
-//            //******TEST******Trying to figure out popup View
-//            let planetDetailsController = PlanetDetailsController()
-//            planetDetailsController.view.bounds = CGRect(x: 0, y: 0, width: view.bounds.width - 24, height: 2 * view.bounds.height / 3)
-//            planetDetailsController.view.center = CGPoint(x: view.bounds.midX, y: view.bounds.midY)
-//            addChild(planetDetailsController)
-//
-////            view.addSubviewWithSlideUpAnimation(planetDetailsController.view, duration: 0.5, options: .curveEaseInOut)
-//
-//            planetDetailsController.view.transform = view.transform.scaledBy(x: 0.01, y: 0.01)
-//
-//            view.addSubview(planetDetailsController.view)
-//
-//            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
-//                planetDetailsController.view.transform = CGAffineTransform.identity
-//            }, completion: nil)
-//
-            
-//            planetDetailsController.didMove(toParent: self)
-            
-            
-            
-            
-            
-            print(planetNodeName)
+            print(tappedPlanet.getName())
         }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         planetarium.setSpeed(to: scaleValue)
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "PlanetInfoSegue" {
+            let controller = segue.destination as! PlanetDetailsController
+            
+            guard let tappedPlanet = tappedPlanet else {
+                return
+            }
+            
+            controller.delegate = self
+            controller.planetTitle = tappedPlanet.getName()
+            
+            controller.planetStats = "Radius:\t\(tappedPlanet.getRadius())\n"
+            controller.planetStats += "Axial Tilt:\t\(K.radToDeg(tappedPlanet.getTilt().z)) deg F\n"
+            controller.planetStats += "1 Day:\t\(tappedPlanet.getRotationSpeed()) sec"
+            
+            controller.planetDetails = "Jupiter is the largest planet in the solar system."
+        }
     }
 
 }
@@ -211,7 +215,11 @@ extension PlanetARiumController: ARSCNViewDelegate {
 }
 
 
-
+extension PlanetARiumController: PlanetDetailsControllerDelegate {
+    func didDismiss(_ controller: PlanetDetailsController) {
+        planetarium.setSpeed(to: scaleValue)
+    }
+}
 
 
 //******TEST******

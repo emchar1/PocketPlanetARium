@@ -10,8 +10,14 @@ import Foundation
 import SceneKit
 import ARKit
 
+
+enum PlanetType {
+    case sun, moon, planet, comet, asteroid, spacestation, miscellany
+}
+
 struct Planet {
     private let name: String
+    private let type: PlanetType
     private let radius: Float
 
     //Planet properties
@@ -29,7 +35,8 @@ struct Planet {
     private let labelColor: UIColor
     private let labelSize: Float
     private var showLabel: Bool
-    
+
+
     
     // MARK: - Initializers
     
@@ -46,8 +53,9 @@ struct Planet {
         - orbitalCenterRotationSpeed: time it takes planet to complete one revolution around its orbital center.
         - labelColor: color of the planet label
      */
-    init(name: String, radius: Float, tilt: SCNVector3, position: SCNVector3, rotationSpeed: TimeInterval, orbitalCenterTilt: SCNVector3, orbitalCenterPosition: SCNVector3, orbitalCenterRotationSpeed: TimeInterval?, labelColor: UIColor) {
+    init(name: String, type: PlanetType, radius: Float, tilt: SCNVector3, position: SCNVector3, rotationSpeed: TimeInterval, orbitalCenterTilt: SCNVector3, orbitalCenterPosition: SCNVector3, orbitalCenterRotationSpeed: TimeInterval?, labelColor: UIColor) {
         self.name = name
+        self.type = type
         self.radius = radius
         self.tilt = tilt
         self.rotationSpeed = rotationSpeed
@@ -102,8 +110,9 @@ struct Planet {
         - rotationSpeed: time in seconds to complete one rotation around a planet's axis
         - labelColor: color of the planet label
      */
-    init(name: String, radius: Float, tilt: SCNVector3, position: SCNVector3, rotationSpeed: TimeInterval, labelColor: UIColor) {
+    init(name: String, type: PlanetType, radius: Float, tilt: SCNVector3, position: SCNVector3, rotationSpeed: TimeInterval, labelColor: UIColor) {
         self.init(name: name,
+                  type: type,
                   radius: radius,
                   tilt: tilt,
                   position: position,
@@ -135,77 +144,19 @@ struct Planet {
     }
     
     
-    // MARK: - Get Property Functions
+    // MARK: - Getters
     
-    /**
-     Returns the planet's name.
-     */
-    func getName() -> String {
-        return name
-    }
-    
-    /**
-     Returns the planet's radius.
-     */
-    func getRadius() -> Float {
-        return radius
-    }
-    
-    /**
-     Returns the node of the planet.
-     */
-    func getNode() -> SCNNode {
-        return node
-    }
-    
-    /**
-     Returns the axial tilt of the planet.
-     */
-    func getTilt() -> SCNVector3 {
-        return tilt
-    }
-
-    /**
-     Returns the planet's orbital center rotation speed.
-     */
-    func getRotationSpeed() -> TimeInterval {
-        return rotationSpeed
-    }
-
-    /**
-     Returns the node of the planet's orbital center.
-     */
-    func getOrbitalCenterNode() -> SCNNode {
-        return orbitalCenterNode
-    }
-    
-    /**
-     Returns the axial tilt of the planet's orbital center.
-     */
-    func getOrbitalCenterTilt() -> SCNVector3 {
-        return orbitalCenterTilt
-    }
-    
-    /**
-     Returns the planet's orbital center rotation speed.
-     */
-    func getOrbitalCenterRotationSpeed() -> TimeInterval? {
-        return orbitalCenterRotationSpeed
-    }
-    
-    /**
-     Returns the color of the label
-     */
-    func getLabelNode() -> SCNNode {
-        return labelNode
-    }
-    
-    /**
-     Returns the color of the label
-     */
-    func getLabelColor() -> UIColor {
-        return labelColor
-    }
+    func getName() -> String { return name }
+    func getType() -> PlanetType { return type }
+    func getRadius() -> Float { return radius }
+    func getNode() -> SCNNode { return node }
+    func getTilt() -> SCNVector3 { return tilt }
+    func getRotationSpeed() -> TimeInterval { return rotationSpeed }
+    func getOrbitalCenterNode() -> SCNNode { return orbitalCenterNode }
+    func getOrbitalCenterTilt() -> SCNVector3 { return orbitalCenterTilt }
+    func getOrbitalCenterRotationSpeed() -> TimeInterval? { return orbitalCenterRotationSpeed }
+    func getLabelNode() -> SCNNode { return labelNode }
+    func getLabelColor() -> UIColor { return labelColor }
 
     /**
      Returns all SCNActions currently tied to the planet.
