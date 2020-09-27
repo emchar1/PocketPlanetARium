@@ -63,6 +63,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ow-uo-NEC">
                                 <rect key="frame" x="20" y="751" width="18" height="22"/>
                                 <state key="normal" image="pencil" catalog="system"/>
+                                <connections>
+                                    <action selector="resetPlanets:" destination="BV1-FR-VrT" eventType="touchUpInside" id="I6Q-wN-NVi"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fQZ-KI-GVf"/>

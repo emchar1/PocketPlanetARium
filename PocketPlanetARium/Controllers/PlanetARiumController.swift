@@ -15,18 +15,16 @@ class PlanetARiumController: UIViewController {
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var scaleSlider: UISlider!
     @IBOutlet weak var lowLightWarning: UIView!
+
+    //PlanetARium properties
+    var planetarium = PlanetARium()
+    var tappedPlanet: Planet?
+    var showLabels = false
     
+    //Lighting properties
     var lowLightTimer: TimeInterval = 0
     var lowLightTimerBegin = false
-    var showLabels = false
-    var planetarium = PlanetARium()
-    
-    
-    
-//    var selectedNode: SCNNode?
-    var tappedPlanet: Planet?
-    
-    
+
     //Pinch to zoom properties
     var pinchBegan: CGFloat?
     var pinchChanged: CGFloat?
@@ -72,7 +70,8 @@ class PlanetARiumController: UIViewController {
     
     func setupSceneView() {
         let configuration = ARWorldTrackingConfiguration()
-        sceneView.session.run(configuration)
+        
+        sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
         sceneView.delegate = self
         sceneView.showsStatistics = true
         sceneView.autoenablesDefaultLighting = false
@@ -89,6 +88,12 @@ class PlanetARiumController: UIViewController {
     @IBAction func toggleLabels(_ sender: UIButton) {
         showLabels = !showLabels
         planetarium.showLabels(showLabels)
+    }
+    
+    @IBAction func resetPlanets(_ sender: UIButton) {
+        setupSceneView()
+
+        planetarium.resetPlanets(withScale: scaleValue, toNode: sceneView)
     }
     
     
@@ -151,6 +156,10 @@ class PlanetARiumController: UIViewController {
     
     
     
+    
+    
+    
+    //*******BETA TESTING
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "PlanetInfoSegue" {
             let controller = segue.destination as! PlanetDetailsController
@@ -169,6 +178,10 @@ class PlanetARiumController: UIViewController {
             controller.planetDetails = "Jupiter is the largest planet in the solar system."
         }
     }
+    
+    
+    
+    
 
 }
 
@@ -215,11 +228,17 @@ extension PlanetARiumController: ARSCNViewDelegate {
 }
 
 
+// MARK: - Planet Details Controller Delegate
+
 extension PlanetARiumController: PlanetDetailsControllerDelegate {
     func didDismiss(_ controller: PlanetDetailsController) {
         planetarium.setSpeed(to: scaleValue)
     }
 }
+
+
+
+
 
 
 //******TEST******
