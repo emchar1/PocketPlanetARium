@@ -110,7 +110,6 @@ class PlanetARiumController: UIViewController {
 
         if let began = pinchBegan, let changed = pinchChanged {
             let diff = Float(changed - began)
-            print(diff)
             scaleValue += diff / (diff < 0 ? 25 : 100)
             planetarium.update(scale: scaleValue, toNode: sceneView)
         }
@@ -135,7 +134,7 @@ class PlanetARiumController: UIViewController {
         if hitResults.count > 0 {
             guard let result = hitResults.first,
                   let planetNodeName = result.node.name,
-                  let tappedPlanet = planetarium.getPlanet(named: planetNodeName) else {
+                  let tappedPlanet = planetarium.getPlanet(withName: planetNodeName) else {
                 return
             }
             

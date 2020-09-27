@@ -138,7 +138,6 @@ struct PlanetARium {
             
             if let moon = moon {
                 earth.addSatellite(moon)
-                print("Moon added")
             }
 //        }
         
@@ -327,7 +326,7 @@ struct PlanetARium {
     /**
      Return the requested planet, sun, or moon. (This will grow inefficiently. Have a struct to house the planets? PlanetDirectory.
      */
-    func getPlanet(named planetName: String) -> Planet? {
+    func getPlanet(withName planetName: String) -> Planet? {
 //        switch planetName.lowercased() {
 //        case "sun":
 //            return sun
@@ -347,7 +346,16 @@ struct PlanetARium {
      Adds a planet to the dictionary. Assumes planet already exists.
      */
     private mutating func addPlanetHelper(with planet: Planet) {
-        planetGroup.addPlanet(planet)
+        planetGroup.addPlanet(Planet(name: planet.getName(),
+                                     type: planet.getType(),
+                                     radius: planet.getRadius(),
+                                     tilt: planet.getNode().eulerAngles,
+                                     position: planet.getNode().position,
+                                     rotationSpeed: planet.getRotationSpeed(),
+                                     orbitalCenterTilt: planet.getOrbitalCenterNode().eulerAngles,
+                                     orbitalCenterPosition: planet.getOrbitalCenterNode().position,
+                                     orbitalCenterRotationSpeed: planet.getOrbitalCenterRotationSpeed(),
+                                     labelColor: planet.getLabelColor()))
     }
     
     /**
@@ -368,6 +376,10 @@ struct PlanetARium {
 //                               orbitalCenterPosition: orbitalCenterPosition,
 //                               orbitalCenterRotationSpeed: orbitalCenterRotationSpeed,
 //                               labelColor: labelColor)
+        
+        if planetGroup.getPlanet(withName: name) == nil {
+            print("Planet is nil")
+        }
         
         let planet = planetGroup.getPlanet(withName: name)
         let lastTilt = planet == nil ? tilt : planet!.getNode().eulerAngles
