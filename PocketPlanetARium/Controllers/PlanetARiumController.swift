@@ -22,7 +22,7 @@ class PlanetARiumController: UIViewController {
     var showLabels = false
     
     //Lighting properties
-    var lowLightTimer: TimeInterval = 0
+    var lowLightTimer: TimeInterval?
     var lowLightTimerBegin = false
 
     //Pinch to zoom properties
@@ -62,8 +62,7 @@ class PlanetARiumController: UIViewController {
         scaleSlider.value = scaleValue
         scaleSlider.setThumbImage(UIImage(systemName: "hare.fill"), for: .normal)
         
-        lowLightWarning.isHidden = true
-//        lowLightWarning.alpha = 0
+        lowLightWarning.alpha = 0.0
         lowLightWarning.clipsToBounds = true
         lowLightWarning.layer.cornerRadius = 7
         
@@ -237,10 +236,11 @@ extension PlanetARiumController: ARSCNViewDelegate {
                 lowLightTimerBegin = true
                 lowLightTimer = time + 3
             }
-        
-            if time > lowLightTimer {
-                DispatchQueue.main.async {
-                    self.lowLightWarning.isHidden = false
+            else {
+                if let lowLightTimer = lowLightTimer, time > lowLightTimer {
+                    DispatchQueue.main.async {
+                        self.lowLightWarning.alpha = 1.0
+                    }
                 }
             }
         }
@@ -249,14 +249,19 @@ extension PlanetARiumController: ARSCNViewDelegate {
                 lowLightTimerBegin = false
                 lowLightTimer = time + 3
             }
-            
-           
-            if time > lowLightTimer {
-                DispatchQueue.main.async {
-                    self.lowLightWarning.isHidden = true
+            else {
+                if let lowLightTimer = lowLightTimer, time > lowLightTimer {
+                    DispatchQueue.main.async {
+                        UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
+                            self.lowLightWarning.alpha = 0.0
+                        }, completion: { _ in
+                            self.lowLightTimer = nil
+                        })
+                    }
                 }
             }
-        }
+        }//end else if lightEstimate.ambientIntensity > 500
+        
     }
     
     
