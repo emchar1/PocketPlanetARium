@@ -57,7 +57,9 @@ class PlanetARiumController: UIViewController {
         
         
         
-        
+        sceneView.delegate = self
+        sceneView.showsStatistics = true
+        sceneView.autoenablesDefaultLighting = true
         
         scaleSlider.value = scaleValue
         scaleSlider.setThumbImage(UIImage(systemName: "hare.fill"), for: .normal)
@@ -71,25 +73,14 @@ class PlanetARiumController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        setupSceneView()
+        sceneView.session.run(ARWorldTrackingConfiguration(), options: [])
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
         sceneView.session.pause()
     }
-    
-    func setupSceneView(with options: ARSession.RunOptions = []) {
-        let configuration = ARWorldTrackingConfiguration()
-        
-        sceneView.session.run(configuration, options: options)
-        sceneView.delegate = self
-        sceneView.showsStatistics = true
-        sceneView.autoenablesDefaultLighting = false
-    }
-    
+
     
     // MARK: - UI Controls
     
@@ -104,7 +95,7 @@ class PlanetARiumController: UIViewController {
     }
     
     @IBAction func resetPlanets(_ sender: UIButton) {
-        setupSceneView(with: [.resetTracking, .removeExistingAnchors])
+        sceneView.session.run(ARWorldTrackingConfiguration(), options: [.resetTracking, .removeExistingAnchors])
         planetarium.resetPlanets(withScale: scaleValue, toNode: sceneView)
     }
     
@@ -228,6 +219,7 @@ extension PlanetARiumController: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         guard let currentFrame = sceneView.session.currentFrame,
               let lightEstimate = currentFrame.lightEstimate else {
+            print("No ambientIntensity checking happening today...")
             return
         }
         
