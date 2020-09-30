@@ -119,17 +119,14 @@ class PlanetARiumController: UIViewController {
     @IBAction func settingsPressed(_ sender: UIButton) {
         showSettings = !showSettings
         
-        UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
-            sender.transform = CGAffineTransform(rotationAngle: .pi)
-        }, completion: nil)
-        UIView.animate(withDuration: 0.25, delay: 0.25, options: .curveEaseOut, animations: {
-            sender.transform = CGAffineTransform(rotationAngle: .pi * 2)
-        }, completion: { _ in
-            K.addHapticFeedback(withStyle: .medium)
-        })
-        
         if showSettings {
-            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut) {
+            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn) {
+                sender.transform = CGAffineTransform(rotationAngle: .pi)
+            } completion: { _ in
+                K.addHapticFeedback(withStyle: .medium)
+            }
+            
+            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn) {
                 self.showLabelsButton.isHidden = false
                 self.showLabelsButton.center.y -= self.settingsButton.frame.size.height + 10
                 self.showLabelsButton.alpha = 0.8
@@ -148,6 +145,12 @@ class PlanetARiumController: UIViewController {
             }
         }
         else {
+            K.addHapticFeedback(withStyle: .medium)
+
+            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+                sender.transform = CGAffineTransform(rotationAngle: -.pi * 2)
+            }, completion: nil)
+            
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut) {
                 self.showLabelsButton.center = self.settingsButton.center
                 self.showLabelsButton.alpha = 0.0
