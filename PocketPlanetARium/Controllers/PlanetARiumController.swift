@@ -129,15 +129,15 @@ class PlanetARiumController: UIViewController {
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn) {
                 self.showLabelsButton.isHidden = false
                 self.showLabelsButton.center.y -= self.settingsButton.frame.size.height + 10
-                self.showLabelsButton.alpha = 0.8
+                self.showLabelsButton.alpha = K.masterAlpha
 
                 self.playPauseButton.isHidden = false
                 self.playPauseButton.center.y -= (self.settingsButton.frame.size.height + 10) * 2
-                self.playPauseButton.alpha = 0.8
+                self.playPauseButton.alpha = K.masterAlpha
 
                 self.resetAnimationButton.isHidden = false
                 self.resetAnimationButton.center.y -= (self.settingsButton.frame.size.height + 10) * 3
-                self.resetAnimationButton.alpha = 0.8
+                self.resetAnimationButton.alpha = K.masterAlpha
             } completion: { _ in
                 if self.isPaused {
                     self.playPauseButton.blink()
@@ -278,7 +278,7 @@ class PlanetARiumController: UIViewController {
         button.tintColor = .white
         button.layer.shadowOpacity = 0.4
         button.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
-        button.alpha = 0.8
+        button.alpha = K.masterAlpha
         button.center.x = view.bounds.width - 70
         button.center.y = view.bounds.height - 100
 //        button.center.x = UIDevice.current.orientation.isPortrait ? view.bounds.width - 70 : view.bounds.height - 70
@@ -337,7 +337,7 @@ extension PlanetARiumController: ARSCNViewDelegate {
             else {
                 if let lowLightTimer = lowLightTimer, time > lowLightTimer {
                     DispatchQueue.main.async {
-                        self.lowLightWarning.alpha = 0.6
+                        self.lowLightWarning.alpha = K.masterAlpha - 0.2
                     }
                 }
             }

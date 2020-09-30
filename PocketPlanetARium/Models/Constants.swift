@@ -15,6 +15,11 @@ struct K {
     static let period = 2 * Float.pi
     
     /**
+     Master alpha transparency to apply across all views for a uniform appearance.
+     */
+    static let masterAlpha: CGFloat = 0.8
+    
+    /**
     Calculates the hypotenuse of a polygon with up to 3 sides.
     - parameters:
        - x: side #1
