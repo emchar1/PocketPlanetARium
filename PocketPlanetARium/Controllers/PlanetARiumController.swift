@@ -122,7 +122,6 @@ class PlanetARiumController: UIViewController {
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
             sender.transform = CGAffineTransform(rotationAngle: .pi)
         }, completion: nil)
-
         UIView.animate(withDuration: 0.25, delay: 0.25, options: .curveEaseOut, animations: {
             sender.transform = CGAffineTransform(rotationAngle: .pi * 2)
         }, completion: { _ in
@@ -130,27 +129,23 @@ class PlanetARiumController: UIViewController {
         })
         
         if showSettings {
-            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut) {
                 self.showLabelsButton.isHidden = false
                 self.showLabelsButton.center.y -= self.settingsButton.frame.size.height + 10
                 self.showLabelsButton.alpha = 0.8
-            }, completion: nil)
 
-            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
                 self.playPauseButton.isHidden = false
                 self.playPauseButton.center.y -= (self.settingsButton.frame.size.height + 10) * 2
                 self.playPauseButton.alpha = 0.8
-            }, completion: { _ in
-                if self.isPaused {
-                    self.playPauseButton.blink()
-                }
-            })
 
-            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
                 self.resetAnimationButton.isHidden = false
                 self.resetAnimationButton.center.y -= (self.settingsButton.frame.size.height + 10) * 3
                 self.resetAnimationButton.alpha = 0.8
-            }, completion: nil)
+            } completion: { _ in
+                if self.isPaused {
+                    self.playPauseButton.blink()
+                }
+            }
         }
         else {
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut) {
@@ -190,7 +185,7 @@ class PlanetARiumController: UIViewController {
         if let began = pinchBegan, let changed = pinchChanged {
             let diff = Float(changed - began)
 
-            scaleValue += diff / (diff < 0 ? 25 : 100)
+            scaleValue += diff / (diff < 0 ? 50 : 200)
             planetarium.update(scale: scaleValue, toNode: sceneView)
 
             handlePause(isPaused)
@@ -321,8 +316,12 @@ class PlanetARiumController: UIViewController {
     
 extension PlanetARiumController: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-        guard let currentFrame = sceneView.session.currentFrame,
-              let lightEstimate = currentFrame.lightEstimate else {
+        guard let currentFrame = sceneView.session.currentFrame else {
+            print("sceneView.session.currentFrame not available?")
+            return
+        }
+        
+        guard let lightEstimate = currentFrame.lightEstimate else {
             print("No ambientIntensity checking happening today...")
             return
         }
