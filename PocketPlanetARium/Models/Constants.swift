@@ -67,3 +67,66 @@ extension Comparable {
         return max(min(self, maxValue), minValue)
     }
 }
+
+
+extension UIColor {
+    /**
+     Allows you to initialize a color with no alpha parameter.
+     - parameters:
+        - red: red component from 0 to 255
+        - green: green component from 0 to 255
+        - blue: blue component from 0 to, wait for it, 255
+     */
+    convenience init(red: Int, green: Int, blue: Int) {
+        assert(red >= 0 && red <= 255, "Invalid red component")
+        assert(green >= 0 && green <= 255, "Invalid green component")
+        assert(blue >= 0 && blue <= 255, "Invalid blue component")
+        
+        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
+    }
+    
+    /**
+     Allows you to initialize a color using a hex value.
+     - parameter rgb: the hex value in the format 0xFFFFF
+    */
+    convenience init(rgb: Int) {
+        self.init(
+            red: (rgb >> 16) & 0xFF,
+            green: (rgb >> 8) & 0xFF,
+            blue: rgb & 0xFF
+        )
+    }
+}
+
+
+extension UIView {
+    /**
+     Applies a blinking animation to a view, i.e. a UIButton.
+     - parameters:
+        - duration: length of the blink
+        - delay: initial delay time before blinking begins
+        - alpha: transparency of the blink in range of 0 to 1.
+     */
+    func blink(duration: TimeInterval = 0.8, delay: TimeInterval = 0.8, alpha: CGFloat = 0.1) {
+        UIView.animate(withDuration: duration, delay: delay, options: [.curveEaseIn, .autoreverse, .repeat, .allowUserInteraction], animations: {
+            self.alpha = alpha
+        })
+    }
+    
+    /**
+     Applies a blinking animation to a view, i.e. a UIButton.
+     - parameter rate: length and delay of the blink
+     */
+    func blink(rate: TimeInterval = 0.8) {
+        blink(duration: rate, delay: rate, alpha: 0.1)
+    }
+    
+    /**
+     Returns the UIView to its original state, i.e. non-blink.
+     - parameter alpha: original alpha level to return the view to
+     */
+    func stopBlink(to alpha: CGFloat = 0.8) {
+        self.layer.removeAllAnimations()
+        self.alpha = alpha
+    }
+}

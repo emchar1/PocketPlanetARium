@@ -13,13 +13,20 @@ import ARKit
 class PlanetARiumController: UIViewController {
 
     @IBOutlet var sceneView: ARSCNView!
-    @IBOutlet weak var scaleSlider: UISlider!
     @IBOutlet weak var lowLightWarning: UIView!
 
+    //Settings buttons
+    @IBOutlet weak var resetAnimationButton: UIButton!
+    @IBOutlet weak var playPauseButton: UIButton!
+    @IBOutlet weak var showLabelsButton: UIButton!
+    @IBOutlet weak var settingsButton: UIButton!
+    var showSettings = false
+    
     //PlanetARium properties
     var planetarium = PlanetARium()
     var tappedPlanet: Planet?
     var showLabels = false
+    var isPaused = false
     
     //Lighting properties
     var lowLightTimer: TimeInterval?
@@ -36,7 +43,6 @@ class PlanetARiumController: UIViewController {
         }
         didSet {
             scaleValue = scaleValue.clamp(min: 0, max: 1)
-            scaleSlider.value = scaleValue
         }
     }
     
@@ -54,16 +60,19 @@ class PlanetARiumController: UIViewController {
         
         //This one causes it to crash after 3 - 5 peeks
 //        registerForPreviewing(with: self, sourceView: view)
+
         
         
+        
+        setupButton(&resetAnimationButton, with: UIColor(rgb: 0x667C89))
+        setupButton(&playPauseButton, with: UIColor(rgb: 0x93A4AD))
+        setupButton(&showLabelsButton, with: UIColor(rgb: 0xD0D8DC))
+        setupButton(&settingsButton)
         
         sceneView.delegate = self
         sceneView.showsStatistics = true
         sceneView.autoenablesDefaultLighting = true
-        
-        scaleSlider.value = scaleValue
-        scaleSlider.setThumbImage(UIImage(systemName: "hare.fill"), for: .normal)
-        
+                
         lowLightWarning.alpha = 0.0
         lowLightWarning.clipsToBounds = true
         lowLightWarning.layer.cornerRadius = 7
@@ -75,28 +84,90 @@ class PlanetARiumController: UIViewController {
         super.viewWillAppear(animated)
         sceneView.session.run(ARWorldTrackingConfiguration(), options: [])
     }
-    
+        
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         sceneView.session.pause()
     }
 
     
-    // MARK: - UI Controls
+    // MARK: - Settings Buttons
     
-    @IBAction func scaleChanged(_ sender: UISlider) {
-        scaleValue = sender.value
-        planetarium.update(scale: scaleValue, toNode: sceneView)
+    @IBAction func resetPlanets(_ sender: UIButton) {
+        K.addHapticFeedback(withStyle: .light)
+
+        sceneView.session.run(ARWorldTrackingConfiguration(), options: [.resetTracking, .removeExistingAnchors])
+        planetarium.resetPlanets(withScale: scaleValue, toNode: sceneView)
+
+        handlePause(isPaused)
+    }
+    
+    @IBAction func pausePressed(_ sender: UIButton) {
+        K.addHapticFeedback(withStyle: .light)
+
+        isPaused = !isPaused
+        handlePause(isPaused)
     }
     
     @IBAction func toggleLabels(_ sender: UIButton) {
+        K.addHapticFeedback(withStyle: .light)
+
         showLabels = !showLabels
         planetarium.showAllLabels(showLabels)
     }
     
-    @IBAction func resetPlanets(_ sender: UIButton) {
-        sceneView.session.run(ARWorldTrackingConfiguration(), options: [.resetTracking, .removeExistingAnchors])
-        planetarium.resetPlanets(withScale: scaleValue, toNode: sceneView)
+    @IBAction func settingsPressed(_ sender: UIButton) {
+        showSettings = !showSettings
+        
+        UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
+            sender.transform = CGAffineTransform(rotationAngle: .pi)
+        }, completion: nil)
+
+        UIView.animate(withDuration: 0.25, delay: 0.25, options: .curveEaseOut, animations: {
+            sender.transform = CGAffineTransform(rotationAngle: .pi * 2)
+        }, completion: { _ in
+            K.addHapticFeedback(withStyle: .medium)
+        })
+        
+        if showSettings {
+            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+                self.showLabelsButton.isHidden = false
+                self.showLabelsButton.center.y -= self.settingsButton.frame.size.height + 10
+                self.showLabelsButton.alpha = 0.8
+            }, completion: nil)
+
+            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+                self.playPauseButton.isHidden = false
+                self.playPauseButton.center.y -= (self.settingsButton.frame.size.height + 10) * 2
+                self.playPauseButton.alpha = 0.8
+            }, completion: { _ in
+                if self.isPaused {
+                    self.playPauseButton.blink()
+                }
+            })
+
+            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+                self.resetAnimationButton.isHidden = false
+                self.resetAnimationButton.center.y -= (self.settingsButton.frame.size.height + 10) * 3
+                self.resetAnimationButton.alpha = 0.8
+            }, completion: nil)
+        }
+        else {
+            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut) {
+                self.showLabelsButton.center = self.settingsButton.center
+                self.showLabelsButton.alpha = 0.0
+                
+                self.playPauseButton.center = self.settingsButton.center
+                self.playPauseButton.alpha = 0.0
+
+                self.resetAnimationButton.center = self.settingsButton.center
+                self.resetAnimationButton.alpha = 0.0
+            } completion: { _ in
+                self.showLabelsButton.isHidden = true
+                self.playPauseButton.isHidden = true
+                self.resetAnimationButton.isHidden = true
+            }
+        }
     }
     
     
@@ -118,14 +189,15 @@ class PlanetARiumController: UIViewController {
 
         if let began = pinchBegan, let changed = pinchChanged {
             let diff = Float(changed - began)
+
             scaleValue += diff / (diff < 0 ? 25 : 100)
             planetarium.update(scale: scaleValue, toNode: sceneView)
+
+            handlePause(isPaused)
         }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        planetarium.pauseAnimation()
-
         guard let touch = touches.first else {
             return
         }
@@ -153,8 +225,6 @@ class PlanetARiumController: UIViewController {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        planetarium.setSpeed(to: scaleValue)
-        
         if let tappedPlanet = tappedPlanet {
             planetarium.showLabel(showLabels, forPlanet: tappedPlanet)
         }
@@ -165,26 +235,14 @@ class PlanetARiumController: UIViewController {
     
     //**************BETA****Start to work on info graph for each planet.
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first, view.traitCollection.forceTouchCapability == .available else {
-            print("3D Touch not available on this device")
+        guard let touch = touches.first, view.traitCollection.forceTouchCapability == .available,
+              touch.force == touch.maximumPossibleForce,
+              tappedPlanet != nil else {
             return
         }
-
-        let location = touch.location(in: sceneView)
-        let hitResults = sceneView.hitTest(location, options: nil)
-
-        if hitResults.count > 0 {
-            guard let result = hitResults.first,
-                  let planetNodeName = result.node.name,
-                  let tappedPlanet = planetarium.getPlanet(withName: planetNodeName),
-                  touch.force == touch.maximumPossibleForce else {
-                return
-            }
-
-            self.tappedPlanet = tappedPlanet
-            performSegue(withIdentifier: "PlanetInfoSegue", sender: nil)
-            K.addHapticFeedback(withStyle: .heavy)
-        }
+                
+        performSegue(withIdentifier: "PlanetInfoSegue", sender: nil)
+        K.addHapticFeedback(withStyle: .heavy)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -207,9 +265,53 @@ class PlanetARiumController: UIViewController {
     }
     
     
+    // MARK: - Helper Functions
     
-    
+    /**
+     Sets up the settings buttons
+     - parameters:
+        - button: the button being passed in and returned as well
+        - color: color of the round background image
+     - If color is set to nil, then the button is a sub-setting button that gets revealed when the original settings button is pressed.
+     */
+    private func setupButton(_ button: inout UIButton, with color: UIColor? = nil) {
+        button.tintColor = .white
+        button.layer.shadowOpacity = 0.4
+        button.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        button.alpha = 0.8
+        button.center.x = view.bounds.width - 70
+        button.center.y = view.bounds.height - 100
+//        button.center.x = UIDevice.current.orientation.isPortrait ? view.bounds.width - 70 : view.bounds.height - 70
+//        button.center.y = UIDevice.current.orientation.isPortrait ? view.bounds.height - 100 : view.bounds.width - 100
+        button.frame.size = CGSize(width: 60, height: 60)
 
+        //i.e. button is a sub-setting button
+        if color != nil {
+            button.backgroundColor = color
+            button.layer.cornerRadius = 0.5 * button.bounds.size.width
+            button.clipsToBounds = true
+            button.alpha = 0.0
+            button.isHidden = true
+        }
+    }
+    
+    /**
+     Handles animation of the PlanetARium.
+     - parameter isPaused: pauses animation if true
+     - Not sure if a parameter is needed or if I can access global isPaused variable???
+     */
+    private func handlePause(_ isPaused: Bool) {
+        if isPaused {
+            planetarium.pauseAnimation()
+            playPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            playPauseButton.blink()
+        }
+        else {
+            planetarium.setSpeed(to: scaleValue)
+            playPauseButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+            playPauseButton.stopBlink()
+        }
+    }
 }
 
 
@@ -222,7 +324,7 @@ extension PlanetARiumController: ARSCNViewDelegate {
             print("No ambientIntensity checking happening today...")
             return
         }
-        
+                
         if lightEstimate.ambientIntensity < 250 {
             if !lowLightTimerBegin {
                 lowLightTimerBegin = true
@@ -231,7 +333,7 @@ extension PlanetARiumController: ARSCNViewDelegate {
             else {
                 if let lowLightTimer = lowLightTimer, time > lowLightTimer {
                     DispatchQueue.main.async {
-                        self.lowLightWarning.alpha = 1.0
+                        self.lowLightWarning.alpha = 0.6
                     }
                 }
             }
@@ -244,7 +346,7 @@ extension PlanetARiumController: ARSCNViewDelegate {
             else {
                 if let lowLightTimer = lowLightTimer, time > lowLightTimer {
                     DispatchQueue.main.async {
-                        UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
+                        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
                             self.lowLightWarning.alpha = 0.0
                         }, completion: { _ in
                             self.lowLightTimer = nil
@@ -264,9 +366,9 @@ extension PlanetARiumController: ARSCNViewDelegate {
 
 extension PlanetARiumController: PlanetDetailsControllerDelegate {
     func didDismiss(_ controller: PlanetDetailsController) {
-        //Resume planetarium animation
-        planetarium.setSpeed(to: scaleValue)
-        
+        //Resume planetarium animation THIS MAY NOT BE NEEDED ANYMORE??
+        handlePause(isPaused)
+            
         //Reset label to it's current state
         if let tappedPlanet = tappedPlanet {
             planetarium.showLabel(showLabels, forPlanet: tappedPlanet)
