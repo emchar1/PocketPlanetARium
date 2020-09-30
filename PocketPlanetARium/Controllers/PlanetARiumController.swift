@@ -228,6 +228,8 @@ class PlanetARiumController: UIViewController {
         if let tappedPlanet = tappedPlanet {
             planetarium.showLabel(showLabels, forPlanet: tappedPlanet)
         }
+        
+        self.tappedPlanet = nil
     }
 
     
@@ -367,12 +369,14 @@ extension PlanetARiumController: ARSCNViewDelegate {
 extension PlanetARiumController: PlanetDetailsControllerDelegate {
     func didDismiss(_ controller: PlanetDetailsController) {
         //Resume planetarium animation THIS MAY NOT BE NEEDED ANYMORE??
-        handlePause(isPaused)
+//        handlePause(isPaused)
             
         //Reset label to it's current state
         if let tappedPlanet = tappedPlanet {
             planetarium.showLabel(showLabels, forPlanet: tappedPlanet)
         }
+        
+        self.tappedPlanet = nil
     }
 }
 
