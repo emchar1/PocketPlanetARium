@@ -27,7 +27,7 @@
                             <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rda-l7-hc1">
                                 <rect key="frame" x="67" y="398" width="280" height="100"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For optimal results, move to a brighter location." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G7N-6Z-Pug">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For optimal results, move to a brighter location." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G7N-6Z-Pug" userLabel="lowLightWarningLabel">
                                         <rect key="frame" x="30" y="28" width="220" height="44.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="220" id="5MY-lA-EYe"/>
@@ -58,16 +58,8 @@
                                     </segue>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ow-uo-NEC" userLabel="Restart">
-                                <rect key="frame" x="334" y="589" width="40" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="arrow.counterclockwise" catalog="system"/>
-                                <connections>
-                                    <action selector="resetPlanets:" destination="BV1-FR-VrT" eventType="touchUpInside" id="I6Q-wN-NVi"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gtb-s3-YzX" userLabel="ShowLabels">
-                                <rect key="frame" x="334" y="685" width="40" height="40"/>
+                                <rect key="frame" x="334" y="734" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal">
                                     <imageReference key="image" image="textformat" catalog="system" renderingMode="template"/>
@@ -77,7 +69,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PxO-yc-I7d" userLabel="PlayPause">
-                                <rect key="frame" x="334" y="637" width="40" height="40"/>
+                                <rect key="frame" x="334" y="686" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="pause.fill" catalog="system"/>
                                 <connections>
@@ -92,6 +84,14 @@
                                 </state>
                                 <connections>
                                     <action selector="settingsPressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="pna-en-1E9"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ow-uo-NEC" userLabel="Restart">
+                                <rect key="frame" x="334" y="638" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="arrow.counterclockwise" catalog="system"/>
+                                <connections>
+                                    <action selector="resetPlanets:" destination="BV1-FR-VrT" eventType="touchUpInside" id="I6Q-wN-NVi"/>
                                 </connections>
                             </button>
                         </subviews>
