@@ -21,6 +21,7 @@ class PlanetARiumController: UIViewController {
     @IBOutlet weak var showLabelsButton: UIButton!
     @IBOutlet weak var settingsButton: UIButton!
     let buttonSize: CGFloat = 60
+    let padding: CGFloat = 40
     var showSettings = false
     
     //PlanetARium properties
@@ -97,7 +98,7 @@ class PlanetARiumController: UIViewController {
     
     @IBAction func resetPlanets(_ sender: UIButton) {
         K.addHapticFeedback(withStyle: .light)
-        self.showSettingsExpanded()
+        showSettingsExpanded()
 
         sceneView.session.run(ARWorldTrackingConfiguration(), options: [.resetTracking, .removeExistingAnchors])
         planetarium.resetPlanets(withScale: scaleValue, toNode: sceneView)
@@ -107,7 +108,7 @@ class PlanetARiumController: UIViewController {
     
     @IBAction func pausePressed(_ sender: UIButton) {
         K.addHapticFeedback(withStyle: .light)
-        self.showSettingsExpanded()
+        showSettingsExpanded()
 
         isPaused = !isPaused
         handlePause(isPaused)
@@ -115,7 +116,7 @@ class PlanetARiumController: UIViewController {
     
     @IBAction func toggleLabels(_ sender: UIButton) {
         K.addHapticFeedback(withStyle: .light)
-        self.showSettingsExpanded()
+        showSettingsExpanded()
 
         showLabels = !showLabels
         planetarium.showAllLabels(showLabels)
@@ -123,7 +124,8 @@ class PlanetARiumController: UIViewController {
     
     @IBAction func settingsPressed(_ sender: UIButton) {
         showSettings = !showSettings
-        
+        showSettingsExpanded()
+
         if showSettings {
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn) {
                 sender.transform = CGAffineTransform(rotationAngle: .pi)
@@ -131,19 +133,24 @@ class PlanetARiumController: UIViewController {
                 K.addHapticFeedback(withStyle: .medium)
             }
             
+            //I DON'T LIKE THIS AT ALL!!!! Prevents buttons just materializing if trying to expand right after the orientation changes.
+            showLabelsButton.center = settingsButton.center
+            playPauseButton.center = settingsButton.center
+            resetAnimationButton.center = settingsButton.center
+            
+            
+            
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn) {
-                self.showSettingsExpanded()
-                
                 self.showLabelsButton.isHidden = false
-//                self.showLabelsButton.center.y = self.settingsButton.center.y - (self.buttonSize + 10)
+                self.showLabelsButton.center.y = self.settingsButton.center.y - (self.buttonSize + 10)
                 self.showLabelsButton.alpha = K.masterAlpha
 
                 self.playPauseButton.isHidden = false
-//                self.playPauseButton.center.y = self.settingsButton.center.y - (self.buttonSize + 10) * 2
+                self.playPauseButton.center.y = self.settingsButton.center.y - (self.buttonSize + 10) * 2
                 self.playPauseButton.alpha = K.masterAlpha
 
                 self.resetAnimationButton.isHidden = false
-//                self.resetAnimationButton.center.y = self.settingsButton.center.y - (self.buttonSize + 10) * 3
+                self.resetAnimationButton.center.y = self.settingsButton.center.y - (self.buttonSize + 10) * 3
                 self.resetAnimationButton.alpha = K.masterAlpha
             } completion: { _ in
                 if self.isPaused {
@@ -282,8 +289,6 @@ class PlanetARiumController: UIViewController {
      - If color is set to nil, then the button is a sub-setting button that gets revealed when the original settings button is pressed.
      */
     private func setupButton(_ button: inout UIButton, with color: UIColor? = nil) {
-        let padding: CGFloat = 40
-        
         button.tintColor = .white
         button.layer.shadowOpacity = 0.4
         button.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
@@ -325,22 +330,28 @@ class PlanetARiumController: UIViewController {
     }
     
     @objc func showSettingsExpanded() {
+        let bottomAnchor = view.safeAreaLayoutGuide.bottomAnchor
+
         if self.showSettings {
-            showLabelsButton.center.y = settingsButton.center.y - (buttonSize + 10)
-            playPauseButton.center.y = settingsButton.center.y - (buttonSize + 10) * 2
-            resetAnimationButton.center.y = settingsButton.center.y - (buttonSize + 10) * 3
+//            showLabelsButton.center.y = settingsButton.center.y - (buttonSize + 10)
+//            playPauseButton.center.y = settingsButton.center.y - (buttonSize + 10) * 2
+//            resetAnimationButton.center.y = settingsButton.center.y - (buttonSize + 10) * 3
+            
+            NSLayoutConstraint.activate([showLabelsButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding - (buttonSize + 10)),
+                                         playPauseButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding - (buttonSize + 10)*2),
+                                         resetAnimationButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding - (buttonSize + 10)*3)])
+        }
+        else {
+//            showLabelsButton.center.y = settingsButton.center.y
+//            playPauseButton.center.y = settingsButton.center.y
+//            resetAnimationButton.center.y = settingsButton.center.y
+
+            NSLayoutConstraint.activate([showLabelsButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding),
+                                         playPauseButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding),
+                                         resetAnimationButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding)])
         }
         
-        
-        
-//        switch UIDevice.current.orientation {
-//        case .landscapeLeft, .landscapeRight:
-//            print("Landscape")
-//        case .portrait, .portraitUpsideDown:
-//            print("Portrait")
-//        default:
-//            print("Unknown orientation")
-//        }
+        print(showSettings)
     }
 }
 
