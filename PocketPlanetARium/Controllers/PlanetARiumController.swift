@@ -20,6 +20,7 @@ class PlanetARiumController: UIViewController {
     @IBOutlet weak var playPauseButton: UIButton!
     @IBOutlet weak var showLabelsButton: UIButton!
     @IBOutlet weak var settingsButton: UIButton!
+    let buttonSize: CGFloat = 60
     var showSettings = false
     
     //PlanetARium properties
@@ -60,9 +61,10 @@ class PlanetARiumController: UIViewController {
         
         //This one causes it to crash after 3 - 5 peeks
 //        registerForPreviewing(with: self, sourceView: view)
-
         
         
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(showSettingsExpanded), name: UIDevice.orientationDidChangeNotification, object: nil)
         
         setupButton(&resetAnimationButton, with: UIColor(rgb: 0x667C89))
         setupButton(&playPauseButton, with: UIColor(rgb: 0x93A4AD))
@@ -70,7 +72,7 @@ class PlanetARiumController: UIViewController {
         setupButton(&settingsButton)
         
         sceneView.delegate = self
-        sceneView.showsStatistics = true
+//        sceneView.showsStatistics = true
         sceneView.autoenablesDefaultLighting = true
                 
         lowLightWarning.alpha = 0.0
@@ -95,6 +97,7 @@ class PlanetARiumController: UIViewController {
     
     @IBAction func resetPlanets(_ sender: UIButton) {
         K.addHapticFeedback(withStyle: .light)
+        self.showSettingsExpanded()
 
         sceneView.session.run(ARWorldTrackingConfiguration(), options: [.resetTracking, .removeExistingAnchors])
         planetarium.resetPlanets(withScale: scaleValue, toNode: sceneView)
@@ -104,6 +107,7 @@ class PlanetARiumController: UIViewController {
     
     @IBAction func pausePressed(_ sender: UIButton) {
         K.addHapticFeedback(withStyle: .light)
+        self.showSettingsExpanded()
 
         isPaused = !isPaused
         handlePause(isPaused)
@@ -111,6 +115,7 @@ class PlanetARiumController: UIViewController {
     
     @IBAction func toggleLabels(_ sender: UIButton) {
         K.addHapticFeedback(withStyle: .light)
+        self.showSettingsExpanded()
 
         showLabels = !showLabels
         planetarium.showAllLabels(showLabels)
@@ -127,16 +132,18 @@ class PlanetARiumController: UIViewController {
             }
             
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn) {
+                self.showSettingsExpanded()
+                
                 self.showLabelsButton.isHidden = false
-                self.showLabelsButton.center.y -= self.settingsButton.frame.size.height + 10
+//                self.showLabelsButton.center.y = self.settingsButton.center.y - (self.buttonSize + 10)
                 self.showLabelsButton.alpha = K.masterAlpha
 
                 self.playPauseButton.isHidden = false
-                self.playPauseButton.center.y -= (self.settingsButton.frame.size.height + 10) * 2
+//                self.playPauseButton.center.y = self.settingsButton.center.y - (self.buttonSize + 10) * 2
                 self.playPauseButton.alpha = K.masterAlpha
 
                 self.resetAnimationButton.isHidden = false
-                self.resetAnimationButton.center.y -= (self.settingsButton.frame.size.height + 10) * 3
+//                self.resetAnimationButton.center.y = self.settingsButton.center.y - (self.buttonSize + 10) * 3
                 self.resetAnimationButton.alpha = K.masterAlpha
             } completion: { _ in
                 if self.isPaused {
@@ -275,20 +282,24 @@ class PlanetARiumController: UIViewController {
      - If color is set to nil, then the button is a sub-setting button that gets revealed when the original settings button is pressed.
      */
     private func setupButton(_ button: inout UIButton, with color: UIColor? = nil) {
+        let padding: CGFloat = 40
+        
         button.tintColor = .white
         button.layer.shadowOpacity = 0.4
         button.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
         button.alpha = K.masterAlpha
-        button.center.x = view.bounds.width - 70
-        button.center.y = view.bounds.height - 100
-//        button.center.x = UIDevice.current.orientation.isPortrait ? view.bounds.width - 70 : view.bounds.height - 70
-//        button.center.y = UIDevice.current.orientation.isPortrait ? view.bounds.height - 100 : view.bounds.width - 100
-        button.frame.size = CGSize(width: 60, height: 60)
+
+        //Autolayout constraints... Here we go!
+        button.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([button.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -padding),
+                                     button.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -padding),
+                                     button.widthAnchor.constraint(equalToConstant: buttonSize),
+                                     button.heightAnchor.constraint(equalToConstant: buttonSize)])
 
         //i.e. button is a sub-setting button
         if color != nil {
             button.backgroundColor = color
-            button.layer.cornerRadius = 0.5 * button.bounds.size.width
+            button.layer.cornerRadius = 0.5 * buttonSize
             button.clipsToBounds = true
             button.alpha = 0.0
             button.isHidden = true
@@ -311,6 +322,25 @@ class PlanetARiumController: UIViewController {
             playPauseButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
             playPauseButton.stopBlink()
         }
+    }
+    
+    @objc func showSettingsExpanded() {
+        if self.showSettings {
+            showLabelsButton.center.y = settingsButton.center.y - (buttonSize + 10)
+            playPauseButton.center.y = settingsButton.center.y - (buttonSize + 10) * 2
+            resetAnimationButton.center.y = settingsButton.center.y - (buttonSize + 10) * 3
+        }
+        
+        
+        
+//        switch UIDevice.current.orientation {
+//        case .landscapeLeft, .landscapeRight:
+//            print("Landscape")
+//        case .portrait, .portraitUpsideDown:
+//            print("Portrait")
+//        default:
+//            print("Unknown orientation")
+//        }
     }
 }
 

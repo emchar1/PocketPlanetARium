@@ -8,6 +8,9 @@
 
 import UIKit
 
+/**
+ A struct of Constants for commonly used properties and functions.
+ */
 struct K {
     /**
      Period of a planetary orbit.
