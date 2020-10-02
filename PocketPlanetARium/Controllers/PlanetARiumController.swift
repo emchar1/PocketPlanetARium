@@ -144,12 +144,12 @@ class PlanetARiumController: UIViewController {
             return
         }
                 
-        performSegue(withIdentifier: "PlanetInfoSegue", sender: nil)
+        performSegue(withIdentifier: "PlanetDetailsSegue", sender: nil)
         K.addHapticFeedback(withStyle: .heavy)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "PlanetInfoSegue" {
+        if segue.identifier == "PlanetDetailsSegue" {
             let controller = segue.destination as! PlanetDetailsController
 
             guard let tappedPlanet = tappedPlanet else {

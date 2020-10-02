@@ -63,6 +63,24 @@ class SettingsView: UIView {
     }
     
     private func initializeButtons() {
+
+        //The order of adding the button to the subviews MATTER!
+        
+        setupButton(&resetAnimationButton,
+                    systemName: "arrow.counterclockwise",
+                    backgroundColor: UIColor(rgb: 0x667C89),
+                    targetAction: #selector(resetAnimationPressed))
+
+        setupButton(&playPauseButton,
+                    systemName: "pause.fill",
+                    backgroundColor: UIColor(rgb: 0x93A4AD),
+                    targetAction: #selector(playPausePressed))
+
+        setupButton(&labelsButton,
+                    systemName: "textformat",
+                    backgroundColor: UIColor(rgb: 0xD0D8DC),
+                    targetAction: #selector(labelsPressed))
+
         settingsButton.frame = CGRect(x: buttonHomePosition.x,
                                       y: buttonHomePosition.y,
                                       width: SettingsView.buttonSize,
@@ -74,22 +92,6 @@ class SettingsView: UIView {
         settingsButton.alpha = K.masterAlpha
         settingsButton.addTarget(self, action: #selector(settingsPressed), for: .touchUpInside)
         self.addSubview(settingsButton)
-                
-        setupButton(&labelsButton,
-                    systemName: "textformat",
-                    backgroundColor: UIColor(rgb: 0xD0D8DC),
-                    targetAction: #selector(labelsPressed))
-        
-        setupButton(&playPauseButton,
-                    systemName: "pause.fill",
-                    backgroundColor: UIColor(rgb: 0x93A4AD),
-                    targetAction: #selector(playPausePressed))
-
-        setupButton(&resetAnimationButton,
-                    systemName: "arrow.counterclockwise",
-                    backgroundColor: UIColor(rgb: 0x667C89),
-                    targetAction: #selector(resetAnimationPressed))
-        
     }
 
     private func setupButton(_ settingsSubButton: inout SettingsSubButton, systemName: String, backgroundColor: UIColor, targetAction: Selector) {
@@ -99,7 +101,7 @@ class SettingsView: UIView {
                                                 height: SettingsView.buttonSize)
         settingsSubButton.button.setImage(UIImage(systemName: systemName), for: .normal)
         settingsSubButton.button.tintColor = .white
-        settingsSubButton.button.alpha = K.masterAlpha
+        settingsSubButton.button.alpha = 0.0
         settingsSubButton.button.backgroundColor = backgroundColor
         settingsSubButton.button.layer.cornerRadius = 0.5 * SettingsView.buttonSize
         settingsSubButton.button.clipsToBounds = true
