@@ -20,7 +20,7 @@ struct K {
     /**
      Master alpha transparency to apply across all views for a uniform appearance.
      */
-    static let masterAlpha: CGFloat = 0.8
+    static let masterAlpha: CGFloat = 1.0
     
     /**
     Calculates the hypotenuse of a polygon with up to 3 sides.
@@ -133,7 +133,7 @@ extension UIView {
      Returns the UIView to its original state, i.e. non-blink.
      - parameter alpha: original alpha level to return the view to
      */
-    func stopBlink(to alpha: CGFloat = 0.8) {
+    func stopBlink(to alpha: CGFloat = K.masterAlpha) {
         self.layer.removeAllAnimations()
         self.alpha = alpha
     }

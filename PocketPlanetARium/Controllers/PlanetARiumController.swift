@@ -16,13 +16,8 @@ class PlanetARiumController: UIViewController {
     @IBOutlet weak var lowLightWarning: UIView!
 
     //Settings buttons
-    @IBOutlet weak var resetAnimationButton: UIButton!
-    @IBOutlet weak var playPauseButton: UIButton!
-    @IBOutlet weak var showLabelsButton: UIButton!
-    @IBOutlet weak var settingsButton: UIButton!
-    let buttonSize: CGFloat = 60
-    let padding: CGFloat = 40
-    var showSettings = false
+    let settingsButtons = SettingsView()
+    let padding: CGFloat = 20
     
     //PlanetARium properties
     var planetarium = PlanetARium()
@@ -49,6 +44,8 @@ class PlanetARiumController: UIViewController {
     }
     
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -65,17 +62,15 @@ class PlanetARiumController: UIViewController {
         
         
         
-        NotificationCenter.default.addObserver(self, selector: #selector(showSettingsExpanded), name: UIDevice.orientationDidChangeNotification, object: nil)
-        
-        setupButton(&resetAnimationButton, with: UIColor(rgb: 0x667C89))
-        setupButton(&playPauseButton, with: UIColor(rgb: 0x93A4AD))
-        setupButton(&showLabelsButton, with: UIColor(rgb: 0xD0D8DC))
-        setupButton(&settingsButton)
+        settingsButtons.delegate = self
+        self.view.addSubview(settingsButtons)
+        NSLayoutConstraint.activate([settingsButtons.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -padding),
+                                     settingsButtons.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -padding)])
         
         sceneView.delegate = self
-//        sceneView.showsStatistics = true
         sceneView.autoenablesDefaultLighting = true
-                
+//        sceneView.showsStatistics = true
+
         lowLightWarning.alpha = 0.0
         lowLightWarning.clipsToBounds = true
         lowLightWarning.layer.cornerRadius = 7
@@ -91,95 +86,6 @@ class PlanetARiumController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         sceneView.session.pause()
-    }
-
-    
-    // MARK: - Settings Buttons
-    
-    @IBAction func resetPlanets(_ sender: UIButton) {
-        K.addHapticFeedback(withStyle: .light)
-        showSettingsExpanded()
-
-        sceneView.session.run(ARWorldTrackingConfiguration(), options: [.resetTracking, .removeExistingAnchors])
-        planetarium.resetPlanets(withScale: scaleValue, toNode: sceneView)
-
-        handlePause(isPaused)
-    }
-    
-    @IBAction func pausePressed(_ sender: UIButton) {
-        K.addHapticFeedback(withStyle: .light)
-        showSettingsExpanded()
-
-        isPaused = !isPaused
-        handlePause(isPaused)
-    }
-    
-    @IBAction func toggleLabels(_ sender: UIButton) {
-        K.addHapticFeedback(withStyle: .light)
-        showSettingsExpanded()
-
-        showLabels = !showLabels
-        planetarium.showAllLabels(showLabels)
-    }
-    
-    @IBAction func settingsPressed(_ sender: UIButton) {
-        showSettings = !showSettings
-        showSettingsExpanded()
-
-        if showSettings {
-            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn) {
-                sender.transform = CGAffineTransform(rotationAngle: .pi)
-            } completion: { _ in
-                K.addHapticFeedback(withStyle: .medium)
-            }
-            
-            //I DON'T LIKE THIS AT ALL!!!! Prevents buttons just materializing if trying to expand right after the orientation changes.
-            showLabelsButton.center = settingsButton.center
-            playPauseButton.center = settingsButton.center
-            resetAnimationButton.center = settingsButton.center
-            
-            
-            
-            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn) {
-                self.showLabelsButton.isHidden = false
-                self.showLabelsButton.center.y = self.settingsButton.center.y - (self.buttonSize + 10)
-                self.showLabelsButton.alpha = K.masterAlpha
-
-                self.playPauseButton.isHidden = false
-                self.playPauseButton.center.y = self.settingsButton.center.y - (self.buttonSize + 10) * 2
-                self.playPauseButton.alpha = K.masterAlpha
-
-                self.resetAnimationButton.isHidden = false
-                self.resetAnimationButton.center.y = self.settingsButton.center.y - (self.buttonSize + 10) * 3
-                self.resetAnimationButton.alpha = K.masterAlpha
-            } completion: { _ in
-                if self.isPaused {
-                    self.playPauseButton.blink()
-                }
-            }
-        }
-        else {
-            K.addHapticFeedback(withStyle: .medium)
-
-            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
-                sender.transform = CGAffineTransform(rotationAngle: -.pi * 2)
-            }, completion: nil)
-            
-            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut) {
-                self.showLabelsButton.center = self.settingsButton.center
-                self.showLabelsButton.alpha = 0.0
-                
-                self.playPauseButton.center = self.settingsButton.center
-                self.playPauseButton.alpha = 0.0
-
-                self.resetAnimationButton.center = self.settingsButton.center
-                self.resetAnimationButton.alpha = 0.0
-            } completion: { _ in
-                self.showLabelsButton.isHidden = true
-                self.playPauseButton.isHidden = true
-                self.resetAnimationButton.isHidden = true
-            }
-        }
     }
     
     
@@ -205,7 +111,7 @@ class PlanetARiumController: UIViewController {
             scaleValue += diff / (diff < 0 ? 50 : 200)
             planetarium.update(scale: scaleValue, toNode: sceneView)
 
-            handlePause(isPaused)
+            handlePlayPause(for: settingsButtons)
         }
     }
     
@@ -277,82 +183,6 @@ class PlanetARiumController: UIViewController {
             controller.planetDetails = "Jupiter is the largest planet in the solar system."
         }
     }
-    
-    
-    // MARK: - Helper Functions
-    
-    /**
-     Sets up the settings buttons
-     - parameters:
-        - button: the button being passed in and returned as well
-        - color: color of the round background image
-     - If color is set to nil, then the button is a sub-setting button that gets revealed when the original settings button is pressed.
-     */
-    private func setupButton(_ button: inout UIButton, with color: UIColor? = nil) {
-        button.tintColor = .white
-        button.layer.shadowOpacity = 0.4
-        button.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
-        button.alpha = K.masterAlpha
-
-        //Autolayout constraints... Here we go!
-        button.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([button.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -padding),
-                                     button.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -padding),
-                                     button.widthAnchor.constraint(equalToConstant: buttonSize),
-                                     button.heightAnchor.constraint(equalToConstant: buttonSize)])
-
-        //i.e. button is a sub-setting button
-        if color != nil {
-            button.backgroundColor = color
-            button.layer.cornerRadius = 0.5 * buttonSize
-            button.clipsToBounds = true
-            button.alpha = 0.0
-            button.isHidden = true
-        }
-    }
-    
-    /**
-     Handles animation of the PlanetARium.
-     - parameter isPaused: pauses animation if true
-     - Not sure if a parameter is needed or if I can access global isPaused variable???
-     */
-    private func handlePause(_ isPaused: Bool) {
-        if isPaused {
-            planetarium.pauseAnimation()
-            playPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-            playPauseButton.blink()
-        }
-        else {
-            planetarium.setSpeed(to: scaleValue)
-            playPauseButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
-            playPauseButton.stopBlink()
-        }
-    }
-    
-    @objc func showSettingsExpanded() {
-        let bottomAnchor = view.safeAreaLayoutGuide.bottomAnchor
-
-        if self.showSettings {
-//            showLabelsButton.center.y = settingsButton.center.y - (buttonSize + 10)
-//            playPauseButton.center.y = settingsButton.center.y - (buttonSize + 10) * 2
-//            resetAnimationButton.center.y = settingsButton.center.y - (buttonSize + 10) * 3
-            
-            NSLayoutConstraint.activate([showLabelsButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding - (buttonSize + 10)),
-                                         playPauseButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding - (buttonSize + 10)*2),
-                                         resetAnimationButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding - (buttonSize + 10)*3)])
-        }
-        else {
-//            showLabelsButton.center.y = settingsButton.center.y
-//            playPauseButton.center.y = settingsButton.center.y
-//            resetAnimationButton.center.y = settingsButton.center.y
-
-            NSLayoutConstraint.activate([showLabelsButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding),
-                                         playPauseButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding),
-                                         resetAnimationButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding)])
-        }
-        
-        print(showSettings)
-    }
 }
 
 
@@ -378,7 +208,7 @@ extension PlanetARiumController: ARSCNViewDelegate {
             else {
                 if let lowLightTimer = lowLightTimer, time > lowLightTimer {
                     DispatchQueue.main.async {
-                        self.lowLightWarning.alpha = K.masterAlpha - 0.2
+                        self.lowLightWarning.alpha = 0.6
                     }
                 }
             }
@@ -424,7 +254,36 @@ extension PlanetARiumController: PlanetDetailsControllerDelegate {
 }
 
 
+// MARK: - Settings View Delegate
 
+extension PlanetARiumController: SettingsViewDelegate {
+    func settingsView(_ controller: SettingsView, didPressLabelsButton settingsSubButton: SettingsSubButton) {
+        showLabels = !showLabels
+        
+        planetarium.showAllLabels(showLabels)
+    }
+    
+    func settingsView(_ controller: SettingsView, didPressPlayPauseButton settingsSubButton: SettingsSubButton) {
+        handlePlayPause(for: controller)
+    }
+    
+    func settingsView(_ controller: SettingsView, didPressResetAnimationButton settingsSubButton: SettingsSubButton) {
+        sceneView.session.run(ARWorldTrackingConfiguration(), options: [.resetTracking, .removeExistingAnchors])
+        planetarium.resetPlanets(withScale: scaleValue, toNode: sceneView)
+
+        //Redundant?
+        handlePlayPause(for: controller)
+    }
+    
+    func handlePlayPause(for controller: SettingsView) {
+        if controller.isPaused {
+            planetarium.pauseAnimation()
+        }
+        else {
+            planetarium.setSpeed(to: scaleValue)
+        }
+    }
+}
 
 
 

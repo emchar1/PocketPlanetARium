@@ -3,7 +3,6 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -58,42 +57,6 @@
                                     </segue>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gtb-s3-YzX" userLabel="ShowLabels">
-                                <rect key="frame" x="334" y="734" width="40" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal">
-                                    <imageReference key="image" image="textformat" catalog="system" renderingMode="template"/>
-                                </state>
-                                <connections>
-                                    <action selector="toggleLabels:" destination="BV1-FR-VrT" eventType="touchUpInside" id="nMj-UO-Fvo"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PxO-yc-I7d" userLabel="PlayPause">
-                                <rect key="frame" x="334" y="686" width="40" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="pause.fill" catalog="system"/>
-                                <connections>
-                                    <action selector="pausePressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="ra8-2j-TyJ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vvu-fS-tOM">
-                                <rect key="frame" x="334" y="782" width="40" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" backgroundImage="settings">
-                                    <color key="titleColor" red="0.28627450980392155" green="0.3529411764705882" blue="0.38823529411764707" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </state>
-                                <connections>
-                                    <action selector="settingsPressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="pna-en-1E9"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ow-uo-NEC" userLabel="Restart">
-                                <rect key="frame" x="334" y="638" width="40" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="arrow.counterclockwise" catalog="system"/>
-                                <connections>
-                                    <action selector="resetPlanets:" destination="BV1-FR-VrT" eventType="touchUpInside" id="I6Q-wN-NVi"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fQZ-KI-GVf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -112,11 +75,7 @@
                     <navigationItem key="navigationItem" id="iqi-dg-1y1"/>
                     <connections>
                         <outlet property="lowLightWarning" destination="Rda-l7-hc1" id="vzK-tM-GDC"/>
-                        <outlet property="playPauseButton" destination="PxO-yc-I7d" id="uDm-hR-Rmb"/>
-                        <outlet property="resetAnimationButton" destination="1ow-uo-NEC" id="Agk-Oa-cHy"/>
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
-                        <outlet property="settingsButton" destination="Vvu-fS-tOM" id="Ic8-DC-Nze"/>
-                        <outlet property="showLabelsButton" destination="Gtb-s3-YzX" id="ULK-Yd-Lie"/>
                         <segue destination="Zct-LL-3e1" kind="presentation" identifier="PlanetInfoSegue" id="KTr-VH-x6O"/>
                         <segue destination="4c5-bX-tws" kind="show" identifier="TestSegue" id="Tqv-NF-g4l"/>
                     </connections>
@@ -291,10 +250,6 @@ This also means that if you assign a closure to two different constants or varia
         <segue reference="uau-d4-gnD"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="arrow.counterclockwise" catalog="system" width="115" height="128"/>
-        <image name="pause.fill" catalog="system" width="116" height="128"/>
-        <image name="settings" width="500" height="500"/>
-        <image name="textformat" catalog="system" width="128" height="78"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
