@@ -46,20 +46,6 @@ class PlanetARiumController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
-        
-        //******BETA Testing peek and pop interaction
-        //I didn't like this one
-//        let interaction = UIContextMenuInteraction(delegate: self)
-//        sceneView.addInteraction(interaction)
-        
-        //This one causes it to crash after 3 - 5 peeks
-//        registerForPreviewing(with: self, sourceView: view)
-        
-        
-        
-        
         settingsButtons.delegate = self
         self.view.addSubview(settingsButtons)
         NSLayoutConstraint.activate([settingsButtons.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -padding),
@@ -165,18 +151,18 @@ class PlanetARiumController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "PlanetInfoSegue" {
             let controller = segue.destination as! PlanetDetailsController
-            
+
             guard let tappedPlanet = tappedPlanet else {
                 return
             }
-            
+
             controller.delegate = self
             controller.planetTitle = tappedPlanet.getName()
-            
+
             controller.planetStats = "Radius:\t\(tappedPlanet.getRadius())\n"
             controller.planetStats += "Axial Tilt:\t\(K.radToDeg(tappedPlanet.getTilt().z)) deg F\n"
             controller.planetStats += "1 Day:\t\(tappedPlanet.getRotationSpeed()) sec"
-            
+
             controller.planetDetails = "Jupiter is the largest planet in the solar system."
         }
     }
@@ -277,116 +263,3 @@ extension PlanetARiumController: SettingsViewDelegate {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-//********GAMMA*******Peek and Pop NOTHING HERE WORKS THE WAY I LIKE IT!
-extension PlanetARiumController: UIViewControllerPreviewingDelegate {
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        
-        let hitResults = sceneView.hitTest(location, options: nil)
-
-        if hitResults.count > 0 {
-            guard let result = hitResults.first,
-                  let planetNodeName = result.node.name,
-                  let tappedPlanet = planetarium.getPlanet(withName: planetNodeName) else {
-                return nil
-            }
-
-            self.tappedPlanet = tappedPlanet
-//            performSegue(withIdentifier: "PlanetInfoSegue", sender: nil)
-//            K.addHapticFeedback(withStyle: .heavy)
-            
-            guard let viewController = storyboard?.instantiateViewController(identifier: "PlanetDetails") as? PlanetDetailsController else {
-                preconditionFailure("Expected a PlanetDetailsController")
-            }
-            
-            viewController.planetTitle = tappedPlanet.getName()
-            
-            return viewController
-            
-
-        }
-        
-        return nil
-    }
-    
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        navigationController?.pushViewController(viewControllerToCommit, animated: true)
-    }
-}
-
-extension PlanetARiumController: UIContextMenuInteractionDelegate {
-    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
-        
-        let hitResults = sceneView.hitTest(location, options: nil)
-
-        if hitResults.count > 0 {
-            guard let result = hitResults.first,
-                  let planetNodeName = result.node.name,
-                  let tappedPlanet = planetarium.getPlanet(withName: planetNodeName) else {
-                return nil
-            }
-
-            self.tappedPlanet = tappedPlanet
-//            performSegue(withIdentifier: "PlanetInfoSegue", sender: nil)
-//            K.addHapticFeedback(withStyle: .heavy)
-            
-            return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
-                return self.makeContextMenu(withPlanet: tappedPlanet)
-            }
-
-        }
-        
-        return nil
-       
-    }
-    
-    func makeContextMenu(withPlanet planet: Planet) -> UIMenu {
-
-        let rename = UIAction(title: "Rename", image: UIImage(systemName: "square.and.pencil")) { action in
-            // Show rename UI
-        }
-        
-        // Here we specify the "destructive" attribute to show that it’s destructive in nature
-        let delete = UIAction(title: "Delete Photo", image: UIImage(systemName: "trash"), attributes: .destructive) { action in
-            // Delete this photo 😢
-        }
-        
-        // The "title" will show up as an action for opening this menu
-        let edit = UIMenu(title: "Edit...", children: [rename, delete])
-        
-        let share = UIAction(title: planet.getName(), image: UIImage(systemName: "square.and.arrow.up")) { action in
-            // Show system share sheet
-        }
-        
-        // Create our menu with both the edit menu and the share action
-        return UIMenu(title: "Main Menu", children: [edit, share])
-    }
-    
-    
-}
-
-
-
-
-
-////******TEST******
-//extension UIView {
-//    func addSubviewWithSlideUpAnimation(_ view: UIView, duration: TimeInterval, options: UIView.AnimationOptions) {
-//        view.transform = view.transform.scaledBy(x: 0.01, y: 0.01)
-//
-//        addSubview(view)
-//
-//        UIView.animate(withDuration: duration, delay: 0, options: options, animations: {
-//            view.transform = CGAffineTransform.identity
-//        }, completion: nil)
-//    }
-//}
