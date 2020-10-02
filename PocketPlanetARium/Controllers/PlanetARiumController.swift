@@ -18,13 +18,12 @@ class PlanetARiumController: UIViewController {
     //Settings buttons
     let settingsButtons = SettingsView()
     let padding: CGFloat = 20
-    
+
     //PlanetARium properties
     var planetarium = PlanetARium()
     var tappedPlanet: Planet?
     var showLabels = false
-    var isPaused = false
-    
+
     //Lighting properties
     var lowLightTimer: TimeInterval?
     var lowLightTimerBegin = false
@@ -43,9 +42,7 @@ class PlanetARiumController: UIViewController {
         }
     }
     
-    
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,6 +56,7 @@ class PlanetARiumController: UIViewController {
         
         //This one causes it to crash after 3 - 5 peeks
 //        registerForPreviewing(with: self, sourceView: view)
+        
         
         
         
@@ -97,8 +95,7 @@ class PlanetARiumController: UIViewController {
             pinchBegan = sender.scale
         case .changed:
             pinchChanged = sender.scale
-        case .ended:
-            //reset values
+        case .ended:            //reset values
             pinchBegan = nil
             pinchChanged = nil
         default:
@@ -241,9 +238,6 @@ extension PlanetARiumController: ARSCNViewDelegate {
 
 extension PlanetARiumController: PlanetDetailsControllerDelegate {
     func didDismiss(_ controller: PlanetDetailsController) {
-        //Resume planetarium animation THIS MAY NOT BE NEEDED ANYMORE??
-//        handlePause(isPaused)
-            
         //Reset label to it's current state
         if let tappedPlanet = tappedPlanet {
             planetarium.showLabel(showLabels, forPlanet: tappedPlanet)
@@ -271,7 +265,6 @@ extension PlanetARiumController: SettingsViewDelegate {
         sceneView.session.run(ARWorldTrackingConfiguration(), options: [.resetTracking, .removeExistingAnchors])
         planetarium.resetPlanets(withScale: scaleValue, toNode: sceneView)
 
-        //Redundant?
         handlePlayPause(for: controller)
     }
     

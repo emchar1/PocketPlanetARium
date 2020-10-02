@@ -61,7 +61,7 @@ struct PlanetARium {
                         tilt: SCNVector3(x: 0, y: 0, z: 0),
                         position: SCNVector3(0, 0, -0.2),
                         rotationSpeed: earthDay * 27,
-                        labelColor: #colorLiteral(red: 0.9911546111, green: 1, blue: 0.6582027078, alpha: 1))
+                        labelColor: #colorLiteral(red: 0.9960784314, green: 0.6784313725, blue: 0.4784313725, alpha: 1))
 
         guard let sun = planets.getPlanet(withName: "Sun") else {
             print("Sun not found when trying to addPlanets")
