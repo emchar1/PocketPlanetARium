@@ -14,7 +14,7 @@ class PlanetARiumController: UIViewController {
 
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var lowLightWarning: UIView!
-
+    
     //Settings buttons
     let settingsButtons = SettingsView()
     let padding: CGFloat = 20
@@ -22,19 +22,18 @@ class PlanetARiumController: UIViewController {
     //PlanetARium properties
     var planetarium = PlanetARium()
     var tappedPlanet: Planet?
-    var showLabels = false
 
     //Lighting properties
     var lowLightTimer: TimeInterval?
     var lowLightTimerBegin = false
 
-    //Pinch to zoom properties
+    //Scaling properties
     var pinchBegan: CGFloat?
     var pinchChanged: CGFloat?
     var scaleValue: Float = 0.218 {
         willSet {
             if newValue < 0 || newValue > 1 {
-                K.addHapticFeedback(withStyle: .light)
+                K.addHapticFeedback(withStyle: .soft)
             }
         }
         didSet {
@@ -53,13 +52,13 @@ class PlanetARiumController: UIViewController {
         
         sceneView.delegate = self
         sceneView.autoenablesDefaultLighting = true
-//        sceneView.showsStatistics = true
+        sceneView.showsStatistics = true
 
         lowLightWarning.alpha = 0.0
         lowLightWarning.clipsToBounds = true
         lowLightWarning.layer.cornerRadius = 7
         
-        planetarium.update(scale: scaleValue, toNode: sceneView)
+        planetarium.beginAnimation(scale: scaleValue, toNode: sceneView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -81,7 +80,7 @@ class PlanetARiumController: UIViewController {
             pinchBegan = sender.scale
         case .changed:
             pinchChanged = sender.scale
-        case .ended:            //reset values
+        case .ended:
             pinchBegan = nil
             pinchChanged = nil
         default:
@@ -90,9 +89,10 @@ class PlanetARiumController: UIViewController {
 
         if let began = pinchBegan, let changed = pinchChanged {
             let diff = Float(changed - began)
+            let diffScale: Float = diff < 0 ? 50 : 200
 
-            scaleValue += diff / (diff < 0 ? 50 : 200)
-            planetarium.update(scale: scaleValue, toNode: sceneView)
+            scaleValue += diff / diffScale
+            planetarium.beginAnimation(scale: scaleValue, toNode: sceneView)
 
             handlePlayPause(for: settingsButtons)
         }
@@ -121,13 +121,15 @@ class PlanetARiumController: UIViewController {
             
             //*******BETA****This will eventually handle a peek and pop with animation
             //make this pop up a little window with planet stats and "press harder to view more"
-            planetarium.showLabel(true, forPlanet: tappedPlanet)
+            planetarium.showLabels(true, forPlanet: tappedPlanet)
+            
+            
         }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let tappedPlanet = tappedPlanet {
-            planetarium.showLabel(showLabels, forPlanet: tappedPlanet)
+            planetarium.showLabels(forPlanet: tappedPlanet)
         }
         
         self.tappedPlanet = nil
@@ -144,8 +146,10 @@ class PlanetARiumController: UIViewController {
             return
         }
                 
-        performSegue(withIdentifier: "PlanetDetailsSegue", sender: nil)
         K.addHapticFeedback(withStyle: .heavy)
+        planetarium.pauseAnimation()
+        planetarium.showLabels(forPlanet: tappedPlanet)
+        performSegue(withIdentifier: "PlanetDetailsSegue", sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -163,7 +167,7 @@ class PlanetARiumController: UIViewController {
             controller.planetStats += "Axial Tilt:\t\(K.radToDeg(tappedPlanet.getTilt().z)) deg F\n"
             controller.planetStats += "1 Day:\t\(tappedPlanet.getRotationSpeed()) sec"
 
-            controller.planetDetails = "Jupiter is the largest planet in the solar system."
+            controller.planetDetails = "\(tappedPlanet.getName()) is a planet in the solar system. Marvel at its grandeur..."
         }
     }
 }
@@ -212,11 +216,10 @@ extension PlanetARiumController: ARSCNViewDelegate {
                     }
                 }
             }
-        }//end else if lightEstimate.ambientIntensity > 500
-        
+        }
     }
-    
-    
+
+
 }
 
 
@@ -226,7 +229,11 @@ extension PlanetARiumController: PlanetDetailsControllerDelegate {
     func didDismiss(_ controller: PlanetDetailsController) {
         //Reset label to it's current state
         if let tappedPlanet = tappedPlanet {
-            planetarium.showLabel(showLabels, forPlanet: tappedPlanet)
+            planetarium.showLabels(forPlanet: tappedPlanet)
+        }
+        
+        if !settingsButtons.isPaused {
+            planetarium.resumeAnimation(to: scaleValue)
         }
         
         self.tappedPlanet = nil
@@ -238,9 +245,8 @@ extension PlanetARiumController: PlanetDetailsControllerDelegate {
 
 extension PlanetARiumController: SettingsViewDelegate {
     func settingsView(_ controller: SettingsView, didPressLabelsButton settingsSubButton: SettingsSubButton) {
-        showLabels = !showLabels
-        
-        planetarium.showAllLabels(showLabels)
+        planetarium.toggleLabels()
+        planetarium.showLabels()
     }
     
     func settingsView(_ controller: SettingsView, didPressPlayPauseButton settingsSubButton: SettingsSubButton) {
@@ -249,7 +255,7 @@ extension PlanetARiumController: SettingsViewDelegate {
     
     func settingsView(_ controller: SettingsView, didPressResetAnimationButton settingsSubButton: SettingsSubButton) {
         sceneView.session.run(ARWorldTrackingConfiguration(), options: [.resetTracking, .removeExistingAnchors])
-        planetarium.resetPlanets(withScale: scaleValue, toNode: sceneView)
+        planetarium.resetAnimation(withScale: scaleValue, toNode: sceneView)
 
         handlePlayPause(for: controller)
     }
@@ -259,7 +265,7 @@ extension PlanetARiumController: SettingsViewDelegate {
             planetarium.pauseAnimation()
         }
         else {
-            planetarium.setSpeed(to: scaleValue)
+            planetarium.resumeAnimation(to: scaleValue)
         }
     }
 }

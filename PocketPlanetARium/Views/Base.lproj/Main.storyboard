@@ -76,7 +76,7 @@
         <!--Planet Details Controller-->
         <scene sceneID="8lZ-GG-5kB">
             <objects>
-                <viewController storyboardIdentifier="PlanetDetails" id="Zct-LL-3e1" customClass="PlanetDetailsController" customModule="PocketPlanetARium" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PlanetDetails" modalTransitionStyle="crossDissolve" modalPresentationStyle="pageSheet" id="Zct-LL-3e1" customClass="PlanetDetailsController" customModule="PocketPlanetARium" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" alpha="0.80000000000000004" contentMode="scaleToFill" id="CKJ-co-Yxg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -142,7 +142,6 @@
                             <constraint firstItem="uw3-WD-4A9" firstAttribute="trailing" secondItem="bWl-5y-AHu" secondAttribute="trailing" constant="20" id="xJB-ju-7aq"/>
                         </constraints>
                     </view>
-                    <value key="contentSizeForViewInPopover" type="size" width="0.0" height="300"/>
                     <connections>
                         <outlet property="planetDetailsLabel" destination="tfU-en-dNF" id="ehR-c3-oFh"/>
                         <outlet property="planetStatsLabel" destination="dcF-Ok-oYJ" id="NJK-Zd-6ZI"/>

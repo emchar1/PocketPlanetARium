@@ -23,6 +23,7 @@ class PlanetDetailsController: UIViewController {
     var planetDetails = "Planet Details"
     var delegate: PlanetDetailsControllerDelegate?
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,6 +34,18 @@ class PlanetDetailsController: UIViewController {
 
     override func viewDidDisappear(_ animated: Bool) {
         delegate?.didDismiss(self)
+    }
+        
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first, view.traitCollection.forceTouchCapability == .available,
+              touch.force == touch.maximumPossibleForce else {
+            return
+        }
+
+        self.dismiss(animated: true, completion: {
+            print("Deep pressed!")
+        })
     }
 
 }

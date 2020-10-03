@@ -44,7 +44,10 @@ class SettingsView: UIView {
     var resetAnimationButton = SettingsSubButton(yPosition: 3)
         
     var delegate: SettingsViewDelegate?
-        
+    
+    
+    // MARK: - Initialization
+    
     init() {
         super.init(frame: CGRect(x: 0,
                                  y: 0,
@@ -62,6 +65,9 @@ class SettingsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /**
+     Helper function that intializes the settings dial button, resetAnimation, playPause and labels buttons.
+     */
     private func initializeButtons() {
 
         //The order of adding the button to the subviews MATTER!
@@ -94,6 +100,14 @@ class SettingsView: UIView {
         self.addSubview(settingsButton)
     }
 
+    /**
+     Sets up a circular SettingsSubButton.
+     - parameters:
+        - settingsSubButton: the button that will get customized
+        - systemName: system name of the button image
+        - backgroundColor: button's background color
+        - targetAction: selector call to the function that gets called when the button is pressed
+     */
     private func setupButton(_ settingsSubButton: inout SettingsSubButton, systemName: String, backgroundColor: UIColor, targetAction: Selector) {
         settingsSubButton.button.frame = CGRect(x: self.buttonHomePosition.x,
                                                 y: self.buttonHomePosition.y,
@@ -109,6 +123,9 @@ class SettingsView: UIView {
         settingsSubButton.button.addTarget(self, action: targetAction, for: .touchUpInside)
         self.addSubview(settingsSubButton.button)
     }
+    
+    
+    // MARK: - Button Presses
     
     @objc private func settingsPressed() {
         showSettings = !showSettings
@@ -133,7 +150,7 @@ class SettingsView: UIView {
                 self.resetAnimationButton.button.frame.origin.y = self.resetAnimationButton.getYPositionInView(self)
                 self.resetAnimationButton.button.alpha = K.masterAlpha
             } completion: { _ in
-                self.handlePause()
+                self.handlePlayPause()
             }
         }
         else {
@@ -165,27 +182,30 @@ class SettingsView: UIView {
         delegate?.settingsView(self, didPressLabelsButton: labelsButton)
     }
     
-    @objc private func playPausePressed() {
-        K.addHapticFeedback(withStyle: .light)
-
-        isPaused = !isPaused
-        handlePause()
-
-        delegate?.settingsView(self, didPressPlayPauseButton: playPauseButton)
-    }
-    
     @objc private func resetAnimationPressed() {
         K.addHapticFeedback(withStyle: .light)
         delegate?.settingsView(self, didPressResetAnimationButton: resetAnimationButton)
     }
     
-    func handlePause() {
+    @objc private func playPausePressed() {
+        K.addHapticFeedback(withStyle: .light)
+
+        isPaused = !isPaused
+        handlePlayPause()
+
+        delegate?.settingsView(self, didPressPlayPauseButton: playPauseButton)
+    }
+    
+    /**
+     Helper function that produces a blinking animation when paused, and toggles the button image.
+     */
+    private func handlePlayPause() {
         if isPaused {
             playPauseButton.button.blink()
             playPauseButton.button.setImage(UIImage(systemName: "play.fill"), for: .normal)
         }
         else {
-            playPauseButton.button.stopBlink()
+            playPauseButton.button.stopBlink(to: K.masterAlpha)
             playPauseButton.button.setImage(UIImage(systemName: "pause.fill"), for: .normal)
         }
     }

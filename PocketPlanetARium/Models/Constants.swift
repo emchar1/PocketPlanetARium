@@ -133,7 +133,7 @@ extension UIView {
      Returns the UIView to its original state, i.e. non-blink.
      - parameter alpha: original alpha level to return the view to
      */
-    func stopBlink(to alpha: CGFloat = K.masterAlpha) {
+    func stopBlink(to alpha: CGFloat) {
         self.layer.removeAllAnimations()
         self.alpha = alpha
     }

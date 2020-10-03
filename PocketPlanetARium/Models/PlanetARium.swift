@@ -15,13 +15,14 @@ struct PlanetARium {
     private let scaleFactor: Float = 3
     private let scaleMinimum: Float = 0.123
     private let scaleMaximum: Float = 1
+    private let scaleSpeed: TimeInterval = 128
 
     //PlanetARium variables
     private var planets = PlanetGroup()
-    private var showLabels: Bool = false
+    private var labelsOn: Bool = false
     
         
-    // MARK: - Add/Remove Planets to Scene
+    // MARK: - Animation Controls
     
     /**
      Adds the solar system to the sceneView, and animates them in an intuitive way with respect to size, scale, and speed.
@@ -31,20 +32,104 @@ struct PlanetARium {
         - toNode: the scene view to add the solar system to
      - The higher the topSpeed, the faster the animation. Suggested values: 2, 4, 8, 16, 32, 64, 128, 256
      */
-    mutating func update(scale: Float, topSpeed speed: TimeInterval = 128, toNode sceneView: ARSCNView) {
+    mutating func beginAnimation(scale: Float, topSpeed speed: TimeInterval? = nil, toNode sceneView: ARSCNView) {
         let adjustedScale = pow(scale.clamp(min: scaleMinimum, max: scaleMaximum), scaleFactor)
+        let adjustedSpeed = speed ?? scaleSpeed
         
-        removeAllPlanetNodes(from: sceneView)
+        removePlanets(from: sceneView)
         
         addPlanets(earthRadius: adjustedScale * 3,
                    earthDistance: adjustedScale * -20,
-                   earthDay: 8 / speed,
-                   earthYear: 365 / speed)
+                   earthDay: 8 / adjustedSpeed,
+                   earthYear: 365 / adjustedSpeed)
         
         animatePlanets(to: sceneView)
         
-        setSpeed(to: scale)
+        resumeAnimation(to: scale)
     }
+        
+    /**
+     Sets the speed of the animation to the given input value.
+     - parameter speed: range from 0 to 1, with 1 being actual speed
+     */
+    func resumeAnimation(to speed: Float) {
+        let adjustedSpeed = pow((1 - speed).clamp(min: scaleMinimum, max: scaleMaximum), scaleFactor)
+        
+        for action in getAllActions() {
+            action.speed = CGFloat(adjustedSpeed)
+        }
+    }
+    
+    /**
+     Pauses all animations.
+     */
+    func pauseAnimation() {
+        for action in getAllActions() {
+            action.speed = CGFloat(pow(scaleMinimum, scaleFactor))
+        }
+    }
+    
+    /**
+     Resets all planet positions by clearing the group and call update(scale:toNode:) to restart the animation.
+     - parameters:
+        - scale: solar system scale with respect to size and orbital distance; works well with values between 0 to 1, i.e. slider values
+        - topSpeed: max speed of the animation
+        - toNode: the scene view to add the solar system to
+     */
+    mutating func resetAnimation(withScale scale: Float, topSpeed speed: TimeInterval? = nil, toNode sceneView: ARSCNView) {
+        let adjustedSpeed = speed ?? scaleSpeed
+
+        planets = PlanetGroup()
+        
+        beginAnimation(scale: scale, topSpeed: adjustedSpeed, toNode: sceneView)
+    }
+        
+    
+    // MARK: - Customization
+    
+    /**
+     Return the requested planet, sun, or moon. (This will grow inefficiently. Have a struct to house the planets? PlanetDirectory.
+     - parameter planetName: name of the planet
+     */
+    func getPlanet(withName planetName: String) -> Planet? {
+        return planets.getPlanet(withName: planetName)
+    }
+    
+    /**
+     Shows or hides the label for a particular Planet or all Planets.
+     - parameters:
+        - show: determines whether to show or hide the label, if nil, go with labelsOn value
+        - planet: the Planet for which to show its label, if nil, show label for all planets
+     */
+    func showLabels(_ show: Bool? = nil, forPlanet planet: Planet? = nil) {
+        if let planet = planet {
+            var planetTemp = planet
+            planetTemp.showLabel(show ?? labelsOn)
+        }
+        else {
+            for planet in planets.getAllPlanets() {
+                var planetTemp = planet
+                planetTemp.showLabel(show ?? labelsOn)
+            }
+        }
+    }
+    
+    /**
+     Toggles the labelsOn, i.e. switch on and off, turn true or false, switch 1 and 0... you get it.
+     */
+    mutating func toggleLabels() {
+        labelsOn = !labelsOn
+    }
+    
+    /**
+     Returns staus of labelsOn.
+     */
+    func areLabelsOn() -> Bool {
+        return labelsOn
+    }
+        
+    
+    // MARK: - Helper Functions
     
     /**
      Adds the solar system to the sceneView.
@@ -54,7 +139,7 @@ struct PlanetARium {
         - earthYear: length of time it takes for the Earth to make one revolution around the sun, in seconds
      - This function allows for more independent customization regarding size of planets, orbital distances, and speed of animation.
      */
-    mutating func addPlanets(earthRadius: Float, earthDistance: Float, earthDay: TimeInterval, earthYear: TimeInterval) {
+    mutating private func addPlanets(earthRadius: Float, earthDistance: Float, earthDay: TimeInterval, earthYear: TimeInterval) {
         addPlanetHelper(name: "Sun",
                         type: PlanetType.sun,
                         radius: (abs(earthDistance) * 0.2).clamp(min: 0.008, max: 0.02),
@@ -212,121 +297,8 @@ struct PlanetARium {
                         orbitalCenterRotationSpeed: earthYear * 248.1,
                         labelColor: #colorLiteral(red: 0.8180410266, green: 0.6948351264, blue: 0.5951495767, alpha: 1))
         
-        showAllLabels(showLabels)
+        showLabels(labelsOn)
     }
-    
-    /**
-     Clears the scene view. Should be called before adding the solar system to the scene view.
-     - parameter sceneView: the scene view to remove the solar system from
-     */
-    func removeAllPlanetNodes(from sceneView: ARSCNView) {
-        sceneView.scene.rootNode.enumerateChildNodes { (node, stop) in
-            node.removeFromParentNode()
-        }
-    }
-    
-    /**
-     Adds all the planet nodes and animates them to the scene view.
-     - parameter sceneView: the scene view to add the solar system to
-     */
-    func animatePlanets(to sceneView: ARSCNView) {
-        guard let sun = planets.getPlanets(withType: PlanetType.sun).first else {
-            print("Sun not found.")
-            return
-        }
-
-        for moon in planets.getPlanets(withType: PlanetType.moon) {
-            moon.animate()
-        }
-
-        for planet in planets.getPlanets(withType: PlanetType.planet) {
-            planet.animate()
-            planet.addOrbitPath()
-
-            sun.addSatellite(planet)
-        }
-
-        sun.animate()
-        sun.addLightSource(omniLumens: 1000, ambientLumens: 250)
-
-        sceneView.scene.rootNode.addChildNode(sun.getOrbitalCenterNode())
-    }
-    
-    /**
-     Shows or hides the label for all planets in the PlanetGroup.
-     - parameter show: determines whether to show or hide the labels
-     - This function also sets the showLabels property based on the value of show passed in, which is why this is a mutating function.
-     */
-    mutating func showAllLabels(_ show: Bool) {
-        self.showLabels = show
-                
-        for planet in planets.getAllPlanets() {
-            var planetTemp = planet
-            planetTemp.showLabel(show)
-        }
-    }
-    
-    /**
-     Shows or hides the label for a particular Planet.
-     - parameters:
-        - show: determines whether to show or hide the label
-        - planet: the Planet for which to show its label
-     */
-    func showLabel(_ show: Bool, forPlanet planet: Planet) {
-        var planetTemp = planet
-        planetTemp.showLabel(show)
-    }
-    
-    /**
-     Resets all planet positions by clearing the group and call update(scale:toNode:) to restart the animation.
-     - parameters:
-        - scale: solar system scale with respect to size and orbital distance; works well with values between 0 to 1, i.e. slider values
-        - topSpeed: max speed of the animation
-        - toNode: the scene view to add the solar system to
-     */
-    mutating func resetPlanets(withScale scale: Float, topSpeed speed: TimeInterval = 128, toNode sceneView: ARSCNView) {
-        planets = PlanetGroup()
-        
-        update(scale: scale, topSpeed: speed, toNode: sceneView)
-    }
-    
-    
-    // MARK: - Speed controls
-    
-    /**
-     Sets the speed of the animation to the given input value.
-     - parameter speed: range from 0 to 1, with 1 being actual speed
-     */
-    func setSpeed(to speed: Float) {
-        let adjustedSpeed = pow((1 - speed).clamp(min: scaleMinimum, max: scaleMaximum), scaleFactor)
-        
-        for action in getAllActions() {
-            action.speed = CGFloat(adjustedSpeed)
-        }
-    }
-    
-    /**
-     Pauses all animations.
-     */
-    func pauseAnimation() {
-        for action in getAllActions() {
-            action.speed = CGFloat(pow(scaleMinimum, scaleFactor))
-        }
-    }
-    
-    
-    // MARK: - Getters
-    
-    /**
-     Return the requested planet, sun, or moon. (This will grow inefficiently. Have a struct to house the planets? PlanetDirectory.
-     - parameter planetName: name of the planet
-     */
-    func getPlanet(withName planetName: String) -> Planet? {
-        return planets.getPlanet(withName: planetName)
-    }
-    
-    
-    // MARK: - Helper Functions
     
     /**
      Adds a planet to the dictionary. This allows for preservation of the last animated planet tilt and orbital center tilt angles.
@@ -381,6 +353,43 @@ struct PlanetARium {
                                        position: position,
                                        rotationSpeed: rotationSpeed,
                                        labelColor: labelColor))
+    }
+    
+    /**
+     Removes all the Planet object nodes, i.e. wipes the scene view. Should be called before adding the solar system to the scene view.
+     - parameter sceneView: the scene view to remove the solar system from
+     */
+    private func removePlanets(from sceneView: ARSCNView) {
+        sceneView.scene.rootNode.enumerateChildNodes { (node, stop) in
+            node.removeFromParentNode()
+        }
+    }
+    
+    /**
+     Adds all the planet nodes and animates them to the scene view.
+     - parameter sceneView: the scene view to add the solar system to
+     */
+    private func animatePlanets(to sceneView: ARSCNView) {
+        guard let sun = planets.getPlanets(withType: PlanetType.sun).first else {
+            print("Sun not found.")
+            return
+        }
+
+        for moon in planets.getPlanets(withType: PlanetType.moon) {
+            moon.animate()
+        }
+
+        for planet in planets.getPlanets(withType: PlanetType.planet) {
+            planet.animate()
+            planet.addOrbitPath()
+
+            sun.addSatellite(planet)
+        }
+
+        sun.animate()
+        sun.addLightSource(omniLumens: 1000, ambientLumens: 250)
+
+        sceneView.scene.rootNode.addChildNode(sun.getOrbitalCenterNode())
     }
     
     /**
