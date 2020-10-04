@@ -76,8 +76,8 @@
         <!--Planet Details Controller-->
         <scene sceneID="8lZ-GG-5kB">
             <objects>
-                <viewController storyboardIdentifier="PlanetDetails" modalTransitionStyle="crossDissolve" modalPresentationStyle="pageSheet" id="Zct-LL-3e1" customClass="PlanetDetailsController" customModule="PocketPlanetARium" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" alpha="0.80000000000000004" contentMode="scaleToFill" id="CKJ-co-Yxg">
+                <viewController storyboardIdentifier="PlanetDetails" modalPresentationStyle="pageSheet" id="Zct-LL-3e1" customClass="PlanetDetailsController" customModule="PocketPlanetARium" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CKJ-co-Yxg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
@@ -86,7 +86,7 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QA6-6G-Qqu">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="40"/>
-                                        <color key="backgroundColor" systemColor="systemPurpleColor"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="XZh-EN-ehl"/>
                                         </constraints>
@@ -99,11 +99,23 @@
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1lr-Gx-rW1">
                                                 <rect key="frame" x="0.0" y="0.0" width="183" height="200"/>
-                                                <color key="backgroundColor" systemColor="systemTealColor"/>
+                                                <subviews>
+                                                    <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XKF-x8-rri">
+                                                        <rect key="frame" x="0.0" y="0.0" width="183" height="200"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </sceneKitView>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="XKF-x8-rri" secondAttribute="trailing" id="0aY-9I-hdP"/>
+                                                    <constraint firstAttribute="bottom" secondItem="XKF-x8-rri" secondAttribute="bottom" id="XPH-mq-jw1"/>
+                                                    <constraint firstItem="XKF-x8-rri" firstAttribute="top" secondItem="1lr-Gx-rW1" secondAttribute="top" id="hUS-tH-f3y"/>
+                                                    <constraint firstItem="XKF-x8-rri" firstAttribute="leading" secondItem="1lr-Gx-rW1" secondAttribute="leading" id="p50-7s-Ct0"/>
+                                                </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dcF-Ok-oYJ">
                                                 <rect key="frame" x="191" y="0.0" width="183" height="200"/>
-                                                <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -115,7 +127,7 @@
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfU-en-dNF">
                                         <rect key="frame" x="0.0" y="256" width="374" height="512"/>
-                                        <color key="backgroundColor" systemColor="systemPinkColor"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -147,6 +159,7 @@
                         <outlet property="planetStatsLabel" destination="dcF-Ok-oYJ" id="NJK-Zd-6ZI"/>
                         <outlet property="planetTitleLabel" destination="QA6-6G-Qqu" id="6VX-2R-IHT"/>
                         <outlet property="planetView" destination="1lr-Gx-rW1" id="pu1-0L-pZZ"/>
+                        <outlet property="sceneView" destination="XKF-x8-rri" id="J9c-SJ-qdq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kX9-Rn-dqL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -157,18 +170,6 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemPinkColor">
-            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemPurpleColor">
-            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemTealColor">
-            <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemYellowColor">
-            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

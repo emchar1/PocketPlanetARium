@@ -124,6 +124,9 @@ class PlanetARiumController: UIViewController {
             planetarium.showLabels(true, forPlanet: tappedPlanet)
             
             
+            
+            
+
         }
     }
     
@@ -138,14 +141,17 @@ class PlanetARiumController: UIViewController {
     
     
     
-    //**************BETA****Start to work on info graph for each planet.
+    
+    
+//**************BETA****Start to work on info graph for each planet.
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first, view.traitCollection.forceTouchCapability == .available,
+        guard let touch = touches.first,
+              view.traitCollection.forceTouchCapability == .available,
               touch.force == touch.maximumPossibleForce,
               tappedPlanet != nil else {
             return
         }
-                
+
         K.addHapticFeedback(withStyle: .heavy)
         planetarium.pauseAnimation()
         planetarium.showLabels(forPlanet: tappedPlanet)
@@ -165,10 +171,41 @@ class PlanetARiumController: UIViewController {
 
             controller.planetStats = "Radius:\t\(tappedPlanet.getRadius())\n"
             controller.planetStats += "Axial Tilt:\t\(K.radToDeg(tappedPlanet.getTilt().z)) deg F\n"
-            controller.planetStats += "1 Day:\t\(tappedPlanet.getRotationSpeed()) sec"
+            controller.planetStats += "1 Day:\t\(tappedPlanet.getRotationSpeed()) sec\n"
+            controller.planetStats += "Category: \n"
+            controller.planetStats += "Category: \n"
+            controller.planetStats += "Category: \n"
+            controller.planetStats += "Category: \n"
+            controller.planetStats += "Category: \n"
+            controller.planetStats += "Category: \n"
+            controller.planetStats += "Category: \n"
 
+            
             controller.planetDetails = "\(tappedPlanet.getName()) is a planet in the solar system. Marvel at its grandeur..."
         }
+    }
+}
+
+
+
+
+
+
+
+// MARK: - Planet Details Controller Delegate
+
+extension PlanetARiumController: PlanetDetailsControllerDelegate {
+    func didDismiss(_ controller: PlanetDetailsController) {
+        //Reset label to it's current state
+        if let tappedPlanet = tappedPlanet {
+            planetarium.showLabels(forPlanet: tappedPlanet)
+        }
+        
+        if !settingsButtons.isPaused {
+            planetarium.resumeAnimation(to: scaleValue)
+        }
+        
+        self.tappedPlanet = nil
     }
 }
 
@@ -220,24 +257,6 @@ extension PlanetARiumController: ARSCNViewDelegate {
     }
 
 
-}
-
-
-// MARK: - Planet Details Controller Delegate
-
-extension PlanetARiumController: PlanetDetailsControllerDelegate {
-    func didDismiss(_ controller: PlanetDetailsController) {
-        //Reset label to it's current state
-        if let tappedPlanet = tappedPlanet {
-            planetarium.showLabels(forPlanet: tappedPlanet)
-        }
-        
-        if !settingsButtons.isPaused {
-            planetarium.resumeAnimation(to: scaleValue)
-        }
-        
-        self.tappedPlanet = nil
-    }
 }
 
 
