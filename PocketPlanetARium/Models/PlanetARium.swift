@@ -148,14 +148,14 @@ struct PlanetARium {
                         rotationSpeed: earthDay * 27,
                         labelColor: #colorLiteral(red: 0.9960784314, green: 0.6784313725, blue: 0.4784313725, alpha: 1),
                         details: PlanetDetails(stats: [PlanetStats.day.rawValue : "1",
-                                                       PlanetStats.distance.rawValue : "2",
+                                                       PlanetStats.distance.rawValue : "2.5 x 1024 tons",
                                                        PlanetStats.gravity.rawValue : "3",
                                                        PlanetStats.mass.rawValue : "4",
                                                        PlanetStats.moons.rawValue : "5",
                                                        PlanetStats.order.rawValue : "6",
                                                        PlanetStats.radius.rawValue : "7",
                                                        PlanetStats.year.rawValue : "8"],
-                                               details: "This planet is magnificent!"))
+                                               details: "This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent!"))
 
         guard let sun = planets.getPlanet(withName: "Sun") else {
             print("Sun not found when trying to addPlanets")

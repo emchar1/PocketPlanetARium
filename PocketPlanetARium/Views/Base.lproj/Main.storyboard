@@ -85,10 +85,10 @@
                                 <rect key="frame" x="20" y="20" width="335" height="684"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zuz-Zc-OBd" userLabel="Planet Title View">
-                                        <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="60"/>
                                         <subviews>
                                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="We4-dF-vYt" userLabel="Close Button">
-                                                <rect key="frame" x="0.0" y="8" width="24" height="24"/>
+                                                <rect key="frame" x="0.0" y="18" width="24" height="24"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="24" id="1Ro-uK-YCR"/>
@@ -107,7 +107,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QA6-6G-Qqu">
-                                                <rect key="frame" x="0.0" y="0.0" width="335" height="31.333333333333332"/>
+                                                <rect key="frame" x="0.0" y="14.333333333333334" width="335" height="31.333333333333329"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="24"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -116,16 +116,16 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="QA6-6G-Qqu" firstAttribute="top" secondItem="zuz-Zc-OBd" secondAttribute="top" id="AXF-2X-hXi"/>
+                                            <constraint firstItem="We4-dF-vYt" firstAttribute="centerY" secondItem="zuz-Zc-OBd" secondAttribute="centerY" id="2XA-LC-NZt"/>
+                                            <constraint firstItem="QA6-6G-Qqu" firstAttribute="centerY" secondItem="zuz-Zc-OBd" secondAttribute="centerY" id="9n8-MP-Tfj"/>
                                             <constraint firstItem="QA6-6G-Qqu" firstAttribute="leading" secondItem="zuz-Zc-OBd" secondAttribute="leading" id="Tog-NN-vjx"/>
                                             <constraint firstAttribute="trailing" secondItem="QA6-6G-Qqu" secondAttribute="trailing" id="kRG-m2-Ntz"/>
-                                            <constraint firstItem="We4-dF-vYt" firstAttribute="centerY" secondItem="zuz-Zc-OBd" secondAttribute="centerY" id="nxN-3M-A5u"/>
-                                            <constraint firstAttribute="height" constant="40" id="od0-1p-UOO"/>
+                                            <constraint firstAttribute="height" constant="60" id="od0-1p-UOO"/>
                                             <constraint firstItem="We4-dF-vYt" firstAttribute="leading" secondItem="zuz-Zc-OBd" secondAttribute="leading" id="x8p-6j-SPc"/>
                                         </constraints>
                                     </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dwk-qX-0mN" userLabel="Sub Stack">
-                                        <rect key="frame" x="0.0" y="48" width="335" height="636"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dwk-qX-0mN" userLabel="Sub Stack">
+                                        <rect key="frame" x="0.0" y="68" width="335" height="616"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="NkC-rC-PWD" userLabel="Inner Stack">
                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="192"/>
@@ -200,7 +200,7 @@
                                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YFz-nP-B0b" userLabel="Planet Details View">
                                                         <rect key="frame" x="335" y="0.0" width="0.0" height="192"/>
                                                         <subviews>
-                                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Jupiter is the largest planet in the world. Jupiter is the l" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWt-TX-aMc">
+                                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" text="This planet is magnificent!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWt-TX-aMc">
                                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="18.333333333333332"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
@@ -223,9 +223,9 @@
                                                 </constraints>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yrs-3o-8rA" userLabel="Planet Details Landscape View">
-                                                <rect key="frame" x="0.0" y="200" width="335" height="436"/>
+                                                <rect key="frame" x="0.0" y="200" width="335" height="416"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" text="Jupiter is the largest planet in the world." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfU-en-dNF" userLabel="Planet Details Label">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" text="This planet is magnificent!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfU-en-dNF" userLabel="Planet Details Label">
                                                         <rect key="frame" x="0.0" y="20" width="335" height="18.333333333333329"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
@@ -249,10 +249,10 @@
                         <viewLayoutGuide key="safeArea" id="uw3-WD-4A9"/>
                         <color key="backgroundColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="uw3-WD-4A9" firstAttribute="bottom" secondItem="bWl-5y-AHu" secondAttribute="bottom" constant="20" id="RP8-KT-U6b"/>
-                            <constraint firstItem="bWl-5y-AHu" firstAttribute="leading" secondItem="uw3-WD-4A9" secondAttribute="leading" constant="20" id="dOo-6P-dcs"/>
-                            <constraint firstItem="bWl-5y-AHu" firstAttribute="top" secondItem="uw3-WD-4A9" secondAttribute="top" constant="20" id="oiv-Pf-sxF"/>
-                            <constraint firstItem="uw3-WD-4A9" firstAttribute="trailing" secondItem="bWl-5y-AHu" secondAttribute="trailing" constant="20" id="xJB-ju-7aq"/>
+                            <constraint firstAttribute="trailing" secondItem="bWl-5y-AHu" secondAttribute="trailing" constant="20" id="CN7-it-QtI"/>
+                            <constraint firstItem="uw3-WD-4A9" firstAttribute="bottom" secondItem="bWl-5y-AHu" secondAttribute="bottom" constant="20" id="cxP-qD-yG8"/>
+                            <constraint firstItem="bWl-5y-AHu" firstAttribute="leading" secondItem="uw3-WD-4A9" secondAttribute="leading" constant="20" id="fxy-Jd-ver"/>
+                            <constraint firstItem="bWl-5y-AHu" firstAttribute="top" secondItem="uw3-WD-4A9" secondAttribute="top" constant="20" id="yb7-Ta-Lfx"/>
                         </constraints>
                     </view>
                     <connections>
