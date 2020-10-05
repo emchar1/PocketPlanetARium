@@ -100,7 +100,7 @@ class PlanetStatsCell: UITableViewCell {
 
 extension PlanetDetailsController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return planet?.getDetails().stats.count ?? 8
+        return planet?.getDetails().stats.count ?? 20
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

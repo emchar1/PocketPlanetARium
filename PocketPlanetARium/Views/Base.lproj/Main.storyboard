@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
-    <device id="retina5_9" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="efQ-Rk-48S">
+    <device id="retina5_9" orientation="landscape" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -8,26 +8,26 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--PlanetARium-->
+        <!--PlanetA Rium Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
                 <viewController id="BV1-FR-VrT" customClass="PlanetARiumController" customModule="PocketPlanetARium" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="U0K-SW-4ec">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="812" height="375"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BrB-h1-WRS">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="778"/>
+                                <rect key="frame" x="44" y="0.0" width="724" height="354"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="T5Z-3W-eZe" appends="YES" id="1wt-VJ-tWE"/>
                                 </connections>
                             </arscnView>
                             <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rda-l7-hc1">
-                                <rect key="frame" x="47.666666666666657" y="356" width="280" height="100"/>
+                                <rect key="frame" x="266" y="137.66666666666666" width="280" height="100"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For optimal results, move to a brighter location." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G7N-6Z-Pug" userLabel="lowLightWarningLabel">
-                                        <rect key="frame" x="30" y="28.000000000000004" width="220" height="44.333333333333343"/>
+                                        <rect key="frame" x="30" y="27.666666666666689" width="220" height="44.333333333333343"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="220" id="5MY-lA-EYe"/>
                                         </constraints>
@@ -56,8 +56,13 @@
                             <constraint firstItem="Rda-l7-hc1" firstAttribute="centerX" secondItem="U0K-SW-4ec" secondAttribute="centerX" id="s6x-Co-CO6"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="PlanetARium" id="Brl-zS-gKQ"/>
-                    <navigationItem key="navigationItem" id="iqi-dg-1y1"/>
+                    <navigationItem key="navigationItem" id="iqi-dg-1y1">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="q1K-q0-lEA">
+                            <connections>
+                                <segue destination="Zct-LL-3e1" kind="presentation" id="HmS-q7-M8r"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="lowLightWarning" destination="Rda-l7-hc1" id="vzK-tM-GDC"/>
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
@@ -71,21 +76,21 @@
                     </connections>
                 </pinchGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1952.1739130434785" y="73.660714285714278"/>
+            <point key="canvasLocation" x="2893.5999999999999" y="73.152709359605907"/>
         </scene>
         <!--Planet Details Controller-->
         <scene sceneID="8lZ-GG-5kB">
             <objects>
                 <viewController storyboardIdentifier="PlanetDetails" modalTransitionStyle="crossDissolve" modalPresentationStyle="pageSheet" id="Zct-LL-3e1" customClass="PlanetDetailsController" customModule="PocketPlanetARium" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="CKJ-co-Yxg">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="CKJ-co-Yxg">
+                        <rect key="frame" x="0.0" y="0.0" width="812" height="375"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="bWl-5y-AHu" userLabel="Main Stack">
-                                <rect key="frame" x="20" y="20" width="335" height="684"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="bWl-5y-AHu" userLabel="Main Stack">
+                                <rect key="frame" x="64" y="20" width="728" height="260"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zuz-Zc-OBd" userLabel="Planet Title View">
-                                        <rect key="frame" x="0.0" y="0.0" width="335" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="728" height="60"/>
                                         <subviews>
                                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="We4-dF-vYt" userLabel="Close Button">
                                                 <rect key="frame" x="0.0" y="18" width="24" height="24"/>
@@ -107,7 +112,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QA6-6G-Qqu">
-                                                <rect key="frame" x="0.0" y="14.333333333333334" width="335" height="31.333333333333329"/>
+                                                <rect key="frame" x="0.0" y="14.333333333333334" width="728" height="31.333333333333329"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="24"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -124,17 +129,17 @@
                                             <constraint firstItem="We4-dF-vYt" firstAttribute="leading" secondItem="zuz-Zc-OBd" secondAttribute="leading" id="x8p-6j-SPc"/>
                                         </constraints>
                                     </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dwk-qX-0mN" userLabel="Sub Stack">
-                                        <rect key="frame" x="0.0" y="68" width="335" height="616"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dwk-qX-0mN" userLabel="Sub Stack">
+                                        <rect key="frame" x="0.0" y="68" width="728" height="192"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="NkC-rC-PWD" userLabel="Inner Stack">
-                                                <rect key="frame" x="0.0" y="0.0" width="335" height="192"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="NkC-rC-PWD" userLabel="Inner Stack">
+                                                <rect key="frame" x="0.0" y="0.0" width="728" height="192"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1lr-Gx-rW1" userLabel="Planet View">
-                                                        <rect key="frame" x="0.0" y="0.0" width="163.66666666666666" height="192"/>
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1lr-Gx-rW1" userLabel="Planet View">
+                                                        <rect key="frame" x="0.0" y="0.0" width="237.33333333333334" height="192"/>
                                                         <subviews>
-                                                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="XKF-x8-rri">
-                                                                <rect key="frame" x="0.0" y="14.333333333333329" width="163.66666666666666" height="163.33333333333337"/>
+                                                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XKF-x8-rri">
+                                                                <rect key="frame" x="0.0" y="14.333333333333329" width="237.33333333333334" height="163.33333333333337"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="XKF-x8-rri" secondAttribute="height" multiplier="1:1" id="1Y3-jl-YPK"/>
@@ -149,59 +154,71 @@
                                                             <constraint firstItem="XKF-x8-rri" firstAttribute="centerX" secondItem="1lr-Gx-rW1" secondAttribute="centerX" id="n2z-sP-TgA"/>
                                                         </constraints>
                                                     </view>
-                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="24" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="42C-Uu-nzs">
-                                                        <rect key="frame" x="171.66666666666663" y="0.0" width="163.33333333333337" height="192"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <prototypes>
-                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="statCell" id="aBg-lJ-bk4" customClass="PlanetStatsCell" customModule="PocketPlanetARium" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="28" width="163.33333333333337" height="24"/>
-                                                                <autoresizingMask key="autoresizingMask"/>
-                                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aBg-lJ-bk4" id="y9X-vd-hvP">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="163.33333333333337" height="24"/>
-                                                                    <autoresizingMask key="autoresizingMask"/>
-                                                                    <subviews>
-                                                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TAx-pJ-LGA" userLabel="Stat Stack">
-                                                                            <rect key="frame" x="0.0" y="3" width="163.33333333333334" height="18.333333333333332"/>
-                                                                            <subviews>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" text="Stat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YZf-MW-zWA">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="18.333333333333332"/>
-                                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                    <constraints>
-                                                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="90" id="osB-jq-8Fe"/>
-                                                                                    </constraints>
-                                                                                    <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="14"/>
-                                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                    <nil key="highlightedColor"/>
-                                                                                </label>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hbb-1N-jnQ">
-                                                                                    <rect key="frame" x="90" y="0.0" width="73.333333333333314" height="18.333333333333332"/>
-                                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
-                                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                    <nil key="highlightedColor"/>
-                                                                                </label>
-                                                                            </subviews>
-                                                                        </stackView>
-                                                                    </subviews>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="trailing" secondItem="TAx-pJ-LGA" secondAttribute="trailing" id="QVi-g5-hUU"/>
-                                                                        <constraint firstItem="TAx-pJ-LGA" firstAttribute="leading" secondItem="y9X-vd-hvP" secondAttribute="leading" id="e2I-sO-ylb"/>
-                                                                        <constraint firstItem="TAx-pJ-LGA" firstAttribute="centerY" secondItem="y9X-vd-hvP" secondAttribute="centerY" id="i22-of-sjs"/>
-                                                                    </constraints>
-                                                                </tableViewCellContentView>
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cnO-9c-Gz9" userLabel="Planet Table View">
+                                                        <rect key="frame" x="245.33333333333331" y="0.0" width="237.33333333333331" height="192"/>
+                                                        <subviews>
+                                                            <tableView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="24" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="42C-Uu-nzs">
+                                                                <rect key="frame" x="0.0" y="0.0" width="237.33333333333334" height="192"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <connections>
-                                                                    <outlet property="stat" destination="YZf-MW-zWA" id="wnf-FL-UGL"/>
-                                                                    <outlet property="value" destination="hbb-1N-jnQ" id="hAF-9k-sRh"/>
-                                                                </connections>
-                                                            </tableViewCell>
-                                                        </prototypes>
-                                                    </tableView>
-                                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YFz-nP-B0b" userLabel="Planet Details View">
-                                                        <rect key="frame" x="335" y="0.0" width="0.0" height="192"/>
+                                                                <prototypes>
+                                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="statCell" id="aBg-lJ-bk4" customClass="PlanetStatsCell" customModule="PocketPlanetARium" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="28" width="237.33333333333334" height="24"/>
+                                                                        <autoresizingMask key="autoresizingMask"/>
+                                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aBg-lJ-bk4" id="y9X-vd-hvP">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="237.33333333333334" height="24"/>
+                                                                            <autoresizingMask key="autoresizingMask"/>
+                                                                            <subviews>
+                                                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TAx-pJ-LGA" userLabel="Stat Stack">
+                                                                                    <rect key="frame" x="0.0" y="3" width="237.33333333333334" height="18.333333333333332"/>
+                                                                                    <subviews>
+                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" text="Stat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YZf-MW-zWA">
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="90" height="18.333333333333332"/>
+                                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                            <constraints>
+                                                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="90" id="osB-jq-8Fe"/>
+                                                                                            </constraints>
+                                                                                            <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="14"/>
+                                                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                            <nil key="highlightedColor"/>
+                                                                                        </label>
+                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hbb-1N-jnQ">
+                                                                                            <rect key="frame" x="90.000000000000014" y="0.0" width="147.33333333333337" height="18.333333333333332"/>
+                                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                            <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
+                                                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                            <nil key="highlightedColor"/>
+                                                                                        </label>
+                                                                                    </subviews>
+                                                                                </stackView>
+                                                                            </subviews>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="trailing" secondItem="TAx-pJ-LGA" secondAttribute="trailing" id="QVi-g5-hUU"/>
+                                                                                <constraint firstItem="TAx-pJ-LGA" firstAttribute="leading" secondItem="y9X-vd-hvP" secondAttribute="leading" id="e2I-sO-ylb"/>
+                                                                                <constraint firstItem="TAx-pJ-LGA" firstAttribute="centerY" secondItem="y9X-vd-hvP" secondAttribute="centerY" id="i22-of-sjs"/>
+                                                                            </constraints>
+                                                                        </tableViewCellContentView>
+                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <connections>
+                                                                            <outlet property="stat" destination="YZf-MW-zWA" id="wnf-FL-UGL"/>
+                                                                            <outlet property="value" destination="hbb-1N-jnQ" id="hAF-9k-sRh"/>
+                                                                        </connections>
+                                                                    </tableViewCell>
+                                                                </prototypes>
+                                                            </tableView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstItem="42C-Uu-nzs" firstAttribute="leading" secondItem="cnO-9c-Gz9" secondAttribute="leading" id="8bo-Ak-XlX"/>
+                                                            <constraint firstAttribute="trailing" secondItem="42C-Uu-nzs" secondAttribute="trailing" id="OTC-o2-FXt"/>
+                                                            <constraint firstItem="42C-Uu-nzs" firstAttribute="top" secondItem="cnO-9c-Gz9" secondAttribute="top" id="YRC-oO-aKU"/>
+                                                            <constraint firstAttribute="bottom" secondItem="42C-Uu-nzs" secondAttribute="bottom" id="peH-B4-Qc8"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YFz-nP-B0b" userLabel="Planet Details View">
+                                                        <rect key="frame" x="490.66666666666657" y="0.0" width="237.33333333333331" height="192"/>
                                                         <subviews>
                                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" text="This planet is magnificent!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWt-TX-aMc">
-                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="18.333333333333332"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="237.33333333333334" height="18.333333333333332"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -223,10 +240,10 @@
                                                 </constraints>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yrs-3o-8rA" userLabel="Planet Details Landscape View">
-                                                <rect key="frame" x="0.0" y="200" width="335" height="416"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="728" height="0.0"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" text="This planet is magnificent!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfU-en-dNF" userLabel="Planet Details Label">
-                                                        <rect key="frame" x="0.0" y="20" width="335" height="18.333333333333329"/>
+                                                        <rect key="frame" x="0.0" y="20" width="728" height="18.333333333333329"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -265,9 +282,31 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kX9-Rn-dqL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2950.7246376811595" y="73.660714285714278"/>
+            <point key="canvasLocation" x="3892" y="73.152709359605907"/>
+        </scene>
+        <!--PlanetARium-->
+        <scene sceneID="yfh-zl-o3d">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="efQ-Rk-48S" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="PlanetARium" id="Brl-zS-gKQ"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="UCh-1V-ADQ">
+                        <rect key="frame" x="0.0" y="0.0" width="812" height="32"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BV1-FR-VrT" kind="relationship" relationship="rootViewController" id="sSf-XU-Zr9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xNe-3X-sKL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1951.2" y="73.152709359605907"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="HmS-q7-M8r"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="multiply" catalog="system" width="128" height="111"/>
         <systemColor name="systemBackgroundColor">
