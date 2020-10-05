@@ -167,21 +167,14 @@ class PlanetARiumController: UIViewController {
             }
 
             controller.delegate = self
-            controller.planetTitle = tappedPlanet.getName()
-
-            controller.planetStats = "Radius:\t\(tappedPlanet.getRadius())\n"
-            controller.planetStats += "Axial Tilt:\t\(K.radToDeg(tappedPlanet.getTilt().z)) deg F\n"
-            controller.planetStats += "1 Day:\t\(tappedPlanet.getRotationSpeed()) sec\n"
-            controller.planetStats += "Category: \n"
-            controller.planetStats += "Category: \n"
-            controller.planetStats += "Category: \n"
-            controller.planetStats += "Category: \n"
-            controller.planetStats += "Category: \n"
-            controller.planetStats += "Category: \n"
-            controller.planetStats += "Category: \n"
-
-            
-            controller.planetDetails = "\(tappedPlanet.getName()) is a planet in the solar system. Marvel at its grandeur..."
+            controller.planet = Planet(name: tappedPlanet.getName(),
+                                       type: tappedPlanet.getType(),
+                                       radius: 1,
+                                       tilt: SCNVector3(x: 0, y: 0, z: 0),
+                                       position: SCNVector3(x: 0, y: 0, z: -1),
+                                       rotationSpeed: 20,
+                                       labelColor: .clear,
+                                       details: tappedPlanet.getDetails())            
         }
     }
 }

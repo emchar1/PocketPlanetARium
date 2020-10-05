@@ -14,49 +14,62 @@ protocol PlanetDetailsControllerDelegate {
 }
 
 class PlanetDetailsController: UIViewController, SCNSceneRendererDelegate {
-    @IBOutlet weak var sceneView: SCNView!
-    @IBOutlet weak var planetView: UIView!
     @IBOutlet weak var planetTitleLabel: UILabel!
-    @IBOutlet weak var planetStatsLabel: UILabel!
+    @IBOutlet weak var sceneView: SCNView!
+    @IBOutlet weak var planetStatsTV: UITableView!
     @IBOutlet weak var planetDetailsLabel: UILabel!
+    @IBOutlet weak var planetDetailsLandscapeLabel: UILabel!
     
-    var planetTitle = "Planet Title"
-    var planetStats = "Planet Stats"
-    var planetDetails = "Planet Details"
+    var planet: Planet?
     var delegate: PlanetDetailsControllerDelegate?
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
-        planetTitleLabel.text = planetTitle
-        planetStatsLabel.text = planetStats
-        planetDetailsLabel.text = planetDetails
-
-        setupPlanetView()
         
+        planetStatsTV.delegate = self
+        planetStatsTV.dataSource = self
+
+        guard let planet = planet else {
+            print("No planet found!")
+            return
+        }
+
+        setupPlanetView(for: planet)
     }
+    
     
     override func viewDidDisappear(_ animated: Bool) {
         delegate?.didDismiss(self)
     }
     
-    func setupPlanetView() {
-        let scene = SCNScene()
+    func setupPlanetView(for planet: Planet) {
+        //Setup labels
+        planetTitleLabel.text = planet.getName()
+        planetDetailsLabel.text = planet.getDetails().details
+        planetDetailsLandscapeLabel.text = planet.getDetails().details
 
-        let planet = Planet(name: planetTitle, type: .planet, radius: 1, tilt: SCNVector3(x: 0, y: 0, z: 0), position: SCNVector3(x: 0, y: 0, z: -1), rotationSpeed: 20, labelColor: .clear)
-                
+        //Planet customization
+        planet.animate()
+        
         if planet.getName() == "Saturn" {
             planet.addRings(imageFileName: "saturn_rings2", innerRadius: planet.getRadius() * 1.1, outerRadius: planet.getRadius() * 2.3)
         }
-        
-        planet.animate()
 
+        if planet.getType() == .sun {
+            planet.addParticles()
+        }
+
+        let scene = SCNScene()
         sceneView.delegate = self
         sceneView.allowsCameraControl = true
         sceneView.autoenablesDefaultLighting = true
         sceneView.scene = scene
-        scene.rootNode.addChildNode(planet.getOrbitalCenterNode())
+        scene.rootNode.addChildNode(planet.getNode())
+    }
+    
+    @IBAction func closePressed(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     
@@ -77,3 +90,29 @@ class PlanetDetailsController: UIViewController, SCNSceneRendererDelegate {
 //    }
 
 }
+
+
+
+class PlanetStatsCell: UITableViewCell {
+    @IBOutlet weak var stat: UILabel!
+    @IBOutlet weak var value: UILabel!
+}
+
+extension PlanetDetailsController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return planet?.getDetails().stats.count ?? 8
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "statCell", for: indexPath) as! PlanetStatsCell
+        
+        if let planet = planet, let stat = PlanetStats(rawValue: indexPath.row) {
+            let statString = "\(stat):"
+            cell.stat.text = statString.capitalized
+            cell.value.text = planet.getDetails().stats[indexPath.row]
+        }
+
+        return cell
+    }
+}
+

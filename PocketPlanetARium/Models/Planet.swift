@@ -29,6 +29,7 @@ struct Planet {
     private let name: String
     private let type: PlanetType
     private let radius: Float
+    private var details: PlanetDetails
 
     //Planet properties
     private let node: SCNNode
@@ -61,7 +62,7 @@ struct Planet {
         - orbitalCenterRotationSpeed: time it takes planet to complete one revolution around its orbital center.
         - labelColor: color of the planet label
      */
-    init(name: String, type: PlanetType, radius: Float, tilt: SCNVector3, position: SCNVector3, rotationSpeed: TimeInterval, orbitalCenterTilt: SCNVector3, orbitalCenterPosition: SCNVector3, orbitalCenterRotationSpeed: TimeInterval?, labelColor: UIColor) {
+    init(name: String, type: PlanetType, radius: Float, tilt: SCNVector3, position: SCNVector3, rotationSpeed: TimeInterval, orbitalCenterTilt: SCNVector3, orbitalCenterPosition: SCNVector3, orbitalCenterRotationSpeed: TimeInterval?, labelColor: UIColor, details: PlanetDetails) {
         self.name = name
         self.type = type
         self.radius = radius
@@ -71,6 +72,7 @@ struct Planet {
         self.orbitalCenterRotationSpeed = orbitalCenterRotationSpeed
         self.labelColor = labelColor
         self.labelSize = 0.05 * radius + 0.005 * abs(position.z)
+        self.details = details
 
         //Set up planet
         let planet = SCNSphere(radius: CGFloat(radius))
@@ -117,7 +119,7 @@ struct Planet {
         - rotationSpeed: time in seconds to complete one rotation around a planet's axis
         - labelColor: color of the planet label
      */
-    init(name: String, type: PlanetType, radius: Float, tilt: SCNVector3, position: SCNVector3, rotationSpeed: TimeInterval, labelColor: UIColor) {
+    init(name: String, type: PlanetType, radius: Float, tilt: SCNVector3, position: SCNVector3, rotationSpeed: TimeInterval, labelColor: UIColor, details: PlanetDetails) {
         self.init(name: name,
                   type: type,
                   radius: radius,
@@ -127,7 +129,8 @@ struct Planet {
                   orbitalCenterTilt: SCNVector3(x: 0, y: 0, z: 0),
                   orbitalCenterPosition: position,
                   orbitalCenterRotationSpeed: nil,
-                  labelColor: labelColor)
+                  labelColor: labelColor,
+                  details: details)
     }
     
     
@@ -156,6 +159,7 @@ struct Planet {
     func getName() -> String { return name }
     func getType() -> PlanetType { return type }
     func getRadius() -> Float { return radius }
+    func getDetails() -> PlanetDetails { return details }
     func getNode() -> SCNNode { return node }
     func getTilt() -> SCNVector3 { return tilt }
     func getRotationSpeed() -> TimeInterval { return rotationSpeed }

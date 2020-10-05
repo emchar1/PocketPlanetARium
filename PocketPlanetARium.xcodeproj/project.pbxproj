@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EA2BCCA425180317007A13F5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2BCCA325180317007A13F5 /* Constants.swift */; };
+		EA40E9B0252ADFFF00726425 /* PlanetDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA40E9AF252ADFFF00726425 /* PlanetDetails.swift */; };
 		EA43CB55252669D300102879 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA43CB54252669D300102879 /* SettingsView.swift */; };
 		EA57EA7325281F0D00FC2323 /* PlanetPeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA57EA7225281F0D00FC2323 /* PlanetPeekView.swift */; };
 		EA58D013251F3D79007A8DB5 /* PlanetDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA58D012251F3D79007A8DB5 /* PlanetDetailsController.swift */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		EA2BCCA325180317007A13F5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		EA40E9AF252ADFFF00726425 /* PlanetDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetDetails.swift; sourceTree = "<group>"; };
 		EA43CB54252669D300102879 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		EA57EA7225281F0D00FC2323 /* PlanetPeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetPeekView.swift; sourceTree = "<group>"; };
 		EA58D012251F3D79007A8DB5 /* PlanetDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetDetailsController.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 			children = (
 				EA2BCCA325180317007A13F5 /* Constants.swift */,
 				EA5B0C0A2510677E00B1E910 /* Planet.swift */,
+				EA40E9AF252ADFFF00726425 /* PlanetDetails.swift */,
 				EAF7BEA825203CAE00C0D1A6 /* PlanetGroup.swift */,
 				EAC1F4CF25149BD30097521A /* PlanetARium.swift */,
 				EA89D9D6251D621D002B82F3 /* SunParticles.scn */,
@@ -194,6 +197,7 @@
 				EA57EA7325281F0D00FC2323 /* PlanetPeekView.swift in Sources */,
 				EA58D013251F3D79007A8DB5 /* PlanetDetailsController.swift in Sources */,
 				EAF7BEA925203CAE00C0D1A6 /* PlanetGroup.swift in Sources */,
+				EA40E9B0252ADFFF00726425 /* PlanetDetails.swift in Sources */,
 				EA43CB55252669D300102879 /* SettingsView.swift in Sources */,
 				EAC1F4D025149BD30097521A /* PlanetARium.swift in Sources */,
 				EA5B0BF7251055B300B1E910 /* AppDelegate.swift in Sources */,

@@ -146,7 +146,16 @@ struct PlanetARium {
                         tilt: SCNVector3(x: 0, y: 0, z: 0),
                         position: SCNVector3(0, 0, -0.2),
                         rotationSpeed: earthDay * 27,
-                        labelColor: #colorLiteral(red: 0.9960784314, green: 0.6784313725, blue: 0.4784313725, alpha: 1))
+                        labelColor: #colorLiteral(red: 0.9960784314, green: 0.6784313725, blue: 0.4784313725, alpha: 1),
+                        details: PlanetDetails(stats: [PlanetStats.day.rawValue : "1",
+                                                       PlanetStats.distance.rawValue : "2",
+                                                       PlanetStats.gravity.rawValue : "3",
+                                                       PlanetStats.mass.rawValue : "4",
+                                                       PlanetStats.moons.rawValue : "5",
+                                                       PlanetStats.order.rawValue : "6",
+                                                       PlanetStats.radius.rawValue : "7",
+                                                       PlanetStats.year.rawValue : "8"],
+                                               details: "This planet is magnificent!"))
 
         guard let sun = planets.getPlanet(withName: "Sun") else {
             print("Sun not found when trying to addPlanets")
@@ -165,7 +174,16 @@ struct PlanetARium {
                         orbitalCenterTilt: SCNVector3(x: 0, y: 0, z: K.degToRad(7)),
                         orbitalCenterPosition: sun.getNode().position,
                         orbitalCenterRotationSpeed: earthYear * 0.24,
-                        labelColor: #colorLiteral(red: 0.7803640962, green: 0.7803606391, blue: 0.7846102715, alpha: 1))
+                        labelColor: #colorLiteral(red: 0.7803640962, green: 0.7803606391, blue: 0.7846102715, alpha: 1),
+                        details: PlanetDetails(stats: [PlanetStats.day.rawValue : "1",
+                                                       PlanetStats.distance.rawValue : "2",
+                                                       PlanetStats.gravity.rawValue : "3",
+                                                       PlanetStats.mass.rawValue : "4",
+                                                       PlanetStats.moons.rawValue : "5",
+                                                       PlanetStats.order.rawValue : "6",
+                                                       PlanetStats.radius.rawValue : "7",
+                                                       PlanetStats.year.rawValue : "8"],
+                                               details: "This planet is magnificent!"))
         
         addPlanetHelper(name: "Venus",
                         type: PlanetType.planet,
@@ -176,7 +194,16 @@ struct PlanetARium {
                         orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(25), z: K.degToRad(3.4)),
                         orbitalCenterPosition: sun.getNode().position,
                         orbitalCenterRotationSpeed: earthYear * 0.62,
-                        labelColor: #colorLiteral(red: 0.9863802791, green: 0.8649248481, blue: 0.6479948163, alpha: 1))
+                        labelColor: #colorLiteral(red: 0.9863802791, green: 0.8649248481, blue: 0.6479948163, alpha: 1),
+                        details: PlanetDetails(stats: [PlanetStats.day.rawValue : "1",
+                                                       PlanetStats.distance.rawValue : "2",
+                                                       PlanetStats.gravity.rawValue : "3",
+                                                       PlanetStats.mass.rawValue : "4",
+                                                       PlanetStats.moons.rawValue : "5",
+                                                       PlanetStats.order.rawValue : "6",
+                                                       PlanetStats.radius.rawValue : "7",
+                                                       PlanetStats.year.rawValue : "8"],
+                                               details: "This planet is magnificent!"))
         
         //Easter egg nested Venus surface skin.
         if let venus = planets.getPlanet(withName: "Venus") {
@@ -189,7 +216,8 @@ struct PlanetARium {
                             orbitalCenterTilt: venus.getOrbitalCenterTilt(),
                             orbitalCenterPosition: sun.getNode().position,
                             orbitalCenterRotationSpeed: venus.getOrbitalCenterRotationSpeed(),
-                            labelColor: UIColor.clear)
+                            labelColor: UIColor.clear,
+                            details: venus.getDetails())
         }
         
         addPlanetHelper(name: "Earth",
@@ -201,7 +229,16 @@ struct PlanetARium {
                         orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(50), z: 0),
                         orbitalCenterPosition: sun.getNode().position,
                         orbitalCenterRotationSpeed: earthYear,
-                        labelColor: #colorLiteral(red: 0.364506036, green: 0.4846500158, blue: 0.1734416783, alpha: 1))
+                        labelColor: #colorLiteral(red: 0.364506036, green: 0.4846500158, blue: 0.1734416783, alpha: 1),
+                        details: PlanetDetails(stats: [PlanetStats.day.rawValue : "1",
+                                                       PlanetStats.distance.rawValue : "2",
+                                                       PlanetStats.gravity.rawValue : "3",
+                                                       PlanetStats.mass.rawValue : "4",
+                                                       PlanetStats.moons.rawValue : "5",
+                                                       PlanetStats.order.rawValue : "6",
+                                                       PlanetStats.radius.rawValue : "7",
+                                                       PlanetStats.year.rawValue : "8"],
+                                               details: "This planet is magnificent!"))
         
         //Add earth's moon.
         if let earth = planets.getPlanet(withName: "Earth") {
@@ -216,7 +253,16 @@ struct PlanetARium {
                           orbitalCenterTilt: moonCheck == nil ? SCNVector3(x: 0, y:0, z: K.degToRad(5.1)) : moonCheck!.getOrbitalCenterNode().eulerAngles,
                           orbitalCenterPosition: earth.getNode().position,
                           orbitalCenterRotationSpeed: earthDay * 27,
-                          labelColor: #colorLiteral(red: 0.7616128325, green: 0.7565351129, blue: 0.7696220279, alpha: 1))
+                          labelColor: #colorLiteral(red: 0.7616128325, green: 0.7565351129, blue: 0.7696220279, alpha: 1),
+                          details: PlanetDetails(stats: [PlanetStats.day.rawValue : "1",
+                                                         PlanetStats.distance.rawValue : "2",
+                                                         PlanetStats.gravity.rawValue : "3",
+                                                         PlanetStats.mass.rawValue : "4",
+                                                         PlanetStats.moons.rawValue : "5",
+                                                         PlanetStats.order.rawValue : "6",
+                                                         PlanetStats.radius.rawValue : "7",
+                                                         PlanetStats.year.rawValue : "8"],
+                                                 details: "This planet is magnificent!"))
 
             if let moon = planets.getPlanet(withName: "Moon") {
                 earth.addSatellite(moon)
@@ -232,7 +278,16 @@ struct PlanetARium {
                         orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(70), z: K.degToRad(1.9)),
                         orbitalCenterPosition: sun.getNode().position,
                         orbitalCenterRotationSpeed: earthYear * 1.88,
-                        labelColor: #colorLiteral(red: 0.8029935956, green: 0.4123460054, blue: 0.2786666751, alpha: 1))
+                        labelColor: #colorLiteral(red: 0.8029935956, green: 0.4123460054, blue: 0.2786666751, alpha: 1),
+                        details: PlanetDetails(stats: [PlanetStats.day.rawValue : "1",
+                                                       PlanetStats.distance.rawValue : "2",
+                                                       PlanetStats.gravity.rawValue : "3",
+                                                       PlanetStats.mass.rawValue : "4",
+                                                       PlanetStats.moons.rawValue : "5",
+                                                       PlanetStats.order.rawValue : "6",
+                                                       PlanetStats.radius.rawValue : "7",
+                                                       PlanetStats.year.rawValue : "8"],
+                                               details: "This planet is magnificent!"))
         
         addPlanetHelper(name: "Jupiter",
                         type: PlanetType.planet,
@@ -243,7 +298,16 @@ struct PlanetARium {
                         orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(100), z: K.degToRad(1.3)),
                         orbitalCenterPosition: sun.getNode().position,
                         orbitalCenterRotationSpeed: earthYear * 11.87,
-                        labelColor: #colorLiteral(red: 0.6988996863, green: 0.6137880087, blue: 0.5267551541, alpha: 1))
+                        labelColor: #colorLiteral(red: 0.6988996863, green: 0.6137880087, blue: 0.5267551541, alpha: 1),
+                        details: PlanetDetails(stats: [PlanetStats.day.rawValue : "1",
+                                                       PlanetStats.distance.rawValue : "2",
+                                                       PlanetStats.gravity.rawValue : "3",
+                                                       PlanetStats.mass.rawValue : "4",
+                                                       PlanetStats.moons.rawValue : "5",
+                                                       PlanetStats.order.rawValue : "6",
+                                                       PlanetStats.radius.rawValue : "7",
+                                                       PlanetStats.year.rawValue : "8"],
+                                               details: "This planet is magnificent!"))
         
         addPlanetHelper(name: "Saturn",
                         type: PlanetType.planet,
@@ -254,7 +318,16 @@ struct PlanetARium {
                         orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(150), z: K.degToRad(2.5)),
                         orbitalCenterPosition: sun.getNode().position,
                         orbitalCenterRotationSpeed: earthYear * 29.44,
-                        labelColor: #colorLiteral(red: 0.6580071449, green: 0.6360285878, blue: 0.521181643, alpha: 1))
+                        labelColor: #colorLiteral(red: 0.6580071449, green: 0.6360285878, blue: 0.521181643, alpha: 1),
+                        details: PlanetDetails(stats: [PlanetStats.day.rawValue : "1",
+                                                       PlanetStats.distance.rawValue : "2",
+                                                       PlanetStats.gravity.rawValue : "3",
+                                                       PlanetStats.mass.rawValue : "4",
+                                                       PlanetStats.moons.rawValue : "5",
+                                                       PlanetStats.order.rawValue : "6",
+                                                       PlanetStats.radius.rawValue : "7",
+                                                       PlanetStats.year.rawValue : "8"],
+                                               details: "This planet is magnificent!"))
         
         if let saturn = planets.getPlanet(withName: "Saturn") {
             saturn.addRings(imageFileName: "saturn_rings2", innerRadius: saturn.getRadius() * 1.1, outerRadius: saturn.getRadius() * 2.3)
@@ -269,7 +342,16 @@ struct PlanetARium {
                         orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(180), z: K.degToRad(0.8)),
                         orbitalCenterPosition: sun.getNode().position,
                         orbitalCenterRotationSpeed: earthYear * 83.81,
-                        labelColor: #colorLiteral(red: 0.6661632061, green: 0.8760991096, blue: 0.9032817483, alpha: 1))
+                        labelColor: #colorLiteral(red: 0.6661632061, green: 0.8760991096, blue: 0.9032817483, alpha: 1),
+                        details: PlanetDetails(stats: [PlanetStats.day.rawValue : "1",
+                                                       PlanetStats.distance.rawValue : "2",
+                                                       PlanetStats.gravity.rawValue : "3",
+                                                       PlanetStats.mass.rawValue : "4",
+                                                       PlanetStats.moons.rawValue : "5",
+                                                       PlanetStats.order.rawValue : "6",
+                                                       PlanetStats.radius.rawValue : "7",
+                                                       PlanetStats.year.rawValue : "8"],
+                                               details: "This planet is magnificent!"))
         
         if let uranus = planets.getPlanet(withName: "Uranus") {
             uranus.addRings(imageFileName: "noimg", innerRadius: uranus.getRadius() * 2, outerRadius: uranus.getRadius() * 2)
@@ -284,18 +366,36 @@ struct PlanetARium {
                         orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(195), z: K.degToRad(1.8)),
                         orbitalCenterPosition: sun.getNode().position,
                         orbitalCenterRotationSpeed: earthYear * 163.84,
-                        labelColor: #colorLiteral(red: 0.2331839204, green: 0.4608405828, blue: 0.8007237315, alpha: 1))
+                        labelColor: #colorLiteral(red: 0.2331839204, green: 0.4608405828, blue: 0.8007237315, alpha: 1),
+                        details: PlanetDetails(stats: [PlanetStats.day.rawValue : "1",
+                                                       PlanetStats.distance.rawValue : "2",
+                                                       PlanetStats.gravity.rawValue : "3",
+                                                       PlanetStats.mass.rawValue : "4",
+                                                       PlanetStats.moons.rawValue : "5",
+                                                       PlanetStats.order.rawValue : "6",
+                                                       PlanetStats.radius.rawValue : "7",
+                                                       PlanetStats.year.rawValue : "8"],
+                                               details: "This planet is magnificent!"))
         
         addPlanetHelper(name: "Pluto",
                         type: PlanetType.planet,
-                        radius: earthRadius,// * 0.19,
+                        radius: earthRadius,
                         tilt: SCNVector3(x: 0, y: 0, z: K.degToRad(122)),
                         position: SCNVector3(x: 0, y: 0, z: earthDistance * 39.48),
                         rotationSpeed: earthDay * 6.38,
                         orbitalCenterTilt: SCNVector3(x: 0, y: -K.degToRad(200), z: K.degToRad(17.2)),
                         orbitalCenterPosition: sun.getNode().position,
                         orbitalCenterRotationSpeed: earthYear * 248.1,
-                        labelColor: #colorLiteral(red: 0.8180410266, green: 0.6948351264, blue: 0.5951495767, alpha: 1))
+                        labelColor: #colorLiteral(red: 0.8180410266, green: 0.6948351264, blue: 0.5951495767, alpha: 1),
+                        details: PlanetDetails(stats: [PlanetStats.day.rawValue : "1",
+                                                       PlanetStats.distance.rawValue : "2",
+                                                       PlanetStats.gravity.rawValue : "3",
+                                                       PlanetStats.mass.rawValue : "4",
+                                                       PlanetStats.moons.rawValue : "5",
+                                                       PlanetStats.order.rawValue : "6",
+                                                       PlanetStats.radius.rawValue : "7",
+                                                       PlanetStats.year.rawValue : "8"],
+                                               details: "This planet is magnificent!"))
         
         showLabels(labelsOn)
     }
@@ -313,7 +413,7 @@ struct PlanetARium {
         - orbitalCenterRotationSpeed: time it takes planet to complete one revolution around its orbital center.
         - labelColor: color of the planet label
      */
-    private mutating func addPlanetHelper(name: String, type: PlanetType, radius: Float, tilt: SCNVector3, position: SCNVector3, rotationSpeed: TimeInterval, orbitalCenterTilt: SCNVector3, orbitalCenterPosition: SCNVector3, orbitalCenterRotationSpeed: TimeInterval?, labelColor: UIColor) {
+    private mutating func addPlanetHelper(name: String, type: PlanetType, radius: Float, tilt: SCNVector3, position: SCNVector3, rotationSpeed: TimeInterval, orbitalCenterTilt: SCNVector3, orbitalCenterPosition: SCNVector3, orbitalCenterRotationSpeed: TimeInterval?, labelColor: UIColor, details: PlanetDetails) {
         
         let planet = planets.getPlanet(withName: name)
         let lastTilt = planet == nil ? tilt : planet!.getNode().eulerAngles
@@ -328,7 +428,8 @@ struct PlanetARium {
                                        orbitalCenterTilt: lastOrbitalCenterTilt,
                                        orbitalCenterPosition: orbitalCenterPosition,
                                        orbitalCenterRotationSpeed: orbitalCenterRotationSpeed,
-                                       labelColor: labelColor))
+                                       labelColor: labelColor,
+                                       details: details))
     }
     
     /**
@@ -341,7 +442,7 @@ struct PlanetARium {
         - rotationSpeed: time in seconds to complete one rotation around a planet's axis
         - labelColor: color of the planet label
      */
-    private mutating func addPlanetHelper(name: String, type: PlanetType, radius: Float, tilt: SCNVector3, position: SCNVector3, rotationSpeed: TimeInterval, labelColor: UIColor) {
+    private mutating func addPlanetHelper(name: String, type: PlanetType, radius: Float, tilt: SCNVector3, position: SCNVector3, rotationSpeed: TimeInterval, labelColor: UIColor, details: PlanetDetails) {
         
         let planet = planets.getPlanet(withName: name)
         let lastTilt = planet == nil ? tilt : planet!.getNode().eulerAngles
@@ -352,7 +453,8 @@ struct PlanetARium {
                                        tilt: lastTilt,
                                        position: position,
                                        rotationSpeed: rotationSpeed,
-                                       labelColor: labelColor))
+                                       labelColor: labelColor,
+                                       details: details))
     }
     
     /**
