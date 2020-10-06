@@ -176,7 +176,9 @@ class PlanetARiumController: UIViewController {
 
 extension PlanetARiumController: PlanetDetailsControllerDelegate {
     func didDismiss(_ controller: PlanetDetailsController) {
-        planetarium.resumeAnimation(to: scaleValue)
+        if !settingsButtons.isPaused {
+            planetarium.resumeAnimation(to: scaleValue)
+        }
     }
 }
 
