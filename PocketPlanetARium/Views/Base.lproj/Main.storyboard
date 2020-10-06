@@ -286,7 +286,7 @@
     <resources>
         <image name="multiply" catalog="system" width="128" height="111"/>
         <namedColor name="BlueGrey900">
-            <color red="0.15778431300000001" green="0.19574198130000001" blue="0.2156933248" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.15800000727176666" green="0.19599999487400055" blue="0.21600000560283661" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
