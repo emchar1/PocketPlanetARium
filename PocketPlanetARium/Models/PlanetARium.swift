@@ -150,7 +150,7 @@ struct PlanetARium {
                         details: PlanetDetails(stats: [PlanetStats.day.rawValue : "648 hrs",
                                                        PlanetStats.distance.rawValue : "--",
                                                        PlanetStats.gravity.rawValue : "274 m/s2",
-                                                       PlanetStats.mass.rawValue : "2.0 x 1030 kg",
+                                                       PlanetStats.mass.rawValue : "2.0x1030 kg",
                                                        PlanetStats.moons.rawValue : "0",
                                                        PlanetStats.order.rawValue : "--",
                                                        PlanetStats.radius.rawValue : "432,690 mi",

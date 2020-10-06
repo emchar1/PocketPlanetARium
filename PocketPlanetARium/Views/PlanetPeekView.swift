@@ -11,9 +11,9 @@ import UIKit
 class PlanetPeekView: UIView {
     
     var planet: Planet?
-    let planetTitle = UILabel()
-    let planetDetails = UILabel()
-    let instructions = UILabel()
+    var planetTitle = UILabel()
+    var planetDetails = UILabel()
+    var instructions = UILabel()
     
     
     // MARK: - Initialization
@@ -42,26 +42,30 @@ class PlanetPeekView: UIView {
         NSLayoutConstraint.activate([widthAnchor.constraint(equalToConstant: frame.width),
                                      heightAnchor.constraint(equalToConstant: frame.height)])
         
-        planetTitle.backgroundColor = .clear
-        planetTitle.font = UIFont(name: "Futura", size: 18.0)
-        planetTitle.textAlignment = .center
-        planetTitle.textColor = .white
-        planetTitle.frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.size.width, height: 40)
-        addSubview(planetTitle)
+        setupLabel(&planetTitle,
+                   frame: CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.size.width, height: 40),
+                   font: UIFont(name: "Futura", size: 18.0),
+                   alignment: .center)
         
-        planetDetails.backgroundColor = .clear
-        planetDetails.font = UIFont(name: "Futura", size: 14.0)
-        planetDetails.numberOfLines = 0
-        planetDetails.textColor = .white
-        planetDetails.frame = CGRect(x: frame.origin.x + 8, y: 40, width: frame.size.width - 8, height: frame.size.height - 80)
-        addSubview(planetDetails)
-
-        instructions.backgroundColor = .clear
-        instructions.font = UIFont(name: "Futura Medium Italic", size: 14.0)
-        instructions.textAlignment = .center
-        instructions.textColor = .white
-        instructions.frame = CGRect(x: frame.origin.x, y: frame.size.height - 40, width: frame.size.width, height: 40)
-        addSubview(instructions)
+        setupLabel(&planetDetails,
+                   frame: CGRect(x: frame.origin.x + 8, y: 40, width: frame.size.width - 8, height: frame.size.height - 80),
+                   font: UIFont(name: "Futura", size: 14.0))
+        
+        setupLabel(&instructions,
+                   frame: CGRect(x: frame.origin.x, y: frame.size.height - 40, width: frame.size.width, height: 40),
+                   font: UIFont(name: "Futura Medium Italic", size: 14.0),
+                   alignment: .center)
+    }
+    
+    private func setupLabel(_ label: inout UILabel, frame: CGRect, font: UIFont?, alignment: NSTextAlignment = .left) {
+        label.backgroundColor = .clear
+        label.font = font
+        label.textColor = .white
+        label.textAlignment = alignment
+        label.numberOfLines = 0
+        label.frame = frame
+        
+        addSubview(label)
     }
     
     

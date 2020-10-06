@@ -171,17 +171,17 @@
                                                                                     <rect key="frame" x="0.0" y="3" width="163.33333333333334" height="18.333333333333332"/>
                                                                                     <subviews>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" text="Stat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YZf-MW-zWA">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="90" height="18.333333333333332"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="75" height="18.333333333333332"/>
                                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                             <constraints>
-                                                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="90" id="osB-jq-8Fe"/>
+                                                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="75" id="osB-jq-8Fe"/>
                                                                                             </constraints>
                                                                                             <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="14"/>
                                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hbb-1N-jnQ">
-                                                                                            <rect key="frame" x="90" y="0.0" width="73.333333333333314" height="18.333333333333332"/>
+                                                                                            <rect key="frame" x="75" y="0.0" width="88.333333333333314" height="18.333333333333332"/>
                                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                             <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
                                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
