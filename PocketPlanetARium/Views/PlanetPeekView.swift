@@ -36,7 +36,7 @@ class PlanetPeekView: UIView {
     private func setupView() {
         clipsToBounds = true
         layer.cornerRadius = 10
-        backgroundColor = UIColor(rgb: 0x212121)
+        backgroundColor = UIColor(named: "BlueGrey900") ?? .gray
 
         translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([widthAnchor.constraint(equalToConstant: frame.width),

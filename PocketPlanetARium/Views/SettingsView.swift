@@ -74,17 +74,17 @@ class SettingsView: UIView {
         
         setupButton(&resetAnimationButton,
                     systemName: "arrow.counterclockwise",
-                    backgroundColor: UIColor(rgb: 0x667C89),
+                    backgroundColor: UIColor(named: "BlueGrey500") ?? .gray,
                     targetAction: #selector(resetAnimationPressed))
 
         setupButton(&playPauseButton,
                     systemName: "pause.fill",
-                    backgroundColor: UIColor(rgb: 0x93A4AD),
+                    backgroundColor: UIColor(named: "BlueGrey300") ?? .gray,
                     targetAction: #selector(playPausePressed))
 
         setupButton(&labelsButton,
                     systemName: "textformat",
-                    backgroundColor: UIColor(rgb: 0xD0D8DC),
+                    backgroundColor: UIColor(named: "BlueGrey100") ?? .gray,
                     targetAction: #selector(labelsPressed))
 
         settingsButton.frame = CGRect(x: buttonHomePosition.x,
@@ -92,7 +92,7 @@ class SettingsView: UIView {
                                       width: SettingsView.buttonSize,
                                       height: SettingsView.buttonSize)
         settingsButton.setBackgroundImage(UIImage(named: "settings"), for: .normal)
-        settingsButton.tintColor = .white
+        settingsButton.tintColor = UIColor(named: "BlueGrey000") ?? .gray
         settingsButton.layer.shadowOpacity = 0.4
         settingsButton.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
         settingsButton.alpha = K.masterAlpha

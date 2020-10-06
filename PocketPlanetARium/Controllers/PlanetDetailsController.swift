@@ -106,13 +106,33 @@ extension PlanetDetailsController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "statCell", for: indexPath) as! PlanetStatsCell
         
-        if let planet = planet, let stat = PlanetStats(rawValue: indexPath.row) {
+        if let planet = planet,
+           let stat = PlanetStats(rawValue: indexPath.row),
+           let value = planet.getDetails().stats[indexPath.row] {
+
             let statString = "\(stat):"
-//            let value = planet.getDetails().stats[indexPath.row]!
 
             cell.stat.text = statString.capitalized
-            cell.value.text = planet.getDetails().stats[indexPath.row]
-//            cell.value.setAttributedTextWithSubscripts(text: value, indicesOfSubscripts: [0, 1, 2], setAsSuperscript: true)
+            cell.value.text = value
+            
+            if stat == .order, value.count > 2 {
+                cell.value.setAttributedTextWithSubscripts(text: value,
+                                                           indicesOfSubscripts: [value.count - 1, value.count - 2],
+                                                           setAsSuperscript: true)
+            }
+
+            if stat == .mass, value.count > 5 {
+                cell.value.setAttributedTextWithSubscripts(text: value,
+                                                           indicesOfSubscripts: [value.count - 4, value.count - 5],
+                                                           setAsSuperscript: true)
+            }
+            
+            if stat == .gravity, value.count > 1 {
+                cell.value.setAttributedTextWithSubscripts(text: value,
+                                                           indicesOfSubscripts: [value.count - 1],
+                                                           setAsSuperscript: true)
+            }
+
         }
 
         return cell
