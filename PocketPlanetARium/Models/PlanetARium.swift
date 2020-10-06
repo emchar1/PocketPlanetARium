@@ -147,14 +147,14 @@ struct PlanetARium {
                         position: SCNVector3(0, 0, -0.2),
                         rotationSpeed: earthDay * 27,
                         labelColor: #colorLiteral(red: 0.9960784314, green: 0.6784313725, blue: 0.4784313725, alpha: 1),
-                        details: PlanetDetails(stats: [PlanetStats.day.rawValue : "1",
-                                                       PlanetStats.distance.rawValue : "2.5 x 1024 tons",
-                                                       PlanetStats.gravity.rawValue : "3",
-                                                       PlanetStats.mass.rawValue : "4",
-                                                       PlanetStats.moons.rawValue : "5",
-                                                       PlanetStats.order.rawValue : "6",
-                                                       PlanetStats.radius.rawValue : "7",
-                                                       PlanetStats.year.rawValue : "8"],
+                        details: PlanetDetails(stats: [PlanetStats.day.rawValue : "648 hrs",
+                                                       PlanetStats.distance.rawValue : "--",
+                                                       PlanetStats.gravity.rawValue : "274 m/s2",
+                                                       PlanetStats.mass.rawValue : "2.0 x 1030 kg",
+                                                       PlanetStats.moons.rawValue : "0",
+                                                       PlanetStats.order.rawValue : "--",
+                                                       PlanetStats.radius.rawValue : "432,690 mi",
+                                                       PlanetStats.year.rawValue : "--"],
                                                details: "This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent! This planet is magnificent!"))
 
         guard let sun = planets.getPlanet(withName: "Sun") else {
@@ -180,7 +180,7 @@ struct PlanetARium {
                                                        PlanetStats.gravity.rawValue : "3",
                                                        PlanetStats.mass.rawValue : "4",
                                                        PlanetStats.moons.rawValue : "5",
-                                                       PlanetStats.order.rawValue : "6",
+                                                       PlanetStats.order.rawValue : "1st",
                                                        PlanetStats.radius.rawValue : "7",
                                                        PlanetStats.year.rawValue : "8"],
                                                details: "This planet is magnificent!"))
@@ -200,7 +200,7 @@ struct PlanetARium {
                                                        PlanetStats.gravity.rawValue : "3",
                                                        PlanetStats.mass.rawValue : "4",
                                                        PlanetStats.moons.rawValue : "5",
-                                                       PlanetStats.order.rawValue : "6",
+                                                       PlanetStats.order.rawValue : "2nd",
                                                        PlanetStats.radius.rawValue : "7",
                                                        PlanetStats.year.rawValue : "8"],
                                                details: "This planet is magnificent!"))
@@ -235,7 +235,7 @@ struct PlanetARium {
                                                        PlanetStats.gravity.rawValue : "3",
                                                        PlanetStats.mass.rawValue : "4",
                                                        PlanetStats.moons.rawValue : "5",
-                                                       PlanetStats.order.rawValue : "6",
+                                                       PlanetStats.order.rawValue : "3rd",
                                                        PlanetStats.radius.rawValue : "7",
                                                        PlanetStats.year.rawValue : "8"],
                                                details: "This planet is magnificent!"))
@@ -259,7 +259,7 @@ struct PlanetARium {
                                                          PlanetStats.gravity.rawValue : "3",
                                                          PlanetStats.mass.rawValue : "4",
                                                          PlanetStats.moons.rawValue : "5",
-                                                         PlanetStats.order.rawValue : "6",
+                                                         PlanetStats.order.rawValue : "-",
                                                          PlanetStats.radius.rawValue : "7",
                                                          PlanetStats.year.rawValue : "8"],
                                                  details: "This planet is magnificent!"))
@@ -284,7 +284,7 @@ struct PlanetARium {
                                                        PlanetStats.gravity.rawValue : "3",
                                                        PlanetStats.mass.rawValue : "4",
                                                        PlanetStats.moons.rawValue : "5",
-                                                       PlanetStats.order.rawValue : "6",
+                                                       PlanetStats.order.rawValue : "4th",
                                                        PlanetStats.radius.rawValue : "7",
                                                        PlanetStats.year.rawValue : "8"],
                                                details: "This planet is magnificent!"))
@@ -304,7 +304,7 @@ struct PlanetARium {
                                                        PlanetStats.gravity.rawValue : "3",
                                                        PlanetStats.mass.rawValue : "4",
                                                        PlanetStats.moons.rawValue : "5",
-                                                       PlanetStats.order.rawValue : "6",
+                                                       PlanetStats.order.rawValue : "5th",
                                                        PlanetStats.radius.rawValue : "7",
                                                        PlanetStats.year.rawValue : "8"],
                                                details: "This planet is magnificent!"))
@@ -324,7 +324,7 @@ struct PlanetARium {
                                                        PlanetStats.gravity.rawValue : "3",
                                                        PlanetStats.mass.rawValue : "4",
                                                        PlanetStats.moons.rawValue : "5",
-                                                       PlanetStats.order.rawValue : "6",
+                                                       PlanetStats.order.rawValue : "6th",
                                                        PlanetStats.radius.rawValue : "7",
                                                        PlanetStats.year.rawValue : "8"],
                                                details: "This planet is magnificent!"))
@@ -348,7 +348,7 @@ struct PlanetARium {
                                                        PlanetStats.gravity.rawValue : "3",
                                                        PlanetStats.mass.rawValue : "4",
                                                        PlanetStats.moons.rawValue : "5",
-                                                       PlanetStats.order.rawValue : "6",
+                                                       PlanetStats.order.rawValue : "7th",
                                                        PlanetStats.radius.rawValue : "7",
                                                        PlanetStats.year.rawValue : "8"],
                                                details: "This planet is magnificent!"))
@@ -372,7 +372,7 @@ struct PlanetARium {
                                                        PlanetStats.gravity.rawValue : "3",
                                                        PlanetStats.mass.rawValue : "4",
                                                        PlanetStats.moons.rawValue : "5",
-                                                       PlanetStats.order.rawValue : "6",
+                                                       PlanetStats.order.rawValue : "8th",
                                                        PlanetStats.radius.rawValue : "7",
                                                        PlanetStats.year.rawValue : "8"],
                                                details: "This planet is magnificent!"))
@@ -392,7 +392,7 @@ struct PlanetARium {
                                                        PlanetStats.gravity.rawValue : "3",
                                                        PlanetStats.mass.rawValue : "4",
                                                        PlanetStats.moons.rawValue : "5",
-                                                       PlanetStats.order.rawValue : "6",
+                                                       PlanetStats.order.rawValue : "9th",
                                                        PlanetStats.radius.rawValue : "7",
                                                        PlanetStats.year.rawValue : "8"],
                                                details: "This planet is magnificent!"))

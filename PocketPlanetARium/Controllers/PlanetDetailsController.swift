@@ -100,7 +100,7 @@ class PlanetStatsCell: UITableViewCell {
 
 extension PlanetDetailsController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return planet?.getDetails().stats.count ?? 20
+        return planet?.getDetails().stats.count ?? 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -108,8 +108,11 @@ extension PlanetDetailsController: UITableViewDelegate, UITableViewDataSource {
         
         if let planet = planet, let stat = PlanetStats(rawValue: indexPath.row) {
             let statString = "\(stat):"
+//            let value = planet.getDetails().stats[indexPath.row]!
+
             cell.stat.text = statString.capitalized
             cell.value.text = planet.getDetails().stats[indexPath.row]
+//            cell.value.setAttributedTextWithSubscripts(text: value, indicesOfSubscripts: [0, 1, 2], setAsSuperscript: true)
         }
 
         return cell

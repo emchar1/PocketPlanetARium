@@ -15,6 +15,8 @@ class PlanetARiumController: UIViewController {
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var lowLightWarning: UIView!
     
+    var peekView: PlanetPeekView?
+
     //Settings buttons
     let settingsButtons = SettingsView()
     let padding: CGFloat = 20
@@ -52,7 +54,7 @@ class PlanetARiumController: UIViewController {
         
         sceneView.delegate = self
         sceneView.autoenablesDefaultLighting = true
-        sceneView.showsStatistics = true
+//        sceneView.showsStatistics = true
 
         lowLightWarning.alpha = 0.0
         lowLightWarning.clipsToBounds = true
@@ -72,7 +74,7 @@ class PlanetARiumController: UIViewController {
     }
     
     
-    // MARK: - Gesture Interaction
+    // MARK: - Zoom Zoom
     
     @IBAction func handlePinch(_ sender: UIPinchGestureRecognizer) {
         switch sender.state {
@@ -96,7 +98,13 @@ class PlanetARiumController: UIViewController {
 
             handlePlayPause(for: settingsButtons)
         }
+        
+        //Prevents peekView getting stuck when trying to pinch instead.
+        peekView?.removeFromSuperview()
     }
+    
+    
+    // MARK: - Planet Details Peek n Pop
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else {
@@ -114,36 +122,20 @@ class PlanetARiumController: UIViewController {
             }
 
             self.tappedPlanet = tappedPlanet
-            
 
+            //Prevents touching two planets in tandem while one finger is held down.
+            peekView?.removeFromSuperview()
             
-            
-            
-            //*******BETA****This will eventually handle a peek and pop with animation
-            //make this pop up a little window with planet stats and "press harder to view more"
-            planetarium.showLabels(true, forPlanet: tappedPlanet)
-            
-            
-            
-            
-
+            peekView = PlanetPeekView(with: tappedPlanet)
+            peekView!.show(in: view, at: location)
         }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let tappedPlanet = tappedPlanet {
-            planetarium.showLabels(forPlanet: tappedPlanet)
-        }
-        
-        self.tappedPlanet = nil
+        peekView?.removeFromSuperview()
+        tappedPlanet = nil
     }
 
-    
-    
-    
-    
-    
-//**************BETA****Start to work on info graph for each planet.
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first,
               view.traitCollection.forceTouchCapability == .available,
@@ -154,8 +146,11 @@ class PlanetARiumController: UIViewController {
 
         K.addHapticFeedback(withStyle: .heavy)
         planetarium.pauseAnimation()
-        planetarium.showLabels(forPlanet: tappedPlanet)
+        
         performSegue(withIdentifier: "PlanetDetailsSegue", sender: nil)
+
+        peekView?.removeFromSuperview()
+        tappedPlanet = nil
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -179,26 +174,9 @@ class PlanetARiumController: UIViewController {
     }
 }
 
-
-
-
-
-
-
-// MARK: - Planet Details Controller Delegate
-
 extension PlanetARiumController: PlanetDetailsControllerDelegate {
     func didDismiss(_ controller: PlanetDetailsController) {
-        //Reset label to it's current state
-        if let tappedPlanet = tappedPlanet {
-            planetarium.showLabels(forPlanet: tappedPlanet)
-        }
-        
-        if !settingsButtons.isPaused {
-            planetarium.resumeAnimation(to: scaleValue)
-        }
-        
-        self.tappedPlanet = nil
+        planetarium.resumeAnimation(to: scaleValue)
     }
 }
 
@@ -248,7 +226,6 @@ extension PlanetARiumController: ARSCNViewDelegate {
             }
         }
     }
-
 
 }
 
