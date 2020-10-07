@@ -10,14 +10,13 @@ import UIKit
 
 struct SettingsSubButton {
     var button = UIButton()
-    var yPosition: CGFloat
+    var xyPosition: CGFloat
     
-    func getYPositionInView(_ view: UIView) -> CGFloat {
-        return view.frame.height - (yPosition + 1) * SettingsView.buttonSize - yPosition * SettingsView.buttonSpacing
-    }
-    
-    func getXPositionInView(_ view: UIView) -> CGFloat {
-        return view.frame.width - (yPosition + 1) * SettingsView.buttonSize - yPosition * SettingsView.buttonSpacing
+    func getPositionInView(_ view: UIView) -> CGPoint {
+        let offset = (xyPosition + 1) * SettingsView.buttonSize + xyPosition * SettingsView.buttonSpacing
+        
+        return CGPoint(x: view.frame.width - offset,
+                       y: view.frame.height - offset)
     }
 }
 
@@ -44,9 +43,9 @@ class SettingsView: UIView {
     
     //Buttons
     var settingsButton = UIButton()
-    var labelsButton = SettingsSubButton(yPosition: 1)
-    var playPauseButton = SettingsSubButton(yPosition: 2)
-    var resetAnimationButton = SettingsSubButton(yPosition: 3)
+    var labelsButton = SettingsSubButton(xyPosition: 1)
+    var playPauseButton = SettingsSubButton(xyPosition: 2)
+    var resetAnimationButton = SettingsSubButton(xyPosition: 3)
         
     var delegate: SettingsViewDelegate?
     
@@ -151,9 +150,9 @@ class SettingsView: UIView {
                 self.playPauseButton.button.frame.origin.x = self.buttonHomePosition.x
                 self.resetAnimationButton.button.frame.origin.x = self.buttonHomePosition.x
 
-                self.labelsButton.button.frame.origin.y = self.labelsButton.getYPositionInView(self)
-                self.playPauseButton.button.frame.origin.y = self.playPauseButton.getYPositionInView(self)
-                self.resetAnimationButton.button.frame.origin.y = self.resetAnimationButton.getYPositionInView(self)
+                self.labelsButton.button.frame.origin.y = self.labelsButton.getPositionInView(self).y
+                self.playPauseButton.button.frame.origin.y = self.playPauseButton.getPositionInView(self).y
+                self.resetAnimationButton.button.frame.origin.y = self.resetAnimationButton.getPositionInView(self).y
             }, completion: nil)
         }
         else {
@@ -162,9 +161,9 @@ class SettingsView: UIView {
                 self.playPauseButton.button.frame.origin.y = self.buttonHomePosition.y
                 self.resetAnimationButton.button.frame.origin.y = self.buttonHomePosition.y
 
-                self.labelsButton.button.frame.origin.x = self.labelsButton.getXPositionInView(self)
-                self.playPauseButton.button.frame.origin.x = self.playPauseButton.getXPositionInView(self)
-                self.resetAnimationButton.button.frame.origin.x = self.resetAnimationButton.getXPositionInView(self)
+                self.labelsButton.button.frame.origin.x = self.labelsButton.getPositionInView(self).x
+                self.playPauseButton.button.frame.origin.x = self.playPauseButton.getPositionInView(self).x
+                self.resetAnimationButton.button.frame.origin.x = self.resetAnimationButton.getPositionInView(self).x
             }, completion: nil)
         }
     }
@@ -193,14 +192,14 @@ class SettingsView: UIView {
                 self.resetAnimationButton.button.alpha = K.masterAlpha
                 
                 if UIDevice.current.orientation == .portrait {
-                    self.labelsButton.button.frame.origin.y = self.labelsButton.getYPositionInView(self)
-                    self.playPauseButton.button.frame.origin.y = self.playPauseButton.getYPositionInView(self)
-                    self.resetAnimationButton.button.frame.origin.y = self.resetAnimationButton.getYPositionInView(self)
+                    self.labelsButton.button.frame.origin.y = self.labelsButton.getPositionInView(self).y
+                    self.playPauseButton.button.frame.origin.y = self.playPauseButton.getPositionInView(self).y
+                    self.resetAnimationButton.button.frame.origin.y = self.resetAnimationButton.getPositionInView(self).y
                 }
                 else {
-                    self.labelsButton.button.frame.origin.x = self.labelsButton.getXPositionInView(self)
-                    self.playPauseButton.button.frame.origin.x = self.playPauseButton.getXPositionInView(self)
-                    self.resetAnimationButton.button.frame.origin.x = self.resetAnimationButton.getXPositionInView(self)
+                    self.labelsButton.button.frame.origin.x = self.labelsButton.getPositionInView(self).x
+                    self.playPauseButton.button.frame.origin.x = self.playPauseButton.getPositionInView(self).x
+                    self.resetAnimationButton.button.frame.origin.x = self.resetAnimationButton.getPositionInView(self).x
                 }
             } completion: { _ in
                 self.handlePlayPause()
