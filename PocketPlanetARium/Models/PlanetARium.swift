@@ -155,7 +155,7 @@ struct PlanetARium {
                                                        PlanetStats.order.rawValue : "--",
                                                        PlanetStats.radius.rawValue : "432,690 mi",
                                                        PlanetStats.year.rawValue : "--"],
-                                               details: "The Sun is the star at the center of the Solar System. It is a nearly perfect sphere of hot plasma, heated to incandescence by nuclear fusion reactions in its core, radiating the energy mainly as light and infrared radiation. It is by far the most important source of energy for life on Earth. Its diameter is about 864,000 miles, or 109 times that of Earth, and its mass is about 330,000 times that of Earth. It accounts for about 99.86% of the total mass of the Solar System. Roughly three quarters of the Sun's mass consists of hydrogen (~73%); the rest is mostly helium (~25%), with much smaller quantities of heavier elements, including oxygen, carbon, neon, and iron."))
+                                               details: "The Sun is the star at the center of the Solar System. It is a nearly perfect sphere of hot plasma, heated to incandescence by nuclear fusion reactions in its core, radiating the energy mainly as light and infrared radiation. It is by far the most important source of energy for life on Earth. Its diameter is about 864,000 miles, or 109 times that of Earth, and its mass is about 330,000 times that of Earth. It accounts for about 99.9% of the total mass of the Solar System. Roughly three quarters of the Sun's mass consists of hydrogen, 73%; the rest is mostly helium, 25%, and much smaller quantities of oxygen, carbon, neon, and iron."))
 
         guard let sun = planets.getPlanet(withName: "Sun") else {
             print("Sun not found when trying to addPlanets")
@@ -183,7 +183,7 @@ struct PlanetARium {
                                                        PlanetStats.order.rawValue : "1st",
                                                        PlanetStats.radius.rawValue : "1,516 mi",
                                                        PlanetStats.year.rawValue : "88 days"],
-                                               details: "Mercury is the smallest and innermost planet in the Solar System. Its orbit around the Sun takes 87.97 days, the shortest of all the planets in the Solar System. It is named after the Greek god Hermes, translated into Latin Mercurius Mercury, god of commerce, messenger of the gods, mediator between gods and mortals. Mercury's surface appears heavily cratered and is similar in appearance to the Moon's, indicating that it has been geologically inactive for billions of years. Having almost no atmosphere to retain heat, it has surface temperatures that vary diurnally more than on any other planet in the Solar System, ranging from −280°F at night to 800°F during the day."))
+                                               details: "Mercury is the smallest and innermost planet in the Solar System. Its orbit around the Sun takes 88 days, the shortest of all the planets in the Solar System. It is named after the Greek god Hermes, translated into Latin Mercurius Mercury, god of commerce, messenger of the gods, mediator between gods and mortals. Mercury's surface appears heavily cratered and is similar in appearance to the Moon's, indicating that it has been geologically inactive for billions of years. Having almost no atmosphere to retain heat, it has surface temperatures that vary diurnally more than on any other planet in the Solar System, ranging from −280°F at night to 800°F during the day."))
         
         addPlanetHelper(name: "Venus",
                         type: PlanetType.planet,
@@ -203,11 +203,11 @@ struct PlanetARium {
                                                        PlanetStats.order.rawValue : "2nd",
                                                        PlanetStats.radius.rawValue : "3,761 mi",
                                                        PlanetStats.year.rawValue : "225 days"],
-                                               details: "Venus is the second planet from the Sun. It is named after the Roman goddess of love and beauty. As the second brightest natural object in the night sky after the Moon, Venus can cast shadows and can be, on rare occasion, visible to the naked eye in broad daylight. Venus is a terrestrial planet and is sometimes called Earth's sister planet because of their similar size, mass, and proximity to the Sun. Venus has by far the hottest surface of any planet in the Solar System, with a mean temperature of 867°F, even though Mercury is closer to the Sun. Venus is shrouded by an opaque layer of highly reflective clouds of sulfuric acid, preventing its surface from being seen from space. Have you found its surface yet?"))
+                                               details: "Venus is the second planet from the Sun. It is named after the Roman goddess of love and beauty. As the second brightest natural object in the night sky after the Moon, Venus can cast shadows and can be, on rare occasion, visible to the naked eye in broad daylight. Venus is a terrestrial planet and is sometimes called Earth's sister planet because of their similar size, mass, and proximity to the Sun. Venus has by far the hottest surface of any planet in the Solar System, with a mean temperature of 867°F, even though Mercury is closer to the Sun. Venus is shrouded by an opaque layer of highly reflective clouds of sulfuric acid, preventing its surface from being seen from space. Have you found Venus' surface yet?"))
         
         //Easter egg nested Venus surface skin.
         if let venus = planets.getPlanet(withName: "Venus") {
-            addPlanetHelper(name: "Venus_Surface",
+            addPlanetHelper(name: "Venus Surface",
                             type: PlanetType.planet,
                             radius: venus.getRadius() * 0.25,
                             tilt: venus.getTilt(),
@@ -262,7 +262,7 @@ struct PlanetARium {
                                                          PlanetStats.order.rawValue : "--",
                                                          PlanetStats.radius.rawValue : "1,079 mi",
                                                          PlanetStats.year.rawValue : "27 days"],
-                                                 details: "The Moon is an astronomical body orbiting Earth and is the planet's only natural satellite. It is the fifth largest satellite in the Solar System, and by far the largest among planetary satellites relative to the size of the planet that it orbits. The Moon is, after Jupiter's satellite Io, the second densest satellite in the Solar System among those whose densities are known. The Moon is thought to have formed about 4.51 billion years ago, not long after Earth. The most widely accepted explanation is that the Moon formed from the debris left over after a giant impact between Earth and a hypothetical Mars-sized planet. New research of Moon rocks, although not rejecting this hypothesis, suggests that the Moon may be older than previously thought."))
+                                                 details: "The Moon is an astronomical body orbiting Earth and is the planet's only natural satellite. It is the fifth largest satellite in the Solar System, and by far the largest among planetary satellites relative to the size of the planet that it orbits. The Moon is, after Jupiter's satellite Io, the second densest satellite in the Solar System among those whose densities are known. The Moon is thought to have formed about 4.5 billion years ago, not long after Earth. The most widely accepted explanation is that the Moon formed from the debris left over after a giant impact between Earth and a hypothetical Mars-sized planet. New research of Moon rocks, although not rejecting this hypothesis, suggests that the Moon may be older than previously thought."))
 
             if let moon = planets.getPlanet(withName: "Moon") {
                 earth.addSatellite(moon)
@@ -307,7 +307,7 @@ struct PlanetARium {
                                                        PlanetStats.order.rawValue : "5th",
                                                        PlanetStats.radius.rawValue : "44,423 mi",
                                                        PlanetStats.year.rawValue : "4,331 days"],
-                                               details: "Jupiter is the fifth planet from the Sun and the largest in the Solar System. It is a gas giant with a mass 1/1000 that of the Sun, but 2.5 times that of all the other planets in the Solar System combined. Jupiter is one of the brightest objects visible to the naked eye in the night sky, and has been known to ancient civilizations since before recorded history. It is named after the Roman god Jupiter. Its prominent feature, the Great Red Spot is a persistent high pressure region in the atmosphere of Jupiter, producing an anticyclonic storm, the largest in the Solar System."))
+                                               details: "Jupiter is the fifth planet from the Sun and the largest in the Solar System. It is a gas giant with a mass 1/1000 that of the Sun, but 2.5 times that of all the other planets in the Solar System combined. It has the shortest day in the Solar System; a day on Jupiter lasts only 10 hours. Jupiter is one of the brightest objects visible to the naked eye in the night sky, and has been known to ancient civilizations since before recorded history. It is named after the Roman god Jupiter. Its prominent feature, the Great Red Spot is a persistent high pressure region in the atmosphere of Jupiter, producing an anticyclonic storm, the largest in the Solar System."))
         
         addPlanetHelper(name: "Saturn",
                         type: PlanetType.planet,
@@ -395,7 +395,7 @@ struct PlanetARium {
                                                        PlanetStats.order.rawValue : "9th",
                                                        PlanetStats.radius.rawValue : "738 mi",
                                                        PlanetStats.year.rawValue : "90,520 days"],
-                                               details: "Pluto is a dwarf planet in the Kuiper belt, a ring of bodies beyond the orbit of Neptune. It was discovered in 1930 and declared to be the ninth planet from the Sun. After 1992, its status as a planet was questioned following the discovery of several objects of similar size in the Kuiper belt. Consequently, in 2006, it was reclassified as a dwarf planet by the International Astronomical Union. Pluto is the ninth largest and tenth most massive known object directly orbiting the Sun. Pluto is primarily made of ice and rock and is relatively small - 1/6 the mass of the Moon and 1/3 its volume. Light from the Sun takes 5.5 hours to reach Pluto, compared to 8 minutes to reach Earth."))
+                                               details: "Pluto is a dwarf planet in the Kuiper belt, a ring of bodies beyond the orbit of Neptune. It was discovered in 1930 and declared to be the ninth planet from the Sun. In 2006, it was reclassified as a dwarf planet by the International Astronomical Union. Pluto is the ninth largest and tenth most massive known object directly orbiting the Sun. Pluto is primarily made of ice and rock and is relatively small - 1/6 the mass of the Moon and 1/3 its volume. Due to its distance, light from the Sun takes 5.5 hours to reach Pluto, compared to 8 minutes to reach Earth. Furthermore, one year on Pluto is equivalent to 248 years on Earth."))
         
         showLabels(labelsOn)
     }

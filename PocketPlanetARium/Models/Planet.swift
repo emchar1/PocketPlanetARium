@@ -77,7 +77,7 @@ struct Planet {
         //Set up planet
         let planet = SCNSphere(radius: CGFloat(radius))
         let material = SCNMaterial()
-        material.diffuse.contents = UIImage(named: "art.scnassets/" + name.lowercased() + ".jpg") ?? UIColor.white.withAlphaComponent(0.8)
+        material.diffuse.contents = UIImage(named: "art.scnassets/" + name.replacingOccurrences(of: " ", with: "_").lowercased() + ".jpg") ?? UIColor.white.withAlphaComponent(0.8)
         planet.materials = [material]
         
         //Set up planet node. Added a tilt to the y axis as well because of the stupid moon. The other alternative is to edit the moon image in GIMP/PSD.
