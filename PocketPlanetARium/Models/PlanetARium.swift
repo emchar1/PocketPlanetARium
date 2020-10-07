@@ -155,7 +155,7 @@ struct PlanetARium {
                                                        PlanetStats.order.rawValue : "--",
                                                        PlanetStats.radius.rawValue : "432,690 mi",
                                                        PlanetStats.year.rawValue : "--"],
-                                               details: "The Sun is the star at the center of the Solar System. It is a nearly perfect sphere of hot plasma, heated to incandescence by nuclear fusion reactions in its core, radiating the energy mainly as light and infrared radiation. It is by far the most important source of energy for life on Earth. Its diameter is about 1.39 million kilometres (864,000 miles), or 109 times that of Earth, and its mass is about 330,000 times that of Earth. It accounts for about 99.86% of the total mass of the Solar System. Roughly three quarters of the Sun's mass consists of hydrogen (~73%); the rest is mostly helium (~25%), with much smaller quantities of heavier elements, including oxygen, carbon, neon, and iron.\n\n The Sun is a G-type main-sequence star (G2V) based on its spectral class. As such, it is informally and not completely accurately referred to as a yellow dwarf (its light is closer to white than yellow). It formed approximately 4.6 billion years ago from the gravitational collapse of matter within a region of a large molecular cloud. Most of this matter gathered in the center, whereas the rest flattened into an orbiting disk that became the Solar System. The central mass became so hot and dense that it eventually initiated nuclear fusion in its core. It is thought that almost all stars form by this process.\n\nIn its core the Sun currently fuses about 600 million tons of hydrogen into helium every second, converting 4 million tons of matter into energy every second as a result. This energy, which can take between 10,000 and 170,000 years to escape the core, is the source of the Sun's light and heat. When hydrogen fusion in its core has diminished to the point at which the Sun is no longer in hydrostatic equilibrium, its core will undergo a marked increase in density and temperature while its outer layers expand, eventually transforming the Sun into a red giant. It is calculated that the Sun will become sufficiently large to engulf the current orbits of Mercury and Venus, and render Earth uninhabitable – but not for about five billion years. After this, it will shed its outer layers and become a dense type of cooling star known as a white dwarf, and no longer produce energy by fusion, but still glow and give off heat from its previous fusion.\n\nThe enormous effect of the Sun on Earth has been recognized since prehistoric times. The Sun has been regarded by some cultures as a deity. The synodic rotation of Earth and its orbit around the Sun are the basis of solar calendars, one of which is the predominant calendar in use today."))
+                                               details: "The Sun is the star at the center of the Solar System. It is a nearly perfect sphere of hot plasma, heated to incandescence by nuclear fusion reactions in its core, radiating the energy mainly as light and infrared radiation. It is by far the most important source of energy for life on Earth. Its diameter is about 864,000 miles, or 109 times that of Earth, and its mass is about 330,000 times that of Earth. It accounts for about 99.86% of the total mass of the Solar System. Roughly three quarters of the Sun's mass consists of hydrogen (~73%); the rest is mostly helium (~25%), with much smaller quantities of heavier elements, including oxygen, carbon, neon, and iron."))
 
         guard let sun = planets.getPlanet(withName: "Sun") else {
             print("Sun not found when trying to addPlanets")
@@ -183,7 +183,7 @@ struct PlanetARium {
                                                        PlanetStats.order.rawValue : "1st",
                                                        PlanetStats.radius.rawValue : "1,516 mi",
                                                        PlanetStats.year.rawValue : "88 days"],
-                                               details: "This planet is magnificent!"))
+                                               details: "Mercury is the smallest and innermost planet in the Solar System. Its orbit around the Sun takes 87.97 days, the shortest of all the planets in the Solar System. It is named after the Greek god Hermes, translated into Latin Mercurius Mercury, god of commerce, messenger of the gods, mediator between gods and mortals. Mercury's surface appears heavily cratered and is similar in appearance to the Moon's, indicating that it has been geologically inactive for billions of years. Having almost no atmosphere to retain heat, it has surface temperatures that vary diurnally more than on any other planet in the Solar System, ranging from −280°F at night to 800°F during the day."))
         
         addPlanetHelper(name: "Venus",
                         type: PlanetType.planet,
@@ -203,7 +203,7 @@ struct PlanetARium {
                                                        PlanetStats.order.rawValue : "2nd",
                                                        PlanetStats.radius.rawValue : "3,761 mi",
                                                        PlanetStats.year.rawValue : "225 days"],
-                                               details: "This planet is magnificent!"))
+                                               details: "Venus is the second planet from the Sun. It is named after the Roman goddess of love and beauty. As the second brightest natural object in the night sky after the Moon, Venus can cast shadows and can be, on rare occasion, visible to the naked eye in broad daylight. Venus is a terrestrial planet and is sometimes called Earth's sister planet because of their similar size, mass, and proximity to the Sun. Venus has by far the hottest surface of any planet in the Solar System, with a mean temperature of 867°F, even though Mercury is closer to the Sun. Venus is shrouded by an opaque layer of highly reflective clouds of sulfuric acid, preventing its surface from being seen from space. Have you found its surface yet?"))
         
         //Easter egg nested Venus surface skin.
         if let venus = planets.getPlanet(withName: "Venus") {
@@ -238,7 +238,7 @@ struct PlanetARium {
                                                        PlanetStats.order.rawValue : "3rd",
                                                        PlanetStats.radius.rawValue : "3,963 mi",
                                                        PlanetStats.year.rawValue : "365 days"],
-                                               details: "This planet is magnificent!"))
+                                               details: "Home, sweet home! Earth is the third planet from the Sun and the only astronomical object known to harbor life. According to radiometric dating estimation and other evidence, Earth formed over 4.5 billion years ago. Within the first billion years of Earth's history, life appeared in the oceans and began to affect Earth's atmosphere and surface, leading to the proliferation of anaerobic and, later, aerobic organisms. Some geological evidence indicates that life may have arisen as early as 4 billion years ago. Since then, the combination of Earth's distance from the Sun, physical properties and geological history have allowed life to evolve and thrive. Over 99% of all species that ever lived on Earth are extinct."))
         
         //Add earth's moon.
         if let earth = planets.getPlanet(withName: "Earth") {
@@ -262,7 +262,7 @@ struct PlanetARium {
                                                          PlanetStats.order.rawValue : "--",
                                                          PlanetStats.radius.rawValue : "1,079 mi",
                                                          PlanetStats.year.rawValue : "27 days"],
-                                                 details: "This planet is magnificent!"))
+                                                 details: "The Moon is an astronomical body orbiting Earth and is the planet's only natural satellite. It is the fifth largest satellite in the Solar System, and by far the largest among planetary satellites relative to the size of the planet that it orbits. The Moon is, after Jupiter's satellite Io, the second densest satellite in the Solar System among those whose densities are known. The Moon is thought to have formed about 4.51 billion years ago, not long after Earth. The most widely accepted explanation is that the Moon formed from the debris left over after a giant impact between Earth and a hypothetical Mars-sized planet. New research of Moon rocks, although not rejecting this hypothesis, suggests that the Moon may be older than previously thought."))
 
             if let moon = planets.getPlanet(withName: "Moon") {
                 earth.addSatellite(moon)
@@ -287,7 +287,7 @@ struct PlanetARium {
                                                        PlanetStats.order.rawValue : "4th",
                                                        PlanetStats.radius.rawValue : "2,111 mi",
                                                        PlanetStats.year.rawValue : "686 days"],
-                                               details: "This planet is magnificent!"))
+                                               details: "Mars is the fourth planet from the Sun and the second smallest planet in the Solar System, being larger than only Mercury. In English, Mars carries the name of the Roman god of war and is often referred to as the Red Planet. The latter refers to the effect of the iron oxide prevalent on Mars's surface, which gives it a reddish appearance distinctive among the astronomical bodies visible to the naked eye. Mars is a terrestrial planet with a thin atmosphere, with surface features reminiscent of the impact craters of the Moon and the valleys, deserts and polar ice caps of Earth. Mars is the site of Olympus Mons, the largest volcano and highest known mountain on any planet in the Solar System, and of Valles Marineris, one of the largest canyons in the Solar System."))
         
         addPlanetHelper(name: "Jupiter",
                         type: PlanetType.planet,
@@ -307,7 +307,7 @@ struct PlanetARium {
                                                        PlanetStats.order.rawValue : "5th",
                                                        PlanetStats.radius.rawValue : "44,423 mi",
                                                        PlanetStats.year.rawValue : "4,331 days"],
-                                               details: "This planet is magnificent!"))
+                                               details: "Jupiter is the fifth planet from the Sun and the largest in the Solar System. It is a gas giant with a mass 1/1000 that of the Sun, but 2.5 times that of all the other planets in the Solar System combined. Jupiter is one of the brightest objects visible to the naked eye in the night sky, and has been known to ancient civilizations since before recorded history. It is named after the Roman god Jupiter. Its prominent feature, the Great Red Spot is a persistent high pressure region in the atmosphere of Jupiter, producing an anticyclonic storm, the largest in the Solar System."))
         
         addPlanetHelper(name: "Saturn",
                         type: PlanetType.planet,
@@ -327,7 +327,7 @@ struct PlanetARium {
                                                        PlanetStats.order.rawValue : "6th",
                                                        PlanetStats.radius.rawValue : "37,448 mi",
                                                        PlanetStats.year.rawValue : "10,747 days"],
-                                               details: "This planet is magnificent!"))
+                                               details: "Saturn is the sixth planet from the Sun and the second largest in the Solar System, after Jupiter. It is a gas giant with an average radius of about nine times that of Earth. It only has 1/8 the average density of Earth; however, with its larger volume, Saturn is over 95 times more massive. Saturn is named after the Roman god of wealth and agriculture; its astronomical symbol (♄) represents the god's sickle. Wind speeds on Saturn can reach 1,100 mph, higher than on Jupiter, but not as high as those on Neptune. The planet's most famous feature is its prominent ring system, which is composed mostly of ice particles, with a smaller amount of rocky debris and dust."))
         
         if let saturn = planets.getPlanet(withName: "Saturn") {
             saturn.addRings(imageFileName: "saturn_rings2", innerRadius: saturn.getRadius() * 1.1, outerRadius: saturn.getRadius() * 2.3)
@@ -351,7 +351,7 @@ struct PlanetARium {
                                                        PlanetStats.order.rawValue : "7th",
                                                        PlanetStats.radius.rawValue : "15,882 mi",
                                                        PlanetStats.year.rawValue : "30,589 days"],
-                                               details: "This planet is magnificent!"))
+                                               details: "Uranus is the seventh planet from the Sun. Its name is a reference to the Greek god of the sky, Uranus, who, according to Greek mythology, was the grandfather of Zeus and father of Cronus. It has the third largest planetary radius and fourth largest planetary mass in the Solar System. Uranus is similar in composition to Neptune; scientists often classify Uranus and Neptune as ice giants to distinguish them from the other gas giants. It has the coldest planetary atmosphere in the Solar System, with a minimum temperature of −371°F. Uranus has a unique configuration because its axis of rotation is tilted sideways; its north and south poles, therefore, lie where most other planets have their equators."))
         
         if let uranus = planets.getPlanet(withName: "Uranus") {
             uranus.addRings(imageFileName: "noimg", innerRadius: uranus.getRadius() * 2, outerRadius: uranus.getRadius() * 2)
@@ -375,7 +375,7 @@ struct PlanetARium {
                                                        PlanetStats.order.rawValue : "8th",
                                                        PlanetStats.radius.rawValue : "15,338 mi",
                                                        PlanetStats.year.rawValue : "59,800 days"],
-                                               details: "This planet is magnificent!"))
+                                               details: "Neptune is the eighth and farthest known Solar planet from the Sun. In the Solar System, it is the fourth largest planet by diameter, the third most massive planet, and the densest giant planet. Neptune is not visible to the unaided eye and is the only planet in the Solar System found by mathematical prediction rather than by empirical observation. Its largest moon, Triton, was discovered shortly thereafter, though none of the planet's remaining 13 known moons were located telescopically until the 20th century. Neptune's atmosphere has active and visible weather patterns. The planet's southern hemisphere has a Great Dark Spot driven by the strongest sustained winds of any planet in the Solar System, with recorded wind speeds as high as 1,300 mph."))
         
         addPlanetHelper(name: "Pluto",
                         type: PlanetType.planet,
@@ -395,7 +395,7 @@ struct PlanetARium {
                                                        PlanetStats.order.rawValue : "9th",
                                                        PlanetStats.radius.rawValue : "738 mi",
                                                        PlanetStats.year.rawValue : "90,520 days"],
-                                               details: "This planet is magnificent!"))
+                                               details: "Pluto is a dwarf planet in the Kuiper belt, a ring of bodies beyond the orbit of Neptune. It was discovered in 1930 and declared to be the ninth planet from the Sun. After 1992, its status as a planet was questioned following the discovery of several objects of similar size in the Kuiper belt. Consequently, in 2006, it was reclassified as a dwarf planet by the International Astronomical Union. Pluto is the ninth largest and tenth most massive known object directly orbiting the Sun. Pluto is primarily made of ice and rock and is relatively small - 1/6 the mass of the Moon and 1/3 its volume. Light from the Sun takes 5.5 hours to reach Pluto, compared to 8 minutes to reach Earth."))
         
         showLabels(labelsOn)
     }

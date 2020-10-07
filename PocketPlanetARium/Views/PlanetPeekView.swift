@@ -14,6 +14,7 @@ class PlanetPeekView: UIView {
     var planetTitle = UILabel()
     var planetDetails = UILabel()
     var instructions = UILabel()
+    let padding: CGFloat = 10
     
     
     // MARK: - Initialization
@@ -74,11 +75,11 @@ class PlanetPeekView: UIView {
     func show(in superView: UIView, at location: CGPoint) {
         var xCenter: CGFloat = 0 {
             didSet {
-                if xCenter < frame.size.width / 2 {
-                    xCenter = frame.size.width / 2
+                if xCenter < frame.size.width / 2 + padding {
+                    xCenter = frame.size.width / 2 + padding
                 }
-                else if xCenter > superView.frame.size.width - frame.size.width / 2 {
-                    xCenter = superView.frame.size.width - frame.size.width / 2
+                else if xCenter > superView.frame.size.width - frame.size.width / 2 - padding {
+                    xCenter = superView.frame.size.width - frame.size.width / 2 - padding
                 }
                 
             }
@@ -86,18 +87,18 @@ class PlanetPeekView: UIView {
 
         var yCenter: CGFloat = 0 {
             didSet {
-                if yCenter < frame.size.height / 2 {
-                    yCenter = frame.size.height / 2
+                if yCenter < frame.size.height / 2 + padding {
+                    yCenter = frame.size.height / 2 + padding
                 }
-                else if yCenter > superView.frame.size.height {
-                    yCenter = superView.frame.size.height
+                else if yCenter > superView.frame.size.height - padding {
+                    yCenter = superView.frame.size.height - padding
                 }
             }
         }
 
         //Need to set these separately because for some reason it doesn't trigger didSet when set initially.
         xCenter = location.x
-        yCenter = location.y - frame.size.height / 2
+        yCenter = location.y - (frame.size.height / 2) - (3 * padding)
         alpha = 0
         
         superView.addSubview(self)
