@@ -12,7 +12,7 @@ struct PlanetGroup {
     /**
      Dictionary of planets comprising of the planet group.
      */
-    private var planets: [String: Planet] = [:]
+    private var planets: [String : Planet] = [:]
     
     
     /**

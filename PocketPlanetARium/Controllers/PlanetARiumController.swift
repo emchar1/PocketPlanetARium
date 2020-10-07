@@ -235,16 +235,16 @@ extension PlanetARiumController: ARSCNViewDelegate {
 // MARK: - Settings View Delegate
 
 extension PlanetARiumController: SettingsViewDelegate {
-    func settingsView(_ controller: SettingsView, didPressLabelsButton settingsSubButton: SettingsSubButton) {
+    func settingsView(_ controller: SettingsView, didPressLabelsButton settingsSubButton: SettingsSubButton?) {
         planetarium.toggleLabels()
         planetarium.showLabels()
     }
     
-    func settingsView(_ controller: SettingsView, didPressPlayPauseButton settingsSubButton: SettingsSubButton) {
+    func settingsView(_ controller: SettingsView, didPressPlayPauseButton settingsSubButton: SettingsSubButton?) {
         handlePlayPause(for: controller)
     }
     
-    func settingsView(_ controller: SettingsView, didPressResetAnimationButton settingsSubButton: SettingsSubButton) {
+    func settingsView(_ controller: SettingsView, didPressResetAnimationButton settingsSubButton: SettingsSubButton?) {
         sceneView.session.run(ARWorldTrackingConfiguration(), options: [.resetTracking, .removeExistingAnchors])
         planetarium.resetAnimation(withScale: scaleValue, toNode: sceneView)
 
