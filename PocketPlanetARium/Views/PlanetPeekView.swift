@@ -49,11 +49,11 @@ class PlanetPeekView: UIView {
                    alignment: .center)
         
         setupLabel(&planetDetails,
-                   frame: CGRect(x: frame.origin.x + 8, y: 40, width: frame.size.width - 8, height: frame.size.height - 80),
+                   frame: CGRect(x: frame.origin.x + 8, y: 40, width: frame.size.width - 8, height: frame.size.height - 70),
                    font: UIFont(name: "Futura", size: 14.0))
         
         setupLabel(&instructions,
-                   frame: CGRect(x: frame.origin.x, y: frame.size.height - 40, width: frame.size.width, height: 40),
+                   frame: CGRect(x: frame.origin.x, y: frame.size.height - 30, width: frame.size.width, height: 30),
                    font: UIFont(name: "Futura Medium Italic", size: 14.0),
                    alignment: .center)
     }
