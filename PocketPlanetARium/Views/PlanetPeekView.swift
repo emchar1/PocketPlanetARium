@@ -20,7 +20,9 @@ class PlanetPeekView: UIView {
     // MARK: - Initialization
     
     init(with planet: Planet) {
-        super.init(frame: CGRect(x: 0, y: 0, width: 175, height: 200))
+        let width = UIDevice.current.orientation == .portrait ? 175 : 200
+        let height = UIDevice.current.orientation == .portrait ? 200 : 175
+        super.init(frame: CGRect(x: 0, y: 0, width: width, height: height))
 
         self.planet = planet
         planetTitle.text = planet.getName()
@@ -46,7 +48,8 @@ class PlanetPeekView: UIView {
         setupLabel(&planetTitle,
                    frame: CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.size.width, height: 40),
                    font: UIFont(name: "Futura", size: 18.0),
-                   alignment: .center)
+                   alignment: .center,
+                   backgroundColor: UIColor(named: "BlueGrey500") ?? .gray)
         
         setupLabel(&planetDetails,
                    frame: CGRect(x: frame.origin.x + 8, y: 40, width: frame.size.width - 8, height: frame.size.height - 70),
@@ -58,8 +61,8 @@ class PlanetPeekView: UIView {
                    alignment: .center)
     }
     
-    private func setupLabel(_ label: inout UILabel, frame: CGRect, font: UIFont?, alignment: NSTextAlignment = .left) {
-        label.backgroundColor = .clear
+    private func setupLabel(_ label: inout UILabel, frame: CGRect, font: UIFont?, alignment: NSTextAlignment = .left, backgroundColor: UIColor = .clear) {
+        label.backgroundColor = backgroundColor
         label.font = font
         label.textColor = .white
         label.textAlignment = alignment

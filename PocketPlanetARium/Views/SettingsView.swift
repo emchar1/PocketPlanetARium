@@ -15,6 +15,10 @@ struct SettingsSubButton {
     func getYPositionInView(_ view: UIView) -> CGFloat {
         return view.frame.height - (yPosition + 1) * SettingsView.buttonSize - yPosition * SettingsView.buttonSpacing
     }
+    
+    func getXPositionInView(_ view: UIView) -> CGFloat {
+        return view.frame.width - (yPosition + 1) * SettingsView.buttonSize - yPosition * SettingsView.buttonSpacing
+    }
 }
 
 
@@ -30,7 +34,8 @@ class SettingsView: UIView {
     static let buttonSize: CGFloat = 60
     static let buttonSpacing: CGFloat = 10
     var buttonHomePosition: CGPoint {
-        CGPoint(x: self.frame.origin.x, y: self.frame.height - SettingsView.buttonSize)
+//        CGPoint(x: self.frame.origin.x, y: self.frame.height - SettingsView.buttonSize)
+        CGPoint(x: self.frame.width - SettingsView.buttonSize, y: self.frame.height - SettingsView.buttonSize)
     }
 
     //State properties
@@ -51,10 +56,12 @@ class SettingsView: UIView {
     init() {
         super.init(frame: CGRect(x: 0,
                                  y: 0,
-                                 width: SettingsView.buttonSize,
+                                 width: 4 * SettingsView.buttonSize + 3 * SettingsView.buttonSpacing,
                                  height: 4 * SettingsView.buttonSize + 3 * SettingsView.buttonSpacing))
 
         initializeButtons()
+        
+        backgroundColor = .blue
         
         translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([widthAnchor.constraint(equalToConstant: frame.width),
@@ -69,7 +76,12 @@ class SettingsView: UIView {
      Helper function that intializes the settings dial button, resetAnimation, playPause and labels buttons.
      */
     private func initializeButtons() {
-
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(orientationDidChange(_:)),
+                                               name: UIDevice.orientationDidChangeNotification,
+                                               object: nil)
+        
         //The order of adding the button to the subviews MATTER!
         
         setupButton(&resetAnimationButton,
@@ -125,6 +137,39 @@ class SettingsView: UIView {
     }
     
     
+    // MARK: - Device Orientation Change
+    
+    @objc private func orientationDidChange(_ notification: NSNotification) {
+        guard showSettings else {
+            //Only need to reposition if settings are expanded
+            return
+        }
+        
+        if UIDevice.current.orientation == .portrait {
+            UIView.animate(withDuration: 0.25, delay: 0, options: .curveLinear, animations: {
+                self.labelsButton.button.frame.origin.x = self.buttonHomePosition.x
+                self.playPauseButton.button.frame.origin.x = self.buttonHomePosition.x
+                self.resetAnimationButton.button.frame.origin.x = self.buttonHomePosition.x
+
+                self.labelsButton.button.frame.origin.y = self.labelsButton.getYPositionInView(self)
+                self.playPauseButton.button.frame.origin.y = self.playPauseButton.getYPositionInView(self)
+                self.resetAnimationButton.button.frame.origin.y = self.resetAnimationButton.getYPositionInView(self)
+            }, completion: nil)
+        }
+        else {
+            UIView.animate(withDuration: 0.25, delay: 0, options: .curveLinear, animations: {
+                self.labelsButton.button.frame.origin.y = self.buttonHomePosition.y
+                self.playPauseButton.button.frame.origin.y = self.buttonHomePosition.y
+                self.resetAnimationButton.button.frame.origin.y = self.buttonHomePosition.y
+
+                self.labelsButton.button.frame.origin.x = self.labelsButton.getXPositionInView(self)
+                self.playPauseButton.button.frame.origin.x = self.playPauseButton.getXPositionInView(self)
+                self.resetAnimationButton.button.frame.origin.x = self.resetAnimationButton.getXPositionInView(self)
+            }, completion: nil)
+        }
+    }
+    
+    
     // MARK: - Button Presses
     
     @objc private func settingsPressed() {
@@ -139,16 +184,24 @@ class SettingsView: UIView {
 
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn) {
                 self.labelsButton.button.isHidden = false
-                self.labelsButton.button.frame.origin.y = self.labelsButton.getYPositionInView(self)
                 self.labelsButton.button.alpha = K.masterAlpha
 
                 self.playPauseButton.button.isHidden = false
-                self.playPauseButton.button.frame.origin.y = self.playPauseButton.getYPositionInView(self)
                 self.playPauseButton.button.alpha = K.masterAlpha
 
                 self.resetAnimationButton.button.isHidden = false
-                self.resetAnimationButton.button.frame.origin.y = self.resetAnimationButton.getYPositionInView(self)
                 self.resetAnimationButton.button.alpha = K.masterAlpha
+                
+                if UIDevice.current.orientation == .portrait {
+                    self.labelsButton.button.frame.origin.y = self.labelsButton.getYPositionInView(self)
+                    self.playPauseButton.button.frame.origin.y = self.playPauseButton.getYPositionInView(self)
+                    self.resetAnimationButton.button.frame.origin.y = self.resetAnimationButton.getYPositionInView(self)
+                }
+                else {
+                    self.labelsButton.button.frame.origin.x = self.labelsButton.getXPositionInView(self)
+                    self.playPauseButton.button.frame.origin.x = self.playPauseButton.getXPositionInView(self)
+                    self.resetAnimationButton.button.frame.origin.x = self.resetAnimationButton.getXPositionInView(self)
+                }
             } completion: { _ in
                 self.handlePlayPause()
             }
@@ -161,14 +214,20 @@ class SettingsView: UIView {
             }, completion: nil)
 
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut) {
-                self.labelsButton.button.frame.origin.y = self.buttonHomePosition.y
                 self.labelsButton.button.alpha = 0.0
-
-                self.playPauseButton.button.frame.origin.y = self.buttonHomePosition.y
                 self.playPauseButton.button.alpha = 0.0
-
-                self.resetAnimationButton.button.frame.origin.y = self.buttonHomePosition.y
                 self.resetAnimationButton.button.alpha = 0.0
+                
+                if UIDevice.current.orientation == .portrait {
+                    self.labelsButton.button.frame.origin.y = self.buttonHomePosition.y
+                    self.playPauseButton.button.frame.origin.y = self.buttonHomePosition.y
+                    self.resetAnimationButton.button.frame.origin.y = self.buttonHomePosition.y
+                }
+                else {
+                    self.labelsButton.button.frame.origin.x = self.buttonHomePosition.x
+                    self.playPauseButton.button.frame.origin.x = self.buttonHomePosition.x
+                    self.resetAnimationButton.button.frame.origin.x = self.buttonHomePosition.x
+                }
             } completion: { _ in
                 self.labelsButton.button.isHidden = true
                 self.playPauseButton.button.isHidden = true
@@ -195,6 +254,9 @@ class SettingsView: UIView {
 
         delegate?.settingsView(self, didPressPlayPauseButton: playPauseButton)
     }
+    
+    
+    // MARK: - Helper Functions
     
     /**
      Helper function that produces a blinking animation when paused, and toggles the button image.
