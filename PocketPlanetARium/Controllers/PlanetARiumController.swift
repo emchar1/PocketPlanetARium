@@ -54,7 +54,7 @@ class PlanetARiumController: UIViewController {
         
         sceneView.delegate = self
         sceneView.autoenablesDefaultLighting = true
-//        sceneView.showsStatistics = true
+        sceneView.showsStatistics = true
 
         lowLightWarning.alpha = 0.0
         lowLightWarning.clipsToBounds = true
