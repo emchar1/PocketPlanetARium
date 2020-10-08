@@ -50,6 +50,11 @@ class SettingsView: UIView {
                                                             SubButtonType.playPause.rawValue : SettingsSubButton(buttonOrder: 2),
                                                             SubButtonType.resetAnimation.rawValue : SettingsSubButton(buttonOrder: 3)]
     
+    //Constraints
+    var viewWidthAnchor: NSLayoutConstraint?
+    var viewHeightAnchor: NSLayoutConstraint?
+    var lastOrientation: UIDeviceOrientation = .portrait
+    
     //Delegate var
     var delegate: SettingsViewDelegate?
     
@@ -57,17 +62,23 @@ class SettingsView: UIView {
     // MARK: - Initialization
     
     init() {
-        let subButtonsCount = CGFloat(settingsSubButtons.count)
         super.init(frame: CGRect(x: 0,
                                  y: 0,
-                                 width: (subButtonsCount + 1) * SettingsView.buttonSize + subButtonsCount * SettingsView.buttonSpacing,
-                                 height: (subButtonsCount + 1) * SettingsView.buttonSize + subButtonsCount * SettingsView.buttonSpacing))
-
+                                 width: SettingsView.buttonSize,
+                                 height: SettingsView.buttonSize))
+        
         initializeButtons()
         
+        backgroundColor = .blue
+        
+        viewWidthAnchor = widthAnchor.constraint(equalToConstant: frame.width)
+        viewHeightAnchor = heightAnchor.constraint(equalToConstant: frame.height)
         translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([widthAnchor.constraint(equalToConstant: frame.width),
-                                     heightAnchor.constraint(equalToConstant: frame.height)])
+        NSLayoutConstraint.activate([viewWidthAnchor!, viewHeightAnchor!])
+        
+        if UIDevice.current.orientation.isValidInterfaceOrientation {
+            lastOrientation = UIDevice.current.orientation
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -145,27 +156,40 @@ class SettingsView: UIView {
     // MARK: - Device Orientation Change
     
     @objc private func orientationDidChange(_ notification: NSNotification) {
-        guard showSettings else {
-            //Only need to reposition if settings are expanded
+        //Only need to reposition if settings are expanded and device orientation is portrait or landscape only.
+        guard showSettings && UIDevice.current.orientation.isValidInterfaceOrientation else {
             return
         }
         
-        if UIDevice.current.orientation == .portrait {
-            UIView.animate(withDuration: 0.25, delay: 0, options: .curveLinear, animations: {
-                for (_, subButton) in self.settingsSubButtons {
-                    subButton.button.frame.origin.x = self.homePosition.x
-                    subButton.button.frame.origin.y = subButton.getPositionInView(self).y
-                }
-            }, completion: nil)
+        
+        let subButtonsCount = CGFloat(settingsSubButtons.count)
+        let newSize = (subButtonsCount + 1) * SettingsView.buttonSize + subButtonsCount * SettingsView.buttonSpacing
+        
+        if UIDevice.current.orientation.isPortrait {
+            frame.size.width = SettingsView.buttonSize
+            frame.size.height = newSize
+            
+            for (_, subButton) in settingsSubButtons {
+                subButton.button.frame.origin.x = homePosition.x
+                subButton.button.frame.origin.y = subButton.getPositionInView(self).y
+            }
         }
-        else {
-            UIView.animate(withDuration: 0.25, delay: 0, options: .curveLinear, animations: {
-                for (_, subButton) in self.settingsSubButtons {
-                    subButton.button.frame.origin.y = self.homePosition.y
-                    subButton.button.frame.origin.x = subButton.getPositionInView(self).x
-                }
-            }, completion: nil)
+        else if UIDevice.current.orientation.isLandscape {
+            frame.size.width = newSize
+            frame.size.height = SettingsView.buttonSize
+            
+            for (_, subButton) in settingsSubButtons {
+                subButton.button.frame.origin.x = subButton.getPositionInView(self).x
+                subButton.button.frame.origin.y = homePosition.y
+            }
         }
+        
+        settingsButton.frame.origin.x = homePosition.x
+        settingsButton.frame.origin.y = homePosition.y
+        viewWidthAnchor?.constant = frame.width
+        viewHeightAnchor?.constant = frame.height
+        
+        lastOrientation = UIDevice.current.orientation
     }
     
     
@@ -173,6 +197,42 @@ class SettingsView: UIView {
     
     @objc private func settingsPressed() {
         showSettings = !showSettings
+        
+        
+        
+        
+        //************TEST
+        //Need to reset all buttons while resizing the frame and constraints!!
+        let subButtonsCount = CGFloat(self.settingsSubButtons.count)
+        let newSize = (subButtonsCount + 1) * SettingsView.buttonSize + subButtonsCount * SettingsView.buttonSpacing
+        
+        if UIDevice.current.orientation.isPortrait ||
+            (!UIDevice.current.orientation.isValidInterfaceOrientation && self.lastOrientation.isPortrait) {
+            self.frame.size.height = newSize
+            self.viewHeightAnchor?.constant = self.frame.height
+            self.settingsButton.frame.origin.y = self.homePosition.y
+            
+            for (_, subButton) in self.settingsSubButtons {
+                subButton.button.frame.origin.y = self.homePosition.y
+            }
+        }
+        else if UIDevice.current.orientation.isLandscape ||
+                    (!UIDevice.current.orientation.isValidInterfaceOrientation && self.lastOrientation.isLandscape) {
+            self.frame.size.width = newSize
+            self.viewWidthAnchor?.constant = self.frame.width
+            self.settingsButton.frame.origin.x = self.homePosition.x
+            
+            for (_, subButton) in self.settingsSubButtons {
+                subButton.button.frame.origin.x = self.homePosition.x
+            }
+        }
+        
+        
+        
+        
+        
+        
+        
         
         if showSettings {
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn) {
@@ -186,10 +246,12 @@ class SettingsView: UIView {
                     subButton.button.isHidden = false
                     subButton.button.alpha = K.masterAlpha
                     
-                    if UIDevice.current.orientation == .portrait {
+                    if UIDevice.current.orientation.isPortrait ||
+                        (!UIDevice.current.orientation.isValidInterfaceOrientation && self.lastOrientation.isPortrait) {
                         subButton.button.frame.origin.y = subButton.getPositionInView(self).y
                     }
-                    else {
+                    else if UIDevice.current.orientation.isLandscape ||
+                                (!UIDevice.current.orientation.isValidInterfaceOrientation && self.lastOrientation.isLandscape) {
                         subButton.button.frame.origin.x = subButton.getPositionInView(self).x
                     }
                 }
@@ -200,6 +262,43 @@ class SettingsView: UIView {
         else {
             K.addHapticFeedback(withStyle: .medium)
 
+            
+            
+            
+            //************TEST
+            //Need to reset all buttons while resizing the frame and constraints!!
+            if UIDevice.current.orientation.isPortrait ||
+                (!UIDevice.current.orientation.isValidInterfaceOrientation && self.lastOrientation.isPortrait) {
+                self.frame.size.height = SettingsView.buttonSize
+                self.viewHeightAnchor?.constant = self.frame.height
+                self.settingsButton.frame.origin.y = self.homePosition.y
+                
+                for (_, subButton) in self.settingsSubButtons {
+                    subButton.button.frame.origin.y = subButton.getPositionInView(self).y
+                }
+                
+                self.lastOrientation = .portrait
+            }
+            else if UIDevice.current.orientation.isLandscape ||
+                        (!UIDevice.current.orientation.isValidInterfaceOrientation && self.lastOrientation.isLandscape) {
+                self.frame.size.width = SettingsView.buttonSize
+                self.viewWidthAnchor?.constant = self.frame.width
+                self.settingsButton.frame.origin.x = self.homePosition.x
+                
+                for (_, subButton) in self.settingsSubButtons {
+                    subButton.button.frame.origin.x = subButton.getPositionInView(self).x
+                }
+                
+                self.lastOrientation = .landscapeRight
+            }
+
+            
+            
+            
+            
+            
+            
+            
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
                 self.settingsButton.transform = CGAffineTransform(rotationAngle: -.pi * 2)
             }, completion: nil)
@@ -208,10 +307,12 @@ class SettingsView: UIView {
                 for (_, subButton) in self.settingsSubButtons {
                     subButton.button.alpha = 0.0
                     
-                    if UIDevice.current.orientation == .portrait {
+                    if UIDevice.current.orientation.isPortrait ||
+                        (!UIDevice.current.orientation.isValidInterfaceOrientation && self.lastOrientation.isPortrait) {
                         subButton.button.frame.origin.y = self.homePosition.y
                     }
-                    else {
+                    else if UIDevice.current.orientation.isLandscape ||
+                                (!UIDevice.current.orientation.isValidInterfaceOrientation && self.lastOrientation.isLandscape) {
                         subButton.button.frame.origin.x = self.homePosition.x
                     }
                 }

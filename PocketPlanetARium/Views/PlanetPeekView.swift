@@ -20,8 +20,8 @@ class PlanetPeekView: UIView {
     // MARK: - Initialization
     
     init(with planet: Planet) {
-        let width = UIDevice.current.orientation == .portrait ? 175 : 200
-        let height = UIDevice.current.orientation == .portrait ? 200 : 175
+        let width = UIDevice.current.orientation.isPortrait ? 175 : 200
+        let height = UIDevice.current.orientation.isPortrait ? 200 : 175
         super.init(frame: CGRect(x: 0, y: 0, width: width, height: height))
 
         self.planet = planet
