@@ -39,7 +39,6 @@ class PlanetPeekView: UIView {
     private func setupView() {
         clipsToBounds = true
         layer.cornerRadius = 10
-//        backgroundColor = UIColor(named: "BlueGrey900") ?? .gray
         
         let blurredEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterialDark))
         blurredEffectView.frame = bounds
