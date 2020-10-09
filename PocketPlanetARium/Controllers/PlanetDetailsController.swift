@@ -79,16 +79,6 @@ class PlanetDetailsController: UIViewController, SCNSceneRendererDelegate {
         //Empty implementation needed so that touches don't render to the underlying controller, i.e. PlanetARiumController. Ugh!!!!! I don't understand why, but this works!!!
     }
 
-//    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        guard let touch = touches.first,
-//              view.traitCollection.forceTouchCapability == .available,
-//              touch.force == touch.maximumPossibleForce else {
-//            return
-//        }
-//
-//        self.dismiss(animated: true, completion: nil)
-//    }
-
 }
 
 
