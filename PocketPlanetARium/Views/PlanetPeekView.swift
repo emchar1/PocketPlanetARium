@@ -39,12 +39,17 @@ class PlanetPeekView: UIView {
     private func setupView() {
         clipsToBounds = true
         layer.cornerRadius = 10
-        backgroundColor = UIColor(named: "BlueGrey900") ?? .gray
+//        backgroundColor = UIColor(named: "BlueGrey900") ?? .gray
+        
+        let blurredEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .systemChromeMaterialDark))
+        blurredEffectView.frame = bounds
+        addSubview(blurredEffectView)
+
 
         translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([widthAnchor.constraint(equalToConstant: frame.width),
                                      heightAnchor.constraint(equalToConstant: frame.height)])
-        
+
         setupLabel(&planetTitle,
                    frame: CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.size.width, height: 40),
                    font: UIFont(name: "Futura", size: 18.0),
@@ -59,6 +64,7 @@ class PlanetPeekView: UIView {
                    frame: CGRect(x: frame.origin.x, y: frame.size.height - 30, width: frame.size.width, height: 30),
                    font: UIFont(name: "Futura Medium Italic", size: 14.0),
                    alignment: .center)
+        
     }
     
     private func setupLabel(_ label: inout UILabel, frame: CGRect, font: UIFont?, alignment: NSTextAlignment = .left, backgroundColor: UIColor = .clear) {
