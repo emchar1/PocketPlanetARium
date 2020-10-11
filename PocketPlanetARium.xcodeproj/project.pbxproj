@@ -10,6 +10,8 @@
 		EA2BCCA425180317007A13F5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2BCCA325180317007A13F5 /* Constants.swift */; };
 		EA40E9B0252ADFFF00726425 /* PlanetDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA40E9AF252ADFFF00726425 /* PlanetDetails.swift */; };
 		EA43CB55252669D300102879 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA43CB54252669D300102879 /* SettingsView.swift */; };
+		EA5736F025317C0700CF442B /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5736EF25317C0700CF442B /* MenuController.swift */; };
+		EA5736F42532E86700CF442B /* MenuPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5736F32532E86700CF442B /* MenuPageViewController.swift */; };
 		EA57EA7325281F0D00FC2323 /* PlanetPeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA57EA7225281F0D00FC2323 /* PlanetPeekView.swift */; };
 		EA58D013251F3D79007A8DB5 /* PlanetDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA58D012251F3D79007A8DB5 /* PlanetDetailsController.swift */; };
 		EA5B0BF7251055B300B1E910 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5B0BF6251055B300B1E910 /* AppDelegate.swift */; };
@@ -28,6 +30,8 @@
 		EA2BCCA325180317007A13F5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EA40E9AF252ADFFF00726425 /* PlanetDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetDetails.swift; sourceTree = "<group>"; };
 		EA43CB54252669D300102879 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		EA5736EF25317C0700CF442B /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MenuController.swift; path = PocketPlanetARium/Controllers/MenuController.swift; sourceTree = SOURCE_ROOT; };
+		EA5736F32532E86700CF442B /* MenuPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPageViewController.swift; sourceTree = "<group>"; };
 		EA57EA7225281F0D00FC2323 /* PlanetPeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetPeekView.swift; sourceTree = "<group>"; };
 		EA58D012251F3D79007A8DB5 /* PlanetDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetDetailsController.swift; sourceTree = "<group>"; };
 		EA5B0BF3251055B300B1E910 /* PocketPlanetARium.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PocketPlanetARium.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,6 +93,8 @@
 		EAC1F4CC25131FF40097521A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				EA5736EF25317C0700CF442B /* MenuController.swift */,
+				EA5736F32532E86700CF442B /* MenuPageViewController.swift */,
 				EA5B0BFA251055B300B1E910 /* PlanetARiumController.swift */,
 				EA58D012251F3D79007A8DB5 /* PlanetDetailsController.swift */,
 			);
@@ -194,8 +200,10 @@
 				EA2BCCA425180317007A13F5 /* Constants.swift in Sources */,
 				EA5B0C0B2510677E00B1E910 /* Planet.swift in Sources */,
 				EA5B0BFB251055B300B1E910 /* PlanetARiumController.swift in Sources */,
+				EA5736F42532E86700CF442B /* MenuPageViewController.swift in Sources */,
 				EA57EA7325281F0D00FC2323 /* PlanetPeekView.swift in Sources */,
 				EA58D013251F3D79007A8DB5 /* PlanetDetailsController.swift in Sources */,
+				EA5736F025317C0700CF442B /* MenuController.swift in Sources */,
 				EAF7BEA925203CAE00C0D1A6 /* PlanetGroup.swift in Sources */,
 				EA40E9B0252ADFFF00726425 /* PlanetDetails.swift in Sources */,
 				EA43CB55252669D300102879 /* SettingsView.swift in Sources */,

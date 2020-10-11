@@ -79,6 +79,13 @@ extension Comparable {
 
 extension UIColor {
     /**
+     Generates a random color
+     */
+    static var randomColor: UIColor {
+        return UIColor(red: Int.random(in: 0...255), green: Int.random(in: 0...255), blue: Int.random(in: 0...255))
+    }
+
+    /**
      Allows you to initialize a color with no alpha parameter.
      - parameters:
         - red: red component from 0 to 255
