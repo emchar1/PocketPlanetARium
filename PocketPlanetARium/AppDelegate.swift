@@ -12,11 +12,20 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    /**
+     Created to prevent view from rotating while it's loading the PlanetARiumController. Start off as portrait only then can update to allow all orientations as needed.
+     */
+    var supportedOrientations: UIInterfaceOrientationMask = .portrait
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         return true
+    }
+    
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        return supportedOrientations
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

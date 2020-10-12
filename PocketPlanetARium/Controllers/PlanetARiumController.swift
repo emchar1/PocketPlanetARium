@@ -24,7 +24,7 @@ class PlanetARiumController: UIViewController {
         loadingLabel.font = UIFont(name: "Futura", size: 17.0)
         loadingLabel.textColor = .white
         loadingLabel.textAlignment = .center
-        loadingLabel.text = "Loading PlanetARium..."
+        loadingLabel.text = "Constructing PlanetARium..."
         return loadingLabel
     }()
 
@@ -62,7 +62,7 @@ class PlanetARiumController: UIViewController {
         view.addSubview(loadingLabel)
         
         bezelView.getBezelView(for: &bezelView, in: view, width: Bezel.getWidth(for: view), height: Bezel.getHeight(for: view))
-
+        
         settingsButtons.delegate = self
         settingsButtons.alpha = 0.0
         view.addSubview(settingsButtons)
@@ -80,32 +80,34 @@ class PlanetARiumController: UIViewController {
         lowLightWarning.layer.cornerRadius = 7
         lowLightWarning.alpha = 0.0
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(orientationDidChange(_:)),
-                                               name: UIDevice.orientationDidChangeNotification,
-                                               object: nil)
-
         planetarium.beginAnimation(scale: scaleValue, toNode: sceneView)
     }
         
     override func viewDidAppear(_ animated: Bool) {
         let duration: TimeInterval = 2.0
 
-        UIView.animate(withDuration: duration / 2, delay: 0.0, options: .curveEaseIn) {
+        UIView.animate(withDuration: duration / 8, delay: 0.0, options: .curveEaseIn) {
             self.loadingLabel.alpha = 0.0
         } completion: { _ in
             self.loadingLabel.removeFromSuperview()
         }
 
-        UIView.animate(withDuration: duration, delay: 0.0, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: duration, delay: 0.0, options: .curveEaseOut) {
             self.bezelView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
 
             self.sceneView.frame = self.bezelView.frame
             self.sceneView.alpha = 1.0
-        }, completion: { _ in
+        } completion: { _ in
             self.view.backgroundColor = .clear
             self.bezelView.backgroundColor = .clear
-        })
+            
+            (UIApplication.shared.delegate as! AppDelegate).supportedOrientations = [.allButUpsideDown]
+
+            NotificationCenter.default.addObserver(self,
+                                                   selector: #selector(self.orientationDidChange(_:)),
+                                                   name: UIDevice.orientationDidChangeNotification,
+                                                   object: nil)
+        }
 
         UIView.animate(withDuration: duration / 2, delay: duration / 2, options: .curveEaseInOut, animations: {
             self.settingsButtons.alpha = K.masterAlpha

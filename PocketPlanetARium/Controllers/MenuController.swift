@@ -13,7 +13,7 @@ class MenuController: UIViewController {
     private var pageController: UIPageViewController?
     private var pages: [Pages] = Pages.allCases
     private var currentIndex = 0
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return .portrait }
+    override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
     
     
     override func viewDidLoad() {
@@ -73,7 +73,7 @@ extension MenuController: UIPageViewControllerDataSource, UIPageViewControllerDe
 
 
 enum Pages: CaseIterable {
-    case pageZero, pageOne, pageTwo, pageThree
+    case pageZero, pageOne, pageTwo, pageThree, pageFour
     
     var name: String {
         switch self {
@@ -85,6 +85,8 @@ enum Pages: CaseIterable {
             return "This is page two"
         case .pageThree:
             return "This is page three"
+        case .pageFour:
+            return "This is page four"
         }
     }
     
@@ -98,6 +100,8 @@ enum Pages: CaseIterable {
             return 2
         case .pageThree:
             return 3
+        case .pageFour:
+            return 4
         }
     }
 }
