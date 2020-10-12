@@ -8,6 +8,15 @@
 
 import UIKit
 
+//******TEST
+protocol PlanetPeekViewDelegate {
+    func planetPeekView(_ controller: PlanetPeekView, willPerformSegue: Bool)
+}
+
+
+
+
+
 class PlanetPeekView: UIView {
     
     var planet: Planet?
@@ -15,6 +24,11 @@ class PlanetPeekView: UIView {
     var planetDetails = UILabel()
     var instructions = UILabel()
     let padding: CGFloat = 10
+    
+    
+    
+    //******TEST
+    var delegate: PlanetPeekViewDelegate?
     
     
     // MARK: - Initialization
@@ -111,11 +125,27 @@ class PlanetPeekView: UIView {
         
         superView.addSubview(self)
         
-        UIView.animate(withDuration: 0.25, delay: 0, options: .curveLinear, animations: {
+        UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
             self.alpha = 1.0
         }, completion: nil)
         
         NSLayoutConstraint.activate([centerXAnchor.constraint(equalTo: superView.leadingAnchor, constant: xCenter),
                                      centerYAnchor.constraint(equalTo: superView.topAnchor, constant: yCenter)])
+    }
+    
+    
+    
+    
+    
+    
+    //******TEST
+    func performSegue(to size: CGSize) {
+        UIView.animate(withDuration: 5.0, delay: 0, options: .curveEaseInOut, animations: {
+            self.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+            self.alpha = 0.0
+        }, completion: { _ in
+            self.delegate?.planetPeekView(self, willPerformSegue: true)
+            self.removeFromSuperview()
+        })
     }
 }

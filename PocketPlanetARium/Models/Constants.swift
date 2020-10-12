@@ -203,6 +203,12 @@ extension UIView {
     func getBezelView(for view: inout UIView, in superView: UIView, width: CGFloat, height: CGFloat) {
         view.translatesAutoresizingMaskIntoConstraints = true
         view.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        
+//        NSLayoutConstraint.activate([view.topAnchor.constraint(equalTo: superView.topAnchor, constant: height),
+//                                     view.leadingAnchor.constraint(equalTo: superView.leadingAnchor, constant: width),
+//                                     view.trailingAnchor.constraint(equalTo: superView.trailingAnchor, constant: width),
+//                                     view.bottomAnchor.constraint(equalTo: superView.bottomAnchor, constant: height)])
+        
         view.center = CGPoint(x: superView.frame.width / 2, y: superView.frame.height / 2)
         view.backgroundColor = .getRandom(redRange: 30...40, greenRange: 30...32, blueRange: 50...70)
         view.layer.cornerRadius = 16

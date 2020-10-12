@@ -60,7 +60,7 @@ class PlanetARiumController: UIViewController {
         
         view.backgroundColor = UIColor(named: "BlueGrey900") ?? .gray
         view.addSubview(loadingLabel)
-
+        
         bezelView.getBezelView(for: &bezelView, in: view, width: Bezel.getWidth(for: view), height: Bezel.getHeight(for: view))
 
         settingsButtons.delegate = self
@@ -79,6 +79,11 @@ class PlanetARiumController: UIViewController {
         lowLightWarning.clipsToBounds = true
         lowLightWarning.layer.cornerRadius = 7
         lowLightWarning.alpha = 0.0
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(orientationDidChange(_:)),
+                                               name: UIDevice.orientationDidChangeNotification,
+                                               object: nil)
 
         planetarium.beginAnimation(scale: scaleValue, toNode: sceneView)
     }
@@ -97,7 +102,10 @@ class PlanetARiumController: UIViewController {
 
             self.sceneView.frame = self.bezelView.frame
             self.sceneView.alpha = 1.0
-        }, completion: nil)
+        }, completion: { _ in
+            self.view.backgroundColor = .clear
+            self.bezelView.backgroundColor = .clear
+        })
 
         UIView.animate(withDuration: duration / 2, delay: duration / 2, options: .curveEaseInOut, animations: {
             self.settingsButtons.alpha = K.masterAlpha
@@ -114,6 +122,11 @@ class PlanetARiumController: UIViewController {
         sceneView.session.pause()
     }
     
+    @objc private func orientationDidChange(_ notification: NSNotification) {
+        bezelView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        sceneView.frame = bezelView.frame
+    }
+
     
     // MARK: - Zoom Zoom
     
@@ -168,6 +181,7 @@ class PlanetARiumController: UIViewController {
             peekView?.removeFromSuperview()
             
             peekView = PlanetPeekView(with: tappedPlanet)
+            peekView!.delegate = self
             peekView!.show(in: view, at: location)
         }
     }
@@ -187,10 +201,11 @@ class PlanetARiumController: UIViewController {
 
         K.addHapticFeedback(withStyle: .heavy)
         planetarium.pauseAnimation()
-        
+                
         performSegue(withIdentifier: "PlanetDetailsSegue", sender: nil)
-
+        
         peekView?.removeFromSuperview()
+
         tappedPlanet = nil
     }
     
@@ -220,6 +235,17 @@ extension PlanetARiumController: PlanetDetailsControllerDelegate {
         if !settingsButtons.isPaused {
             planetarium.resumeAnimation(to: scaleValue)
         }
+    }
+}
+
+
+
+
+
+//******TEST
+extension PlanetARiumController: PlanetPeekViewDelegate {
+    func planetPeekView(_ controller: PlanetPeekView, willPerformSegue: Bool) {
+        performSegue(withIdentifier: "PlanetDetailsSegue", sender: nil)
     }
 }
 

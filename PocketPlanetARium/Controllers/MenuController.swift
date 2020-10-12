@@ -13,6 +13,7 @@ class MenuController: UIViewController {
     private var pageController: UIPageViewController?
     private var pages: [Pages] = Pages.allCases
     private var currentIndex = 0
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask { return .portrait }
     
     
     override func viewDidLoad() {
