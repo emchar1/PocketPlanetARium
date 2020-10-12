@@ -8,6 +8,18 @@
 
 import UIKit
 
+struct Bezel {
+    static let padding: CGFloat = 20
+    
+    static func getWidth(for view: UIView) -> CGFloat {
+        return view.frame.width - 2 * Bezel.padding
+    }
+    
+    static func getHeight(for view: UIView) -> CGFloat {
+        return view.frame.height - 10 * Bezel.padding
+    }
+}
+
 /**
  A struct of Constants for commonly used properties and functions.
  */
@@ -84,6 +96,23 @@ extension UIColor {
     static var randomColor: UIColor {
         return UIColor(red: Int.random(in: 0...255), green: Int.random(in: 0...255), blue: Int.random(in: 0...255))
     }
+    
+    var descriptionBits: String {
+        var fRed: CGFloat = 0
+        var fGreen: CGFloat = 0
+        var fBlue: CGFloat = 0
+        var fAlpha: CGFloat = 0
+        
+        if self.getRed(&fRed, green: &fGreen, blue: &fBlue, alpha: &fAlpha) {
+            let iRed = Int(fRed * 255.0)
+            let iGreen = Int(fGreen * 255.0)
+            let iBlue = Int(fBlue * 255.0)
+            
+            return "UIColor: (R: \(iRed), G: \(iGreen), B: \(iBlue), A: \(fAlpha))"
+        }
+        
+        return "Invalid color!"
+    }
 
     /**
      Allows you to initialize a color with no alpha parameter.
@@ -110,6 +139,24 @@ extension UIColor {
             green: (rgb >> 8) & 0xFF,
             blue: rgb & 0xFF
         )
+    }
+    
+    /**
+     Generates a random color within a restricted range of RGB values.
+     - parameters:
+        - redRange: R range to clamp inputs to within 0...255.
+        - greenRange: G range to clamp inputs to within 0...255.
+        - blueRange: B range to clamp inputs to within 0...255.
+     - My descriptions are lame. I need to get better at documentaton... 🤪
+     */
+    static func getRandom(redRange: ClosedRange<Int> = 0...255,
+                                    greenRange: ClosedRange<Int> = 0...255,
+                                    blueRange: ClosedRange<Int> = 0...255) -> UIColor {
+        let redRangeNormalized = redRange.clamped(to: 0...255)
+        let greenRangeNormalized = greenRange.clamped(to: 0...255)
+        let blueRangeNormalized = blueRange.clamped(to: 0...255)
+        
+        return UIColor(red: Int.random(in: redRangeNormalized), green: Int.random(in: greenRangeNormalized), blue: Int.random(in: blueRangeNormalized))
     }
 }
 
@@ -143,6 +190,26 @@ extension UIView {
     func stopBlink(to alpha: CGFloat) {
         self.layer.removeAllAnimations()
         self.alpha = alpha
+    }
+    
+    /**
+     Creates a bezel for the view, kinda like a spaceship window.
+     - parameters:
+        - view: the view to bezel
+        - superView: using the superview as a reference
+        - width: width of the bezel view
+        - height: height of...
+     */
+    func getBezelView(for view: inout UIView, in superView: UIView, width: CGFloat, height: CGFloat) {
+        view.translatesAutoresizingMaskIntoConstraints = true
+        view.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        view.center = CGPoint(x: superView.frame.width / 2, y: superView.frame.height / 2)
+        view.backgroundColor = .getRandom(redRange: 30...40, greenRange: 30...32, blueRange: 50...70)
+        view.layer.cornerRadius = 16
+        view.layer.shadowOpacity = 0.3
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowRadius = 10
+        view.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
     }
 }
 

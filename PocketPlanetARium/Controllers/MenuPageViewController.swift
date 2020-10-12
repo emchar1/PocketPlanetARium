@@ -9,8 +9,10 @@
 import UIKit
 
 class MenuPageViewController: UIViewController {
+    var bezelView: UIView?
     var titleLabel: UILabel?
     var page: Pages
+    let padding: CGFloat = 20
     
     init(with page: Pages) {
         self.page = page
@@ -26,9 +28,15 @@ class MenuPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+        bezelView = UIView(frame: CGRect(x: 0, y: 0, width: Bezel.getWidth(for: view), height: Bezel.getHeight(for: view)))
+        bezelView?.getBezelView(for: &bezelView!, in: view, width: bezelView!.frame.width, height: bezelView!.frame.height)
+        view.addSubview(bezelView!)
+
+        titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
         titleLabel?.center = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
         titleLabel?.textAlignment = .center
+        titleLabel?.font = UIFont(name: "Futura", size: 20.0)
+        titleLabel?.textColor = .white
         titleLabel?.text = page.name
         view.addSubview(titleLabel!)
     }
@@ -41,7 +49,6 @@ class MenuPageViewController: UIViewController {
         }
 
         K.addHapticFeedback(withStyle: .heavy)
-        
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let planetARiumController = storyboard.instantiateViewController(identifier: String(describing: PlanetARiumController.self)) as? PlanetARiumController {

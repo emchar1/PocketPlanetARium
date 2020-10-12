@@ -12,10 +12,21 @@ import ARKit
 
 class PlanetARiumController: UIViewController {
 
+    @IBOutlet weak var bezelView: UIView!
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var lowLightWarning: UIView!
-    
+
+    override var prefersStatusBarHidden: Bool { return true }
     var peekView: PlanetPeekView?
+    lazy var loadingLabel: UILabel = {
+        let loadingLabel = UILabel(frame: CGRect(x: 0, y: 0, width: bezelView.frame.width, height: 40))
+        loadingLabel.center = view.center
+        loadingLabel.font = UIFont(name: "Futura", size: 17.0)
+        loadingLabel.textColor = .white
+        loadingLabel.textAlignment = .center
+        loadingLabel.text = "Loading PlanetARium..."
+        return loadingLabel
+    }()
 
     //Settings buttons
     let settingsButtons = SettingsView()
@@ -47,22 +58,52 @@ class PlanetARiumController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = UIColor(named: "BlueGrey900") ?? .gray
+        view.addSubview(loadingLabel)
+
+        bezelView.getBezelView(for: &bezelView, in: view, width: Bezel.getWidth(for: view), height: Bezel.getHeight(for: view))
+
         settingsButtons.delegate = self
-        self.view.addSubview(settingsButtons)
+        settingsButtons.alpha = 0.0
+        view.addSubview(settingsButtons)
         NSLayoutConstraint.activate([settingsButtons.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -padding),
                                      settingsButtons.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -padding)])
-        
+
         sceneView.delegate = self
         sceneView.autoenablesDefaultLighting = true
-        sceneView.showsStatistics = true
+//        sceneView.showsStatistics = true
+        sceneView.translatesAutoresizingMaskIntoConstraints = true
+        sceneView.frame = CGRect(x: 0, y: 0, width: bezelView.frame.width, height: bezelView.frame.height)
+        sceneView.alpha = 0.0
 
-        lowLightWarning.alpha = 0.0
         lowLightWarning.clipsToBounds = true
         lowLightWarning.layer.cornerRadius = 7
-        
+        lowLightWarning.alpha = 0.0
+
         planetarium.beginAnimation(scale: scaleValue, toNode: sceneView)
     }
-    
+        
+    override func viewDidAppear(_ animated: Bool) {
+        let duration: TimeInterval = 2.0
+
+        UIView.animate(withDuration: duration / 2, delay: 0.0, options: .curveEaseIn) {
+            self.loadingLabel.alpha = 0.0
+        } completion: { _ in
+            self.loadingLabel.removeFromSuperview()
+        }
+
+        UIView.animate(withDuration: duration, delay: 0.0, options: .curveEaseOut, animations: {
+            self.bezelView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
+
+            self.sceneView.frame = self.bezelView.frame
+            self.sceneView.alpha = 1.0
+        }, completion: nil)
+
+        UIView.animate(withDuration: duration / 2, delay: duration / 2, options: .curveEaseInOut, animations: {
+            self.settingsButtons.alpha = K.masterAlpha
+        }, completion: nil)
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         sceneView.session.run(ARWorldTrackingConfiguration(), options: [])
@@ -107,7 +148,7 @@ class PlanetARiumController: UIViewController {
     // MARK: - Planet Details Peek n Pop
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else {
+        guard let touch = touches.first, touches.count == 1 else {
             return
         }
 

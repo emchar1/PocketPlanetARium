@@ -23,7 +23,7 @@ class MenuController: UIViewController {
         pageController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         pageController?.dataSource = self
         pageController?.delegate = self
-        pageController?.view.backgroundColor = .randomColor
+        pageController?.view.backgroundColor = UIColor(named: "BlueGrey900") ?? .gray
         pageController?.view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         addChild(pageController!)
         
