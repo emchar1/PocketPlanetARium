@@ -55,7 +55,7 @@ class PlanetARiumController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor(named: "BlueGrey900") ?? .gray
+        view.backgroundColor = UIColor(named: "BlueGrey700") ?? .gray
         view.addSubview(loadingLabel)
         
         bezelView.getBezelView(for: &bezelView, in: view, width: Bezel.getWidth(for: view), height: Bezel.getHeight(for: view))
@@ -68,7 +68,7 @@ class PlanetARiumController: UIViewController {
 
         sceneView.delegate = self
         sceneView.autoenablesDefaultLighting = true
-        sceneView.showsStatistics = true
+//        sceneView.showsStatistics = true
         sceneView.translatesAutoresizingMaskIntoConstraints = true
         sceneView.frame = CGRect(x: 0, y: 0, width: bezelView.frame.width, height: bezelView.frame.height)
         sceneView.alpha = 0.0
@@ -89,7 +89,7 @@ class PlanetARiumController: UIViewController {
             self.loadingLabel.removeFromSuperview()
         }
 
-        UIView.animate(withDuration: duration, delay: 0.0, options: .curveEaseInOut) {
+        UIView.animate(withDuration: duration, delay: 0.0, options: .curveEaseOut) {
             self.bezelView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
 
             self.sceneView.frame = self.bezelView.frame
