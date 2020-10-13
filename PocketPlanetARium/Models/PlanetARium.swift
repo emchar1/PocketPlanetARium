@@ -19,7 +19,7 @@ struct PlanetARium {
 
     //PlanetARium variables
     private var planets = PlanetGroup()
-    private var labelsOn: Bool = false
+    private var labelsOn = false
     
         
     // MARK: - Animation Controls
@@ -46,6 +46,8 @@ struct PlanetARium {
         animatePlanets(to: sceneView)
         
         resumeAnimation(to: scale)
+        
+        sceneView.scene.background.contents = UIImage(named: "art.scnassets/background.jpg")            
     }
         
     /**
@@ -127,7 +129,7 @@ struct PlanetARium {
     func areLabelsOn() -> Bool {
         return labelsOn
     }
-        
+            
     
     // MARK: - Helper Functions
     
@@ -489,7 +491,7 @@ struct PlanetARium {
         }
 
         sun.animate()
-        sun.addLightSource(omniLumens: 1000, ambientLumens: 250)
+        sun.addLightSource(omniLumens: 1000, ambientLumens: 40)
 
         sceneView.scene.rootNode.addChildNode(sun.getOrbitalCenterNode())
     }

@@ -71,7 +71,7 @@ class PlanetARiumController: UIViewController {
 
         sceneView.delegate = self
         sceneView.autoenablesDefaultLighting = true
-//        sceneView.showsStatistics = true
+        sceneView.showsStatistics = true
         sceneView.translatesAutoresizingMaskIntoConstraints = true
         sceneView.frame = CGRect(x: 0, y: 0, width: bezelView.frame.width, height: bezelView.frame.height)
         sceneView.alpha = 0.0
@@ -79,7 +79,7 @@ class PlanetARiumController: UIViewController {
         lowLightWarning.clipsToBounds = true
         lowLightWarning.layer.cornerRadius = 7
         lowLightWarning.alpha = 0.0
-        
+                
         planetarium.beginAnimation(scale: scaleValue, toNode: sceneView)
     }
         
@@ -101,6 +101,7 @@ class PlanetARiumController: UIViewController {
             self.view.backgroundColor = .clear
             self.bezelView.backgroundColor = .clear
             
+            //Enable device rotation only after the bezel finishes animating!
             (UIApplication.shared.delegate as! AppDelegate).supportedOrientations = [.allButUpsideDown]
 
             NotificationCenter.default.addObserver(self,
@@ -183,7 +184,7 @@ class PlanetARiumController: UIViewController {
             peekView?.removeFromSuperview()
             
             peekView = PlanetPeekView(with: tappedPlanet)
-            peekView!.delegate = self
+//            peekView!.delegate = self
             peekView!.show(in: view, at: location)
         }
     }
