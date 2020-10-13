@@ -44,8 +44,6 @@ class MenuPageViewController: UIViewController {
         if page == .pageFour {
             button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
             button!.addTarget(self, action: #selector(loadPlanetARium), for: .touchUpInside)
-            button!.addTarget(self, action: #selector(highlightButton), for: .touchDown)
-            button!.addTarget(self, action: #selector(unhighlightButton), for: .touchDragExit)
             button!.center = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2 + 100)
             button!.backgroundColor = .gray
             button!.layer.cornerRadius = 10
@@ -58,17 +56,7 @@ class MenuPageViewController: UIViewController {
             view.addSubview(button!)
         }
     }
-    
-    @objc func highlightButton(_ sender: UIButton) {
-        sender.backgroundColor = .darkGray
-        sender.layer.shadowOpacity = 0.0
-    }
-    
-    @objc func unhighlightButton(_ sender: UIButton) {
-        sender.backgroundColor = .gray
-        sender.layer.shadowOpacity = 0.6
-    }
-        
+            
     @objc func loadPlanetARium(_ sender: UIButton) {
         sender.backgroundColor = .darkGray
         sender.layer.shadowOpacity = 0.0
@@ -83,21 +71,4 @@ class MenuPageViewController: UIViewController {
         }
     }
     
-//    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        guard let touch = touches.first,
-//              view.traitCollection.forceTouchCapability == .available,
-//              touch.force == touch.maximumPossibleForce else {
-//            return
-//        }
-//
-//        K.addHapticFeedback(withStyle: .heavy)
-//
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        if let planetARiumController = storyboard.instantiateViewController(identifier: String(describing: PlanetARiumController.self)) as? PlanetARiumController {
-//
-//            planetARiumController.modalTransitionStyle = .crossDissolve
-//            planetARiumController.modalPresentationStyle = .fullScreen
-//            present(planetARiumController, animated: true, completion: nil)
-//        }
-//    }
 }

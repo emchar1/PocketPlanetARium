@@ -210,7 +210,7 @@ extension UIView {
 //                                     view.bottomAnchor.constraint(equalTo: superView.bottomAnchor, constant: height)])
         
         view.center = CGPoint(x: superView.frame.width / 2, y: superView.frame.height / 2)
-        view.backgroundColor = .getRandom(redRange: 30...40, greenRange: 30...32, blueRange: 50...70)
+        view.backgroundColor = UIColor(named: "BlueGrey900") ?? .lightGray
         view.layer.cornerRadius = 16
         view.layer.shadowOpacity = 0.3
         view.layer.shadowColor = UIColor.black.cgColor

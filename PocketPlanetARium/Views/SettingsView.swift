@@ -135,7 +135,7 @@ class SettingsView: UIView {
         settingsButton.setBackgroundImage(UIImage(named: "settings"), for: .normal)
         settingsButton.tintColor = UIColor(named: "BlueGrey000") ?? .gray
         settingsButton.layer.shadowOpacity = 0.4
-        settingsButton.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        settingsButton.layer.shadowOffset = .zero
         settingsButton.alpha = K.masterAlpha
         settingsButton.addTarget(self, action: #selector(settingsPressed), for: .touchUpInside)
         addSubview(settingsButton)
@@ -163,7 +163,8 @@ class SettingsView: UIView {
         settingsSubButton.button.alpha = 0.0
         settingsSubButton.button.backgroundColor = backgroundColor
         settingsSubButton.button.layer.cornerRadius = 0.5 * SettingsView.buttonSize
-        settingsSubButton.button.clipsToBounds = true
+        settingsSubButton.button.layer.shadowOpacity = 0.4
+        settingsSubButton.button.layer.shadowOffset = .zero
         settingsSubButton.button.isHidden = true
         settingsSubButton.button.addTarget(self, action: targetAction, for: .touchUpInside)
         addSubview(settingsSubButton.button)

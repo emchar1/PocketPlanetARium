@@ -55,7 +55,7 @@ class PlanetARiumController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor(named: "BlueGrey700") ?? .gray
+        view.backgroundColor = UIColor(named: "BlueGrey500") ?? .gray
         view.addSubview(loadingLabel)
         
         bezelView.getBezelView(for: &bezelView, in: view, width: Bezel.getWidth(for: view), height: Bezel.getHeight(for: view))
@@ -79,6 +79,16 @@ class PlanetARiumController: UIViewController {
                 
         planetarium.beginAnimation(scale: scaleValue, toNode: sceneView)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        sceneView.session.run(ARWorldTrackingConfiguration(), options: [])
+    }
+        
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        sceneView.session.pause()
+    }
         
     override func viewDidAppear(_ animated: Bool) {
         let duration: TimeInterval = 2.0
@@ -91,7 +101,6 @@ class PlanetARiumController: UIViewController {
 
         UIView.animate(withDuration: duration, delay: 0.0, options: .curveEaseOut) {
             self.bezelView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
-
             self.sceneView.frame = self.bezelView.frame
             self.sceneView.alpha = 1.0
         } completion: { _ in
@@ -110,16 +119,6 @@ class PlanetARiumController: UIViewController {
         UIView.animate(withDuration: duration / 2, delay: duration / 2, options: .curveEaseInOut, animations: {
             self.settingsButtons.alpha = K.masterAlpha
         }, completion: nil)
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        sceneView.session.run(ARWorldTrackingConfiguration(), options: [])
-    }
-        
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        sceneView.session.pause()
     }
     
     @objc private func orientationDidChange(_ notification: NSNotification) {
