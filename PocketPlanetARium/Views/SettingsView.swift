@@ -124,7 +124,7 @@ class SettingsView: UIView {
                     targetAction: #selector(playPausePressed))
 
         setupButton(&settingsSubButtons[SubButtonType.labels.rawValue],
-                    systemName: "textformat",
+                    systemName: "info",
                     backgroundColor: UIColor(named: "BlueGrey100") ?? .gray,
                     targetAction: #selector(labelsPressed))
 

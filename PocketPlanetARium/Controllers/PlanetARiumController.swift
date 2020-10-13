@@ -43,12 +43,9 @@ class PlanetARiumController: UIViewController {
     //Scaling properties
     var pinchBegan: CGFloat?
     var pinchChanged: CGFloat?
+    var pinchBoundsCount = 0
+    var pinchBoundsLimit = 10
     var scaleValue: Float = 0.218 {
-        willSet {
-            if newValue < 0 || newValue > 1 {
-                K.addHapticFeedback(withStyle: .soft)
-            }
-        }
         didSet {
             scaleValue = scaleValue.clamp(min: 0, max: 1)
         }
@@ -92,7 +89,7 @@ class PlanetARiumController: UIViewController {
             self.loadingLabel.removeFromSuperview()
         }
 
-        UIView.animate(withDuration: duration, delay: 0.0, options: .curveEaseOut) {
+        UIView.animate(withDuration: duration, delay: 0.0, options: .curveEaseInOut) {
             self.bezelView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
 
             self.sceneView.frame = self.bezelView.frame
@@ -151,9 +148,19 @@ class PlanetARiumController: UIViewController {
             let diffScale: Float = diff < 0 ? 50 : 200
 
             scaleValue += diff / diffScale
-            planetarium.beginAnimation(scale: scaleValue, toNode: sceneView)
-
-            handlePlayPause(for: settingsButtons)
+            
+            if scaleValue > 0 && scaleValue < 1 {
+                pinchBoundsCount = 0
+                
+                planetarium.beginAnimation(scale: scaleValue, toNode: sceneView)
+                handlePlayPause(for: settingsButtons)
+            }
+            else {
+                if pinchBoundsCount < pinchBoundsLimit {
+                    K.addHapticFeedback(withStyle: .soft)
+                    pinchBoundsCount += 1
+                }
+            }
         }
         
         //Prevents peekView getting stuck when trying to pinch instead.
