@@ -12,11 +12,11 @@ class MenuPageViewController: UIViewController {
     var bezelView: UIView?
     var titleLabel: UILabel?
     var button: UIButton?
-    var page: Pages
+    var menuItem: MenuItem
     let padding: CGFloat = 20
     
-    init(with page: Pages) {
-        self.page = page
+    init(with menuItem: MenuItem) {
+        self.menuItem = menuItem
 
         //I don't get why this version of init needs to be called, and why it appears after page binding?
         super.init(nibName: nil, bundle: nil)
@@ -38,10 +38,10 @@ class MenuPageViewController: UIViewController {
         titleLabel!.textAlignment = .center
         titleLabel!.font = UIFont(name: "Futura", size: 17.0)
         titleLabel!.textColor = .white
-        titleLabel!.text = page.name
+        titleLabel!.text = menuItem.item.description
         view.addSubview(titleLabel!)
         
-        if page == .pageFour {
+        if menuItem == .item4 {
             button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
             button!.addTarget(self, action: #selector(loadPlanetARium), for: .touchUpInside)
             button!.center = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2 + 100)

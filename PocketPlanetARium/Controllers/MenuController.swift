@@ -11,7 +11,7 @@ import UIKit
 class MenuController: UIViewController {
     
     private var pageController: UIPageViewController?
-    private var pages: [Pages] = Pages.allCases
+    private var menuItems: [MenuItem] = MenuItem.allCases
     private var currentIndex = 0
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
     
@@ -26,11 +26,14 @@ class MenuController: UIViewController {
         pageController?.delegate = self
         pageController?.view.backgroundColor = UIColor(named: "BlueGrey500") ?? .gray
         pageController?.view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        
+        //Makes this ad hoc pageController a child of MenuController.
         addChild(pageController!)
         
+        //Also need to add the child's view as a subview of this view.
         view.addSubview(pageController!.view)
         
-        let initialController = MenuPageViewController(with: pages[0])
+        let initialController = MenuPageViewController(with: menuItems[0])
         pageController?.setViewControllers([initialController], direction: .forward, animated: true, completion: nil)
         
         pageController?.didMove(toParent: self)
@@ -50,58 +53,18 @@ extension MenuController: UIPageViewControllerDataSource, UIPageViewControllerDe
     private func scrollPage(for viewController: UIViewController, forward: Bool) -> UIViewController? {
         guard let viewController = viewController as? MenuPageViewController else { return nil }
         
-        let index = viewController.page.index + (forward ? 1 : -1)
+        let index = viewController.menuItem.item.index + (forward ? 1 : -1)
         
-        guard index >= 0 && index < pages.count else { return nil }
+        guard index >= 0 && index < menuItems.count else { return nil }
         
-        return MenuPageViewController(with: pages[index])
+        return MenuPageViewController(with: menuItems[index])
     }
     
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return pages.count
+        return menuItems.count
     }
     
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         return currentIndex
-    }
-}
-
-
-
-
-
-
-
-enum Pages: CaseIterable {
-    case pageZero, pageOne, pageTwo, pageThree, pageFour
-    
-    var name: String {
-        switch self {
-        case .pageZero:
-            return "This is page zero"
-        case .pageOne:
-            return "This is page one"
-        case .pageTwo:
-            return "This is page two"
-        case .pageThree:
-            return "This is page three"
-        case .pageFour:
-            return "This is page four"
-        }
-    }
-    
-    var index: Int {
-        switch self {
-        case .pageZero:
-            return 0
-        case .pageOne:
-            return 1
-        case .pageTwo:
-            return 2
-        case .pageThree:
-            return 3
-        case .pageFour:
-            return 4
-        }
     }
 }
