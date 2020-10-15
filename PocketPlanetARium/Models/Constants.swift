@@ -8,22 +8,63 @@
 
 import UIKit
 
+
+// MARK: - Bezel struct
+
 struct Bezel {
-    static let padding: CGFloat = 20
-    
+    /**
+     My golden ratio for the bezelView.
+     */
+    static let bezelRatio: CGFloat = 612 / 335
+
+    /**
+     Returns the width of the bezelView.
+     */
     static func getWidth(for view: UIView) -> CGFloat {
-        return view.frame.width - 2 * Bezel.padding
+        return bezelRatio < K.screenRatio ? view.frame.width - 2 * K.padding : getHeight(for: view) / bezelRatio
     }
     
+    /**
+     Returns the height of the bezelView.
+     */
     static func getHeight(for view: UIView) -> CGFloat {
-        return view.frame.height - 10 * Bezel.padding
+        return bezelRatio < K.screenRatio ? getWidth(for: view) * bezelRatio : view.frame.height - 6 * K.padding
     }
 }
+
+
+// MARK: - K struct
 
 /**
  A struct of Constants for commonly used properties and functions.
  */
 struct K {
+    static let fontFace = "Futura"
+    static let fontFaceItalic = "Futura Medium Italic"
+    static let fontSizeMenu: CGFloat = 20
+    static let fontSizePeek: CGFloat = 10
+    static let fontSizePeekTitle: CGFloat = 18
+    static let fontSizePeekDetails: CGFloat = 14
+    
+    static var color = "BlueGrey"
+    static let color000 = "\(K.color)000"
+    static let color100 = "\(K.color)100"
+    static let color300 = "\(K.color)300"
+    static let color500 = "\(K.color)500"
+    static let color700 = "\(K.color)700"
+    static let color900 = "\(K.color)900"
+
+
+    /**
+     Returns the screen ratio of the device.
+     */
+    static let screenRatio: CGFloat = UIScreen.main.bounds.height / UIScreen.main.bounds.width
+
+    /**
+     Typical padding. Can be used for views, cells, etc. Takes into account screen size to determine what the padding should be.
+     */
+    static let padding: CGFloat = UIScreen.main.bounds.width / 18.75
+    
     /**
      Period of a planetary orbit.
      */
@@ -75,6 +116,8 @@ struct K {
 
 }
 
+
+// MARK: - Class Extensions
 
 extension Comparable {
     /**
@@ -210,7 +253,7 @@ extension UIView {
 //                                     view.bottomAnchor.constraint(equalTo: superView.bottomAnchor, constant: height)])
         
         view.center = CGPoint(x: superView.frame.width / 2, y: superView.frame.height / 2)
-        view.backgroundColor = UIColor(named: "BlueGrey900") ?? .lightGray
+        view.backgroundColor = UIColor(named: K.color900) ?? .lightGray
         view.layer.cornerRadius = 16
         view.layer.shadowOpacity = 0.3
         view.layer.shadowColor = UIColor.black.cgColor

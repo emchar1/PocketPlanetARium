@@ -97,7 +97,7 @@ struct Planet {
         let labelMaterial = SCNMaterial()
         labelMaterial.diffuse.contents = labelColor
         label.materials = [labelMaterial]
-        label.font = UIFont(name: "Futura", size: 11)
+        label.font = UIFont(name: K.fontFace, size: 11)
         
         self.labelNode = SCNNode()
         labelNode.position = SCNVector3(x: position.x, y: position.y + radius, z: position.z)

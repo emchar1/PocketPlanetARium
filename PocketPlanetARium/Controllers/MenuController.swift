@@ -10,7 +10,7 @@ import UIKit
 
 class MenuController: UIViewController {
     
-    private var pageController: UIPageViewController?
+    private var pageController: UIPageViewController!
     private var menuItems: [MenuItem] = MenuItem.allCases
     private var currentIndex = 0
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
@@ -22,21 +22,21 @@ class MenuController: UIViewController {
 
     private func setupPageController() {
         pageController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-        pageController?.dataSource = self
-        pageController?.delegate = self
-        pageController?.view.backgroundColor = UIColor(named: "BlueGrey500") ?? .gray
-        pageController?.view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        pageController.dataSource = self
+        pageController.delegate = self
+        pageController.view.backgroundColor = UIColor(named: K.color500) ?? .gray
+        pageController.view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         
         //Makes this ad hoc pageController a child of MenuController.
-        addChild(pageController!)
+        addChild(pageController)
         
         //Also need to add the child's view as a subview of this view.
-        view.addSubview(pageController!.view)
+        view.addSubview(pageController.view)
         
-        let initialController = MenuPageViewController(with: menuItems[0])
-        pageController?.setViewControllers([initialController], direction: .forward, animated: true, completion: nil)
+        let initialController = MenuPageViewController(with: menuItems[currentIndex])
+        pageController.setViewControllers([initialController], direction: .forward, animated: true, completion: nil)
         
-        pageController?.didMove(toParent: self)
+        pageController.didMove(toParent: self)
     }
 }
 

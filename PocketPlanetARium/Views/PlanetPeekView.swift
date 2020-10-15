@@ -23,7 +23,6 @@ class PlanetPeekView: UIView {
     var planetTitle = UILabel()
     var planetDetails = UILabel()
     var instructions = UILabel()
-    let padding: CGFloat = 10
     
     
     
@@ -65,17 +64,17 @@ class PlanetPeekView: UIView {
 
         setupLabel(&planetTitle,
                    frame: CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.size.width, height: 40),
-                   font: UIFont(name: "Futura", size: 18.0),
+                   font: UIFont(name: K.fontFace, size: K.fontSizePeekTitle),
                    alignment: .center,
-                   backgroundColor: UIColor(named: "BlueGrey500") ?? .gray)
+                   backgroundColor: UIColor(named: K.color500) ?? .gray)
         
         setupLabel(&planetDetails,
                    frame: CGRect(x: frame.origin.x + 8, y: 40, width: frame.size.width - 8, height: frame.size.height - 70),
-                   font: UIFont(name: "Futura", size: 14.0))
+                   font: UIFont(name: K.fontFace, size: K.fontSizePeekDetails))
         
         setupLabel(&instructions,
                    frame: CGRect(x: frame.origin.x, y: frame.size.height - 30, width: frame.size.width, height: 30),
-                   font: UIFont(name: "Futura Medium Italic", size: 14.0),
+                   font: UIFont(name: K.fontFaceItalic, size: K.fontSizePeekDetails),
                    alignment: .center)
         
     }
@@ -97,11 +96,11 @@ class PlanetPeekView: UIView {
     func show(in superView: UIView, at location: CGPoint) {
         var xCenter: CGFloat = 0 {
             didSet {
-                if xCenter < frame.size.width / 2 + padding {
-                    xCenter = frame.size.width / 2 + padding
+                if xCenter < frame.size.width / 2 + K.padding {
+                    xCenter = frame.size.width / 2 + K.padding
                 }
-                else if xCenter > superView.frame.size.width - frame.size.width / 2 - padding {
-                    xCenter = superView.frame.size.width - frame.size.width / 2 - padding
+                else if xCenter > superView.frame.size.width - frame.size.width / 2 - K.padding {
+                    xCenter = superView.frame.size.width - frame.size.width / 2 - K.padding
                 }
                 
             }
@@ -109,18 +108,18 @@ class PlanetPeekView: UIView {
 
         var yCenter: CGFloat = 0 {
             didSet {
-                if yCenter < frame.size.height / 2 + padding {
-                    yCenter = frame.size.height / 2 + padding
+                if yCenter < frame.size.height / 2 + K.padding {
+                    yCenter = frame.size.height / 2 + K.padding
                 }
-                else if yCenter > superView.frame.size.height - padding {
-                    yCenter = superView.frame.size.height - padding
+                else if yCenter > superView.frame.size.height - K.padding {
+                    yCenter = superView.frame.size.height - K.padding
                 }
             }
         }
 
         //Need to set these separately because for some reason it doesn't trigger didSet when set initially.
         xCenter = location.x
-        yCenter = location.y - (frame.size.height / 2) - (3 * padding)
+        yCenter = location.y - (frame.size.height / 2) - (2 * K.padding)
         alpha = 0
         
         superView.addSubview(self)

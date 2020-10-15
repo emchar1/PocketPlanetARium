@@ -115,17 +115,17 @@ class SettingsView: UIView {
         //The order of adding the button to the subviews MATTER!
         setupButton(&settingsSubButtons[SubButtonType.resetAnimation.rawValue],
                     systemName: "arrow.counterclockwise",
-                    backgroundColor: UIColor(named: "BlueGrey500") ?? .gray,
+                    backgroundColor: UIColor(named: K.color500) ?? .gray,
                     targetAction: #selector(resetAnimationPressed))
 
         setupButton(&settingsSubButtons[SubButtonType.playPause.rawValue],
                     systemName: "pause.fill",
-                    backgroundColor: UIColor(named: "BlueGrey300") ?? .gray,
+                    backgroundColor: UIColor(named: K.color300) ?? .gray,
                     targetAction: #selector(playPausePressed))
 
         setupButton(&settingsSubButtons[SubButtonType.labels.rawValue],
                     systemName: "info",
-                    backgroundColor: UIColor(named: "BlueGrey100") ?? .gray,
+                    backgroundColor: UIColor(named: K.color100) ?? .gray,
                     targetAction: #selector(labelsPressed))
 
         settingsButton.frame = CGRect(x: homePosition.x,
@@ -133,7 +133,7 @@ class SettingsView: UIView {
                                       width: SettingsView.buttonSize,
                                       height: SettingsView.buttonSize)
         settingsButton.setBackgroundImage(UIImage(named: "settings"), for: .normal)
-        settingsButton.tintColor = UIColor(named: "BlueGrey000") ?? .gray
+        settingsButton.tintColor = UIColor(named: K.color000) ?? .gray
         settingsButton.layer.shadowOpacity = 0.4
         settingsButton.layer.shadowOffset = .zero
         settingsButton.alpha = K.masterAlpha

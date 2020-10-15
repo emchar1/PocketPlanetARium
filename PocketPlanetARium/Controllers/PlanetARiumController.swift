@@ -19,9 +19,9 @@ class PlanetARiumController: UIViewController {
     override var prefersStatusBarHidden: Bool { return true }
     var peekView: PlanetPeekView?
     lazy var loadingLabel: UILabel = {
-        let loadingLabel = UILabel(frame: CGRect(x: 0, y: 0, width: bezelView.frame.width, height: 40))
+        let loadingLabel = UILabel(frame: CGRect(x: 0, y: 0, width: Bezel.getWidth(for: view), height: 100))
         loadingLabel.center = view.center
-        loadingLabel.font = UIFont(name: "Futura", size: 17.0)
+        loadingLabel.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
         loadingLabel.textColor = .white
         loadingLabel.textAlignment = .center
         loadingLabel.text = "Constructing PlanetARium..."
@@ -30,7 +30,6 @@ class PlanetARiumController: UIViewController {
 
     //Settings buttons
     let settingsButtons = SettingsView()
-    let padding: CGFloat = 20
 
     //PlanetARium properties
     var planetarium = PlanetARium()
@@ -54,17 +53,20 @@ class PlanetARiumController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = UIColor(named: "BlueGrey500") ?? .gray
+                
+        view.backgroundColor = UIColor(named: K.color500) ?? .gray
         view.addSubview(loadingLabel)
-        
+
         bezelView.getBezelView(for: &bezelView, in: view, width: Bezel.getWidth(for: view), height: Bezel.getHeight(for: view))
-        
+
+
         settingsButtons.delegate = self
         settingsButtons.alpha = 0.0
         view.addSubview(settingsButtons)
-        NSLayoutConstraint.activate([settingsButtons.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -padding),
-                                     settingsButtons.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -padding)])
+        NSLayoutConstraint.activate([settingsButtons.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+                                                                             constant: -K.padding),
+                                     settingsButtons.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                                                                               constant: -K.padding)])
 
         sceneView.delegate = self
         sceneView.autoenablesDefaultLighting = true
@@ -93,7 +95,7 @@ class PlanetARiumController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         let duration: TimeInterval = 2.0
 
-        UIView.animate(withDuration: duration / 8, delay: 0.0, options: .curveEaseIn) {
+        UIView.animate(withDuration: duration / 2, delay: 0.0, options: .curveEaseIn) {
             self.loadingLabel.alpha = 0.0
         } completion: { _ in
             self.loadingLabel.removeFromSuperview()
