@@ -19,7 +19,7 @@ class PlanetARiumController: UIViewController {
     override var prefersStatusBarHidden: Bool { return true }
     var peekView: PlanetPeekView?
     lazy var loadingLabel: UILabel = {
-        let loadingLabel = UILabel(frame: CGRect(x: 0, y: 0, width: Bezel.getWidth(for: view), height: 100))
+        let loadingLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
         loadingLabel.center = view.center
         loadingLabel.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
         loadingLabel.textColor = .white
@@ -57,9 +57,37 @@ class PlanetARiumController: UIViewController {
         view.backgroundColor = UIColor(named: K.color500) ?? .gray
         view.addSubview(loadingLabel)
 
-        bezelView.createBezelView(for: &bezelView, in: view, width: Bezel.getWidth(for: view), height: Bezel.getHeight(for: view))
 
+        
+        
+        
+        
+        
+        
+        let bezelRatio: CGFloat = 612/335
+        let possibleWidth = view.frame.width - 2 * K.padding
+        let possibleHeight = view.frame.height - 6 * K.padding
+        let width = bezelRatio < K.screenRatio ? possibleWidth : possibleHeight / bezelRatio
+        let height = bezelRatio < K.screenRatio ? possibleWidth * bezelRatio : possibleHeight
 
+        bezelView.translatesAutoresizingMaskIntoConstraints = true
+        bezelView.frame = CGRect(x: 0, y: 0, width: width, height: height)
+                
+        bezelView.center = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
+        bezelView.backgroundColor = UIColor(named: K.color900) ?? .gray
+        bezelView.layer.cornerRadius = K.padding
+        bezelView.layer.shadowColor = UIColor.black.cgColor
+        bezelView.layer.shadowOpacity = 0.3
+        bezelView.layer.shadowRadius = 10
+
+    
+        
+        
+        
+        
+
+        
+        
         settingsButtons.delegate = self
         settingsButtons.alpha = 0.0
         view.addSubview(settingsButtons)

@@ -9,30 +9,6 @@
 import UIKit
 
 
-// MARK: - Bezel struct
-
-struct Bezel {
-    /**
-     My golden ratio for the bezelView.
-     */
-    static let bezelRatio: CGFloat = 612 / 335
-
-    /**
-     Returns the width of the bezelView.
-     */
-    static func getWidth(for view: UIView) -> CGFloat {
-        return bezelRatio < K.screenRatio ? view.frame.width - 2 * K.padding : getHeight(for: view) / bezelRatio
-    }
-    
-    /**
-     Returns the height of the bezelView.
-     */
-    static func getHeight(for view: UIView) -> CGFloat {
-        return bezelRatio < K.screenRatio ? getWidth(for: view) * bezelRatio : view.frame.height - 6 * K.padding
-    }
-}
-
-
 // MARK: - K struct
 
 /**
@@ -235,31 +211,6 @@ extension UIView {
         self.alpha = alpha
     }
     
-    /**
-     Creates a bezel for the view, kinda like a spaceship window.
-     - parameters:
-        - view: the view of the bezel
-        - superView: the superview reference, which usually adds the bezel view
-        - width: width of the bezel view
-        - height: height of the bezel view
-     */
-    func createBezelView(for view: inout UIView, in superView: UIView, width: CGFloat, height: CGFloat) {
-        view.translatesAutoresizingMaskIntoConstraints = true
-        view.frame = CGRect(x: 0, y: 0, width: width, height: height)
-        
-//        NSLayoutConstraint.activate([view.topAnchor.constraint(equalTo: superView.topAnchor, constant: height),
-//                                     view.leadingAnchor.constraint(equalTo: superView.leadingAnchor, constant: width),
-//                                     view.trailingAnchor.constraint(equalTo: superView.trailingAnchor, constant: width),
-//                                     view.bottomAnchor.constraint(equalTo: superView.bottomAnchor, constant: height)])
-        
-        view.center = CGPoint(x: superView.frame.width / 2, y: superView.frame.height / 2)
-        view.backgroundColor = UIColor(named: K.color900) ?? .lightGray
-        view.layer.cornerRadius = 16
-        view.layer.shadowOpacity = 0.3
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowRadius = 10
-        view.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
-    }
 }
 
 
