@@ -238,12 +238,12 @@ extension UIView {
     /**
      Creates a bezel for the view, kinda like a spaceship window.
      - parameters:
-        - view: the view to bezel
-        - superView: using the superview as a reference
+        - view: the view of the bezel
+        - superView: the superview reference, which usually adds the bezel view
         - width: width of the bezel view
-        - height: height of...
+        - height: height of the bezel view
      */
-    func getBezelView(for view: inout UIView, in superView: UIView, width: CGFloat, height: CGFloat) {
+    func createBezelView(for view: inout UIView, in superView: UIView, width: CGFloat, height: CGFloat) {
         view.translatesAutoresizingMaskIntoConstraints = true
         view.frame = CGRect(x: 0, y: 0, width: width, height: height)
         

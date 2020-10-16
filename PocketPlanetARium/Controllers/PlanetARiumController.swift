@@ -57,7 +57,7 @@ class PlanetARiumController: UIViewController {
         view.backgroundColor = UIColor(named: K.color500) ?? .gray
         view.addSubview(loadingLabel)
 
-        bezelView.getBezelView(for: &bezelView, in: view, width: Bezel.getWidth(for: view), height: Bezel.getHeight(for: view))
+        bezelView.createBezelView(for: &bezelView, in: view, width: Bezel.getWidth(for: view), height: Bezel.getHeight(for: view))
 
 
         settingsButtons.delegate = self
