@@ -16,17 +16,17 @@ enum MenuItem: CaseIterable {
     var item: MenuIndex {
         switch self {
         case .item0:
-            return (0, "Imagine the universe in the palm of your hand...")
+            return (0, "Imagine the universe in the palm of your hand... With the Pocket PlanetARium, you can do just that. Get up, move around, and discover the planets in augmented reality!")
         case .item1:
-            return (1, "Get up, move around, and discover the planets in augmented reality!")
+            return (1, "When first launching the app, make sure to hold your phone at a comfortable distance from your face, at eye level, and perpendicular to the floor. Make sure lighting in the room is adequate to get the best experience.")
         case .item2:
-            return (2, "Pinch to zoom in and out.")
+            return (2, "Pinch with two fingers in the PlanetARium to zoom in and out. The PlanetARium will scale from as small as 5 feet to as large as half a mile in radius!")
         case .item3:
-            return (3, "Tap on a planet to get more info.")
+            return (3, "Tap on any planet to get quick info. Continue to press deeper to get more details on the planet.")
         case .item4:
-            return (4, "But remember to always be aware of your surroundings!")
+            return (4, "Remember to ALWAYS be aware of your surroundings!")
         case .item5:
-            return (5, "Menu items\nMenu items\nMenu items.")
+            return (5, "PlanetARium: Solar System\nSound: On\nHints on Startup: On")
         }
     }
 }

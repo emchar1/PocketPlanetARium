@@ -58,7 +58,7 @@ class MenuContentView: UIView {
      */
     private func setupStack1() {
         let view1 = UIView()
-        view1.backgroundColor = .blue
+//        view1.backgroundColor = .blue
         stackView.addArrangedSubview(view1)
         
         //image view
@@ -78,14 +78,15 @@ class MenuContentView: UIView {
      */
     private func setupStack2() {
         let view2 = UIView()
-        view2.backgroundColor = .green
+//        view2.backgroundColor = .green
         stackView.addArrangedSubview(view2)
         
         //content label
         contentLabel = UILabel()
-        contentLabel.backgroundColor = .orange
+//        contentLabel.backgroundColor = .orange
         contentLabel.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
         contentLabel.textColor = .white
+        contentLabel.textAlignment = .center
         contentLabel.numberOfLines = 0
         contentLabel.text = menuItem.item.description
         
@@ -104,20 +105,21 @@ class MenuContentView: UIView {
         
         //*******FIX!!!
         if menuItem == .item5 {
-            goButton = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
-            goButton.backgroundColor = .gray
-            goButton.layer.cornerRadius = 10
-            goButton.layer.shadowOffset = .zero
+            goButton = UIButton()
+            goButton.backgroundColor = UIColor(rgb: 0x3498db)
+            goButton.layer.cornerRadius = 7
             goButton.layer.shadowRadius = 3
             goButton.layer.shadowColor = UIColor.black.cgColor
-            goButton.layer.shadowOpacity = 0.6
+            goButton.layer.shadowOpacity = 0.3
             goButton.titleLabel?.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
             goButton.setTitle("Go to PlanetARium", for: .normal)
             goButton.addTarget(self, action: #selector(loadPlanetARium), for: .touchUpInside)
             view2.addSubview(goButton)
             goButton.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([goButton.centerXAnchor.constraint(equalTo: view2.centerXAnchor),
-                                         goButton.centerYAnchor.constraint(equalTo: view2.centerYAnchor)])
+            NSLayoutConstraint.activate([goButton.widthAnchor.constraint(equalToConstant: 200),
+                                         goButton.heightAnchor.constraint(equalToConstant: 50),
+                                         goButton.centerXAnchor.constraint(equalTo: view2.centerXAnchor),
+                                         view2.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: goButton.bottomAnchor, constant: 2 * K.padding)])
         }
 
     }
