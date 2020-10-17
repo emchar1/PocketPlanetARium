@@ -15,9 +15,12 @@ import UIKit
  A struct of Constants for commonly used properties and functions.
  */
 struct K {
+    static let userDefaultsKey_SoundIsMuted = "SoundIsMuted"
+    static let userDefaultsKey_HintsAreOff = "HintsAreOff"
+    
     static let fontFace = "Futura"
     static let fontFaceItalic = "Futura Medium Italic"
-    static let fontSizeMenu: CGFloat = 20
+    static let fontSizeMenu: CGFloat = 18
     static let fontSizePeekTitle: CGFloat = 18
     static let fontSizePeekDetails: CGFloat = 14
     
@@ -49,7 +52,7 @@ struct K {
      Master alpha transparency to apply across all views for a uniform appearance.
      */
     static let masterAlpha: CGFloat = 1.0
-    
+            
     /**
     Calculates the hypotenuse of a polygon with up to 3 sides.
     - parameters:

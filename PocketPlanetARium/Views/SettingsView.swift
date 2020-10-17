@@ -32,6 +32,7 @@ struct SettingsSubButton {
 // MARK: - SettingsView Delegate Function Headers
 
 protocol SettingsViewDelegate {
+    func settingsView(_ controller: SettingsView, didPressSoundButton settingsSubButton: SettingsSubButton?)
     func settingsView(_ controller: SettingsView, didPressLabelsButton settingsSubButton: SettingsSubButton?)
     func settingsView(_ controller: SettingsView, didPressPlayPauseButton settingsSubButton: SettingsSubButton?)
     func settingsView(_ controller: SettingsView, didPressResetAnimationButton settingsSubButton: SettingsSubButton?)
@@ -52,16 +53,18 @@ class SettingsView: UIView {
 
     //State properties
     var showSettings = false
+    var isMuted: Bool
     var isPaused = false
     
     //Buttons
     var settingsButton = UIButton()
     enum SubButtonType: String {
-        case labels, playPause, resetAnimation
+        case sound, labels, playPause, resetAnimation
     }
-    var settingsSubButtons: [String : SettingsSubButton] = [SubButtonType.labels.rawValue : SettingsSubButton(buttonOrder: 1),
-                                                            SubButtonType.playPause.rawValue : SettingsSubButton(buttonOrder: 2),
-                                                            SubButtonType.resetAnimation.rawValue : SettingsSubButton(buttonOrder: 3)]
+    var settingsSubButtons: [String : SettingsSubButton] = [SubButtonType.sound.rawValue : SettingsSubButton(buttonOrder: 1),
+                                                            SubButtonType.labels.rawValue : SettingsSubButton(buttonOrder: 2),
+                                                            SubButtonType.playPause.rawValue : SettingsSubButton(buttonOrder: 3),
+                                                            SubButtonType.resetAnimation.rawValue : SettingsSubButton(buttonOrder: 4)]
     
     //View parameters
     var viewWidthAnchor: NSLayoutConstraint?
@@ -81,11 +84,13 @@ class SettingsView: UIView {
     // MARK: - Initialization
     
     init() {
+        isMuted = UserDefaults.standard.bool(forKey: K.userDefaultsKey_SoundIsMuted)
+
         super.init(frame: CGRect(x: 0,
                                  y: 0,
                                  width: SettingsView.buttonSize,
                                  height: SettingsView.buttonSize))
-        
+                
         initializeButtons()
         
         translatesAutoresizingMaskIntoConstraints = false
@@ -115,18 +120,24 @@ class SettingsView: UIView {
         //The order of adding the button to the subviews MATTER!
         setupButton(&settingsSubButtons[SubButtonType.resetAnimation.rawValue],
                     systemName: "arrow.counterclockwise",
-                    backgroundColor: UIColor(named: K.color500) ?? .gray,
+                    backgroundColor: UIColor(named: K.color700) ?? .gray,
                     targetAction: #selector(resetAnimationPressed))
 
         setupButton(&settingsSubButtons[SubButtonType.playPause.rawValue],
                     systemName: "pause.fill",
-                    backgroundColor: UIColor(named: K.color300) ?? .gray,
+                    backgroundColor: UIColor(named: K.color500) ?? .gray,
                     targetAction: #selector(playPausePressed))
 
         setupButton(&settingsSubButtons[SubButtonType.labels.rawValue],
                     systemName: "info",
-                    backgroundColor: UIColor(named: K.color100) ?? .gray,
+                    backgroundColor: UIColor(named: K.color300) ?? .gray,
                     targetAction: #selector(labelsPressed))
+
+        setupButton(&settingsSubButtons[SubButtonType.sound.rawValue],
+                    systemName: isMuted ? "speaker.slash.fill" : "speaker.fill",
+                    backgroundColor: UIColor(named: K.color100) ?? .gray,
+                    tintColor: UIColor(named: K.color900) ?? .white,
+                    targetAction: #selector(soundPressed))
 
         settingsButton.frame = CGRect(x: homePosition.x,
                                       y: homePosition.y,
@@ -149,7 +160,7 @@ class SettingsView: UIView {
         - backgroundColor: button's background color
         - targetAction: selector call to the function that gets called when the button is pressed
      */
-    private func setupButton(_ settingsSubButton: inout SettingsSubButton?, systemName: String, backgroundColor: UIColor, targetAction: Selector) {
+    private func setupButton(_ settingsSubButton: inout SettingsSubButton?, systemName: String, backgroundColor: UIColor, tintColor: UIColor = .white, targetAction: Selector) {
         guard let settingsSubButton = settingsSubButton else {
             fatalError("Invalid subButton name!")
         }
@@ -159,7 +170,7 @@ class SettingsView: UIView {
                                                 width: SettingsView.buttonSize,
                                                 height: SettingsView.buttonSize)
         settingsSubButton.button.setImage(UIImage(systemName: systemName), for: .normal)
-        settingsSubButton.button.tintColor = .white
+        settingsSubButton.button.tintColor = tintColor
         settingsSubButton.button.alpha = 0.0
         settingsSubButton.button.backgroundColor = backgroundColor
         settingsSubButton.button.layer.cornerRadius = 0.5 * SettingsView.buttonSize
@@ -334,6 +345,18 @@ class SettingsView: UIView {
     /**
      Target action that handles the labels button press.
      */
+    @objc private func soundPressed() {
+        K.addHapticFeedback(withStyle: .light)
+        
+        isMuted = !isMuted
+        handleSound()
+        
+        delegate?.settingsView(self, didPressSoundButton: settingsSubButtons[SubButtonType.sound.rawValue])
+    }
+
+    /**
+     Target action that handles the labels button press.
+     */
     @objc private func labelsPressed() {
         K.addHapticFeedback(withStyle: .light)
         delegate?.settingsView(self, didPressLabelsButton: settingsSubButtons[SubButtonType.labels.rawValue])
@@ -361,6 +384,26 @@ class SettingsView: UIView {
     
     
     // MARK: - Helper Functions
+    
+    /**
+     Toggles the sound on or off.
+     */
+    private func handleSound() {
+        guard let soundButton = settingsSubButtons[SubButtonType.sound.rawValue] else {
+            return
+        }
+                
+        if isMuted {
+            print("Sound is muted")
+            UserDefaults.standard.setValue(true, forKey: K.userDefaultsKey_SoundIsMuted)
+            soundButton.button.setImage(UIImage(systemName: "speaker.slash.fill"), for: .normal)
+        }
+        else {
+            print("Sound is on")
+            UserDefaults.standard.setValue(false, forKey: K.userDefaultsKey_SoundIsMuted)
+            soundButton.button.setImage(UIImage(systemName: "speaker.fill"), for: .normal)
+        }
+    }
     
     /**
      Helper function that produces a blinking animation when paused, and toggles the button image.

@@ -77,7 +77,7 @@ class PlanetARiumController: UIViewController {
                 
         bezelView.center = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
         bezelView.backgroundColor = UIColor(named: K.color900) ?? .gray
-        bezelView.layer.cornerRadius = K.padding
+        bezelView.layer.cornerRadius = 18
         bezelView.layer.shadowColor = UIColor.black.cgColor
         bezelView.layer.shadowOpacity = 0.3
         bezelView.layer.shadowRadius = 10
@@ -360,6 +360,10 @@ extension PlanetARiumController: ARSCNViewDelegate {
 // MARK: - Settings View Delegate
 
 extension PlanetARiumController: SettingsViewDelegate {
+    func settingsView(_ controller: SettingsView, didPressSoundButton settingsSubButton: SettingsSubButton?) {
+        print("Toggled sound. Need to implement!")
+    }
+
     func settingsView(_ controller: SettingsView, didPressLabelsButton settingsSubButton: SettingsSubButton?) {
         planetarium.toggleLabels()
         planetarium.showLabels()

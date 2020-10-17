@@ -107,7 +107,7 @@ class MenuContentView: UIView {
         if menuItem == .item5 {
             goButton = UIButton()
             goButton.backgroundColor = UIColor(rgb: 0x3498db)
-            goButton.layer.cornerRadius = 7
+            goButton.layer.cornerRadius = 30
             goButton.layer.shadowRadius = 3
             goButton.layer.shadowColor = UIColor.black.cgColor
             goButton.layer.shadowOpacity = 0.3
@@ -116,8 +116,8 @@ class MenuContentView: UIView {
             goButton.addTarget(self, action: #selector(loadPlanetARium), for: .touchUpInside)
             view2.addSubview(goButton)
             goButton.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([goButton.widthAnchor.constraint(equalToConstant: 200),
-                                         goButton.heightAnchor.constraint(equalToConstant: 50),
+            NSLayoutConstraint.activate([goButton.widthAnchor.constraint(equalToConstant: 225),
+                                         goButton.heightAnchor.constraint(equalToConstant: 60),
                                          goButton.centerXAnchor.constraint(equalTo: view2.centerXAnchor),
                                          view2.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: goButton.bottomAnchor, constant: 2 * K.padding)])
         }
