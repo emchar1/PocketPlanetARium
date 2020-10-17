@@ -9,6 +9,7 @@
 import UIKit
 import SceneKit
 import ARKit
+import AVFoundation
 
 class PlanetARiumController: UIViewController {
 
@@ -50,6 +51,9 @@ class PlanetARiumController: UIViewController {
             scaleValue = scaleValue.clamp(min: 0, max: 1)
         }
     }
+    
+    //Sound & Music
+    var audioPlayer = AVAudioPlayer()
     
 
     override func viewDidLoad() {
@@ -115,6 +119,8 @@ class PlanetARiumController: UIViewController {
         lowLightWarning.alpha = 0.0
                 
         planetarium.beginAnimation(scale: scaleValue, toNode: sceneView)
+        
+        setupSounds()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -156,6 +162,9 @@ class PlanetARiumController: UIViewController {
         UIView.animate(withDuration: duration / 2, delay: duration / 2, options: .curveEaseInOut, animations: {
             self.settingsButtons.alpha = K.masterAlpha
         }, completion: nil)
+        
+        //PLAY MUSIC!!!
+        audioPlayer.play()
     }
     
     @objc private func orientationDidChange(_ notification: NSNotification) {
@@ -362,6 +371,15 @@ extension PlanetARiumController: ARSCNViewDelegate {
 extension PlanetARiumController: SettingsViewDelegate {
     func settingsView(_ controller: SettingsView, didPressSoundButton settingsSubButton: SettingsSubButton?) {
         print("Toggled sound. Need to implement!")
+        
+        if controller.isMuted {
+            //Mute all sounds
+            audioPlayer.setVolume(0.0, fadeDuration: 0.25)
+        }
+        else {
+            //Play all sounds
+            audioPlayer.setVolume(1.0, fadeDuration: 0.25)
+        }
     }
 
     func settingsView(_ controller: SettingsView, didPressLabelsButton settingsSubButton: SettingsSubButton?) {
@@ -382,12 +400,31 @@ extension PlanetARiumController: SettingsViewDelegate {
         showScaleLabel()
     }
     
-    func handlePlayPause(for controller: SettingsView) {
+    private func handlePlayPause(for controller: SettingsView) {
         if controller.isPaused {
             planetarium.pauseAnimation()
         }
         else {
             planetarium.resumeAnimation(to: scaleValue)
+        }
+    }
+}
+
+
+// MARK: - Sound of Music
+
+extension PlanetARiumController {
+    private func setupSounds() {
+        let sound = Bundle.main.path(forResource: "starwarstheme", ofType: "mp3")
+        
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
+
+            audioPlayer.volume = UserDefaults.standard.bool(forKey: K.userDefaultsKey_SoundIsMuted) ? 0.0 : 1.0
+            audioPlayer.numberOfLoops = -1
+        }
+        catch {
+            print(error)
         }
     }
 }
