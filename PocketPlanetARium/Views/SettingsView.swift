@@ -392,15 +392,15 @@ class SettingsView: UIView {
         guard let soundButton = settingsSubButtons[SubButtonType.sound.rawValue] else {
             return
         }
+        
+        UserDefaults.standard.setValue(isMuted, forKey: K.userDefaultsKey_SoundIsMuted)
                 
         if isMuted {
             print("Sound is muted")
-            UserDefaults.standard.setValue(true, forKey: K.userDefaultsKey_SoundIsMuted)
             soundButton.button.setImage(UIImage(systemName: "speaker.slash.fill"), for: .normal)
         }
         else {
             print("Sound is on")
-            UserDefaults.standard.setValue(false, forKey: K.userDefaultsKey_SoundIsMuted)
             soundButton.button.setImage(UIImage(systemName: "speaker.fill"), for: .normal)
         }
     }
