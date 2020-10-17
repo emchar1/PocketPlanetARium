@@ -129,6 +129,33 @@ struct PlanetARium {
     func areLabelsOn() -> Bool {
         return labelsOn
     }
+    
+    /**
+     Returns the physical distance from the Sun to Mercury, in feet.
+     */
+    func getDistanceSunTo(_ planetName: String) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.minimumFractionDigits = 2
+        formatter.maximumFractionDigits = 2
+        
+        guard let planet = planets.getPlanet(withName: planetName) else {
+            return "nil"
+        }
+        
+        let distance = planet.getNode().position.z * -39.3701/12.0
+        
+        if distance > 10 {
+            formatter.minimumFractionDigits = 0
+            formatter.maximumFractionDigits = 0
+        }
+        
+        guard let distanceToReturn = formatter.string(from: NSNumber(value: distance)) else {
+            return "nil"
+        }
+
+        return "Sun to \(planetName): " + distanceToReturn + " ft"
+    }
             
     
     // MARK: - Helper Functions

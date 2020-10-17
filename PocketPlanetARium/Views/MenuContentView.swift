@@ -126,7 +126,7 @@ class MenuContentView: UIView {
     // MARK: - PlanetARium Segue
             
     @objc func loadPlanetARium(_ sender: UIButton) {
-        superView.label.alpha = 1.0
+        superView.label.alpha = K.masterAlpha
         
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseOut) {
             self.alpha = 0

@@ -17,6 +17,7 @@ class PlanetARiumController: UIViewController {
     @IBOutlet weak var lowLightWarning: UIView!
 
     override var prefersStatusBarHidden: Bool { return true }
+    var scaleLabel: UILabel!
     var peekView: PlanetPeekView?
     lazy var loadingLabel: UILabel = {
         let loadingLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
@@ -64,6 +65,7 @@ class PlanetARiumController: UIViewController {
         
         
         
+        //*****Do I like this???
         let bezelRatio: CGFloat = 612/335
         let possibleWidth = view.frame.width - 2 * K.padding
         let possibleHeight = view.frame.height - 6 * K.padding
@@ -80,21 +82,26 @@ class PlanetARiumController: UIViewController {
         bezelView.layer.shadowOpacity = 0.3
         bezelView.layer.shadowRadius = 10
 
-    
-        
-        
-        
-        
+        scaleLabel = UILabel()
+        scaleLabel.font = UIFont(name: K.fontFace, size: K.fontSizePeekDetails)
+        scaleLabel.textColor = .white
+        view.addSubview(scaleLabel)
+        scaleLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([scaleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: K.padding),
+                                    view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: scaleLabel.bottomAnchor, constant: K.padding)])
 
+        
+        
+        
+        
+        
         
         
         settingsButtons.delegate = self
         settingsButtons.alpha = 0.0
         view.addSubview(settingsButtons)
-        NSLayoutConstraint.activate([settingsButtons.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
-                                                                             constant: -K.padding),
-                                     settingsButtons.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-                                                                               constant: -K.padding)])
+        NSLayoutConstraint.activate([view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: settingsButtons.bottomAnchor, constant: K.padding),
+                                     view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: settingsButtons.trailingAnchor, constant: K.padding)])
 
         sceneView.delegate = self
         sceneView.autoenablesDefaultLighting = true
@@ -190,10 +197,22 @@ class PlanetARiumController: UIViewController {
                     pinchBoundsCount += 1
                 }
             }
+
+
+            showScaleLabel()
         }
         
         //Prevents peekView getting stuck when trying to pinch instead.
         peekView?.removeFromSuperview()
+    }
+    
+    private func showScaleLabel() {
+        scaleLabel.alpha = K.masterAlpha
+        scaleLabel.text = planetarium.getDistanceSunTo("Earth")
+        
+        UIView.animate(withDuration: 0.25, delay: 2.0, options: .curveEaseOut, animations: {
+            self.scaleLabel.alpha = 0.0
+        }, completion: nil)
     }
     
     
@@ -355,6 +374,8 @@ extension PlanetARiumController: SettingsViewDelegate {
         planetarium.resetAnimation(withScale: scaleValue, toNode: sceneView)
 
         handlePlayPause(for: controller)
+        
+        showScaleLabel()
     }
     
     func handlePlayPause(for controller: SettingsView) {

@@ -18,7 +18,6 @@ struct K {
     static let fontFace = "Futura"
     static let fontFaceItalic = "Futura Medium Italic"
     static let fontSizeMenu: CGFloat = 20
-    static let fontSizePeek: CGFloat = 10
     static let fontSizePeekTitle: CGFloat = 18
     static let fontSizePeekDetails: CGFloat = 14
     

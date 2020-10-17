@@ -125,7 +125,7 @@ class PlanetPeekView: UIView {
         superView.addSubview(self)
         
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
-            self.alpha = 1.0
+            self.alpha = K.masterAlpha
         }, completion: nil)
         
         NSLayoutConstraint.activate([centerXAnchor.constraint(equalTo: superView.leadingAnchor, constant: xCenter),
