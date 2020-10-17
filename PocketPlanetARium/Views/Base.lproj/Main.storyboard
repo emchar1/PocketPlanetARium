@@ -32,76 +32,13 @@
                     <view key="view" contentMode="scaleToFill" id="U0K-SW-4ec">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T8A-IK-4ul" userLabel="Bezel View">
-                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
-                                <subviews>
-                                    <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BrB-h1-WRS">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="734"/>
-                                        <gestureRecognizers/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <integer key="value" value="16"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="T5Z-3W-eZe" appends="YES" id="1wt-VJ-tWE"/>
-                                        </connections>
-                                    </arscnView>
-                                    <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rda-l7-hc1">
-                                        <rect key="frame" x="47.666666666666657" y="317" width="280" height="100"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For optimal results, move to a brighter location." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G7N-6Z-Pug" userLabel="lowLightWarningLabel">
-                                                <rect key="frame" x="30" y="28.000000000000004" width="220" height="44.333333333333343"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="220" id="5MY-lA-EYe"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstItem="G7N-6Z-Pug" firstAttribute="centerX" secondItem="Rda-l7-hc1" secondAttribute="centerX" id="g0X-u6-rdt"/>
-                                            <constraint firstAttribute="height" constant="100" id="oyB-cn-p3O"/>
-                                            <constraint firstAttribute="width" constant="280" id="qp8-Ho-CBg"/>
-                                            <constraint firstItem="G7N-6Z-Pug" firstAttribute="centerY" secondItem="Rda-l7-hc1" secondAttribute="centerY" id="soo-vs-vvH"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstItem="BrB-h1-WRS" firstAttribute="leading" secondItem="T8A-IK-4ul" secondAttribute="leading" placeholder="YES" id="9cC-VL-9vV"/>
-                                    <constraint firstItem="Rda-l7-hc1" firstAttribute="centerX" secondItem="T8A-IK-4ul" secondAttribute="centerX" id="Asp-Vp-efe"/>
-                                    <constraint firstItem="BrB-h1-WRS" firstAttribute="top" secondItem="T8A-IK-4ul" secondAttribute="top" placeholder="YES" id="Q1F-dA-rWH"/>
-                                    <constraint firstAttribute="bottom" secondItem="BrB-h1-WRS" secondAttribute="bottom" placeholder="YES" id="gFb-Ji-6vl"/>
-                                    <constraint firstItem="Rda-l7-hc1" firstAttribute="centerY" secondItem="T8A-IK-4ul" secondAttribute="centerY" id="hko-Np-STZ"/>
-                                    <constraint firstAttribute="trailing" secondItem="BrB-h1-WRS" secondAttribute="trailing" placeholder="YES" id="mR0-hU-GQW"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <integer key="value" value="16"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="fQZ-KI-GVf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="T8A-IK-4ul" firstAttribute="trailing" secondItem="fQZ-KI-GVf" secondAttribute="trailing" placeholder="YES" id="BE2-tJ-O3h"/>
-                            <constraint firstItem="T8A-IK-4ul" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" placeholder="YES" id="CUu-hw-Tf8"/>
-                            <constraint firstItem="T8A-IK-4ul" firstAttribute="bottom" secondItem="fQZ-KI-GVf" secondAttribute="bottom" placeholder="YES" id="oTV-Ft-mvm"/>
-                            <constraint firstItem="T8A-IK-4ul" firstAttribute="top" secondItem="fQZ-KI-GVf" secondAttribute="top" placeholder="YES" id="woo-dc-isF"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="iqi-dg-1y1">
                         <barButtonItem key="rightBarButtonItem" title="Item" id="q1K-q0-lEA"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="bezelView" destination="T8A-IK-4ul" id="Rlf-9T-cpS"/>
-                        <outlet property="lowLightWarning" destination="Rda-l7-hc1" id="vzK-tM-GDC"/>
-                        <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
                         <segue destination="Zct-LL-3e1" kind="presentation" identifier="PlanetDetailsSegue" id="KTr-VH-x6O"/>
                     </connections>
                 </viewController>

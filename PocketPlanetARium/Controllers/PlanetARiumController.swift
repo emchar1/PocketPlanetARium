@@ -12,21 +12,21 @@ import ARKit
 
 class PlanetARiumController: UIViewController {
 
-    @IBOutlet weak var bezelView: UIView!
-    @IBOutlet var sceneView: ARSCNView!
-    @IBOutlet weak var lowLightWarning: UIView!
+    var bezelView: MenuBezelView!
+    var sceneView: ARSCNView!
+//    @IBOutlet weak var lowLightWarning: UIView!
 
     override var prefersStatusBarHidden: Bool { return true }
     var peekView: PlanetPeekView?
-    lazy var loadingLabel: UILabel = {
-        let loadingLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
-        loadingLabel.center = view.center
-        loadingLabel.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
-        loadingLabel.textColor = .white
-        loadingLabel.textAlignment = .center
-        loadingLabel.text = "Constructing PlanetARium..."
-        return loadingLabel
-    }()
+//    lazy var loadingLabel: UILabel = {
+//        let loadingLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+//        loadingLabel.center = view.center
+//        loadingLabel.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
+//        loadingLabel.textColor = .white
+//        loadingLabel.textAlignment = .center
+//        loadingLabel.text = "Constructing PlanetARium..."
+//        return loadingLabel
+//    }()
 
     //Settings buttons
     let settingsButtons = SettingsView()
@@ -54,8 +54,8 @@ class PlanetARiumController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
                 
-        view.backgroundColor = UIColor(named: K.color500) ?? .gray
-        view.addSubview(loadingLabel)
+        view.backgroundColor = UIColor(named: K.color500) ?? .red
+//        view.addSubview(loadingLabel)
 
 
         
@@ -70,15 +70,19 @@ class PlanetARiumController: UIViewController {
         let width = bezelRatio < K.screenRatio ? possibleWidth : possibleHeight / bezelRatio
         let height = bezelRatio < K.screenRatio ? possibleWidth * bezelRatio : possibleHeight
 
-        bezelView.translatesAutoresizingMaskIntoConstraints = true
-        bezelView.frame = CGRect(x: 0, y: 0, width: width, height: height)
-                
-        bezelView.center = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
-        bezelView.backgroundColor = UIColor(named: K.color900) ?? .gray
-        bezelView.layer.cornerRadius = K.padding
-        bezelView.layer.shadowColor = UIColor.black.cgColor
-        bezelView.layer.shadowOpacity = 0.3
-        bezelView.layer.shadowRadius = 10
+        bezelView = MenuBezelView(in: view)
+        bezelView.label.alpha = 1.0
+
+        view.addSubview(bezelView)
+        
+//        bezelView.translatesAutoresizingMaskIntoConstraints = true
+//        bezelView.frame = CGRect(x: 0, y: 0, width: width, height: height)
+//        bezelView.center = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
+//        bezelView.backgroundColor = UIColor(named: K.color900) ?? .gray
+//        bezelView.layer.cornerRadius = K.padding
+//        bezelView.layer.shadowColor = UIColor.black.cgColor
+//        bezelView.layer.shadowOpacity = 0.3
+//        bezelView.layer.shadowRadius = 10
 
     
         
@@ -96,6 +100,10 @@ class PlanetARiumController: UIViewController {
                                      settingsButtons.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
                                                                                constant: -K.padding)])
 
+        sceneView = ARSCNView()
+//        sceneView.backgroundColor = .cyan
+        
+        bezelView.addSubview(sceneView)
         sceneView.delegate = self
         sceneView.autoenablesDefaultLighting = true
 //        sceneView.showsStatistics = true
@@ -103,9 +111,9 @@ class PlanetARiumController: UIViewController {
         sceneView.frame = CGRect(x: 0, y: 0, width: bezelView.frame.width, height: bezelView.frame.height)
         sceneView.alpha = 0.0
 
-        lowLightWarning.clipsToBounds = true
-        lowLightWarning.layer.cornerRadius = 7
-        lowLightWarning.alpha = 0.0
+//        lowLightWarning.clipsToBounds = true
+//        lowLightWarning.layer.cornerRadius = 7
+//        lowLightWarning.alpha = 0.0
                 
         planetarium.beginAnimation(scale: scaleValue, toNode: sceneView)
     }
@@ -123,15 +131,16 @@ class PlanetARiumController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         let duration: TimeInterval = 2.0
 
-        UIView.animate(withDuration: duration / 2, delay: 0.0, options: .curveEaseIn) {
-            self.loadingLabel.alpha = 0.0
-        } completion: { _ in
-            self.loadingLabel.removeFromSuperview()
-        }
+//        UIView.animate(withDuration: duration / 2, delay: 0.0, options: .curveEaseIn) {
+//            self.loadingLabel.alpha = 0.0
+//        } completion: { _ in
+//            self.loadingLabel.removeFromSuperview()
+//        }
 
         UIView.animate(withDuration: duration, delay: 0.0, options: .curveEaseOut) {
             self.bezelView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
             self.sceneView.frame = self.bezelView.frame
+            self.bezelView.label.frame = self.bezelView.frame
             self.sceneView.alpha = 1.0
         } completion: { _ in
             self.view.backgroundColor = .clear
@@ -311,7 +320,7 @@ extension PlanetARiumController: ARSCNViewDelegate {
             else {
                 if let lowLightTimer = lowLightTimer, time > lowLightTimer {
                     DispatchQueue.main.async {
-                        self.lowLightWarning.alpha = 0.6
+//                        self.lowLightWarning.alpha = 0.6
                     }
                 }
             }
@@ -325,7 +334,7 @@ extension PlanetARiumController: ARSCNViewDelegate {
                 if let lowLightTimer = lowLightTimer, time > lowLightTimer {
                     DispatchQueue.main.async {
                         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
-                            self.lowLightWarning.alpha = 0.0
+//                            self.lowLightWarning.alpha = 0.0
                         }, completion: { _ in
                             self.lowLightTimer = nil
                         })

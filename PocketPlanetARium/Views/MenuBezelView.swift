@@ -41,6 +41,7 @@ class MenuBezelView: UIView {
         layer.shadowRadius = 10
         
         label = UILabel(frame: frame)
+        label.backgroundColor = .purple
         label.frame.origin = .zero
         label.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
         label.textColor = .white
