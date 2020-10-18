@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 
 // MARK: - Settings Sub Button Struct
@@ -77,6 +78,11 @@ class SettingsView: UIView {
     }
     var lastOrientation: UIDeviceOrientation = .portrait
     
+    //Music & Sounds
+    var buttonPressPlayer = AVAudioPlayer()
+    var settingsExpandPlayer = AVAudioPlayer()
+    var settingsCollapsePlayer = AVAudioPlayer()
+    
     //Delegate var
     var delegate: SettingsViewDelegate?
     
@@ -106,6 +112,8 @@ class SettingsView: UIView {
         if UIDevice.current.orientation.isValidInterfaceOrientation {
             lastOrientation = UIDevice.current.orientation
         }
+        
+        setupSounds()
     }
     
     required init?(coder: NSCoder) {
@@ -234,6 +242,9 @@ class SettingsView: UIView {
         showSettings = !showSettings
         
         if showSettings {
+            settingsExpandPlayer.currentTime = 0
+            settingsExpandPlayer.play()
+            
             //Need to reset all buttons while resizing the frame and constraints!!
             if UIDevice.current.orientation.isPortrait ||
                 (!UIDevice.current.orientation.isValidInterfaceOrientation && lastOrientation.isPortrait) {
@@ -287,6 +298,8 @@ class SettingsView: UIView {
         }
         else {
             K.addHapticFeedback(withStyle: .medium)
+            settingsCollapsePlayer.currentTime = 0
+            settingsCollapsePlayer.play()
 
             //Need to reset all buttons while resizing the frame and constraints!!
             frame.size.width = collapsedViewSize
@@ -347,6 +360,9 @@ class SettingsView: UIView {
      */
     @objc private func soundPressed() {
         K.addHapticFeedback(withStyle: .light)
+        buttonPressPlayer.pan = -1.0
+        buttonPressPlayer.currentTime = 0
+        buttonPressPlayer.play()
         
         isMuted = !isMuted
         handleSound()
@@ -359,6 +375,10 @@ class SettingsView: UIView {
      */
     @objc private func labelsPressed() {
         K.addHapticFeedback(withStyle: .light)
+        buttonPressPlayer.pan = -0.5
+        buttonPressPlayer.currentTime = 0
+        buttonPressPlayer.play()
+
         delegate?.settingsView(self, didPressLabelsButton: settingsSubButtons[SubButtonType.labels.rawValue])
     }
     
@@ -367,6 +387,10 @@ class SettingsView: UIView {
      */
     @objc private func resetAnimationPressed() {
         K.addHapticFeedback(withStyle: .light)
+        buttonPressPlayer.pan = 1.0
+        buttonPressPlayer.currentTime = 0
+        buttonPressPlayer.play()
+
         delegate?.settingsView(self, didPressResetAnimationButton: settingsSubButtons[SubButtonType.resetAnimation.rawValue])
     }
     
@@ -375,6 +399,9 @@ class SettingsView: UIView {
      */
     @objc private func playPausePressed() {
         K.addHapticFeedback(withStyle: .light)
+        buttonPressPlayer.pan = 0.5
+        buttonPressPlayer.currentTime = 0
+        buttonPressPlayer.play()
 
         isPaused = !isPaused
         handlePlayPause()
@@ -392,15 +419,21 @@ class SettingsView: UIView {
         guard let soundButton = settingsSubButtons[SubButtonType.sound.rawValue] else {
             return
         }
-        
+                
         UserDefaults.standard.setValue(isMuted, forKey: K.userDefaultsKey_SoundIsMuted)
                 
         if isMuted {
-            print("Sound is muted")
+            buttonPressPlayer.volume = 0.0
+            settingsExpandPlayer.volume = 0.0
+            settingsCollapsePlayer.volume = 0.0
+
             soundButton.button.setImage(UIImage(systemName: "speaker.slash.fill"), for: .normal)
         }
         else {
-            print("Sound is on")
+            buttonPressPlayer.volume = 1.0
+            settingsExpandPlayer.volume = 1.0
+            settingsCollapsePlayer.volume = 1.0
+
             soundButton.button.setImage(UIImage(systemName: "speaker.fill"), for: .normal)
         }
     }
@@ -423,4 +456,38 @@ class SettingsView: UIView {
         }
     }
     
+}
+
+
+// MARK: - Sound FX
+
+extension SettingsView {
+    private func setupSounds() {
+        let buttonPress = K.sounds_buttonPress
+        let settingsExpand = K.sounds_settingsExpand
+        let settingsCollapse = K.sounds_settingsCollapse
+        
+        guard let buttonPressSound = Bundle.main.path(forResource: buttonPress.name, ofType: buttonPress.type),
+              let settingsExpandSound = Bundle.main.path(forResource: settingsExpand.name, ofType: settingsExpand.type),
+              let settingsCollapseSound = Bundle.main.path(forResource: settingsCollapse.name, ofType: settingsCollapse.type) else {
+            print("Can't find button sounds.")
+            return
+        }
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.ambient, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+            
+            buttonPressPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: buttonPressSound))
+            settingsExpandPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: settingsExpandSound))
+            settingsCollapsePlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: settingsCollapseSound))
+
+            buttonPressPlayer.volume = isMuted ? 0.0 : 1.0
+            settingsExpandPlayer.volume = isMuted ? 0.0 : 1.0
+            settingsCollapsePlayer.volume = isMuted ? 0.0 : 1.0
+        }
+        catch {
+            print(error)
+        }
+    }
 }

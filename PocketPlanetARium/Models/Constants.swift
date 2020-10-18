@@ -15,15 +15,18 @@ import UIKit
  A struct of Constants for commonly used properties and functions.
  */
 struct K {
+    //UserDefault Keys
     static let userDefaultsKey_SoundIsMuted = "SoundIsMuted"
     static let userDefaultsKey_HintsAreOff = "HintsAreOff"
     
+    //Fonts
     static let fontFace = "Futura"
     static let fontFaceItalic = "Futura Medium Italic"
     static let fontSizeMenu: CGFloat = 18
     static let fontSizePeekTitle: CGFloat = 18
     static let fontSizePeekDetails: CGFloat = 14
     
+    //Color Themes
     static var color = "BlueGrey"
     static let color000 = "\(K.color)000"
     static let color100 = "\(K.color)100"
@@ -31,6 +34,19 @@ struct K {
     static let color500 = "\(K.color)500"
     static let color700 = "\(K.color)700"
     static let color900 = "\(K.color)900"
+    
+    //Music and Sounds
+    static let music_starWarsTheme: (name: String, type: String) = ("starwarstheme", "mp3")
+    static let music_outerspace: (name: String, type: String) = ("25032559_space-travel_by_phillipmariani_preview", "mp3")
+    static let sounds_openPlanetARium: (name: String, type: String) = ("9121155_tick_by_royaltyfreesounds_preview", "mp3")
+    static let sounds_buttonPress: (name: String, type: String) = ("18384061_tick_by_nonzerobot_preview", "mp3")
+    static let sounds_settingsExpand: (name: String, type: String) = ("24718337_zoom_by_volkovsound_preview", "mp3")
+    static let sounds_settingsCollapse: (name: String, type: String) = ("4458404_option-tick_by_urbazon_preview", "mp3")
+    static let sounds_scaleShrink: (name: String, type: String) = ("8108259_zoom-in_by_stockwaves_preview", "mp3")
+    static let sounds_scaleGrow: (name: String, type: String) = ("8108259_zoom-in_by_stockwaves_preview", "mp3")
+    static let sounds_peekDetails: (name: String, type: String) = ("", "")
+    static let sounds_popDetails: (name: String, type: String) = ("", "")
+    static let sounds_closeDetails: (name: String, type: String) = ("", "")
 
 
     /**

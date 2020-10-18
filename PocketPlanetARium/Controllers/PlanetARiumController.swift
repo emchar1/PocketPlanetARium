@@ -54,6 +54,8 @@ class PlanetARiumController: UIViewController {
     
     //Sound & Music
     var audioPlayer = AVAudioPlayer()
+    var scaleShrinkPlayer = AVAudioPlayer()
+    var scaleGrowPlayer = AVAudioPlayer()
     
 
     override func viewDidLoad() {
@@ -199,6 +201,13 @@ class PlanetARiumController: UIViewController {
                 
                 planetarium.beginAnimation(scale: scaleValue, toNode: sceneView)
                 handlePlayPause(for: settingsButtons)
+                
+                if diff < 0 {
+                    scaleShrinkPlayer.play()
+                }
+                else {
+                    scaleGrowPlayer.play()
+                }
             }
             else {
                 if pinchBoundsCount < pinchBoundsLimit {
@@ -370,15 +379,17 @@ extension PlanetARiumController: ARSCNViewDelegate {
 
 extension PlanetARiumController: SettingsViewDelegate {
     func settingsView(_ controller: SettingsView, didPressSoundButton settingsSubButton: SettingsSubButton?) {
-        print("Toggled sound. Need to implement!")
-        
         if controller.isMuted {
             //Mute all sounds
             audioPlayer.setVolume(0.0, fadeDuration: 0.25)
+            scaleShrinkPlayer.volume = 0.0
+            scaleGrowPlayer.volume = 0.0
         }
         else {
             //Play all sounds
             audioPlayer.setVolume(1.0, fadeDuration: 0.25)
+            scaleShrinkPlayer.volume = 1.0
+            scaleGrowPlayer.volume = 1.0
         }
     }
 
@@ -415,13 +426,28 @@ extension PlanetARiumController: SettingsViewDelegate {
 
 extension PlanetARiumController {
     private func setupSounds() {
-        let sound = Bundle.main.path(forResource: "starwarstheme", ofType: "mp3")
+        let backgroundMusic = K.music_outerspace
+        
+        guard let backgroundMusicSound = Bundle.main.path(forResource: backgroundMusic.name, ofType: backgroundMusic.type),
+              let scaleShrinkSound = Bundle.main.path(forResource: K.sounds_scaleShrink.name, ofType: K.sounds_scaleShrink.type),
+              let scaleGrowSound = Bundle.main.path(forResource: K.sounds_scaleGrow.name, ofType: K.sounds_scaleGrow.type) else {
+
+            print("Unable to find sounds in PlanetARiumController!")
+            return
+        }
         
         do {
-            audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
+            try AVAudioSession.sharedInstance().setCategory(.ambient, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+            
+            audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: backgroundMusicSound))
+            scaleShrinkPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: scaleShrinkSound))
+            scaleGrowPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: scaleGrowSound))
 
             audioPlayer.volume = UserDefaults.standard.bool(forKey: K.userDefaultsKey_SoundIsMuted) ? 0.0 : 1.0
             audioPlayer.numberOfLoops = -1
+            scaleShrinkPlayer.volume = UserDefaults.standard.bool(forKey: K.userDefaultsKey_SoundIsMuted) ? 0.0 : 1.0
+            scaleGrowPlayer.volume = UserDefaults.standard.bool(forKey: K.userDefaultsKey_SoundIsMuted) ? 0.0 : 1.0
         }
         catch {
             print(error)
