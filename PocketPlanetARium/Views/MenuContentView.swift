@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AVFoundation
 
 protocol MenuContentViewDelegate {
     func menuContentView(_ controller: MenuContentView, didPresentPlanetARiumController planetARiumController: PlanetARiumController)
@@ -23,7 +22,6 @@ class MenuContentView: UIView {
     var menuItem: MenuItem
     
     var delegate: MenuContentViewDelegate?
-    var audioPlayer = AVAudioPlayer()
 
         
     init(in superView: MenuBezelView, with menuItem: MenuItem) {
@@ -31,8 +29,7 @@ class MenuContentView: UIView {
         self.superView = superView
         super.init(frame: CGRect(x: 0, y: 0, width: superView.frame.width, height: superView.frame.height))
         
-        setupViews()    
-        setupSounds()
+        setupViews()
 }
 
     required init?(coder: NSCoder) {
@@ -132,7 +129,7 @@ class MenuContentView: UIView {
             
     @objc func loadPlanetARium(_ sender: UIButton) {
         superView.label.alpha = K.masterAlpha
-        audioPlayer.play()
+        audioManager.playSound(for: "GoButton")
         
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseOut) {
             self.alpha = 0
@@ -148,30 +145,5 @@ class MenuContentView: UIView {
             }
         }
         
-    }
-}
-
-
-// MARK: - Sound FX
-
-extension MenuContentView {
-    private func setupSounds() {
-        let openPlanetARium = K.sounds_openPlanetARium
-        
-        guard let openPlanetARiumSound = Bundle.main.path(forResource: openPlanetARium.name, ofType: openPlanetARium.type) else {
-            print("Can't find button sounds.")
-            return
-        }
-        
-        do {
-            try AVAudioSession.sharedInstance().setCategory(.ambient, mode: .default)
-            try AVAudioSession.sharedInstance().setActive(true)
-            
-            audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: openPlanetARiumSound))
-            audioPlayer.volume = UserDefaults.standard.bool(forKey: K.userDefaultsKey_SoundIsMuted) ? 0.0 : 1.0
-        }
-        catch {
-            print(error)
-        }
     }
 }

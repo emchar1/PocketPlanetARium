@@ -9,7 +9,6 @@
 import UIKit
 import SceneKit
 import ARKit
-import AVFoundation
 
 class PlanetARiumController: UIViewController {
 
@@ -51,12 +50,7 @@ class PlanetARiumController: UIViewController {
             scaleValue = scaleValue.clamp(min: 0, max: 1)
         }
     }
-    
-    //Sound & Music
-    var audioPlayer = AVAudioPlayer()
-    var scaleShrinkPlayer = AVAudioPlayer()
-    var scaleGrowPlayer = AVAudioPlayer()
-    
+        
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,9 +114,7 @@ class PlanetARiumController: UIViewController {
         lowLightWarning.layer.cornerRadius = 7
         lowLightWarning.alpha = 0.0
                 
-        planetarium.beginAnimation(scale: scaleValue, toNode: sceneView)
-        
-        setupSounds()
+        planetarium.beginAnimation(scale: scaleValue, toNode: sceneView)        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -166,7 +158,7 @@ class PlanetARiumController: UIViewController {
         }, completion: nil)
         
         //PLAY MUSIC!!!
-        audioPlayer.play()
+        audioManager.playSound(for: "OuterSpace")
     }
     
     @objc private func orientationDidChange(_ notification: NSNotification) {
@@ -203,10 +195,10 @@ class PlanetARiumController: UIViewController {
                 handlePlayPause(for: settingsButtons)
                 
                 if diff < 0 {
-                    scaleShrinkPlayer.play()
+                    audioManager.playSound(for: "PinchShrink")
                 }
                 else {
-                    scaleGrowPlayer.play()
+                    audioManager.playSound(for: "PinchGrow")
                 }
             }
             else {
@@ -379,18 +371,7 @@ extension PlanetARiumController: ARSCNViewDelegate {
 
 extension PlanetARiumController: SettingsViewDelegate {
     func settingsView(_ controller: SettingsView, didPressSoundButton settingsSubButton: SettingsSubButton?) {
-        if controller.isMuted {
-            //Mute all sounds
-            audioPlayer.setVolume(0.0, fadeDuration: 0.25)
-            scaleShrinkPlayer.volume = 0.0
-            scaleGrowPlayer.volume = 0.0
-        }
-        else {
-            //Play all sounds
-            audioPlayer.setVolume(1.0, fadeDuration: 0.25)
-            scaleShrinkPlayer.volume = 1.0
-            scaleGrowPlayer.volume = 1.0
-        }
+
     }
 
     func settingsView(_ controller: SettingsView, didPressLabelsButton settingsSubButton: SettingsSubButton?) {
@@ -417,40 +398,6 @@ extension PlanetARiumController: SettingsViewDelegate {
         }
         else {
             planetarium.resumeAnimation(to: scaleValue)
-        }
-    }
-}
-
-
-// MARK: - Sound of Music
-
-extension PlanetARiumController {
-    private func setupSounds() {
-        let backgroundMusic = K.music_outerspace
-        
-        guard let backgroundMusicSound = Bundle.main.path(forResource: backgroundMusic.name, ofType: backgroundMusic.type),
-              let scaleShrinkSound = Bundle.main.path(forResource: K.sounds_scaleShrink.name, ofType: K.sounds_scaleShrink.type),
-              let scaleGrowSound = Bundle.main.path(forResource: K.sounds_scaleGrow.name, ofType: K.sounds_scaleGrow.type) else {
-
-            print("Unable to find sounds in PlanetARiumController!")
-            return
-        }
-        
-        do {
-            try AVAudioSession.sharedInstance().setCategory(.ambient, mode: .default)
-            try AVAudioSession.sharedInstance().setActive(true)
-            
-            audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: backgroundMusicSound))
-            scaleShrinkPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: scaleShrinkSound))
-            scaleGrowPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: scaleGrowSound))
-
-            audioPlayer.volume = UserDefaults.standard.bool(forKey: K.userDefaultsKey_SoundIsMuted) ? 0.0 : 1.0
-            audioPlayer.numberOfLoops = -1
-            scaleShrinkPlayer.volume = UserDefaults.standard.bool(forKey: K.userDefaultsKey_SoundIsMuted) ? 0.0 : 1.0
-            scaleGrowPlayer.volume = UserDefaults.standard.bool(forKey: K.userDefaultsKey_SoundIsMuted) ? 0.0 : 1.0
-        }
-        catch {
-            print(error)
         }
     }
 }

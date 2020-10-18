@@ -35,18 +35,6 @@ struct K {
     static let color700 = "\(K.color)700"
     static let color900 = "\(K.color)900"
     
-    //Music and Sounds
-    static let music_starWarsTheme: (name: String, type: String) = ("starwarstheme", "mp3")
-    static let music_outerspace: (name: String, type: String) = ("25032559_space-travel_by_phillipmariani_preview", "mp3")
-    static let sounds_openPlanetARium: (name: String, type: String) = ("9121155_tick_by_royaltyfreesounds_preview", "mp3")
-    static let sounds_buttonPress: (name: String, type: String) = ("18384061_tick_by_nonzerobot_preview", "mp3")
-    static let sounds_settingsExpand: (name: String, type: String) = ("24718337_zoom_by_volkovsound_preview", "mp3")
-    static let sounds_settingsCollapse: (name: String, type: String) = ("4458404_option-tick_by_urbazon_preview", "mp3")
-    static let sounds_scaleShrink: (name: String, type: String) = ("8108259_zoom-in_by_stockwaves_preview", "mp3")
-    static let sounds_scaleGrow: (name: String, type: String) = ("8108259_zoom-in_by_stockwaves_preview", "mp3")
-    static let sounds_peekDetails: (name: String, type: String) = ("", "")
-    static let sounds_popDetails: (name: String, type: String) = ("", "")
-    static let sounds_closeDetails: (name: String, type: String) = ("", "")
 
 
     /**

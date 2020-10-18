@@ -18,6 +18,7 @@
 		EA432882253C118400BCD31F /* 25101617_zoom-in_by_mellau_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA432881253C118400BCD31F /* 25101617_zoom-in_by_mellau_preview.mp3 */; };
 		EA432885253C122B00BCD31F /* 8108259_zoom-in_by_stockwaves_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA432884253C122B00BCD31F /* 8108259_zoom-in_by_stockwaves_preview.mp3 */; };
 		EA432889253C181400BCD31F /* 9121155_tick_by_royaltyfreesounds_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA432888253C181400BCD31F /* 9121155_tick_by_royaltyfreesounds_preview.mp3 */; };
+		EA43288C253CC9B900BCD31F /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA43288B253CC9B800BCD31F /* AudioManager.swift */; };
 		EA43CB55252669D300102879 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA43CB54252669D300102879 /* SettingsView.swift */; };
 		EA5736F025317C0700CF442B /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5736EF25317C0700CF442B /* MenuController.swift */; };
 		EA5736F42532E86700CF442B /* MenuPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5736F32532E86700CF442B /* MenuPageViewController.swift */; };
@@ -49,6 +50,7 @@
 		EA432881253C118400BCD31F /* 25101617_zoom-in_by_mellau_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "25101617_zoom-in_by_mellau_preview.mp3"; sourceTree = "<group>"; };
 		EA432884253C122B00BCD31F /* 8108259_zoom-in_by_stockwaves_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "8108259_zoom-in_by_stockwaves_preview.mp3"; sourceTree = "<group>"; };
 		EA432888253C181400BCD31F /* 9121155_tick_by_royaltyfreesounds_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 9121155_tick_by_royaltyfreesounds_preview.mp3; sourceTree = "<group>"; };
+		EA43288B253CC9B800BCD31F /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		EA43CB54252669D300102879 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		EA5736EF25317C0700CF442B /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MenuController.swift; path = PocketPlanetARium/Controllers/MenuController.swift; sourceTree = SOURCE_ROOT; };
 		EA5736F32532E86700CF442B /* MenuPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPageViewController.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				EA2BCCA325180317007A13F5 /* Constants.swift */,
+				EA43288B253CC9B800BCD31F /* AudioManager.swift */,
 				EA5737022536969700CF442B /* MenuItem.swift */,
 				EA5B0C0A2510677E00B1E910 /* Planet.swift */,
 				EA40E9AF252ADFFF00726425 /* PlanetDetails.swift */,
@@ -256,6 +259,7 @@
 				EA5737032536969700CF442B /* MenuItem.swift in Sources */,
 				EA5736F025317C0700CF442B /* MenuController.swift in Sources */,
 				EAF7BEA925203CAE00C0D1A6 /* PlanetGroup.swift in Sources */,
+				EA43288C253CC9B900BCD31F /* AudioManager.swift in Sources */,
 				EA40E9B0252ADFFF00726425 /* PlanetDetails.swift in Sources */,
 				EA43CB55252669D300102879 /* SettingsView.swift in Sources */,
 				EAC1F4D025149BD30097521A /* PlanetARium.swift in Sources */,

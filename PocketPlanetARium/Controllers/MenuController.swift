@@ -8,16 +8,20 @@
 
 import UIKit
 
+//Need to add this as a global var to be shared across all files!
+var audioManager = AudioManager()
+
 class MenuController: UIViewController {
     
     private var pageController: UIPageViewController!
     private var menuItems: [MenuItem] = MenuItem.allCases
     private var currentIndex = 0
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
-    
+
     
     override func viewDidLoad() {
         setupPageController()
+        audioManager.setupSounds()
     }
 
     private func setupPageController() {

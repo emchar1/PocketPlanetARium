@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AVFoundation
 
 
 // MARK: - Settings Sub Button Struct
@@ -78,11 +77,6 @@ class SettingsView: UIView {
     }
     var lastOrientation: UIDeviceOrientation = .portrait
     
-    //Music & Sounds
-    var buttonPressPlayer = AVAudioPlayer()
-    var settingsExpandPlayer = AVAudioPlayer()
-    var settingsCollapsePlayer = AVAudioPlayer()
-    
     //Delegate var
     var delegate: SettingsViewDelegate?
     
@@ -112,8 +106,6 @@ class SettingsView: UIView {
         if UIDevice.current.orientation.isValidInterfaceOrientation {
             lastOrientation = UIDevice.current.orientation
         }
-        
-        setupSounds()
     }
     
     required init?(coder: NSCoder) {
@@ -142,7 +134,7 @@ class SettingsView: UIView {
                     targetAction: #selector(labelsPressed))
 
         setupButton(&settingsSubButtons[SubButtonType.sound.rawValue],
-                    systemName: isMuted ? "speaker.slash.fill" : "speaker.fill",
+                    systemName: isMuted ? "speaker.slash.fill" : "speaker.2.fill",
                     backgroundColor: UIColor(named: K.color100) ?? .gray,
                     tintColor: UIColor(named: K.color900) ?? .white,
                     targetAction: #selector(soundPressed))
@@ -242,8 +234,7 @@ class SettingsView: UIView {
         showSettings = !showSettings
         
         if showSettings {
-            settingsExpandPlayer.currentTime = 0
-            settingsExpandPlayer.play()
+            audioManager.playSound(for: "SettingsExpand", currentTime: 0)
             
             //Need to reset all buttons while resizing the frame and constraints!!
             if UIDevice.current.orientation.isPortrait ||
@@ -298,8 +289,7 @@ class SettingsView: UIView {
         }
         else {
             K.addHapticFeedback(withStyle: .medium)
-            settingsCollapsePlayer.currentTime = 0
-            settingsCollapsePlayer.play()
+            audioManager.playSound(for: "SettingsCollapse", currentTime: 0)
 
             //Need to reset all buttons while resizing the frame and constraints!!
             frame.size.width = collapsedViewSize
@@ -360,9 +350,7 @@ class SettingsView: UIView {
      */
     @objc private func soundPressed() {
         K.addHapticFeedback(withStyle: .light)
-        buttonPressPlayer.pan = -1.0
-        buttonPressPlayer.currentTime = 0
-        buttonPressPlayer.play()
+        audioManager.playSound(for: "ButtonPress", currentTime: 0, pan: -1.0)
         
         isMuted = !isMuted
         handleSound()
@@ -375,23 +363,9 @@ class SettingsView: UIView {
      */
     @objc private func labelsPressed() {
         K.addHapticFeedback(withStyle: .light)
-        buttonPressPlayer.pan = -0.5
-        buttonPressPlayer.currentTime = 0
-        buttonPressPlayer.play()
+        audioManager.playSound(for: "ButtonPress", currentTime: 0, pan: -0.5)
 
         delegate?.settingsView(self, didPressLabelsButton: settingsSubButtons[SubButtonType.labels.rawValue])
-    }
-    
-    /**
-     Target action that handles the resetAnimation button press.
-     */
-    @objc private func resetAnimationPressed() {
-        K.addHapticFeedback(withStyle: .light)
-        buttonPressPlayer.pan = 1.0
-        buttonPressPlayer.currentTime = 0
-        buttonPressPlayer.play()
-
-        delegate?.settingsView(self, didPressResetAnimationButton: settingsSubButtons[SubButtonType.resetAnimation.rawValue])
     }
     
     /**
@@ -399,14 +373,22 @@ class SettingsView: UIView {
      */
     @objc private func playPausePressed() {
         K.addHapticFeedback(withStyle: .light)
-        buttonPressPlayer.pan = 0.5
-        buttonPressPlayer.currentTime = 0
-        buttonPressPlayer.play()
+        audioManager.playSound(for: "ButtonPress", currentTime: 0, pan: 0.5)
 
         isPaused = !isPaused
         handlePlayPause()
 
         delegate?.settingsView(self, didPressPlayPauseButton: settingsSubButtons[SubButtonType.playPause.rawValue])
+    }
+    
+    /**
+     Target action that handles the resetAnimation button press.
+     */
+    @objc private func resetAnimationPressed() {
+        K.addHapticFeedback(withStyle: .light)
+        audioManager.playSound(for: "ButtonPress", currentTime: 0, pan: 1.0)
+
+        delegate?.settingsView(self, didPressResetAnimationButton: settingsSubButtons[SubButtonType.resetAnimation.rawValue])
     }
     
     
@@ -421,20 +403,13 @@ class SettingsView: UIView {
         }
                 
         UserDefaults.standard.setValue(isMuted, forKey: K.userDefaultsKey_SoundIsMuted)
+        audioManager.updateVolumes()
                 
         if isMuted {
-            buttonPressPlayer.volume = 0.0
-            settingsExpandPlayer.volume = 0.0
-            settingsCollapsePlayer.volume = 0.0
-
             soundButton.button.setImage(UIImage(systemName: "speaker.slash.fill"), for: .normal)
         }
         else {
-            buttonPressPlayer.volume = 1.0
-            settingsExpandPlayer.volume = 1.0
-            settingsCollapsePlayer.volume = 1.0
-
-            soundButton.button.setImage(UIImage(systemName: "speaker.fill"), for: .normal)
+            soundButton.button.setImage(UIImage(systemName: "speaker.2.fill"), for: .normal)
         }
     }
     
@@ -456,38 +431,4 @@ class SettingsView: UIView {
         }
     }
     
-}
-
-
-// MARK: - Sound FX
-
-extension SettingsView {
-    private func setupSounds() {
-        let buttonPress = K.sounds_buttonPress
-        let settingsExpand = K.sounds_settingsExpand
-        let settingsCollapse = K.sounds_settingsCollapse
-        
-        guard let buttonPressSound = Bundle.main.path(forResource: buttonPress.name, ofType: buttonPress.type),
-              let settingsExpandSound = Bundle.main.path(forResource: settingsExpand.name, ofType: settingsExpand.type),
-              let settingsCollapseSound = Bundle.main.path(forResource: settingsCollapse.name, ofType: settingsCollapse.type) else {
-            print("Can't find button sounds.")
-            return
-        }
-        
-        do {
-            try AVAudioSession.sharedInstance().setCategory(.ambient, mode: .default)
-            try AVAudioSession.sharedInstance().setActive(true)
-            
-            buttonPressPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: buttonPressSound))
-            settingsExpandPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: settingsExpandSound))
-            settingsCollapsePlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: settingsCollapseSound))
-
-            buttonPressPlayer.volume = isMuted ? 0.0 : 1.0
-            settingsExpandPlayer.volume = isMuted ? 0.0 : 1.0
-            settingsCollapsePlayer.volume = isMuted ? 0.0 : 1.0
-        }
-        catch {
-            print(error)
-        }
-    }
 }
