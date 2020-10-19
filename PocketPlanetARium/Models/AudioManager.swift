@@ -51,7 +51,7 @@ struct AudioManager {
         "PlanetARiumOpen" : AudioItem(fileName: "PlanetARiumOpen_SpaceshipDoor1", category: .soundFX),
         "ButtonPress" : AudioItem(fileName: "ButtonPress_IndustrialSwitch4", category: .soundFX, maxVolume: 0.5),
         "SettingsExpand" : AudioItem(fileName: "SettingsExpand_ZoomV1", category: .soundFX),
-        "SettingsCollapse" : AudioItem(fileName: "SettingsCollapse_SoftDrinkCanOpen", category: .soundFX),
+        "SettingsCollapse" : AudioItem(fileName: "SettingsCollapse_SoftDrinkCanOpen", category: .soundFX, maxVolume: 0.5),
         "PinchShrink" : AudioItem(fileName: "Pinch_ZoomIn", category: .soundFX),
         "PinchGrow" : AudioItem(fileName: "Pinch_ZoomIn", category: .soundFX),
         "DetailsOpen" : AudioItem(fileName: "DetailsOpen_Blip", category: .soundFX),

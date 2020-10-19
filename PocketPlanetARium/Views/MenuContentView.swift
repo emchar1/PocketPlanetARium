@@ -130,6 +130,7 @@ class MenuContentView: UIView {
     @objc func loadPlanetARium(_ sender: UIButton) {
         let duration: TimeInterval = 0.25
         
+        K.addHapticFeedback(withStyle: .light)
         audioManager.playSound(for: "GoButton")
         audioManager.stopSound(for: "MenuScreen", fadeDuration: 2.0)
         
