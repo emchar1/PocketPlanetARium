@@ -129,7 +129,7 @@ class PlanetARiumController: UIViewController {
         
     override func viewDidAppear(_ animated: Bool) {
         let duration: TimeInterval = 2.0
-
+        
         UIView.animate(withDuration: duration / 2, delay: 0.0, options: .curveEaseIn) {
             self.loadingLabel.alpha = 0.0
         } completion: { _ in
@@ -158,6 +158,7 @@ class PlanetARiumController: UIViewController {
         }, completion: nil)
         
         //PLAY MUSIC!!!
+        audioManager.playSound(for: "PlanetARiumOpen")
         audioManager.playSound(for: "OuterSpace")
     }
     

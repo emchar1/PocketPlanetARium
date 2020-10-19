@@ -38,11 +38,12 @@ struct AudioManager {
         "StarWars" : AudioItem(fileName: "starwarstheme", fileType: .mp3, category: .music),
         "OuterSpace" : AudioItem(fileName: "25032559_space-travel_by_phillipmariani_preview", fileType: .mp3, category: .music),
         "GoButton" : AudioItem(fileName: "9121155_tick_by_royaltyfreesounds_preview", fileType: .mp3, category: .soundFX),
-        "ButtonPress" : AudioItem(fileName: "18384061_tick_by_nonzerobot_preview", fileType: .mp3, category: .soundFX),
+        "PlanetARiumOpen" : AudioItem(fileName: "22999267_spaceship-door-open_by_happymusichappysounds_preview", fileType: .mp3, category: .soundFX),
+        "ButtonPress" : AudioItem(fileName: "19191098_industrial-switch-4_by_stormwaveaudio_preview", fileType: .mp3, category: .soundFX),
         "SettingsExpand" : AudioItem(fileName: "24718337_zoom_by_volkovsound_preview", fileType: .mp3, category: .soundFX),
-        "SettingsCollapse" : AudioItem(fileName: "4458404_option-tick_by_urbazon_preview", fileType: .mp3, category: .soundFX),
+        "SettingsCollapse" : AudioItem(fileName: "24438397_machine-pump_by_googleeman_preview", fileType: .mp3, category: .soundFX),
         "PinchShrink" : AudioItem(fileName: "8108259_zoom-in_by_stockwaves_preview", fileType: .mp3, category: .soundFX),
-        "PinchGrow" : AudioItem(fileName: "8108259_zoom-in_by_stockwaves_preview", fileType: .mp3, category: .soundFX)
+        "PinchGrow" : AudioItem(fileName: "26062075_zoom_by_tibasfx_preview", fileType: .mp3, category: .soundFX)
     ]
 
     /**
