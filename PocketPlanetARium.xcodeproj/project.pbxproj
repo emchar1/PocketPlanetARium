@@ -17,10 +17,8 @@
 		EA432889253C181400BCD31F /* 9121155_tick_by_royaltyfreesounds_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA432888253C181400BCD31F /* 9121155_tick_by_royaltyfreesounds_preview.mp3 */; };
 		EA43288C253CC9B900BCD31F /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA43288B253CC9B800BCD31F /* AudioManager.swift */; };
 		EA432896253D06B400BCD31F /* 22999267_spaceship-door-open_by_happymusichappysounds_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA432895253D06B400BCD31F /* 22999267_spaceship-door-open_by_happymusichappysounds_preview.mp3 */; };
-		EA4328A3253D098400BCD31F /* 24438397_machine-pump_by_googleeman_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328A2253D098400BCD31F /* 24438397_machine-pump_by_googleeman_preview.mp3 */; };
 		EA4328A6253D0A5900BCD31F /* 19191098_industrial-switch-4_by_stormwaveaudio_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328A5253D0A5900BCD31F /* 19191098_industrial-switch-4_by_stormwaveaudio_preview.mp3 */; };
 		EA4328B3253D5B8500BCD31F /* 17464625_button-tap_by_3dhome_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328B2253D5B8500BCD31F /* 17464625_button-tap_by_3dhome_preview.mp3 */; };
-		EA4328B9253D603400BCD31F /* 22817208_click_by_3dhome_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328B8253D603400BCD31F /* 22817208_click_by_3dhome_preview.mp3 */; };
 		EA4328C2253D649600BCD31F /* 25445208_soft-drink-can-open_by_audiopros_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328C1253D649600BCD31F /* 25445208_soft-drink-can-open_by_audiopros_preview.mp3 */; };
 		EA4328C5253D69E200BCD31F /* 19220675_blip_by_3dhome_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328C4253D69E200BCD31F /* 19220675_blip_by_3dhome_preview.mp3 */; };
 		EA4328C8253D6AC300BCD31F /* 26554041_notification-blip-5_by_biggest_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328C7253D6AC300BCD31F /* 26554041_notification-blip-5_by_biggest_preview.mp3 */; };
@@ -54,10 +52,8 @@
 		EA432888253C181400BCD31F /* 9121155_tick_by_royaltyfreesounds_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 9121155_tick_by_royaltyfreesounds_preview.mp3; sourceTree = "<group>"; };
 		EA43288B253CC9B800BCD31F /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		EA432895253D06B400BCD31F /* 22999267_spaceship-door-open_by_happymusichappysounds_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "22999267_spaceship-door-open_by_happymusichappysounds_preview.mp3"; sourceTree = "<group>"; };
-		EA4328A2253D098400BCD31F /* 24438397_machine-pump_by_googleeman_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "24438397_machine-pump_by_googleeman_preview.mp3"; sourceTree = "<group>"; };
 		EA4328A5253D0A5900BCD31F /* 19191098_industrial-switch-4_by_stormwaveaudio_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "19191098_industrial-switch-4_by_stormwaveaudio_preview.mp3"; sourceTree = "<group>"; };
 		EA4328B2253D5B8500BCD31F /* 17464625_button-tap_by_3dhome_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "17464625_button-tap_by_3dhome_preview.mp3"; sourceTree = "<group>"; };
-		EA4328B8253D603400BCD31F /* 22817208_click_by_3dhome_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 22817208_click_by_3dhome_preview.mp3; sourceTree = "<group>"; };
 		EA4328C1253D649600BCD31F /* 25445208_soft-drink-can-open_by_audiopros_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "25445208_soft-drink-can-open_by_audiopros_preview.mp3"; sourceTree = "<group>"; };
 		EA4328C4253D69E200BCD31F /* 19220675_blip_by_3dhome_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 19220675_blip_by_3dhome_preview.mp3; sourceTree = "<group>"; };
 		EA4328C7253D6AC300BCD31F /* 26554041_notification-blip-5_by_biggest_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "26554041_notification-blip-5_by_biggest_preview.mp3"; sourceTree = "<group>"; };
@@ -103,9 +99,7 @@
 				EA432895253D06B400BCD31F /* 22999267_spaceship-door-open_by_happymusichappysounds_preview.mp3 */,
 				EA4328C7253D6AC300BCD31F /* 26554041_notification-blip-5_by_biggest_preview.mp3 */,
 				EA4328B2253D5B8500BCD31F /* 17464625_button-tap_by_3dhome_preview.mp3 */,
-				EA4328B8253D603400BCD31F /* 22817208_click_by_3dhome_preview.mp3 */,
 				EA4328A5253D0A5900BCD31F /* 19191098_industrial-switch-4_by_stormwaveaudio_preview.mp3 */,
-				EA4328A2253D098400BCD31F /* 24438397_machine-pump_by_googleeman_preview.mp3 */,
 				EA432888253C181400BCD31F /* 9121155_tick_by_royaltyfreesounds_preview.mp3 */,
 				EA43287E253C0F2300BCD31F /* 24718337_zoom_by_volkovsound_preview.mp3 */,
 				EA43287B253C084200BCD31F /* 25032559_space-travel_by_phillipmariani_preview.mp3 */,
@@ -243,7 +237,6 @@
 			files = (
 				EA4328A6253D0A5900BCD31F /* 19191098_industrial-switch-4_by_stormwaveaudio_preview.mp3 in Resources */,
 				EA4328B3253D5B8500BCD31F /* 17464625_button-tap_by_3dhome_preview.mp3 in Resources */,
-				EA4328A3253D098400BCD31F /* 24438397_machine-pump_by_googleeman_preview.mp3 in Resources */,
 				EA89D9D7251D621D002B82F3 /* SunParticles.scn in Resources */,
 				EA43284F253BAD2000BCD31F /* starwarstheme.mp3 in Resources */,
 				EA5B0BF9251055B300B1E910 /* art.scnassets in Resources */,
@@ -255,7 +248,6 @@
 				EA43287F253C0F2300BCD31F /* 24718337_zoom_by_volkovsound_preview.mp3 in Resources */,
 				EA5B0C00251055B300B1E910 /* Assets.xcassets in Resources */,
 				EA5B0BFE251055B300B1E910 /* Main.storyboard in Resources */,
-				EA4328B9253D603400BCD31F /* 22817208_click_by_3dhome_preview.mp3 in Resources */,
 				EA4328C2253D649600BCD31F /* 25445208_soft-drink-can-open_by_audiopros_preview.mp3 in Resources */,
 				EA4328C5253D69E200BCD31F /* 19220675_blip_by_3dhome_preview.mp3 in Resources */,
 				EA4328C8253D6AC300BCD31F /* 26554041_notification-blip-5_by_biggest_preview.mp3 in Resources */,
