@@ -16,10 +16,14 @@
 		EA432885253C122B00BCD31F /* 8108259_zoom-in_by_stockwaves_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA432884253C122B00BCD31F /* 8108259_zoom-in_by_stockwaves_preview.mp3 */; };
 		EA432889253C181400BCD31F /* 9121155_tick_by_royaltyfreesounds_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA432888253C181400BCD31F /* 9121155_tick_by_royaltyfreesounds_preview.mp3 */; };
 		EA43288C253CC9B900BCD31F /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA43288B253CC9B800BCD31F /* AudioManager.swift */; };
-		EA432893253D044800BCD31F /* 26062075_zoom_by_tibasfx_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA432892253D044800BCD31F /* 26062075_zoom_by_tibasfx_preview.mp3 */; };
 		EA432896253D06B400BCD31F /* 22999267_spaceship-door-open_by_happymusichappysounds_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA432895253D06B400BCD31F /* 22999267_spaceship-door-open_by_happymusichappysounds_preview.mp3 */; };
 		EA4328A3253D098400BCD31F /* 24438397_machine-pump_by_googleeman_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328A2253D098400BCD31F /* 24438397_machine-pump_by_googleeman_preview.mp3 */; };
 		EA4328A6253D0A5900BCD31F /* 19191098_industrial-switch-4_by_stormwaveaudio_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328A5253D0A5900BCD31F /* 19191098_industrial-switch-4_by_stormwaveaudio_preview.mp3 */; };
+		EA4328B3253D5B8500BCD31F /* 17464625_button-tap_by_3dhome_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328B2253D5B8500BCD31F /* 17464625_button-tap_by_3dhome_preview.mp3 */; };
+		EA4328B9253D603400BCD31F /* 22817208_click_by_3dhome_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328B8253D603400BCD31F /* 22817208_click_by_3dhome_preview.mp3 */; };
+		EA4328C2253D649600BCD31F /* 25445208_soft-drink-can-open_by_audiopros_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328C1253D649600BCD31F /* 25445208_soft-drink-can-open_by_audiopros_preview.mp3 */; };
+		EA4328C5253D69E200BCD31F /* 19220675_blip_by_3dhome_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328C4253D69E200BCD31F /* 19220675_blip_by_3dhome_preview.mp3 */; };
+		EA4328C8253D6AC300BCD31F /* 26554041_notification-blip-5_by_biggest_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328C7253D6AC300BCD31F /* 26554041_notification-blip-5_by_biggest_preview.mp3 */; };
 		EA43CB55252669D300102879 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA43CB54252669D300102879 /* SettingsView.swift */; };
 		EA5736F025317C0700CF442B /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5736EF25317C0700CF442B /* MenuController.swift */; };
 		EA5736F42532E86700CF442B /* MenuPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5736F32532E86700CF442B /* MenuPageViewController.swift */; };
@@ -49,10 +53,14 @@
 		EA432884253C122B00BCD31F /* 8108259_zoom-in_by_stockwaves_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "8108259_zoom-in_by_stockwaves_preview.mp3"; sourceTree = "<group>"; };
 		EA432888253C181400BCD31F /* 9121155_tick_by_royaltyfreesounds_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 9121155_tick_by_royaltyfreesounds_preview.mp3; sourceTree = "<group>"; };
 		EA43288B253CC9B800BCD31F /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
-		EA432892253D044800BCD31F /* 26062075_zoom_by_tibasfx_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 26062075_zoom_by_tibasfx_preview.mp3; sourceTree = "<group>"; };
 		EA432895253D06B400BCD31F /* 22999267_spaceship-door-open_by_happymusichappysounds_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "22999267_spaceship-door-open_by_happymusichappysounds_preview.mp3"; sourceTree = "<group>"; };
 		EA4328A2253D098400BCD31F /* 24438397_machine-pump_by_googleeman_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "24438397_machine-pump_by_googleeman_preview.mp3"; sourceTree = "<group>"; };
 		EA4328A5253D0A5900BCD31F /* 19191098_industrial-switch-4_by_stormwaveaudio_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "19191098_industrial-switch-4_by_stormwaveaudio_preview.mp3"; sourceTree = "<group>"; };
+		EA4328B2253D5B8500BCD31F /* 17464625_button-tap_by_3dhome_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "17464625_button-tap_by_3dhome_preview.mp3"; sourceTree = "<group>"; };
+		EA4328B8253D603400BCD31F /* 22817208_click_by_3dhome_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 22817208_click_by_3dhome_preview.mp3; sourceTree = "<group>"; };
+		EA4328C1253D649600BCD31F /* 25445208_soft-drink-can-open_by_audiopros_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "25445208_soft-drink-can-open_by_audiopros_preview.mp3"; sourceTree = "<group>"; };
+		EA4328C4253D69E200BCD31F /* 19220675_blip_by_3dhome_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 19220675_blip_by_3dhome_preview.mp3; sourceTree = "<group>"; };
+		EA4328C7253D6AC300BCD31F /* 26554041_notification-blip-5_by_biggest_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "26554041_notification-blip-5_by_biggest_preview.mp3"; sourceTree = "<group>"; };
 		EA43CB54252669D300102879 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		EA5736EF25317C0700CF442B /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MenuController.swift; path = PocketPlanetARium/Controllers/MenuController.swift; sourceTree = SOURCE_ROOT; };
 		EA5736F32532E86700CF442B /* MenuPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPageViewController.swift; sourceTree = "<group>"; };
@@ -90,8 +98,12 @@
 			children = (
 				EA43284E253BAD1F00BCD31F /* starwarstheme.mp3 */,
 				EA432884253C122B00BCD31F /* 8108259_zoom-in_by_stockwaves_preview.mp3 */,
-				EA432892253D044800BCD31F /* 26062075_zoom_by_tibasfx_preview.mp3 */,
+				EA4328C1253D649600BCD31F /* 25445208_soft-drink-can-open_by_audiopros_preview.mp3 */,
+				EA4328C4253D69E200BCD31F /* 19220675_blip_by_3dhome_preview.mp3 */,
 				EA432895253D06B400BCD31F /* 22999267_spaceship-door-open_by_happymusichappysounds_preview.mp3 */,
+				EA4328C7253D6AC300BCD31F /* 26554041_notification-blip-5_by_biggest_preview.mp3 */,
+				EA4328B2253D5B8500BCD31F /* 17464625_button-tap_by_3dhome_preview.mp3 */,
+				EA4328B8253D603400BCD31F /* 22817208_click_by_3dhome_preview.mp3 */,
 				EA4328A5253D0A5900BCD31F /* 19191098_industrial-switch-4_by_stormwaveaudio_preview.mp3 */,
 				EA4328A2253D098400BCD31F /* 24438397_machine-pump_by_googleeman_preview.mp3 */,
 				EA432888253C181400BCD31F /* 9121155_tick_by_royaltyfreesounds_preview.mp3 */,
@@ -230,6 +242,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA4328A6253D0A5900BCD31F /* 19191098_industrial-switch-4_by_stormwaveaudio_preview.mp3 in Resources */,
+				EA4328B3253D5B8500BCD31F /* 17464625_button-tap_by_3dhome_preview.mp3 in Resources */,
 				EA4328A3253D098400BCD31F /* 24438397_machine-pump_by_googleeman_preview.mp3 in Resources */,
 				EA89D9D7251D621D002B82F3 /* SunParticles.scn in Resources */,
 				EA43284F253BAD2000BCD31F /* starwarstheme.mp3 in Resources */,
@@ -242,7 +255,10 @@
 				EA43287F253C0F2300BCD31F /* 24718337_zoom_by_volkovsound_preview.mp3 in Resources */,
 				EA5B0C00251055B300B1E910 /* Assets.xcassets in Resources */,
 				EA5B0BFE251055B300B1E910 /* Main.storyboard in Resources */,
-				EA432893253D044800BCD31F /* 26062075_zoom_by_tibasfx_preview.mp3 in Resources */,
+				EA4328B9253D603400BCD31F /* 22817208_click_by_3dhome_preview.mp3 in Resources */,
+				EA4328C2253D649600BCD31F /* 25445208_soft-drink-can-open_by_audiopros_preview.mp3 in Resources */,
+				EA4328C5253D69E200BCD31F /* 19220675_blip_by_3dhome_preview.mp3 in Resources */,
+				EA4328C8253D6AC300BCD31F /* 26554041_notification-blip-5_by_biggest_preview.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

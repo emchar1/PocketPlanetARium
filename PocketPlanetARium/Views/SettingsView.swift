@@ -351,10 +351,10 @@ class SettingsView: UIView {
     @objc private func soundPressed() {
         K.addHapticFeedback(withStyle: .light)
         audioManager.playSound(for: "ButtonPress", currentTime: 0, pan: -1.0)
-        
+
         isMuted = !isMuted
         handleSound()
-        
+
         delegate?.settingsView(self, didPressSoundButton: settingsSubButtons[SubButtonType.sound.rawValue])
     }
 

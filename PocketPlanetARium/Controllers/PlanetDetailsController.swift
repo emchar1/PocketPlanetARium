@@ -37,8 +37,7 @@ class PlanetDetailsController: UIViewController, SCNSceneRendererDelegate {
 
         setupPlanetView(for: planet)
     }
-    
-    
+        
     override func viewDidDisappear(_ animated: Bool) {
         delegate?.didDismiss(self)
     }
@@ -60,6 +59,10 @@ class PlanetDetailsController: UIViewController, SCNSceneRendererDelegate {
 
         if planet.getType() == .sun {
             planet.addParticles()
+        }
+        
+        if planet.getName() == "Venus Surface" {
+            audioManager.playSound(for: "Venus Surface", currentTime: 0.0)
         }
 
         let scene = SCNScene()

@@ -269,6 +269,8 @@ class PlanetARiumController: UIViewController {
         }
 
         K.addHapticFeedback(withStyle: .heavy)
+        audioManager.playSound(for: "DetailsOpen", currentTime: 0)
+
         planetarium.pauseAnimation()
                 
         performSegue(withIdentifier: "PlanetDetailsSegue", sender: nil)

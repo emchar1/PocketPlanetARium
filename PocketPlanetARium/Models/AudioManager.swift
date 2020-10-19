@@ -27,7 +27,15 @@ struct AudioItem {
     let fileName: String
     let fileType: AudioType
     let category: AudioCategory
+    let maxVolume: Float
     var player = AVAudioPlayer()
+    
+    init(fileName: String, fileType: AudioType = .mp3, category: AudioCategory, maxVolume: Float = 1.0) {
+        self.fileName = fileName
+        self.fileType = fileType
+        self.category = category
+        self.maxVolume = maxVolume
+    }
 }
 
 
@@ -35,15 +43,17 @@ struct AudioItem {
 
 struct AudioManager {
     var audioItems: [String : AudioItem] = [
-        "StarWars" : AudioItem(fileName: "starwarstheme", fileType: .mp3, category: .music),
-        "OuterSpace" : AudioItem(fileName: "25032559_space-travel_by_phillipmariani_preview", fileType: .mp3, category: .music),
-        "GoButton" : AudioItem(fileName: "9121155_tick_by_royaltyfreesounds_preview", fileType: .mp3, category: .soundFX),
-        "PlanetARiumOpen" : AudioItem(fileName: "22999267_spaceship-door-open_by_happymusichappysounds_preview", fileType: .mp3, category: .soundFX),
-        "ButtonPress" : AudioItem(fileName: "19191098_industrial-switch-4_by_stormwaveaudio_preview", fileType: .mp3, category: .soundFX),
-        "SettingsExpand" : AudioItem(fileName: "24718337_zoom_by_volkovsound_preview", fileType: .mp3, category: .soundFX),
-        "SettingsCollapse" : AudioItem(fileName: "24438397_machine-pump_by_googleeman_preview", fileType: .mp3, category: .soundFX),
-        "PinchShrink" : AudioItem(fileName: "8108259_zoom-in_by_stockwaves_preview", fileType: .mp3, category: .soundFX),
-        "PinchGrow" : AudioItem(fileName: "26062075_zoom_by_tibasfx_preview", fileType: .mp3, category: .soundFX)
+        "StarWars" : AudioItem(fileName: "starwarstheme", category: .music),
+        "OuterSpace" : AudioItem(fileName: "25032559_space-travel_by_phillipmariani_preview", category: .music),
+        "GoButton" : AudioItem(fileName: "9121155_tick_by_royaltyfreesounds_preview", category: .soundFX),
+        "PlanetARiumOpen" : AudioItem(fileName: "22999267_spaceship-door-open_by_happymusichappysounds_preview", category: .soundFX),
+        "ButtonPress" : AudioItem(fileName: "19191098_industrial-switch-4_by_stormwaveaudio_preview", category: .soundFX, maxVolume: 0.5),
+        "SettingsExpand" : AudioItem(fileName: "24718337_zoom_by_volkovsound_preview", category: .soundFX),
+        "SettingsCollapse" : AudioItem(fileName: "25445208_soft-drink-can-open_by_audiopros_preview", category: .soundFX),
+        "PinchShrink" : AudioItem(fileName: "8108259_zoom-in_by_stockwaves_preview", category: .soundFX),
+        "PinchGrow" : AudioItem(fileName: "8108259_zoom-in_by_stockwaves_preview", category: .soundFX),
+        "DetailsOpen" : AudioItem(fileName: "19220675_blip_by_3dhome_preview", category: .soundFX),
+        "Venus Surface" : AudioItem(fileName: "26554041_notification-blip-5_by_biggest_preview", category: .soundFX)
     ]
 
     /**
@@ -79,7 +89,7 @@ struct AudioManager {
             var audioPlayer = audioItem.player
             
             audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: audioURL))
-            audioPlayer.volume = UserDefaults.standard.bool(forKey: K.userDefaultsKey_SoundIsMuted) ? 0.0 : 1.0
+            audioPlayer.volume = UserDefaults.standard.bool(forKey: K.userDefaultsKey_SoundIsMuted) ? 0.0 : audioItem.maxVolume
             audioPlayer.numberOfLoops = audioItem.category == .music ? -1 : 0
             
             return audioPlayer
@@ -133,14 +143,14 @@ struct AudioManager {
      Updates the volume across all audio players. Sets it to 0 (off) or 1 (on) based on if the app is muted or not.
      */
     func updateVolumes() {
-        for (key, _) in audioItems {
-            let volumeToSet: Float = UserDefaults.standard.bool(forKey: K.userDefaultsKey_SoundIsMuted) ? 0.0 : 1.0
+        for (_, item) in audioItems {
+            let volumeToSet: Float = UserDefaults.standard.bool(forKey: K.userDefaultsKey_SoundIsMuted) ? 0.0 : item.maxVolume
             
-            if audioItems[key]!.category == .music {
-                audioItems[key]!.player.setVolume(volumeToSet, fadeDuration: 0.25)
+            if item.category == .music {
+                item.player.setVolume(volumeToSet, fadeDuration: 0.25)
             }
             else {
-                audioItems[key]!.player.volume = volumeToSet
+                item.player.volume = volumeToSet
             }
         }
     }
