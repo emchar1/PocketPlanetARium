@@ -17,7 +17,6 @@ class PlanetARiumController: UIViewController {
     @IBOutlet weak var lowLightWarning: UIView!
 
     override var prefersStatusBarHidden: Bool { return true }
-    let backgroundMusic = "OuterSpace"
     var scaleLabel: UILabel!
     var peekView: PlanetPeekView?
     lazy var loadingLabel: UILabel = {
@@ -26,6 +25,7 @@ class PlanetARiumController: UIViewController {
         loadingLabel.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
         loadingLabel.textColor = .white
         loadingLabel.textAlignment = .center
+//        loadingLabel.text = "May the Force be with you."
         loadingLabel.text = "Remember to always be aware\nof your surroundings."
         loadingLabel.numberOfLines = 0
         return loadingLabel
@@ -161,7 +161,7 @@ class PlanetARiumController: UIViewController {
         
         //PLAY MUSIC!!!
         audioManager.playSound(for: "PlanetARiumOpen")
-        audioManager.playSound(for: backgroundMusic)
+        audioManager.playSound(for: "PlanetARiumMusic")
     }
     
     @objc private func orientationDidChange(_ notification: NSNotification) {

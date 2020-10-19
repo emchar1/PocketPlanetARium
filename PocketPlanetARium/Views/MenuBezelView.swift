@@ -45,6 +45,7 @@ class MenuBezelView: UIView {
         label.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
         label.textColor = .white
         label.textAlignment = .center
+//        label.text = "May the Force be with you."
         label.text = "Remember to always be aware\nof your surroundings."
         label.numberOfLines = 0
         label.alpha = 0.0

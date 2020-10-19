@@ -62,7 +62,7 @@ class PlanetDetailsController: UIViewController, SCNSceneRendererDelegate {
         }
         
         if planet.getName() == "Venus Surface" {
-            audioManager.playSound(for: "Venus Surface", currentTime: 0.0)
+            audioManager.playSound(for: "VenusSurface", currentTime: 0.0)
         }
 
         let scene = SCNScene()

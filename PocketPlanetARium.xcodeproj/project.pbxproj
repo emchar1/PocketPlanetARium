@@ -10,7 +10,7 @@
 		EA2BCCA425180317007A13F5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2BCCA325180317007A13F5 /* Constants.swift */; };
 		EA40E9B0252ADFFF00726425 /* PlanetDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA40E9AF252ADFFF00726425 /* PlanetDetails.swift */; };
 		EA4328262539F4E600BCD31F /* MenuBezelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4328252539F4E600BCD31F /* MenuBezelView.swift */; };
-		EA43284F253BAD2000BCD31F /* starwarstheme.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA43284E253BAD1F00BCD31F /* starwarstheme.mp3 */; };
+		EA43284F253BAD2000BCD31F /* StarWarsTheme.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA43284E253BAD1F00BCD31F /* StarWarsTheme.mp3 */; };
 		EA43288C253CC9B900BCD31F /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA43288B253CC9B800BCD31F /* AudioManager.swift */; };
 		EA4328B3253D5B8500BCD31F /* 17464625_button-tap_by_3dhome_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328B2253D5B8500BCD31F /* 17464625_button-tap_by_3dhome_preview.mp3 */; };
 		EA4328D0253E021F00BCD31F /* DetailsOpen_Blip.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328CF253E021F00BCD31F /* DetailsOpen_Blip.mp3 */; };
@@ -48,7 +48,7 @@
 		EA2BCCA325180317007A13F5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EA40E9AF252ADFFF00726425 /* PlanetDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetDetails.swift; sourceTree = "<group>"; };
 		EA4328252539F4E600BCD31F /* MenuBezelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBezelView.swift; sourceTree = "<group>"; };
-		EA43284E253BAD1F00BCD31F /* starwarstheme.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = starwarstheme.mp3; sourceTree = "<group>"; };
+		EA43284E253BAD1F00BCD31F /* StarWarsTheme.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = StarWarsTheme.mp3; sourceTree = "<group>"; };
 		EA43288B253CC9B800BCD31F /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		EA4328B2253D5B8500BCD31F /* 17464625_button-tap_by_3dhome_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "17464625_button-tap_by_3dhome_preview.mp3"; sourceTree = "<group>"; };
 		EA4328CF253E021F00BCD31F /* DetailsOpen_Blip.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = DetailsOpen_Blip.mp3; sourceTree = "<group>"; };
@@ -98,7 +98,7 @@
 		EA43284D253BAD0700BCD31F /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				EA43284E253BAD1F00BCD31F /* starwarstheme.mp3 */,
+				EA43284E253BAD1F00BCD31F /* StarWarsTheme.mp3 */,
 				EA4328CF253E021F00BCD31F /* DetailsOpen_Blip.mp3 */,
 				EA4328E4253E0A5300BCD31F /* OuterSpace_SpaceTravel.mp3 */,
 				EA432905253E28E700BCD31F /* EggPlanet.mp3 */,
@@ -254,7 +254,7 @@
 				EA432903253E28DB00BCD31F /* GustyGardenGalaxy.mp3 in Resources */,
 				EA4328ED253E0AC800BCD31F /* SettingsCollapse_SoftDrinkCanOpen.mp3 in Resources */,
 				EA89D9D7251D621D002B82F3 /* SunParticles.scn in Resources */,
-				EA43284F253BAD2000BCD31F /* starwarstheme.mp3 in Resources */,
+				EA43284F253BAD2000BCD31F /* StarWarsTheme.mp3 in Resources */,
 				EA4328E9253E0A9300BCD31F /* PlanetARiumOpen_SpaceshipDoor1.mp3 in Resources */,
 				EA5B0BF9251055B300B1E910 /* art.scnassets in Resources */,
 				EA4328E5253E0A5300BCD31F /* OuterSpace_SpaceTravel.mp3 in Resources */,

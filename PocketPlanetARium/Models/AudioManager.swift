@@ -20,6 +20,10 @@ enum AudioCategory {
     case music, soundFX
 }
 
+enum AudioTheme {
+    case main, starWars, superMario
+}
+
 
 // MARK: - AudioItem
 
@@ -42,23 +46,25 @@ struct AudioItem {
 // MARK: - AudioManager
 
 struct AudioManager {
-    var audioItems: [String : AudioItem] = [
-        "MenuScreen" : AudioItem(fileName: "MenuScreen_HitechControlRoom", fileType: .wav, category: .music),
-        "MenuButtonPress" : AudioItem(fileName: "17464625_button-tap_by_3dhome_preview", category: .soundFX),
-        "StarWars" : AudioItem(fileName: "starwarstheme", category: .music),
-        "EggPlanet" : AudioItem(fileName: "EggPlanet", category: .music),
-        "GustyGardenGalaxy" : AudioItem(fileName: "GustyGardenGalaxy", category: .music),
-        "OuterSpace" : AudioItem(fileName: "OuterSpace_SpaceTravel", category: .music),
-        "GoButton" : AudioItem(fileName: "GoButton_Tick", fileType: .wav, category: .soundFX),
-        "PlanetARiumOpen" : AudioItem(fileName: "PlanetARiumOpen_SpaceshipDoor1", category: .soundFX, maxVolume: 0.5),
-        "ButtonPress" : AudioItem(fileName: "ButtonPress_IndustrialSwitch4", category: .soundFX, maxVolume: 0.5),
-        "SettingsExpand" : AudioItem(fileName: "SettingsExpand_ZoomV1", category: .soundFX),
-        "SettingsCollapse" : AudioItem(fileName: "SettingsCollapse_SoftDrinkCanOpen", category: .soundFX, maxVolume: 0.5),
-        "PinchShrink" : AudioItem(fileName: "Pinch_ZoomIn", category: .soundFX),
-        "PinchGrow" : AudioItem(fileName: "Pinch_ZoomIn", category: .soundFX),
-        "DetailsOpen" : AudioItem(fileName: "DetailsOpen_Blip", category: .soundFX),
-        "Venus Surface" : AudioItem(fileName: "VenusSurface_NotificationBlip5", category: .soundFX)
-    ]
+    var theme: AudioTheme
+    var audioItems: [String : AudioItem] = [:]
+    
+    init(with theme: AudioTheme = .main) {
+        self.theme = theme
+
+        audioItems["MenuScreen"] = AudioItem(fileName: "MenuScreen_HitechControlRoom", fileType: .wav, category: .music)
+        audioItems["MenuButtonPress"] = AudioItem(fileName: "17464625_button-tap_by_3dhome_preview", category: .soundFX)
+        audioItems["GoButton"] = AudioItem(fileName: "GoButton_Tick", fileType: .wav, category: .soundFX)
+        audioItems["PlanetARiumOpen"] = AudioItem(fileName: "PlanetARiumOpen_SpaceshipDoor1", category: .soundFX, maxVolume: 0.5)
+        audioItems["PlanetARiumMusic"] = AudioItem(fileName: "OuterSpace_SpaceTravel", category: .music)
+        audioItems["ButtonPress"] = AudioItem(fileName: "ButtonPress_IndustrialSwitch4", category: .soundFX, maxVolume: 0.5)
+        audioItems["SettingsExpand"] = AudioItem(fileName: "SettingsExpand_ZoomV1", category: .soundFX)
+        audioItems["SettingsCollapse"] = AudioItem(fileName: "SettingsCollapse_SoftDrinkCanOpen", category: .soundFX, maxVolume: 0.5)
+        audioItems["PinchShrink"] = AudioItem(fileName: "Pinch_ZoomIn", category: .soundFX)
+        audioItems["PinchGrow"] = AudioItem(fileName: "Pinch_ZoomIn", category: .soundFX)
+        audioItems["DetailsOpen"] = AudioItem(fileName: "DetailsOpen_Blip", category: .soundFX)
+        audioItems["VenusSurface"] = AudioItem(fileName: "VenusSurface_NotificationBlip5", category: .soundFX)
+    }
 
     /**
      Sets up the individual audio players for the various sounds.
