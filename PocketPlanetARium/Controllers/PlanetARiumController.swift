@@ -17,6 +17,7 @@ class PlanetARiumController: UIViewController {
     @IBOutlet weak var lowLightWarning: UIView!
 
     override var prefersStatusBarHidden: Bool { return true }
+    let backgroundMusic = "OuterSpace"
     var scaleLabel: UILabel!
     var peekView: PlanetPeekView?
     lazy var loadingLabel: UILabel = {
@@ -160,7 +161,7 @@ class PlanetARiumController: UIViewController {
         
         //PLAY MUSIC!!!
         audioManager.playSound(for: "PlanetARiumOpen")
-        audioManager.playSound(for: "OuterSpace")
+        audioManager.playSound(for: backgroundMusic)
     }
     
     @objc private func orientationDidChange(_ notification: NSNotification) {
