@@ -43,6 +43,8 @@ struct AudioItem {
 
 struct AudioManager {
     var audioItems: [String : AudioItem] = [
+        "MenuScreen" : AudioItem(fileName: "19897704_hi-tech-control-room_by_hollywoodedge_preview", category: .music),
+        "MenuButtonPress" : AudioItem(fileName: "17464625_button-tap_by_3dhome_preview", category: .soundFX),
         "StarWars" : AudioItem(fileName: "starwarstheme", category: .music),
         "OuterSpace" : AudioItem(fileName: "25032559_space-travel_by_phillipmariani_preview", category: .music),
         "GoButton" : AudioItem(fileName: "9121155_tick_by_royaltyfreesounds_preview", category: .soundFX),
@@ -120,6 +122,26 @@ struct AudioManager {
 
         item.player.pan = pan
         item.player.play()
+    }
+    
+    /**
+     Stops playing a specified audio item, with decrescendo if needed.
+     - parameters:
+        - audioKey: the key for the audio item to stop
+        - fadeDuration: length of time in seconds for music to fade before stopping.
+     */
+    func stopSound(for audioKey: String, fadeDuration: TimeInterval = 0.0) {
+        guard let item = audioItems[audioKey] else {
+            print("Unable to find \(audioKey) in AudioManager.audioItems[]")
+            return
+        }
+        
+        item.player.setVolume(0.0, fadeDuration: fadeDuration)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + fadeDuration) {
+            item.player.stop()
+            print("Stopped!")
+        }
     }
     
     /**

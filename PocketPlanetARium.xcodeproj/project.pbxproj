@@ -22,6 +22,7 @@
 		EA4328C2253D649600BCD31F /* 25445208_soft-drink-can-open_by_audiopros_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328C1253D649600BCD31F /* 25445208_soft-drink-can-open_by_audiopros_preview.mp3 */; };
 		EA4328C5253D69E200BCD31F /* 19220675_blip_by_3dhome_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328C4253D69E200BCD31F /* 19220675_blip_by_3dhome_preview.mp3 */; };
 		EA4328C8253D6AC300BCD31F /* 26554041_notification-blip-5_by_biggest_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328C7253D6AC300BCD31F /* 26554041_notification-blip-5_by_biggest_preview.mp3 */; };
+		EA4328CD253D7F6200BCD31F /* 19897704_hi-tech-control-room_by_hollywoodedge_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328CC253D7F6200BCD31F /* 19897704_hi-tech-control-room_by_hollywoodedge_preview.mp3 */; };
 		EA43CB55252669D300102879 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA43CB54252669D300102879 /* SettingsView.swift */; };
 		EA5736F025317C0700CF442B /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5736EF25317C0700CF442B /* MenuController.swift */; };
 		EA5736F42532E86700CF442B /* MenuPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5736F32532E86700CF442B /* MenuPageViewController.swift */; };
@@ -57,6 +58,7 @@
 		EA4328C1253D649600BCD31F /* 25445208_soft-drink-can-open_by_audiopros_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "25445208_soft-drink-can-open_by_audiopros_preview.mp3"; sourceTree = "<group>"; };
 		EA4328C4253D69E200BCD31F /* 19220675_blip_by_3dhome_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 19220675_blip_by_3dhome_preview.mp3; sourceTree = "<group>"; };
 		EA4328C7253D6AC300BCD31F /* 26554041_notification-blip-5_by_biggest_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "26554041_notification-blip-5_by_biggest_preview.mp3"; sourceTree = "<group>"; };
+		EA4328CC253D7F6200BCD31F /* 19897704_hi-tech-control-room_by_hollywoodedge_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "19897704_hi-tech-control-room_by_hollywoodedge_preview.mp3"; sourceTree = "<group>"; };
 		EA43CB54252669D300102879 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		EA5736EF25317C0700CF442B /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MenuController.swift; path = PocketPlanetARium/Controllers/MenuController.swift; sourceTree = SOURCE_ROOT; };
 		EA5736F32532E86700CF442B /* MenuPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPageViewController.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				EA4328C4253D69E200BCD31F /* 19220675_blip_by_3dhome_preview.mp3 */,
 				EA432895253D06B400BCD31F /* 22999267_spaceship-door-open_by_happymusichappysounds_preview.mp3 */,
 				EA4328C7253D6AC300BCD31F /* 26554041_notification-blip-5_by_biggest_preview.mp3 */,
+				EA4328CC253D7F6200BCD31F /* 19897704_hi-tech-control-room_by_hollywoodedge_preview.mp3 */,
 				EA4328B2253D5B8500BCD31F /* 17464625_button-tap_by_3dhome_preview.mp3 */,
 				EA4328A5253D0A5900BCD31F /* 19191098_industrial-switch-4_by_stormwaveaudio_preview.mp3 */,
 				EA432888253C181400BCD31F /* 9121155_tick_by_royaltyfreesounds_preview.mp3 */,
@@ -240,6 +243,7 @@
 				EA89D9D7251D621D002B82F3 /* SunParticles.scn in Resources */,
 				EA43284F253BAD2000BCD31F /* starwarstheme.mp3 in Resources */,
 				EA5B0BF9251055B300B1E910 /* art.scnassets in Resources */,
+				EA4328CD253D7F6200BCD31F /* 19897704_hi-tech-control-room_by_hollywoodedge_preview.mp3 in Resources */,
 				EA432896253D06B400BCD31F /* 22999267_spaceship-door-open_by_happymusichappysounds_preview.mp3 in Resources */,
 				EA43287C253C084200BCD31F /* 25032559_space-travel_by_phillipmariani_preview.mp3 in Resources */,
 				EA432889253C181400BCD31F /* 9121155_tick_by_royaltyfreesounds_preview.mp3 in Resources */,

@@ -22,6 +22,7 @@ class MenuController: UIViewController {
     override func viewDidLoad() {
         setupPageController()
         audioManager.setupSounds()
+        audioManager.playSound(for: "MenuScreen")
     }
 
     private func setupPageController() {

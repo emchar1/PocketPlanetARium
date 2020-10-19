@@ -130,6 +130,7 @@ class MenuContentView: UIView {
     @objc func loadPlanetARium(_ sender: UIButton) {
         superView.label.alpha = K.masterAlpha
         audioManager.playSound(for: "GoButton")
+        audioManager.stopSound(for: "MenuScreen", fadeDuration: 2.0)
         
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseOut) {
             self.alpha = 0
