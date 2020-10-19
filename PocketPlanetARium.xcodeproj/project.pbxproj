@@ -11,18 +11,17 @@
 		EA40E9B0252ADFFF00726425 /* PlanetDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA40E9AF252ADFFF00726425 /* PlanetDetails.swift */; };
 		EA4328262539F4E600BCD31F /* MenuBezelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4328252539F4E600BCD31F /* MenuBezelView.swift */; };
 		EA43284F253BAD2000BCD31F /* starwarstheme.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA43284E253BAD1F00BCD31F /* starwarstheme.mp3 */; };
-		EA43287C253C084200BCD31F /* 25032559_space-travel_by_phillipmariani_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA43287B253C084200BCD31F /* 25032559_space-travel_by_phillipmariani_preview.mp3 */; };
-		EA43287F253C0F2300BCD31F /* 24718337_zoom_by_volkovsound_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA43287E253C0F2300BCD31F /* 24718337_zoom_by_volkovsound_preview.mp3 */; };
-		EA432885253C122B00BCD31F /* 8108259_zoom-in_by_stockwaves_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA432884253C122B00BCD31F /* 8108259_zoom-in_by_stockwaves_preview.mp3 */; };
-		EA432889253C181400BCD31F /* 9121155_tick_by_royaltyfreesounds_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA432888253C181400BCD31F /* 9121155_tick_by_royaltyfreesounds_preview.mp3 */; };
 		EA43288C253CC9B900BCD31F /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA43288B253CC9B800BCD31F /* AudioManager.swift */; };
-		EA432896253D06B400BCD31F /* 22999267_spaceship-door-open_by_happymusichappysounds_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA432895253D06B400BCD31F /* 22999267_spaceship-door-open_by_happymusichappysounds_preview.mp3 */; };
-		EA4328A6253D0A5900BCD31F /* 19191098_industrial-switch-4_by_stormwaveaudio_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328A5253D0A5900BCD31F /* 19191098_industrial-switch-4_by_stormwaveaudio_preview.mp3 */; };
 		EA4328B3253D5B8500BCD31F /* 17464625_button-tap_by_3dhome_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328B2253D5B8500BCD31F /* 17464625_button-tap_by_3dhome_preview.mp3 */; };
-		EA4328C2253D649600BCD31F /* 25445208_soft-drink-can-open_by_audiopros_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328C1253D649600BCD31F /* 25445208_soft-drink-can-open_by_audiopros_preview.mp3 */; };
-		EA4328C5253D69E200BCD31F /* 19220675_blip_by_3dhome_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328C4253D69E200BCD31F /* 19220675_blip_by_3dhome_preview.mp3 */; };
-		EA4328C8253D6AC300BCD31F /* 26554041_notification-blip-5_by_biggest_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328C7253D6AC300BCD31F /* 26554041_notification-blip-5_by_biggest_preview.mp3 */; };
-		EA4328CD253D7F6200BCD31F /* 19897704_hi-tech-control-room_by_hollywoodedge_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328CC253D7F6200BCD31F /* 19897704_hi-tech-control-room_by_hollywoodedge_preview.mp3 */; };
+		EA4328D0253E021F00BCD31F /* DetailsOpen_Blip.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328CF253E021F00BCD31F /* DetailsOpen_Blip.mp3 */; };
+		EA4328D9253E099100BCD31F /* VenusSurface_NotificationBlip5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328D8253E099100BCD31F /* VenusSurface_NotificationBlip5.mp3 */; };
+		EA4328DD253E09CB00BCD31F /* Pinch_ZoomIn.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328DC253E09CB00BCD31F /* Pinch_ZoomIn.mp3 */; };
+		EA4328E5253E0A5300BCD31F /* OuterSpace_SpaceTravel.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328E4253E0A5300BCD31F /* OuterSpace_SpaceTravel.mp3 */; };
+		EA4328E9253E0A9300BCD31F /* PlanetARiumOpen_SpaceshipDoor1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328E8253E0A9300BCD31F /* PlanetARiumOpen_SpaceshipDoor1.mp3 */; };
+		EA4328ED253E0AC800BCD31F /* SettingsCollapse_SoftDrinkCanOpen.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328EC253E0AC800BCD31F /* SettingsCollapse_SoftDrinkCanOpen.mp3 */; };
+		EA4328F1253E0B0A00BCD31F /* MenuScreen_HitechControlRoom.wav in Resources */ = {isa = PBXBuildFile; fileRef = EA4328F0253E0B0A00BCD31F /* MenuScreen_HitechControlRoom.wav */; };
+		EA4328F5253E0B5900BCD31F /* GoButton_Tick.wav in Resources */ = {isa = PBXBuildFile; fileRef = EA4328F4253E0B5900BCD31F /* GoButton_Tick.wav */; };
+		EA4328F9253E0BC100BCD31F /* ButtonPress_IndustrialSwitch4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328F8253E0BC100BCD31F /* ButtonPress_IndustrialSwitch4.mp3 */; };
 		EA43CB55252669D300102879 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA43CB54252669D300102879 /* SettingsView.swift */; };
 		EA5736F025317C0700CF442B /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5736EF25317C0700CF442B /* MenuController.swift */; };
 		EA5736F42532E86700CF442B /* MenuPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5736F32532E86700CF442B /* MenuPageViewController.swift */; };
@@ -47,18 +46,17 @@
 		EA40E9AF252ADFFF00726425 /* PlanetDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetDetails.swift; sourceTree = "<group>"; };
 		EA4328252539F4E600BCD31F /* MenuBezelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBezelView.swift; sourceTree = "<group>"; };
 		EA43284E253BAD1F00BCD31F /* starwarstheme.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = starwarstheme.mp3; sourceTree = "<group>"; };
-		EA43287B253C084200BCD31F /* 25032559_space-travel_by_phillipmariani_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "25032559_space-travel_by_phillipmariani_preview.mp3"; sourceTree = "<group>"; };
-		EA43287E253C0F2300BCD31F /* 24718337_zoom_by_volkovsound_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 24718337_zoom_by_volkovsound_preview.mp3; sourceTree = "<group>"; };
-		EA432884253C122B00BCD31F /* 8108259_zoom-in_by_stockwaves_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "8108259_zoom-in_by_stockwaves_preview.mp3"; sourceTree = "<group>"; };
-		EA432888253C181400BCD31F /* 9121155_tick_by_royaltyfreesounds_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 9121155_tick_by_royaltyfreesounds_preview.mp3; sourceTree = "<group>"; };
 		EA43288B253CC9B800BCD31F /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
-		EA432895253D06B400BCD31F /* 22999267_spaceship-door-open_by_happymusichappysounds_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "22999267_spaceship-door-open_by_happymusichappysounds_preview.mp3"; sourceTree = "<group>"; };
-		EA4328A5253D0A5900BCD31F /* 19191098_industrial-switch-4_by_stormwaveaudio_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "19191098_industrial-switch-4_by_stormwaveaudio_preview.mp3"; sourceTree = "<group>"; };
 		EA4328B2253D5B8500BCD31F /* 17464625_button-tap_by_3dhome_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "17464625_button-tap_by_3dhome_preview.mp3"; sourceTree = "<group>"; };
-		EA4328C1253D649600BCD31F /* 25445208_soft-drink-can-open_by_audiopros_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "25445208_soft-drink-can-open_by_audiopros_preview.mp3"; sourceTree = "<group>"; };
-		EA4328C4253D69E200BCD31F /* 19220675_blip_by_3dhome_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 19220675_blip_by_3dhome_preview.mp3; sourceTree = "<group>"; };
-		EA4328C7253D6AC300BCD31F /* 26554041_notification-blip-5_by_biggest_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "26554041_notification-blip-5_by_biggest_preview.mp3"; sourceTree = "<group>"; };
-		EA4328CC253D7F6200BCD31F /* 19897704_hi-tech-control-room_by_hollywoodedge_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "19897704_hi-tech-control-room_by_hollywoodedge_preview.mp3"; sourceTree = "<group>"; };
+		EA4328CF253E021F00BCD31F /* DetailsOpen_Blip.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = DetailsOpen_Blip.mp3; sourceTree = "<group>"; };
+		EA4328D8253E099100BCD31F /* VenusSurface_NotificationBlip5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = VenusSurface_NotificationBlip5.mp3; sourceTree = "<group>"; };
+		EA4328DC253E09CB00BCD31F /* Pinch_ZoomIn.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Pinch_ZoomIn.mp3; sourceTree = "<group>"; };
+		EA4328E4253E0A5300BCD31F /* OuterSpace_SpaceTravel.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = OuterSpace_SpaceTravel.mp3; sourceTree = "<group>"; };
+		EA4328E8253E0A9300BCD31F /* PlanetARiumOpen_SpaceshipDoor1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = PlanetARiumOpen_SpaceshipDoor1.mp3; sourceTree = "<group>"; };
+		EA4328EC253E0AC800BCD31F /* SettingsCollapse_SoftDrinkCanOpen.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SettingsCollapse_SoftDrinkCanOpen.mp3; sourceTree = "<group>"; };
+		EA4328F0253E0B0A00BCD31F /* MenuScreen_HitechControlRoom.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = MenuScreen_HitechControlRoom.wav; sourceTree = "<group>"; };
+		EA4328F4253E0B5900BCD31F /* GoButton_Tick.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = GoButton_Tick.wav; sourceTree = "<group>"; };
+		EA4328F8253E0BC100BCD31F /* ButtonPress_IndustrialSwitch4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ButtonPress_IndustrialSwitch4.mp3; sourceTree = "<group>"; };
 		EA43CB54252669D300102879 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		EA5736EF25317C0700CF442B /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MenuController.swift; path = PocketPlanetARium/Controllers/MenuController.swift; sourceTree = SOURCE_ROOT; };
 		EA5736F32532E86700CF442B /* MenuPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPageViewController.swift; sourceTree = "<group>"; };
@@ -95,17 +93,16 @@
 			isa = PBXGroup;
 			children = (
 				EA43284E253BAD1F00BCD31F /* starwarstheme.mp3 */,
-				EA432884253C122B00BCD31F /* 8108259_zoom-in_by_stockwaves_preview.mp3 */,
-				EA4328C1253D649600BCD31F /* 25445208_soft-drink-can-open_by_audiopros_preview.mp3 */,
-				EA4328C4253D69E200BCD31F /* 19220675_blip_by_3dhome_preview.mp3 */,
-				EA432895253D06B400BCD31F /* 22999267_spaceship-door-open_by_happymusichappysounds_preview.mp3 */,
-				EA4328C7253D6AC300BCD31F /* 26554041_notification-blip-5_by_biggest_preview.mp3 */,
-				EA4328CC253D7F6200BCD31F /* 19897704_hi-tech-control-room_by_hollywoodedge_preview.mp3 */,
+				EA4328CF253E021F00BCD31F /* DetailsOpen_Blip.mp3 */,
+				EA4328E4253E0A5300BCD31F /* OuterSpace_SpaceTravel.mp3 */,
+				EA4328E8253E0A9300BCD31F /* PlanetARiumOpen_SpaceshipDoor1.mp3 */,
+				EA4328EC253E0AC800BCD31F /* SettingsCollapse_SoftDrinkCanOpen.mp3 */,
+				EA4328D8253E099100BCD31F /* VenusSurface_NotificationBlip5.mp3 */,
+				EA4328F8253E0BC100BCD31F /* ButtonPress_IndustrialSwitch4.mp3 */,
+				EA4328F0253E0B0A00BCD31F /* MenuScreen_HitechControlRoom.wav */,
+				EA4328F4253E0B5900BCD31F /* GoButton_Tick.wav */,
 				EA4328B2253D5B8500BCD31F /* 17464625_button-tap_by_3dhome_preview.mp3 */,
-				EA4328A5253D0A5900BCD31F /* 19191098_industrial-switch-4_by_stormwaveaudio_preview.mp3 */,
-				EA432888253C181400BCD31F /* 9121155_tick_by_royaltyfreesounds_preview.mp3 */,
-				EA43287E253C0F2300BCD31F /* 24718337_zoom_by_volkovsound_preview.mp3 */,
-				EA43287B253C084200BCD31F /* 25032559_space-travel_by_phillipmariani_preview.mp3 */,
+				EA4328DC253E09CB00BCD31F /* Pinch_ZoomIn.mp3 */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -238,23 +235,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA4328A6253D0A5900BCD31F /* 19191098_industrial-switch-4_by_stormwaveaudio_preview.mp3 in Resources */,
+				EA4328DD253E09CB00BCD31F /* Pinch_ZoomIn.mp3 in Resources */,
+				EA4328F1253E0B0A00BCD31F /* MenuScreen_HitechControlRoom.wav in Resources */,
 				EA4328B3253D5B8500BCD31F /* 17464625_button-tap_by_3dhome_preview.mp3 in Resources */,
+				EA4328F9253E0BC100BCD31F /* ButtonPress_IndustrialSwitch4.mp3 in Resources */,
+				EA4328D0253E021F00BCD31F /* DetailsOpen_Blip.mp3 in Resources */,
+				EA4328ED253E0AC800BCD31F /* SettingsCollapse_SoftDrinkCanOpen.mp3 in Resources */,
 				EA89D9D7251D621D002B82F3 /* SunParticles.scn in Resources */,
 				EA43284F253BAD2000BCD31F /* starwarstheme.mp3 in Resources */,
+				EA4328E9253E0A9300BCD31F /* PlanetARiumOpen_SpaceshipDoor1.mp3 in Resources */,
 				EA5B0BF9251055B300B1E910 /* art.scnassets in Resources */,
-				EA4328CD253D7F6200BCD31F /* 19897704_hi-tech-control-room_by_hollywoodedge_preview.mp3 in Resources */,
-				EA432896253D06B400BCD31F /* 22999267_spaceship-door-open_by_happymusichappysounds_preview.mp3 in Resources */,
-				EA43287C253C084200BCD31F /* 25032559_space-travel_by_phillipmariani_preview.mp3 in Resources */,
-				EA432889253C181400BCD31F /* 9121155_tick_by_royaltyfreesounds_preview.mp3 in Resources */,
-				EA432885253C122B00BCD31F /* 8108259_zoom-in_by_stockwaves_preview.mp3 in Resources */,
+				EA4328E5253E0A5300BCD31F /* OuterSpace_SpaceTravel.mp3 in Resources */,
+				EA4328F5253E0B5900BCD31F /* GoButton_Tick.wav in Resources */,
 				EA5B0C03251055B300B1E910 /* LaunchScreen.storyboard in Resources */,
-				EA43287F253C0F2300BCD31F /* 24718337_zoom_by_volkovsound_preview.mp3 in Resources */,
 				EA5B0C00251055B300B1E910 /* Assets.xcassets in Resources */,
 				EA5B0BFE251055B300B1E910 /* Main.storyboard in Resources */,
-				EA4328C2253D649600BCD31F /* 25445208_soft-drink-can-open_by_audiopros_preview.mp3 in Resources */,
-				EA4328C5253D69E200BCD31F /* 19220675_blip_by_3dhome_preview.mp3 in Resources */,
-				EA4328C8253D6AC300BCD31F /* 26554041_notification-blip-5_by_biggest_preview.mp3 in Resources */,
+				EA4328D9253E099100BCD31F /* VenusSurface_NotificationBlip5.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

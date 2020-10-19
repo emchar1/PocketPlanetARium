@@ -104,7 +104,7 @@ class MenuContentView: UIView {
         
         
         //*******FIX!!!
-        if menuItem == .item5 {
+        if menuItem == .item4 {
             goButton = UIButton()
             goButton.backgroundColor = UIColor(rgb: 0x3498db)
             goButton.layer.cornerRadius = 30
@@ -128,11 +128,16 @@ class MenuContentView: UIView {
     // MARK: - PlanetARium Segue
             
     @objc func loadPlanetARium(_ sender: UIButton) {
-        superView.label.alpha = K.masterAlpha
+        let duration: TimeInterval = 0.25
+        
         audioManager.playSound(for: "GoButton")
         audioManager.stopSound(for: "MenuScreen", fadeDuration: 2.0)
         
-        UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseOut) {
+        UIView.animate(withDuration: duration, delay: duration / 2, options: .curveEaseIn, animations: {
+            self.superView.label.alpha = K.masterAlpha
+        }, completion: nil)
+        
+        UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut) {
             self.alpha = 0
         } completion: { _ in
             let storyboard = UIStoryboard(name: "Main", bundle: nil)

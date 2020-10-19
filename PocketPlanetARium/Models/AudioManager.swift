@@ -43,19 +43,19 @@ struct AudioItem {
 
 struct AudioManager {
     var audioItems: [String : AudioItem] = [
-        "MenuScreen" : AudioItem(fileName: "19897704_hi-tech-control-room_by_hollywoodedge_preview", category: .music),
+        "MenuScreen" : AudioItem(fileName: "MenuScreen_HitechControlRoom", fileType: .wav, category: .music),
         "MenuButtonPress" : AudioItem(fileName: "17464625_button-tap_by_3dhome_preview", category: .soundFX),
         "StarWars" : AudioItem(fileName: "starwarstheme", category: .music),
-        "OuterSpace" : AudioItem(fileName: "25032559_space-travel_by_phillipmariani_preview", category: .music),
-        "GoButton" : AudioItem(fileName: "9121155_tick_by_royaltyfreesounds_preview", category: .soundFX),
-        "PlanetARiumOpen" : AudioItem(fileName: "22999267_spaceship-door-open_by_happymusichappysounds_preview", category: .soundFX),
-        "ButtonPress" : AudioItem(fileName: "19191098_industrial-switch-4_by_stormwaveaudio_preview", category: .soundFX, maxVolume: 0.5),
-        "SettingsExpand" : AudioItem(fileName: "24718337_zoom_by_volkovsound_preview", category: .soundFX),
-        "SettingsCollapse" : AudioItem(fileName: "25445208_soft-drink-can-open_by_audiopros_preview", category: .soundFX),
-        "PinchShrink" : AudioItem(fileName: "8108259_zoom-in_by_stockwaves_preview", category: .soundFX),
-        "PinchGrow" : AudioItem(fileName: "8108259_zoom-in_by_stockwaves_preview", category: .soundFX),
-        "DetailsOpen" : AudioItem(fileName: "19220675_blip_by_3dhome_preview", category: .soundFX),
-        "Venus Surface" : AudioItem(fileName: "26554041_notification-blip-5_by_biggest_preview", category: .soundFX)
+        "OuterSpace" : AudioItem(fileName: "OuterSpace_SpaceTravel", category: .music),
+        "GoButton" : AudioItem(fileName: "GoButton_Tick", fileType: .wav, category: .soundFX),
+        "PlanetARiumOpen" : AudioItem(fileName: "PlanetARiumOpen_SpaceshipDoor1", category: .soundFX),
+        "ButtonPress" : AudioItem(fileName: "ButtonPress_IndustrialSwitch4", category: .soundFX, maxVolume: 0.5),
+        "SettingsExpand" : AudioItem(fileName: "SettingsExpand_ZoomV1", category: .soundFX),
+        "SettingsCollapse" : AudioItem(fileName: "SettingsCollapse_SoftDrinkCanOpen", category: .soundFX),
+        "PinchShrink" : AudioItem(fileName: "Pinch_ZoomIn", category: .soundFX),
+        "PinchGrow" : AudioItem(fileName: "Pinch_ZoomIn", category: .soundFX),
+        "DetailsOpen" : AudioItem(fileName: "DetailsOpen_Blip", category: .soundFX),
+        "Venus Surface" : AudioItem(fileName: "VenusSurface_NotificationBlip5", category: .soundFX)
     ]
 
     /**
@@ -140,7 +140,6 @@ struct AudioManager {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + fadeDuration) {
             item.player.stop()
-            print("Stopped!")
         }
     }
     
