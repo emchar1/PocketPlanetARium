@@ -19,7 +19,7 @@
 		EA4328E5253E0A5300BCD31F /* OuterSpace_SpaceTravel.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328E4253E0A5300BCD31F /* OuterSpace_SpaceTravel.mp3 */; };
 		EA4328E9253E0A9300BCD31F /* PlanetARiumOpen_SpaceshipDoor1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328E8253E0A9300BCD31F /* PlanetARiumOpen_SpaceshipDoor1.mp3 */; };
 		EA4328ED253E0AC800BCD31F /* SettingsCollapse_SoftDrinkCanOpen.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328EC253E0AC800BCD31F /* SettingsCollapse_SoftDrinkCanOpen.mp3 */; };
-		EA4328F1253E0B0A00BCD31F /* MenuScreen_HitechControlRoom.wav in Resources */ = {isa = PBXBuildFile; fileRef = EA4328F0253E0B0A00BCD31F /* MenuScreen_HitechControlRoom.wav */; };
+		EA4328F1253E0B0A00BCD31F /* main_MenuScreen.wav in Resources */ = {isa = PBXBuildFile; fileRef = EA4328F0253E0B0A00BCD31F /* main_MenuScreen.wav */; };
 		EA4328F5253E0B5900BCD31F /* GoButton_Tick.wav in Resources */ = {isa = PBXBuildFile; fileRef = EA4328F4253E0B5900BCD31F /* GoButton_Tick.wav */; };
 		EA4328F9253E0BC100BCD31F /* ButtonPress_IndustrialSwitch4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328F8253E0BC100BCD31F /* ButtonPress_IndustrialSwitch4.mp3 */; };
 		EA4328FF253E100000BCD31F /* SettingsExpand_ZoomV1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328FE253E100000BCD31F /* SettingsExpand_ZoomV1.mp3 */; };
@@ -57,7 +57,7 @@
 		EA4328E4253E0A5300BCD31F /* OuterSpace_SpaceTravel.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = OuterSpace_SpaceTravel.mp3; sourceTree = "<group>"; };
 		EA4328E8253E0A9300BCD31F /* PlanetARiumOpen_SpaceshipDoor1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = PlanetARiumOpen_SpaceshipDoor1.mp3; sourceTree = "<group>"; };
 		EA4328EC253E0AC800BCD31F /* SettingsCollapse_SoftDrinkCanOpen.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SettingsCollapse_SoftDrinkCanOpen.mp3; sourceTree = "<group>"; };
-		EA4328F0253E0B0A00BCD31F /* MenuScreen_HitechControlRoom.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = MenuScreen_HitechControlRoom.wav; sourceTree = "<group>"; };
+		EA4328F0253E0B0A00BCD31F /* main_MenuScreen.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = main_MenuScreen.wav; sourceTree = "<group>"; };
 		EA4328F4253E0B5900BCD31F /* GoButton_Tick.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = GoButton_Tick.wav; sourceTree = "<group>"; };
 		EA4328F8253E0BC100BCD31F /* ButtonPress_IndustrialSwitch4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ButtonPress_IndustrialSwitch4.mp3; sourceTree = "<group>"; };
 		EA4328FE253E100000BCD31F /* SettingsExpand_ZoomV1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SettingsExpand_ZoomV1.mp3; sourceTree = "<group>"; };
@@ -108,7 +108,7 @@
 				EA4328FE253E100000BCD31F /* SettingsExpand_ZoomV1.mp3 */,
 				EA4328D8253E099100BCD31F /* VenusSurface_NotificationBlip5.mp3 */,
 				EA4328F8253E0BC100BCD31F /* ButtonPress_IndustrialSwitch4.mp3 */,
-				EA4328F0253E0B0A00BCD31F /* MenuScreen_HitechControlRoom.wav */,
+				EA4328F0253E0B0A00BCD31F /* main_MenuScreen.wav */,
 				EA4328F4253E0B5900BCD31F /* GoButton_Tick.wav */,
 				EA4328B2253D5B8500BCD31F /* 17464625_button-tap_by_3dhome_preview.mp3 */,
 				EA4328DC253E09CB00BCD31F /* Pinch_ZoomIn.mp3 */,
@@ -246,7 +246,7 @@
 			files = (
 				EA432906253E28E700BCD31F /* EggPlanet.mp3 in Resources */,
 				EA4328DD253E09CB00BCD31F /* Pinch_ZoomIn.mp3 in Resources */,
-				EA4328F1253E0B0A00BCD31F /* MenuScreen_HitechControlRoom.wav in Resources */,
+				EA4328F1253E0B0A00BCD31F /* main_MenuScreen.wav in Resources */,
 				EA4328FF253E100000BCD31F /* SettingsExpand_ZoomV1.mp3 in Resources */,
 				EA4328B3253D5B8500BCD31F /* 17464625_button-tap_by_3dhome_preview.mp3 in Resources */,
 				EA4328F9253E0BC100BCD31F /* ButtonPress_IndustrialSwitch4.mp3 in Resources */,

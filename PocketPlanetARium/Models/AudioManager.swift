@@ -20,8 +20,8 @@ enum AudioCategory {
     case music, soundFX
 }
 
-enum AudioTheme {
-    case main, starWars, superMario
+enum AudioTheme: String {
+    case main = "main", starWars, superMario
 }
 
 
@@ -52,7 +52,7 @@ struct AudioManager {
     init(with theme: AudioTheme = .main) {
         self.theme = theme
 
-        audioItems["MenuScreen"] = AudioItem(fileName: "MenuScreen_HitechControlRoom", fileType: .wav, category: .music)
+        audioItems["MenuScreen"] = AudioItem(fileName: theme.rawValue + "_MenuScreen", fileType: .wav, category: .music)
         audioItems["MenuButtonPress"] = AudioItem(fileName: "17464625_button-tap_by_3dhome_preview", category: .soundFX)
         audioItems["GoButton"] = AudioItem(fileName: "GoButton_Tick", fileType: .wav, category: .soundFX)
         audioItems["PlanetARiumOpen"] = AudioItem(fileName: "PlanetARiumOpen_SpaceshipDoor1", category: .soundFX, maxVolume: 0.5)
