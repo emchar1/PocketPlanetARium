@@ -23,7 +23,6 @@
 		EA4328FF253E100000BCD31F /* main_SettingsExpand.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328FE253E100000BCD31F /* main_SettingsExpand.mp3 */; };
 		EA432903253E28DB00BCD31F /* mario_PlanetARiumMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA432902253E28DB00BCD31F /* mario_PlanetARiumMusic.mp3 */; };
 		EA432906253E28E700BCD31F /* mario2_planetARiumMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA432905253E28E700BCD31F /* mario2_planetARiumMusic.mp3 */; };
-		EA43290B253E552600BCD31F /* main_MenuScreen.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA43290A253E552600BCD31F /* main_MenuScreen.mp3 */; };
 		EA43290F253E567A00BCD31F /* main_GoButton.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA43290E253E567A00BCD31F /* main_GoButton.mp3 */; };
 		EA43CB55252669D300102879 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA43CB54252669D300102879 /* SettingsView.swift */; };
 		EA5736F025317C0700CF442B /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5736EF25317C0700CF442B /* MenuController.swift */; };
@@ -61,7 +60,6 @@
 		EA4328FE253E100000BCD31F /* main_SettingsExpand.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = main_SettingsExpand.mp3; sourceTree = "<group>"; };
 		EA432902253E28DB00BCD31F /* mario_PlanetARiumMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mario_PlanetARiumMusic.mp3; sourceTree = "<group>"; };
 		EA432905253E28E700BCD31F /* mario2_planetARiumMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mario2_planetARiumMusic.mp3; sourceTree = "<group>"; };
-		EA43290A253E552600BCD31F /* main_MenuScreen.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = main_MenuScreen.mp3; sourceTree = "<group>"; };
 		EA43290E253E567A00BCD31F /* main_GoButton.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = main_GoButton.mp3; sourceTree = "<group>"; };
 		EA43CB54252669D300102879 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		EA5736EF25317C0700CF442B /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MenuController.swift; path = PocketPlanetARium/Controllers/MenuController.swift; sourceTree = SOURCE_ROOT; };
@@ -104,7 +102,6 @@
 				EA4328DC253E09CB00BCD31F /* main_Pinch.mp3 */,
 				EA4328E4253E0A5300BCD31F /* main_PlanetARiumMusic.mp3 */,
 				EA43290E253E567A00BCD31F /* main_GoButton.mp3 */,
-				EA43290A253E552600BCD31F /* main_MenuScreen.mp3 */,
 				EA4328E8253E0A9300BCD31F /* main_PlanetARiumOpen.mp3 */,
 				EA4328EC253E0AC800BCD31F /* main_SettingsCollapse.mp3 */,
 				EA4328FE253E100000BCD31F /* main_SettingsExpand.mp3 */,
@@ -261,7 +258,6 @@
 				EA5B0C03251055B300B1E910 /* LaunchScreen.storyboard in Resources */,
 				EA5B0C00251055B300B1E910 /* Assets.xcassets in Resources */,
 				EA5B0BFE251055B300B1E910 /* Main.storyboard in Resources */,
-				EA43290B253E552600BCD31F /* main_MenuScreen.mp3 in Resources */,
 				EA4328D9253E099100BCD31F /* main_VenusSurface.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
