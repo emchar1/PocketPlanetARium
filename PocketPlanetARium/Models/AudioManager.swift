@@ -47,23 +47,25 @@ struct AudioItem {
 
 struct AudioManager {
     var theme: AudioTheme
-    var audioItems: [String : AudioItem] = [:]
+    var audioItems: [String : AudioItem]
+    
     
     init(with theme: AudioTheme = .main) {
         self.theme = theme
 
-        audioItems["MenuScreen"] = AudioItem(fileName: theme.rawValue + "_MenuScreen", fileType: .wav, category: .music)
+        audioItems = [:]
+        audioItems["MenuScreen"] = AudioItem(fileName: theme.rawValue + "_MenuScreen", category: .music)
         audioItems["MenuButtonPress"] = AudioItem(fileName: "17464625_button-tap_by_3dhome_preview", category: .soundFX)
-        audioItems["GoButton"] = AudioItem(fileName: "GoButton_Tick", fileType: .wav, category: .soundFX)
-        audioItems["PlanetARiumOpen"] = AudioItem(fileName: "PlanetARiumOpen_SpaceshipDoor1", category: .soundFX, maxVolume: 0.5)
-        audioItems["PlanetARiumMusic"] = AudioItem(fileName: "OuterSpace_SpaceTravel", category: .music)
-        audioItems["ButtonPress"] = AudioItem(fileName: "ButtonPress_IndustrialSwitch4", category: .soundFX, maxVolume: 0.5)
-        audioItems["SettingsExpand"] = AudioItem(fileName: "SettingsExpand_ZoomV1", category: .soundFX)
-        audioItems["SettingsCollapse"] = AudioItem(fileName: "SettingsCollapse_SoftDrinkCanOpen", category: .soundFX, maxVolume: 0.5)
-        audioItems["PinchShrink"] = AudioItem(fileName: "Pinch_ZoomIn", category: .soundFX)
-        audioItems["PinchGrow"] = AudioItem(fileName: "Pinch_ZoomIn", category: .soundFX)
-        audioItems["DetailsOpen"] = AudioItem(fileName: "DetailsOpen_Blip", category: .soundFX)
-        audioItems["VenusSurface"] = AudioItem(fileName: "VenusSurface_NotificationBlip5", category: .soundFX)
+        audioItems["GoButton"] = AudioItem(fileName: theme.rawValue + "_GoButton", category: .soundFX)
+        audioItems["PlanetARiumOpen"] = AudioItem(fileName: theme.rawValue + "_PlanetARiumOpen", category: .soundFX, maxVolume: 0.5)
+        audioItems["PlanetARiumMusic"] = AudioItem(fileName: theme.rawValue + "_PlanetARiumMusic", category: .music)
+        audioItems["ButtonPress"] = AudioItem(fileName: theme.rawValue + "_ButtonPress", category: .soundFX, maxVolume: 0.5)
+        audioItems["SettingsExpand"] = AudioItem(fileName: theme.rawValue + "_SettingsExpand", category: .soundFX)
+        audioItems["SettingsCollapse"] = AudioItem(fileName: theme.rawValue + "_SettingsCollapse", category: .soundFX, maxVolume: 0.5)
+        audioItems["PinchShrink"] = AudioItem(fileName: theme.rawValue + "_Pinch", category: .soundFX)
+        audioItems["PinchGrow"] = AudioItem(fileName: theme.rawValue + "_Pinch", category: .soundFX)
+        audioItems["DetailsOpen"] = AudioItem(fileName: theme.rawValue + "_DetailsOpen", category: .soundFX)
+        audioItems["VenusSurface"] = AudioItem(fileName: theme.rawValue + "_VenusSurface", category: .soundFX)
     }
 
     /**
