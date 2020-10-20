@@ -25,6 +25,10 @@
 		EA432906253E28E700BCD31F /* mario2_planetARiumMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA432905253E28E700BCD31F /* mario2_planetARiumMusic.mp3 */; };
 		EA43290F253E567A00BCD31F /* main_GoButton.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA43290E253E567A00BCD31F /* main_GoButton.mp3 */; };
 		EA432914253E574E00BCD31F /* main_MenuScreen.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA432913253E574E00BCD31F /* main_MenuScreen.mp3 */; };
+		EA432918253E632A00BCD31F /* starWars_SettingsCollapse.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA432916253E632A00BCD31F /* starWars_SettingsCollapse.mp3 */; };
+		EA432919253E632A00BCD31F /* starWars_SettingsExpand.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA432917253E632A00BCD31F /* starWars_SettingsExpand.mp3 */; };
+		EA43291F253EA1D300BCD31F /* Pinch.mov in Resources */ = {isa = PBXBuildFile; fileRef = EA43291D253EA1D300BCD31F /* Pinch.mov */; };
+		EA432920253EA1D300BCD31F /* HardPress.mov in Resources */ = {isa = PBXBuildFile; fileRef = EA43291E253EA1D300BCD31F /* HardPress.mov */; };
 		EA43CB55252669D300102879 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA43CB54252669D300102879 /* SettingsView.swift */; };
 		EA5736F025317C0700CF442B /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5736EF25317C0700CF442B /* MenuController.swift */; };
 		EA5736F42532E86700CF442B /* MenuPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5736F32532E86700CF442B /* MenuPageViewController.swift */; };
@@ -63,6 +67,10 @@
 		EA432905253E28E700BCD31F /* mario2_planetARiumMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mario2_planetARiumMusic.mp3; sourceTree = "<group>"; };
 		EA43290E253E567A00BCD31F /* main_GoButton.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = main_GoButton.mp3; sourceTree = "<group>"; };
 		EA432913253E574E00BCD31F /* main_MenuScreen.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = main_MenuScreen.mp3; sourceTree = "<group>"; };
+		EA432916253E632A00BCD31F /* starWars_SettingsCollapse.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = starWars_SettingsCollapse.mp3; sourceTree = "<group>"; };
+		EA432917253E632A00BCD31F /* starWars_SettingsExpand.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = starWars_SettingsExpand.mp3; sourceTree = "<group>"; };
+		EA43291D253EA1D300BCD31F /* Pinch.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Pinch.mov; sourceTree = "<group>"; };
+		EA43291E253EA1D300BCD31F /* HardPress.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = HardPress.mov; sourceTree = "<group>"; };
 		EA43CB54252669D300102879 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		EA5736EF25317C0700CF442B /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MenuController.swift; path = PocketPlanetARium/Controllers/MenuController.swift; sourceTree = SOURCE_ROOT; };
 		EA5736F32532E86700CF442B /* MenuPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPageViewController.swift; sourceTree = "<group>"; };
@@ -112,8 +120,19 @@
 				EA432902253E28DB00BCD31F /* mario_PlanetARiumMusic.mp3 */,
 				EA432905253E28E700BCD31F /* mario2_planetARiumMusic.mp3 */,
 				EA43284E253BAD1F00BCD31F /* starWars_PlanetARiumMusic.mp3 */,
+				EA432916253E632A00BCD31F /* starWars_SettingsCollapse.mp3 */,
+				EA432917253E632A00BCD31F /* starWars_SettingsExpand.mp3 */,
 			);
 			path = Sounds;
+			sourceTree = "<group>";
+		};
+		EA43291C253EA1BE00BCD31F /* Movies */ = {
+			isa = PBXGroup;
+			children = (
+				EA43291E253EA1D300BCD31F /* HardPress.mov */,
+				EA43291D253EA1D300BCD31F /* Pinch.mov */,
+			);
+			path = Movies;
 			sourceTree = "<group>";
 		};
 		EA5B0BEA251055B300B1E910 = {
@@ -140,6 +159,7 @@
 				EAC1F4CC25131FF40097521A /* Controllers */,
 				EAC1F4CD25131FFE0097521A /* Views */,
 				EA43284D253BAD0700BCD31F /* Sounds */,
+				EA43291C253EA1BE00BCD31F /* Movies */,
 				EA5B0BFF251055B300B1E910 /* Assets.xcassets */,
 				EA5B0BF8251055B300B1E910 /* art.scnassets */,
 				EA5B0C01251055B300B1E910 /* LaunchScreen.storyboard */,
@@ -245,14 +265,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA432906253E28E700BCD31F /* mario2_planetARiumMusic.mp3 in Resources */,
+				EA432918253E632A00BCD31F /* starWars_SettingsCollapse.mp3 in Resources */,
 				EA4328DD253E09CB00BCD31F /* main_Pinch.mp3 in Resources */,
 				EA4328FF253E100000BCD31F /* main_SettingsExpand.mp3 in Resources */,
 				EA4328B3253D5B8500BCD31F /* 17464625_button-tap_by_3dhome_preview.mp3 in Resources */,
 				EA4328F9253E0BC100BCD31F /* main_ButtonPress.mp3 in Resources */,
+				EA432920253EA1D300BCD31F /* HardPress.mov in Resources */,
 				EA43290F253E567A00BCD31F /* main_GoButton.mp3 in Resources */,
 				EA4328D0253E021F00BCD31F /* main_DetailsOpen.mp3 in Resources */,
 				EA432914253E574E00BCD31F /* main_MenuScreen.mp3 in Resources */,
+				EA432919253E632A00BCD31F /* starWars_SettingsExpand.mp3 in Resources */,
 				EA432903253E28DB00BCD31F /* mario_PlanetARiumMusic.mp3 in Resources */,
+				EA43291F253EA1D300BCD31F /* Pinch.mov in Resources */,
 				EA4328ED253E0AC800BCD31F /* main_SettingsCollapse.mp3 in Resources */,
 				EA89D9D7251D621D002B82F3 /* SunParticles.scn in Resources */,
 				EA43284F253BAD2000BCD31F /* starWars_PlanetARiumMusic.mp3 in Resources */,
