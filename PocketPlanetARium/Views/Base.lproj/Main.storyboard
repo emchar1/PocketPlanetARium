@@ -51,7 +51,7 @@
                                     <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rda-l7-hc1">
                                         <rect key="frame" x="47.666666666666657" y="317" width="280" height="100"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For optimal results, move to a brighter location." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G7N-6Z-Pug" userLabel="lowLightWarningLabel">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For optimal performance, move to a brighter location." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G7N-6Z-Pug" userLabel="lowLightWarningLabel">
                                                 <rect key="frame" x="30" y="28.000000000000004" width="220" height="44.333333333333343"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="220" id="5MY-lA-EYe"/>

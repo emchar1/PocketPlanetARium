@@ -49,6 +49,8 @@ struct AudioManager {
     var theme: AudioTheme
     var audioItems: [String : AudioItem]
     
+
+    // MARK: - Setup
     
     init(with theme: AudioTheme = .main) {
         self.theme = theme
@@ -66,12 +68,14 @@ struct AudioManager {
         audioItems["PinchGrow"] = AudioItem(fileName: theme.rawValue + "_Pinch", category: .soundFX)
         audioItems["DetailsOpen"] = AudioItem(fileName: theme.rawValue + "_DetailsOpen", category: .soundFX)
         audioItems["VenusSurface"] = AudioItem(fileName: theme.rawValue + "_VenusSurface", category: .soundFX)
+        
+        setupSounds()
     }
 
     /**
      Sets up the individual audio players for the various sounds.
      */
-    mutating func setupSounds() {
+    private mutating func setupSounds() {
         do {
             try AVAudioSession.sharedInstance().setCategory(.ambient, mode: .default)
             try AVAudioSession.sharedInstance().setActive(true)
@@ -112,6 +116,9 @@ struct AudioManager {
         
         return nil
     }
+    
+    
+    // MARK: - Playback
     
     /**
      Plays a sound for a given key that exists in the audioItems dictionary.

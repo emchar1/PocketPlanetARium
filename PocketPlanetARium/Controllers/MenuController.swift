@@ -9,7 +9,7 @@
 import UIKit
 
 //Need to add this as a global var to be shared across all files!
-var audioManager = AudioManager()
+var audioManager = AudioManager(with: .main)
 
 class MenuController: UIViewController {
     
@@ -21,7 +21,9 @@ class MenuController: UIViewController {
     
     override func viewDidLoad() {
         setupPageController()
-        audioManager.setupSounds()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         audioManager.playSound(for: "MenuScreen")
     }
 
