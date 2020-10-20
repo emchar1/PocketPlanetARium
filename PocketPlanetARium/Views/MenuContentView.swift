@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import AVKit
 
 protocol MenuContentViewDelegate {
     func menuContentView(_ controller: MenuContentView, didPresentPlanetARiumController planetARiumController: PlanetARiumController)
@@ -16,7 +17,7 @@ protocol MenuContentViewDelegate {
 class MenuContentView: UIView {
     var superView: MenuBezelView!
     var stackView: UIStackView!
-    var videoView: UIImageView!
+    var playerViewController: AVPlayerViewController?
     var contentLabel: UILabel!
     var goButton: UIButton!
     
@@ -63,30 +64,26 @@ class MenuContentView: UIView {
         stackView.addArrangedSubview(view1)
         
         
-        //THIS DOESN'T WORK???
-        guard let videoURL = Bundle.main.path(forResource: "Pinch", ofType: "mov") else {
-            print("Unable to find video")
-            return
-        }
 
-        let avPlayer = AVPlayer(url: URL(fileURLWithPath: videoURL))
-        let avPlayerLayer = AVPlayerLayer(player: avPlayer)
-        avPlayerLayer.frame = view1.bounds
-        view1.layer.addSublayer(avPlayerLayer)
-        avPlayer.play()
+
+
+
+
+        playerViewController = AVPlayerViewController()
+        playerViewController!.player = AVPlayer(url: URL(fileURLWithPath: Bundle.main.path(forResource: "planetPinch", ofType: "mov")!))
+        playerViewController!.showsPlaybackControls = false
+        playerViewController!.player!.play()
+        playerViewController!.view.frame = CGRect(x: 0, y: 0, width: view1.frame.width, height: view1.frame.height)
+        playerViewController!.view.contentMode = .scaleToFill
+        playerViewController!.view.clipsToBounds = true
+        view1.addSubview(playerViewController!.view)
+
+
         
         
-//        //image view
-//        videoView = UIImageView()
-//        videoView.backgroundColor = .black
-//
-//
-//        view1.addSubview(videoView)
-//        videoView.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([videoView.topAnchor.constraint(equalTo: view1.safeAreaLayoutGuide.topAnchor, constant: K.padding),
-//                                     videoView.leadingAnchor.constraint(equalTo: view1.safeAreaLayoutGuide.leadingAnchor),
-//                                     view1.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: videoView.bottomAnchor, constant: K.padding),
-//                                     view1.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: videoView.trailingAnchor)])
+        
+        
+        
     }
     
     /**

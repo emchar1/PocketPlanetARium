@@ -29,7 +29,6 @@ class MenuPageViewController: UIViewController {
         
         menuBezelView = MenuBezelView(in: view)
         view.addSubview(menuBezelView!)
-        
         menuBezelView!.addContentView(in: self, with: menuItem)
     }
         
