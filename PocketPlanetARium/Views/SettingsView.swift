@@ -363,7 +363,7 @@ class SettingsView: UIView {
      */
     @objc private func labelsPressed() {
         K.addHapticFeedback(withStyle: .light)
-        audioManager.playSound(for: "ButtonPress", currentTime: 0, pan: 0.5)
+        audioManager.playSound(for: "ButtonPressInfo", currentTime: 0, pan: 0.5)
 
         delegate?.settingsView(self, didPressLabelsButton: settingsSubButtons[SubButtonType.labels.rawValue])
     }
@@ -373,7 +373,7 @@ class SettingsView: UIView {
      */
     @objc private func playPausePressed() {
         K.addHapticFeedback(withStyle: .light)
-        audioManager.playSound(for: "ButtonPress", currentTime: 0, pan: -0.5)
+        audioManager.playSound(for: "ButtonPressPause", currentTime: 0, pan: -0.5)
 
         isPaused = !isPaused
         handlePlayPause()
@@ -386,7 +386,7 @@ class SettingsView: UIView {
      */
     @objc private func resetAnimationPressed() {
         K.addHapticFeedback(withStyle: .light)
-        audioManager.playSound(for: "ButtonPress", currentTime: 0, pan: -1.0)
+        audioManager.playSound(for: "ButtonPressReset", currentTime: 0, pan: -1.0)
 
         delegate?.settingsView(self, didPressResetAnimationButton: settingsSubButtons[SubButtonType.resetAnimation.rawValue])
     }

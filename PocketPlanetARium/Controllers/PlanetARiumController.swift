@@ -271,7 +271,7 @@ class PlanetARiumController: UIViewController {
         }
 
         K.addHapticFeedback(withStyle: .heavy)
-        audioManager.playSound(for: "DetailsOpen", currentTime: 0)
+//        audioManager.playSound(for: "DetailsOpen", currentTime: 0)
 
         planetarium.pauseAnimation()
                 

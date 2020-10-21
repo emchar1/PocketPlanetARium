@@ -17,9 +17,12 @@ protocol MenuContentViewDelegate {
 class MenuContentView: UIView {
     var superView: MenuBezelView!
     var stackView: UIStackView!
-    var playerViewController: AVPlayerViewController?
+    var playerViewController: AVPlayerViewController!
     var contentLabel: UILabel!
     var goButton: UIButton!
+    
+    var changeMusicButton: UIButton! //temporary
+    var theme = 0
     
     var menuItem: MenuItem
     
@@ -68,8 +71,7 @@ class MenuContentView: UIView {
         
         playerViewController = AVPlayerViewController()
         
-        guard let videoURL = Bundle.main.path(forResource: video.name, ofType: video.type),
-              let playerViewController = playerViewController else {
+        guard let videoURL = Bundle.main.path(forResource: video.name, ofType: video.type) else {
             
             print("Unable to find video \(video.name).\(video.type)")
             return
@@ -138,14 +140,33 @@ class MenuContentView: UIView {
             goButton.layer.shadowColor = UIColor.black.cgColor
             goButton.layer.shadowOpacity = 0.3
             goButton.titleLabel?.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
-            goButton.setTitle("Go to PlanetARium", for: .normal)
+            goButton.setTitle("Launch PlanetARium", for: .normal)
             goButton.addTarget(self, action: #selector(loadPlanetARium), for: .touchUpInside)
             view2.addSubview(goButton)
             goButton.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([goButton.widthAnchor.constraint(equalToConstant: 225),
                                          goButton.heightAnchor.constraint(equalToConstant: 60),
                                          goButton.centerXAnchor.constraint(equalTo: view2.centerXAnchor),
-                                         view2.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: goButton.bottomAnchor, constant: 2 * K.padding)])
+                                         view2.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: goButton.bottomAnchor, constant: 4 * K.padding)])
+            
+            
+            
+            //TOTALLY A TEST!!!
+            changeMusicButton = UIButton()
+            changeMusicButton.backgroundColor = UIColor(rgb: 0x3498db)
+            changeMusicButton.layer.cornerRadius = 30
+            changeMusicButton.layer.shadowRadius = 3
+            changeMusicButton.layer.shadowColor = UIColor.black.cgColor
+            changeMusicButton.layer.shadowOpacity = 0.3
+            changeMusicButton.titleLabel?.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
+            changeMusicButton.setTitle("Change Theme", for: .normal)
+            changeMusicButton.addTarget(self, action: #selector(changeMusic), for: .touchUpInside)
+            view2.addSubview(changeMusicButton)
+            changeMusicButton.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([changeMusicButton.widthAnchor.constraint(equalToConstant: 225),
+                                         changeMusicButton.heightAnchor.constraint(equalToConstant: 60),
+                                         changeMusicButton.centerXAnchor.constraint(equalTo: view2.centerXAnchor),
+                                         view2.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: changeMusicButton.bottomAnchor, constant: 0)])
         }
 
     }
@@ -157,7 +178,7 @@ class MenuContentView: UIView {
         let duration: TimeInterval = 0.25
         
         K.addHapticFeedback(withStyle: .light)
-        audioManager.playSound(for: "GoButton")
+        audioManager.playSound(for: "GoButton", currentTime: 0.0)
         audioManager.stopSound(for: "MenuScreen", fadeDuration: 2.0)
         
         UIView.animate(withDuration: duration, delay: duration / 2, options: .curveEaseIn, animations: {
@@ -178,5 +199,30 @@ class MenuContentView: UIView {
             }
         }
         
+    }
+    
+    @objc func changeMusic(_ sender: UIButton) {
+        K.addHapticFeedback(withStyle: .light)
+
+        theme += 1
+        if theme > 2 {
+            theme = 0
+        }
+        switch  theme {
+        case 0:
+            audioManager.setTheme(.main)
+            sender.setTitle("Main Theme", for: .normal)
+        case 1:
+            audioManager.setTheme(.mario)
+            sender.setTitle("Super Mario", for: .normal)
+        case 2:
+            audioManager.setTheme(.starWars)
+            sender.setTitle("Star Wars", for: .normal)
+        default:
+            print("Unknown theme")
+        }
+        
+        audioManager.playSound(for: "GoButton", currentTime: 0.0)
+        print(theme)
     }
 }
