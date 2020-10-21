@@ -31,6 +31,17 @@ class MenuPageViewController: UIViewController {
         view.addSubview(menuBezelView!)
         menuBezelView!.addContentView(in: self, with: menuItem)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        //I should probably use protocol delegation instead of this travesty, but I'm lazy and exhausted :P
+        menuBezelView.menuContentView?.playerViewController?.player?.play()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        //I should probably use protocol delegation instead of this travesty, but I'm lazy and exhausted :P
+        menuBezelView.menuContentView?.playerViewController?.player?.pause()
+        menuBezelView.menuContentView?.playerViewController?.player?.seek(to: .zero)
+    }
         
 }
 

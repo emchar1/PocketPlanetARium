@@ -20,8 +20,10 @@ struct K {
     static let userDefaultsKey_HintsAreOff = "HintsAreOff"
     
     //Fonts
-    static let fontFace = "Futura"
-    static let fontFaceItalic = "Futura Medium Italic"
+    static let fontFace = "Prime-Regular"
+    static let fontFaceItalic = "Prime-Light"
+    static let fontFaceSecondary = "Futura"
+    static let fontFaceSecondaryItalic = "Futura Medium Italic"
     static let fontSizeMenu: CGFloat = 18
     static let fontSizePeekTitle: CGFloat = 18
     static let fontSizePeekDetails: CGFloat = 14

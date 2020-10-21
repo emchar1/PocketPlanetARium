@@ -47,7 +47,7 @@ class MenuContentView: UIView {
         
         addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: K.padding),
+        NSLayoutConstraint.activate([stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 2 * K.padding),
                                      stackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: K.padding),
                                      safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: stackView.bottomAnchor, constant: K.padding),
                                      safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: K.padding)])
@@ -60,30 +60,43 @@ class MenuContentView: UIView {
      */
     private func setupStack1() {
         let view1 = UIView()
-        view1.backgroundColor = .blue
+//        view1.backgroundColor = .blue
+        view1.clipsToBounds = true
         stackView.addArrangedSubview(view1)
         
+        guard let video = menuItem.item.video else { return }
         
-
-
-
-
-
         playerViewController = AVPlayerViewController()
-        playerViewController!.player = AVPlayer(url: URL(fileURLWithPath: Bundle.main.path(forResource: "planetPinch", ofType: "mov")!))
-        playerViewController!.showsPlaybackControls = false
-        playerViewController!.player!.play()
-        playerViewController!.view.frame = CGRect(x: 0, y: 0, width: view1.frame.width, height: view1.frame.height)
-        playerViewController!.view.contentMode = .scaleToFill
-        playerViewController!.view.clipsToBounds = true
-        view1.addSubview(playerViewController!.view)
-
-
         
+        guard let videoURL = Bundle.main.path(forResource: video.name, ofType: video.type),
+              let playerViewController = playerViewController else {
+            
+            print("Unable to find video \(video.name).\(video.type)")
+            return
+        }
         
+        playerViewController.player = AVPlayer(url: URL(fileURLWithPath: videoURL))
+//        playerViewController.view.backgroundColor = .systemPink
+        playerViewController.showsPlaybackControls = false
+        playerViewController.player!.actionAtItemEnd = .none
+        view1.addSubview(playerViewController.view)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidReachEnd(notification:)), name: .AVPlayerItemDidPlayToEndTime, object: playerViewController.player!.currentItem)
         
-        
+        playerViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([playerViewController.view.leadingAnchor.constraint(equalTo: view1.safeAreaLayoutGuide.leadingAnchor),
+                                     view1.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: playerViewController.view.trailingAnchor),
+                                     playerViewController.view.heightAnchor.constraint(equalToConstant: playerViewController.view.frame.height),
+                                     playerViewController.view.centerYAnchor.constraint(equalTo: view1.safeAreaLayoutGuide.centerYAnchor)])
+    }
+    
+    /**
+     Helper method to allow looping of a training video when it reaches the end.
+     */
+    @objc private func playerItemDidReachEnd(notification: Notification) {
+        if let playerItem = notification.object as? AVPlayerItem {
+            playerItem.seek(to: .zero, completionHandler: nil)
+        }
     }
     
     /**
@@ -105,7 +118,7 @@ class MenuContentView: UIView {
         
         view2.addSubview(contentLabel)
         contentLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([contentLabel.topAnchor.constraint(equalTo: view2.safeAreaLayoutGuide.topAnchor, constant: K.padding),
+        NSLayoutConstraint.activate([contentLabel.topAnchor.constraint(equalTo: view2.safeAreaLayoutGuide.topAnchor, constant: 2 * K.padding),
                                      contentLabel.leadingAnchor.constraint(equalTo: view2.safeAreaLayoutGuide.leadingAnchor),
                                      view2.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: contentLabel.trailingAnchor)])
 

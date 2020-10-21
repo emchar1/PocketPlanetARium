@@ -27,8 +27,18 @@
 		EA432914253E574E00BCD31F /* main_MenuScreen.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA432913253E574E00BCD31F /* main_MenuScreen.mp3 */; };
 		EA432918253E632A00BCD31F /* starWars_SettingsCollapse.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA432916253E632A00BCD31F /* starWars_SettingsCollapse.mp3 */; };
 		EA432919253E632A00BCD31F /* starWars_SettingsExpand.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA432917253E632A00BCD31F /* starWars_SettingsExpand.mp3 */; };
-		EA432931253F70E900BCD31F /* planetHardPress.mov in Resources */ = {isa = PBXBuildFile; fileRef = EA43292F253F70E800BCD31F /* planetHardPress.mov */; };
 		EA432932253F70E900BCD31F /* planetPinch.mov in Resources */ = {isa = PBXBuildFile; fileRef = EA432930253F70E900BCD31F /* planetPinch.mov */; };
+		EA43293A253F9E0700BCD31F /* planetHardPress.mov in Resources */ = {isa = PBXBuildFile; fileRef = EA432939253F9E0700BCD31F /* planetHardPress.mov */; };
+		EA43293F253FAF7300BCD31F /* Prime-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA43293D253FAF7300BCD31F /* Prime-Regular.otf */; };
+		EA432940253FAF7300BCD31F /* Prime-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA43293E253FAF7300BCD31F /* Prime-Light.otf */; };
+		EA43294A253FAF8E00BCD31F /* PantonDemo-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA432942253FAF8D00BCD31F /* PantonDemo-Light.otf */; };
+		EA43294B253FAF8E00BCD31F /* PantonNarrowDemo-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA432943253FAF8D00BCD31F /* PantonNarrowDemo-Light.otf */; };
+		EA43294C253FAF8E00BCD31F /* PantonNarrowDemo-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA432944253FAF8D00BCD31F /* PantonNarrowDemo-LightItalic.otf */; };
+		EA43294D253FAF8E00BCD31F /* PantonNarrowDemo-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA432945253FAF8D00BCD31F /* PantonNarrowDemo-BlackItalic.otf */; };
+		EA43294E253FAF8E00BCD31F /* PantonDemo-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA432946253FAF8D00BCD31F /* PantonDemo-Black.otf */; };
+		EA43294F253FAF8E00BCD31F /* PantonDemo-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA432947253FAF8D00BCD31F /* PantonDemo-LightItalic.otf */; };
+		EA432950253FAF8E00BCD31F /* PantonNarrowDemo-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA432948253FAF8D00BCD31F /* PantonNarrowDemo-Black.otf */; };
+		EA432951253FAF8E00BCD31F /* PantonDemo-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA432949253FAF8E00BCD31F /* PantonDemo-BlackItalic.otf */; };
 		EA43CB55252669D300102879 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA43CB54252669D300102879 /* SettingsView.swift */; };
 		EA5736F025317C0700CF442B /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5736EF25317C0700CF442B /* MenuController.swift */; };
 		EA5736F42532E86700CF442B /* MenuPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5736F32532E86700CF442B /* MenuPageViewController.swift */; };
@@ -69,8 +79,18 @@
 		EA432913253E574E00BCD31F /* main_MenuScreen.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = main_MenuScreen.mp3; sourceTree = "<group>"; };
 		EA432916253E632A00BCD31F /* starWars_SettingsCollapse.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = starWars_SettingsCollapse.mp3; sourceTree = "<group>"; };
 		EA432917253E632A00BCD31F /* starWars_SettingsExpand.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = starWars_SettingsExpand.mp3; sourceTree = "<group>"; };
-		EA43292F253F70E800BCD31F /* planetHardPress.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = planetHardPress.mov; sourceTree = "<group>"; };
 		EA432930253F70E900BCD31F /* planetPinch.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = planetPinch.mov; sourceTree = "<group>"; };
+		EA432939253F9E0700BCD31F /* planetHardPress.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = planetHardPress.mov; sourceTree = "<group>"; };
+		EA43293D253FAF7300BCD31F /* Prime-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Prime-Regular.otf"; sourceTree = "<group>"; };
+		EA43293E253FAF7300BCD31F /* Prime-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Prime-Light.otf"; sourceTree = "<group>"; };
+		EA432942253FAF8D00BCD31F /* PantonDemo-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PantonDemo-Light.otf"; sourceTree = "<group>"; };
+		EA432943253FAF8D00BCD31F /* PantonNarrowDemo-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PantonNarrowDemo-Light.otf"; sourceTree = "<group>"; };
+		EA432944253FAF8D00BCD31F /* PantonNarrowDemo-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PantonNarrowDemo-LightItalic.otf"; sourceTree = "<group>"; };
+		EA432945253FAF8D00BCD31F /* PantonNarrowDemo-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PantonNarrowDemo-BlackItalic.otf"; sourceTree = "<group>"; };
+		EA432946253FAF8D00BCD31F /* PantonDemo-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PantonDemo-Black.otf"; sourceTree = "<group>"; };
+		EA432947253FAF8D00BCD31F /* PantonDemo-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PantonDemo-LightItalic.otf"; sourceTree = "<group>"; };
+		EA432948253FAF8D00BCD31F /* PantonNarrowDemo-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PantonNarrowDemo-Black.otf"; sourceTree = "<group>"; };
+		EA432949253FAF8E00BCD31F /* PantonDemo-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PantonDemo-BlackItalic.otf"; sourceTree = "<group>"; };
 		EA43CB54252669D300102879 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		EA5736EF25317C0700CF442B /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MenuController.swift; path = PocketPlanetARium/Controllers/MenuController.swift; sourceTree = SOURCE_ROOT; };
 		EA5736F32532E86700CF442B /* MenuPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPageViewController.swift; sourceTree = "<group>"; };
@@ -129,10 +149,27 @@
 		EA43291C253EA1BE00BCD31F /* Movies */ = {
 			isa = PBXGroup;
 			children = (
-				EA43292F253F70E800BCD31F /* planetHardPress.mov */,
 				EA432930253F70E900BCD31F /* planetPinch.mov */,
+				EA432939253F9E0700BCD31F /* planetHardPress.mov */,
 			);
 			path = Movies;
+			sourceTree = "<group>";
+		};
+		EA43293C253FAF1000BCD31F /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				EA432946253FAF8D00BCD31F /* PantonDemo-Black.otf */,
+				EA432949253FAF8E00BCD31F /* PantonDemo-BlackItalic.otf */,
+				EA432942253FAF8D00BCD31F /* PantonDemo-Light.otf */,
+				EA432947253FAF8D00BCD31F /* PantonDemo-LightItalic.otf */,
+				EA432948253FAF8D00BCD31F /* PantonNarrowDemo-Black.otf */,
+				EA432945253FAF8D00BCD31F /* PantonNarrowDemo-BlackItalic.otf */,
+				EA432943253FAF8D00BCD31F /* PantonNarrowDemo-Light.otf */,
+				EA432944253FAF8D00BCD31F /* PantonNarrowDemo-LightItalic.otf */,
+				EA43293E253FAF7300BCD31F /* Prime-Light.otf */,
+				EA43293D253FAF7300BCD31F /* Prime-Regular.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		EA5B0BEA251055B300B1E910 = {
@@ -160,6 +197,7 @@
 				EAC1F4CD25131FFE0097521A /* Views */,
 				EA43284D253BAD0700BCD31F /* Sounds */,
 				EA43291C253EA1BE00BCD31F /* Movies */,
+				EA43293C253FAF1000BCD31F /* Fonts */,
 				EA5B0BFF251055B300B1E910 /* Assets.xcassets */,
 				EA5B0BF8251055B300B1E910 /* art.scnassets */,
 				EA5B0C01251055B300B1E910 /* LaunchScreen.storyboard */,
@@ -264,29 +302,39 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA43294C253FAF8E00BCD31F /* PantonNarrowDemo-LightItalic.otf in Resources */,
+				EA43294B253FAF8E00BCD31F /* PantonNarrowDemo-Light.otf in Resources */,
 				EA432906253E28E700BCD31F /* mario2_planetARiumMusic.mp3 in Resources */,
 				EA432918253E632A00BCD31F /* starWars_SettingsCollapse.mp3 in Resources */,
 				EA4328DD253E09CB00BCD31F /* main_Pinch.mp3 in Resources */,
 				EA4328FF253E100000BCD31F /* main_SettingsExpand.mp3 in Resources */,
+				EA43294D253FAF8E00BCD31F /* PantonNarrowDemo-BlackItalic.otf in Resources */,
 				EA4328B3253D5B8500BCD31F /* 17464625_button-tap_by_3dhome_preview.mp3 in Resources */,
 				EA4328F9253E0BC100BCD31F /* main_ButtonPress.mp3 in Resources */,
+				EA432950253FAF8E00BCD31F /* PantonNarrowDemo-Black.otf in Resources */,
 				EA43290F253E567A00BCD31F /* main_GoButton.mp3 in Resources */,
+				EA43294A253FAF8E00BCD31F /* PantonDemo-Light.otf in Resources */,
 				EA4328D0253E021F00BCD31F /* main_DetailsOpen.mp3 in Resources */,
 				EA432932253F70E900BCD31F /* planetPinch.mov in Resources */,
 				EA432914253E574E00BCD31F /* main_MenuScreen.mp3 in Resources */,
-				EA432931253F70E900BCD31F /* planetHardPress.mov in Resources */,
+				EA43294E253FAF8E00BCD31F /* PantonDemo-Black.otf in Resources */,
 				EA432919253E632A00BCD31F /* starWars_SettingsExpand.mp3 in Resources */,
 				EA432903253E28DB00BCD31F /* mario_PlanetARiumMusic.mp3 in Resources */,
+				EA43293F253FAF7300BCD31F /* Prime-Regular.otf in Resources */,
+				EA43293A253F9E0700BCD31F /* planetHardPress.mov in Resources */,
 				EA4328ED253E0AC800BCD31F /* main_SettingsCollapse.mp3 in Resources */,
 				EA89D9D7251D621D002B82F3 /* SunParticles.scn in Resources */,
+				EA432951253FAF8E00BCD31F /* PantonDemo-BlackItalic.otf in Resources */,
 				EA43284F253BAD2000BCD31F /* starWars_PlanetARiumMusic.mp3 in Resources */,
 				EA4328E9253E0A9300BCD31F /* main_PlanetARiumOpen.mp3 in Resources */,
 				EA5B0BF9251055B300B1E910 /* art.scnassets in Resources */,
+				EA43294F253FAF8E00BCD31F /* PantonDemo-LightItalic.otf in Resources */,
 				EA4328E5253E0A5300BCD31F /* main_PlanetARiumMusic.mp3 in Resources */,
 				EA5B0C03251055B300B1E910 /* LaunchScreen.storyboard in Resources */,
 				EA5B0C00251055B300B1E910 /* Assets.xcassets in Resources */,
 				EA5B0BFE251055B300B1E910 /* Main.storyboard in Resources */,
 				EA4328D9253E099100BCD31F /* main_VenusSurface.mp3 in Resources */,
+				EA432940253FAF7300BCD31F /* Prime-Light.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,7 +516,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fiveplay-apps.PocketPlanetARium";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -486,7 +534,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fiveplay-apps.PocketPlanetARium";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

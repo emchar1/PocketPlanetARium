@@ -60,7 +60,6 @@ struct AudioManager {
         audioItems["MenuButtonPress"] = AudioItem(fileName: "17464625_button-tap_by_3dhome_preview", category: .soundFX)
         audioItems["GoButton"] = AudioItem(fileName: "main_GoButton", category: .soundFX)
         audioItems["PlanetARiumOpen"] = AudioItem(fileName: "main_PlanetARiumOpen", category: .soundFX, maxVolume: 0.5)
-        
         audioItems["PlanetARiumMusic"] = AudioItem(fileName: theme.rawValue + "_PlanetARiumMusic", category: .music)
         audioItems["ButtonPress"] = AudioItem(fileName: theme.rawValue + "_ButtonPress", category: .soundFX, maxVolume: 0.5)
         audioItems["SettingsExpand"] = AudioItem(fileName: theme.rawValue + "_SettingsExpand", category: .soundFX)
