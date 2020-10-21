@@ -126,17 +126,8 @@
 		EA43284D253BAD0700BCD31F /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				EA992FA02540B4CD00992CB7 /* mainTheme */,
 				EA4328B2253D5B8500BCD31F /* 17464625_button-tap_by_3dhome_preview.mp3 */,
-				EA4328F8253E0BC100BCD31F /* main_ButtonPress.mp3 */,
-				EA4328CF253E021F00BCD31F /* main_DetailsOpen.mp3 */,
-				EA4328DC253E09CB00BCD31F /* main_Pinch.mp3 */,
-				EA4328E4253E0A5300BCD31F /* main_PlanetARiumMusic.mp3 */,
-				EA432913253E574E00BCD31F /* main_MenuScreen.mp3 */,
-				EA43290E253E567A00BCD31F /* main_GoButton.mp3 */,
-				EA4328E8253E0A9300BCD31F /* main_PlanetARiumOpen.mp3 */,
-				EA4328EC253E0AC800BCD31F /* main_SettingsCollapse.mp3 */,
-				EA4328FE253E100000BCD31F /* main_SettingsExpand.mp3 */,
-				EA4328D8253E099100BCD31F /* main_VenusSurface.mp3 */,
 				EA432902253E28DB00BCD31F /* mario_PlanetARiumMusic.mp3 */,
 				EA432905253E28E700BCD31F /* mario2_planetARiumMusic.mp3 */,
 				EA43284E253BAD1F00BCD31F /* starWars_PlanetARiumMusic.mp3 */,
@@ -204,6 +195,23 @@
 				EA5B0C04251055B300B1E910 /* Info.plist */,
 			);
 			path = PocketPlanetARium;
+			sourceTree = "<group>";
+		};
+		EA992FA02540B4CD00992CB7 /* mainTheme */ = {
+			isa = PBXGroup;
+			children = (
+				EA4328F8253E0BC100BCD31F /* main_ButtonPress.mp3 */,
+				EA4328CF253E021F00BCD31F /* main_DetailsOpen.mp3 */,
+				EA4328DC253E09CB00BCD31F /* main_Pinch.mp3 */,
+				EA4328E4253E0A5300BCD31F /* main_PlanetARiumMusic.mp3 */,
+				EA432913253E574E00BCD31F /* main_MenuScreen.mp3 */,
+				EA43290E253E567A00BCD31F /* main_GoButton.mp3 */,
+				EA4328E8253E0A9300BCD31F /* main_PlanetARiumOpen.mp3 */,
+				EA4328EC253E0AC800BCD31F /* main_SettingsCollapse.mp3 */,
+				EA4328FE253E100000BCD31F /* main_SettingsExpand.mp3 */,
+				EA4328D8253E099100BCD31F /* main_VenusSurface.mp3 */,
+			);
+			path = mainTheme;
 			sourceTree = "<group>";
 		};
 		EAC1F4CC25131FF40097521A /* Controllers */ = {
