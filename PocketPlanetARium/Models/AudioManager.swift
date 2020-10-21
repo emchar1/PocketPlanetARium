@@ -68,12 +68,13 @@ struct AudioManager {
         }
         
         setTheme(theme)
+        setupSounds()
     }
 
     /**
      Sets up the individual audio players for the various sounds. It won't setup MenuScreen sound because that's set up in initialization.
      */
-    private mutating func setupSounds() {
+    mutating func setupSounds() {
         for (key, item) in audioItems {
             if let player = configureAudioPlayer(for: item), key != "MenuScreen" {
                 audioItems[key]?.player = player
@@ -197,8 +198,6 @@ struct AudioManager {
         case .starWars:
             setThemeStarWars()
         }
-                
-        setupSounds()
     }
 
     mutating private func setThemeMain() {

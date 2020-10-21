@@ -222,6 +222,7 @@ class MenuContentView: UIView {
             print("Unknown theme")
         }
         
+        audioManager.setupSounds()
         audioManager.playSound(for: "GoButton", currentTime: 0.0)
         print(theme)
     }
