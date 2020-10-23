@@ -16,8 +16,8 @@ protocol MenuContentViewLaunchDelegate {
 class MenuContentViewLaunch: UIView {
     var superView: MenuBezelView!
     var stackView: UIStackView!
-    var titleLabel: UILabel!
-    var titleLabel2: UILabel!
+    var pocketLabel: UILabel!
+    var planetARiumLabel: UILabel!
     var contentLabel: UILabel!
     var launchButton: UIButton!
     var menuItem: MenuItem
@@ -30,8 +30,8 @@ class MenuContentViewLaunch: UIView {
     
     
     //TEMPORARY!!!!
-    var changeMusicButton: UIButton!
-    var theme = 0
+//    var changeMusicButton: UIButton!
+//    var theme = 0
 
 
 
@@ -76,51 +76,38 @@ class MenuContentViewLaunch: UIView {
      */
     private func setupStack1() {
         let view1 = UIView()
-//        view1.backgroundColor = .blue
         view1.clipsToBounds = true
         stackView.addArrangedSubview(view1)
         
+        
+        let fontTitle: String = K.fontTitle
+        let fontSize: CGFloat = 40
+        let textColor = UIColor.getRandom(redRange: 175...255, greenRange: 175...255, blueRange: 175...255)
+        let shadowOffset: CGFloat = 3.0
+        
         //"Pocket" label
-        titleLabel = UILabel(frame: CGRect(x: -frame.width, y: frame.height / 4 - 25, width: frame.width, height: 50))
-//        titleLabel.backgroundColor = .systemPink
-        titleLabel.font = UIFont(name: K.fontTitle, size: 40)
-        titleLabel.textColor = .white
-        titleLabel.textAlignment = .center
-        titleLabel.numberOfLines = 0
-        titleLabel.text = "Pocket"
-        titleLabel.alpha = 0.0
+        pocketLabel = UILabel(frame: CGRect(x: -frame.width, y: frame.height / 4 - 25, width: frame.width, height: 50))
+        pocketLabel.font = UIFont(name: fontTitle, size: fontSize)
+        pocketLabel.textColor = textColor
+        pocketLabel.textAlignment = .center
+        pocketLabel.numberOfLines = 0
+        pocketLabel.text = "Pocket"
+        pocketLabel.shadowColor = .darkGray
+        pocketLabel.shadowOffset = CGSize(width: shadowOffset, height: shadowOffset)
+        pocketLabel.alpha = 0.0
+        addSubview(pocketLabel)
         
-        addSubview(titleLabel)
-        
-//        titleLabelXAnchor = titleLabel.centerXAnchor.constraint(equalTo: view1.safeAreaLayoutGuide.centerXAnchor, constant: -200)
-//        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([titleLabelXAnchor!,
-//                                     titleLabel.centerYAnchor.constraint(equalTo: view1.safeAreaLayoutGuide.centerYAnchor)])
-//        NSLayoutConstraint.activate([titleLabel.topAnchor.constraint(equalTo: view1.safeAreaLayoutGuide.topAnchor),
-//                                     titleLabel.leadingAnchor.constraint(equalTo: view1.safeAreaLayoutGuide.leadingAnchor),
-//                                     view1.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: titleLabel.bottomAnchor),
-//                                     view1.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor)])
-
         //"PlanetARium" label
-        titleLabel2 = UILabel(frame: CGRect(x: frame.width, y: frame.height / 4 + 25, width: frame.width, height: 50))
-//        titleLabel2.backgroundColor = .purple
-        titleLabel2.font = UIFont(name: K.fontTitle, size: 40)
-        titleLabel2.textColor = .white
-        titleLabel2.textAlignment = .center
-        titleLabel2.numberOfLines = 0
-        titleLabel2.text = "PlanetARium"
-        titleLabel2.alpha = 0.0
-        
-        addSubview(titleLabel2)
-
-//        titleLabel2XAnchor = titleLabel2.centerXAnchor.constraint(equalTo: view1.safeAreaLayoutGuide.centerXAnchor, constant: 200)
-//        titleLabel2.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([titleLabel2XAnchor!,
-//                                     titleLabel2.centerYAnchor.constraint(equalTo: view1.safeAreaLayoutGuide.centerYAnchor)])
-//        NSLayoutConstraint.activate([titleLabel2.topAnchor.constraint(equalTo: view1.safeAreaLayoutGuide.topAnchor),
-//                                     titleLabel2.leadingAnchor.constraint(equalTo: view1.safeAreaLayoutGuide.leadingAnchor),
-//                                     view1.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: titleLabel2.bottomAnchor),
-//                                     view1.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: titleLabel2.trailingAnchor)])
+        planetARiumLabel = UILabel(frame: CGRect(x: frame.width, y: frame.height / 4 + 25, width: frame.width, height: 50))
+        planetARiumLabel.font = UIFont(name: fontTitle, size: fontSize)
+        planetARiumLabel.textColor = textColor
+        planetARiumLabel.textAlignment = .center
+        planetARiumLabel.numberOfLines = 0
+        planetARiumLabel.text = "PlanetARium"
+        planetARiumLabel.shadowColor = .darkGray
+        planetARiumLabel.shadowOffset = CGSize(width: shadowOffset, height: shadowOffset)
+        planetARiumLabel.alpha = 0.0
+        addSubview(planetARiumLabel)
     }
     
     /**
@@ -144,7 +131,7 @@ class MenuContentViewLaunch: UIView {
         NSLayoutConstraint.activate([contentLabel.topAnchor.constraint(equalTo: view2.safeAreaLayoutGuide.topAnchor, constant: 2 * K.padding),
                                      contentLabel.leadingAnchor.constraint(equalTo: view2.safeAreaLayoutGuide.leadingAnchor),
                                      view2.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: contentLabel.trailingAnchor)])
-
+        
         
         
         
@@ -153,40 +140,41 @@ class MenuContentViewLaunch: UIView {
         
         
         //*******FIX!!!
-            launchButton = UIButton()
-            launchButton.backgroundColor = UIColor(rgb: 0x3498db)
-            launchButton.layer.cornerRadius = 30
-            launchButton.layer.shadowRadius = 3
-            launchButton.layer.shadowColor = UIColor.black.cgColor
-            launchButton.layer.shadowOpacity = 0.3
-            launchButton.titleLabel?.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
-            launchButton.setTitle("Launch PlanetARium", for: .normal)
-            launchButton.addTarget(self, action: #selector(loadPlanetARium), for: .touchUpInside)
-            view2.addSubview(launchButton)
-            launchButton.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([launchButton.widthAnchor.constraint(equalToConstant: 225),
-                                         launchButton.heightAnchor.constraint(equalToConstant: 60),
-                                         launchButton.centerXAnchor.constraint(equalTo: view2.centerXAnchor),
-                                         view2.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: launchButton.bottomAnchor, constant: 4 * K.padding)])
+        launchButton = UIButton(type: .system)
+        launchButton.backgroundColor = UIColor(rgb: 0x3498db)
+        launchButton.layer.cornerRadius = 25
+        launchButton.layer.shadowRadius = 4
+        launchButton.layer.shadowColor = UIColor.black.cgColor
+        launchButton.layer.shadowOpacity = 0.3
+        launchButton.titleLabel?.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
+        launchButton.tintColor = .white
+        launchButton.setTitle("Launch PlanetARium", for: .normal)
+        launchButton.addTarget(self, action: #selector(loadPlanetARium), for: .touchUpInside)
+        view2.addSubview(launchButton)
+        launchButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([launchButton.widthAnchor.constraint(equalToConstant: 225),
+                                     launchButton.heightAnchor.constraint(equalToConstant: 50),
+                                     launchButton.centerXAnchor.constraint(equalTo: view2.centerXAnchor),
+                                     view2.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: launchButton.bottomAnchor, constant: K.padding)])
             
             
             
             //TOTALLY A TEST!!!
-            changeMusicButton = UIButton()
-            changeMusicButton.backgroundColor = UIColor(rgb: 0x3498db)
-            changeMusicButton.layer.cornerRadius = 30
-            changeMusicButton.layer.shadowRadius = 3
-            changeMusicButton.layer.shadowColor = UIColor.black.cgColor
-            changeMusicButton.layer.shadowOpacity = 0.3
-            changeMusicButton.titleLabel?.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
-            changeMusicButton.setTitle("Change Theme", for: .normal)
-            changeMusicButton.addTarget(self, action: #selector(changeMusic), for: .touchUpInside)
-            view2.addSubview(changeMusicButton)
-            changeMusicButton.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([changeMusicButton.widthAnchor.constraint(equalToConstant: 225),
-                                         changeMusicButton.heightAnchor.constraint(equalToConstant: 60),
-                                         changeMusicButton.centerXAnchor.constraint(equalTo: view2.centerXAnchor),
-                                         view2.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: changeMusicButton.bottomAnchor, constant: 0)])
+//            changeMusicButton = UIButton()
+//            changeMusicButton.backgroundColor = UIColor(rgb: 0x3498db)
+//            changeMusicButton.layer.cornerRadius = 30
+//            changeMusicButton.layer.shadowRadius = 3
+//            changeMusicButton.layer.shadowColor = UIColor.black.cgColor
+//            changeMusicButton.layer.shadowOpacity = 0.3
+//            changeMusicButton.titleLabel?.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
+//            changeMusicButton.setTitle("Change Theme", for: .normal)
+//            changeMusicButton.addTarget(self, action: #selector(changeMusic), for: .touchUpInside)
+//            view2.addSubview(changeMusicButton)
+//            changeMusicButton.translatesAutoresizingMaskIntoConstraints = false
+//            NSLayoutConstraint.activate([changeMusicButton.widthAnchor.constraint(equalToConstant: 225),
+//                                         changeMusicButton.heightAnchor.constraint(equalToConstant: 60),
+//                                         changeMusicButton.centerXAnchor.constraint(equalTo: view2.centerXAnchor),
+//                                         view2.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: changeMusicButton.bottomAnchor, constant: 0)])
 
     }
     
@@ -225,29 +213,33 @@ class MenuContentViewLaunch: UIView {
     
     
     
-    @objc func changeMusic(_ sender: UIButton) {
-        K.addHapticFeedback(withStyle: .light)
-
-        theme += 1
-        if theme > 2 {
-            theme = 0
-        }
-        switch  theme {
-        case 0:
-            audioManager.setTheme(.main)
-            sender.setTitle("Main Theme", for: .normal)
-        case 1:
-            audioManager.setTheme(.mario)
-            sender.setTitle("Super Mario", for: .normal)
-        case 2:
-            audioManager.setTheme(.starWars)
-            sender.setTitle("Star Wars", for: .normal)
-        default:
-            print("Unknown theme")
-        }
-        
-        audioManager.setupSounds()
-        audioManager.playSound(for: "ButtonPress", currentTime: 0.0)
-    }
+    
+    
+    
+    
+//    @objc func changeMusic(_ sender: UIButton) {
+//        K.addHapticFeedback(withStyle: .light)
+//
+//        theme += 1
+//        if theme > 2 {
+//            theme = 0
+//        }
+//        switch  theme {
+//        case 0:
+//            audioManager.setTheme(.main)
+//            sender.setTitle("Main Theme", for: .normal)
+//        case 1:
+//            audioManager.setTheme(.mario)
+//            sender.setTitle("Super Mario", for: .normal)
+//        case 2:
+//            audioManager.setTheme(.starWars)
+//            sender.setTitle("Star Wars", for: .normal)
+//        default:
+//            print("Unknown theme")
+//        }
+//        
+//        audioManager.setupSounds()
+//        audioManager.playSound(for: "ButtonPress", currentTime: 0.0)
+//    }
 
 }

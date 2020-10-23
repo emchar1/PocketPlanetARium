@@ -16,25 +16,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pocket PlanetARium" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fh0-x6-Ocs">
-                                <rect key="frame" x="64" y="427" width="286.5" height="42"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5Play Apps" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fh0-x6-Ocs">
+                                <rect key="frame" x="123.5" y="427" width="167" height="42"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="32"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5Play Apps" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ajw-k8-I1F">
-                                <rect key="frame" x="162.5" y="759.5" width="89" height="22.5"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ajw-k8-I1F" secondAttribute="bottom" constant="80" id="4PQ-EB-3Xi"/>
                             <constraint firstItem="Fh0-x6-Ocs" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="9bW-nP-Ucy"/>
-                            <constraint firstItem="ajw-k8-I1F" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="NDy-hi-mTc"/>
                             <constraint firstItem="Fh0-x6-Ocs" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="ikW-so-KXT"/>
                         </constraints>
                     </view>

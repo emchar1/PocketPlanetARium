@@ -26,7 +26,7 @@ enum MenuItem: CaseIterable {
         case .item4:
             return (4, "Use the controls at the bottom right to toggle the sound on/off, display planet names, pause animation, and reset your location.\n\nIf you lose your positioning, reset your location to place you back in the center of the PlanetARium.", (name: "planetSettings", type: "mov"))
         case .item5:
-            return (5, "View: Solar System\nSound: On\nHints on Startup: On", nil)
+            return (5, "View: Solar System\n\nSound: On\n\nHints on Startup: On\n\nCredits", nil)
         }
     }
 }

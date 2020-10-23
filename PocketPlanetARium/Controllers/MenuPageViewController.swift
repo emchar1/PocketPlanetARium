@@ -27,7 +27,7 @@ class MenuPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        menuBezelView = MenuBezelView(in: view)
+        menuBezelView = MenuBezelView(in: view, showSubLabel: menuItem == .item5 ? false : true)
         view.addSubview(menuBezelView!)
         menuBezelView!.addContentView(in: self, with: menuItem)
     }
@@ -57,12 +57,12 @@ class MenuPageViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         if let menuContentView = menuBezelView.menuContentView as? MenuContentViewLaunch {
-            menuContentView.titleLabel.alpha = 1.0
-            menuContentView.titleLabel2.alpha = 1.0
+            menuContentView.pocketLabel.alpha = 1.0
+            menuContentView.planetARiumLabel.alpha = 1.0
             
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
-                menuContentView.titleLabel.frame.origin.x = 0
-                menuContentView.titleLabel2.frame.origin.x = 0
+                menuContentView.pocketLabel.frame.origin.x = 0
+                menuContentView.planetARiumLabel.frame.origin.x = 0
             }, completion: nil)
         }
     }

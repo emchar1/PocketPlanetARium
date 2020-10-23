@@ -15,7 +15,7 @@ class MenuController: UIViewController {
     
     private var pageController: UIPageViewController!
     private var menuItems: [MenuItem] = MenuItem.allCases
-    private var currentIndex = 0
+    private var currentIndex = 5
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
 
     

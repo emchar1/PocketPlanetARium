@@ -11,20 +11,21 @@ import UIKit
 class MenuBezelView: UIView {
     var superView: UIView!
     var label: UILabel!
+    var subLabel: UILabel?
     var menuContentView: UIView?
     
-    init(in superView: UIView) {
+    init(in superView: UIView, showSubLabel: Bool) {
         self.superView = superView
         super.init(frame: .zero)
         
-        setupView()
+        setupView(showSubLabel: showSubLabel)
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
-    private func setupView() {
+    private func setupView(showSubLabel: Bool) {
         let bezelRatio: CGFloat = 612/335
         let possibleWidth = superView.frame.width - 2 * K.padding
         let possibleHeight = superView.frame.height - 6 * K.padding
@@ -50,6 +51,16 @@ class MenuBezelView: UIView {
         label.numberOfLines = 0
         label.alpha = 0.0
         addSubview(label)
+        
+        if showSubLabel {
+            subLabel = UILabel(frame: CGRect(x: 0, y: height - 40, width: width, height: 40))
+            subLabel!.font = UIFont(name: K.fontFaceItalic, size: K.fontSizePeekDetails)
+            subLabel!.textColor = .white
+            subLabel!.textAlignment = .center
+            subLabel!.text = "(Swipe left to proceed)"
+            addSubview(subLabel!)
+        }
+        
     }
     
     func addContentView(in controller: MenuContentViewLaunchDelegate, with menuItem: MenuItem) {

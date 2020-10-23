@@ -23,8 +23,8 @@ struct K {
     static let fontTitle = "Age-Normal"
     static let fontFace = "Prime-Regular"
     static let fontFaceItalic = "Prime-Light"
-    static let fontFaceSecondary = "Futura"
-    static let fontFaceSecondaryItalic = "Futura Medium Italic"
+    static let fontFaceSecondary = "PantonNarrowDemo-Black"
+    static let fontFaceSecondaryItalic = "PantonNarrowDemo-BlackItalic"
     static let fontSizeMenu: CGFloat = 18
     static let fontSizePeekTitle: CGFloat = 18
     static let fontSizePeekDetails: CGFloat = 14

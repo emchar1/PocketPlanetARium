@@ -47,6 +47,10 @@ class PlanetDetailsController: UIViewController, SCNSceneRendererDelegate {
         
         //Setup labels
         planetTitleLabel.text = planet.getName()
+        planetTitleLabel.textColor = UIColor.getRandom(redRange: 175...255, greenRange: 175...255, blueRange: 175...255)
+        planetTitleLabel.shadowOffset = CGSize(width: 2.0, height: 2.0)
+        planetTitleLabel.shadowColor = .darkGray
+        
         planetDetailsLabel.text = planet.getDetails().details
         planetDetailsLandscapeLabel.text = planet.getDetails().details
 
