@@ -11,7 +11,7 @@ import UIKit
 class MenuBezelView: UIView {
     var superView: UIView!
     var label: UILabel!
-    var menuContentView: MenuContentView?
+    var menuContentView: UIView?
     
     init(in superView: UIView) {
         self.superView = superView
@@ -52,9 +52,23 @@ class MenuBezelView: UIView {
         addSubview(label)
     }
     
-    func addContentView(in controller: MenuContentViewDelegate, with menuItem: MenuItem) {
-        menuContentView = MenuContentView(in: self, with: menuItem)
-        menuContentView!.delegate = controller
+    func addContentView(in controller: MenuContentViewLaunchDelegate, with menuItem: MenuItem) {
+        if menuItem == .item5 {
+            menuContentView = MenuContentViewLaunch(in: self, with: menuItem)
+
+            if let menuContentView = menuContentView as? MenuContentViewLaunch {
+                menuContentView.delegate = controller
+            }
+        }
+        else {
+            if menuItem.item.video == nil {
+                menuContentView = MenuContentViewSingle(in: self, with: menuItem)
+            }
+            else {
+                menuContentView = MenuContentView(in: self, with: menuItem)
+            }
+        }
+        
         addSubview(menuContentView!)
     }
 }

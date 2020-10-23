@@ -20,6 +20,7 @@ struct K {
     static let userDefaultsKey_HintsAreOff = "HintsAreOff"
     
     //Fonts
+    static let fontTitle = "Age-Normal"
     static let fontFace = "Prime-Regular"
     static let fontFaceItalic = "Prime-Light"
     static let fontFaceSecondary = "Futura"

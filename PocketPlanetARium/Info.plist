@@ -24,6 +24,7 @@
 	<string></string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Age-Normal.otf</string>
 		<string>PantonDemo-Black.otf</string>
 		<string>PantonDemo-BlackItalic.otf</string>
 		<string>PantonDemo-Light.otf</string>

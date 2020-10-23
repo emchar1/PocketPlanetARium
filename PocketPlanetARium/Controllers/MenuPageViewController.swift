@@ -34,22 +34,53 @@ class MenuPageViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         //I should probably use protocol delegation instead of this travesty, but I'm lazy and exhausted :P
-        menuBezelView.menuContentView?.playerViewController?.player?.play()
+        if let menuContentView = menuBezelView.menuContentView as? MenuContentViewSingle {
+            UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
+                menuContentView.contentLabel.alpha = 1.0
+            }, completion: nil)
+        }
+
+        if let menuContentView = menuBezelView.menuContentView as? MenuContentView {
+            menuContentView.playerViewController?.player?.play()
+
+            UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
+                menuContentView.contentLabel.alpha = 1.0
+            }, completion: nil)
+        }
+        
+        if let menuContentView = menuBezelView.menuContentView as? MenuContentViewLaunch {
+            UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
+                menuContentView.contentLabel.alpha = 1.0
+            }, completion: nil)
+        }
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        //I should probably use protocol delegation instead of this travesty, but I'm lazy and exhausted :P
-        menuBezelView.menuContentView?.playerViewController?.player?.pause()
-        menuBezelView.menuContentView?.playerViewController?.player?.seek(to: .zero)
+    override func viewDidAppear(_ animated: Bool) {
+        if let menuContentView = menuBezelView.menuContentView as? MenuContentViewLaunch {
+            menuContentView.titleLabel.alpha = 1.0
+            menuContentView.titleLabel2.alpha = 1.0
+            
+            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
+                menuContentView.titleLabel.frame.origin.x = 0
+                menuContentView.titleLabel2.frame.origin.x = 0
+            }, completion: nil)
+        }
     }
         
+    override func viewDidDisappear(_ animated: Bool) {
+        //I should probably use protocol delegation instead of this travesty, but I'm lazy and exhausted :P
+        if let menuContentView = menuBezelView.menuContentView as? MenuContentView {
+            menuContentView.playerViewController?.player?.pause()
+            menuContentView.playerViewController?.player?.seek(to: .zero)
+        }
+    }
 }
 
 
-// MARK: - MenuContentViewDelegate
+// MARK: - MenuContentViewLaunchDelegate
 
-extension MenuPageViewController: MenuContentViewDelegate {
-    func menuContentView(_ controller: MenuContentView, didPresentPlanetARiumController planetARiumController: PlanetARiumController) {
+extension MenuPageViewController: MenuContentViewLaunchDelegate {
+    func menuContentViewLaunch(_ controller: MenuContentViewLaunch, didPresentPlanetARiumController planetARiumController: PlanetARiumController) {
         self.present(planetARiumController, animated: true, completion: nil)
     }
 }

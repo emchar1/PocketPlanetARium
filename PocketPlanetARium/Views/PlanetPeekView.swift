@@ -40,7 +40,7 @@ class PlanetPeekView: UIView {
         self.planet = planet
         planetTitle.text = planet.getName()
         planetDetails.text = planet.getDetails().details
-        instructions.text = "(deep press for more)"
+        instructions.text = "(press hard to read more)"
         
         setupView()
     }
@@ -64,7 +64,7 @@ class PlanetPeekView: UIView {
 
         setupLabel(&planetTitle,
                    frame: CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.size.width, height: 40),
-                   font: UIFont(name: K.fontFace, size: K.fontSizePeekTitle),
+                   font: UIFont(name: K.fontTitle, size: K.fontSizePeekTitle),
                    alignment: .center,
                    backgroundColor: UIColor(named: K.color500) ?? .gray)
         
