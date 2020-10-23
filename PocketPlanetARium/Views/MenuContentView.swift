@@ -46,14 +46,14 @@ class MenuContentView: UIView {
                                      safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: stackView.bottomAnchor, constant: K.padding),
                                      safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: K.padding)])
 
-        setupStack1()
-        setupStack2()
+        setupStackTop()
+        setupStackBottom()
     }
     
     /**
      Helper method to set up the first view in the stack.
      */
-    private func setupStack1() {
+    private func setupStackTop() {
         let view1 = UIView()
         view1.clipsToBounds = true
         stackView.addArrangedSubview(view1)
@@ -85,7 +85,7 @@ class MenuContentView: UIView {
     /**
      Helper method to set up the second view in the stack.
      */
-    private func setupStack2() {
+    private func setupStackBottom() {
         let view2 = UIView()
         stackView.addArrangedSubview(view2)
         

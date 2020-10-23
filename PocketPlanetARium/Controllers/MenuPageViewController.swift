@@ -48,11 +48,12 @@ class MenuPageViewController: UIViewController {
             }, completion: nil)
         }
         
-        if let menuContentView = menuBezelView.menuContentView as? MenuContentViewLaunch {
-            UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
-                menuContentView.contentLabel.alpha = 1.0
-            }, completion: nil)
-        }
+        //Figure a way to animate the launch page....
+//        if let menuContentView = menuBezelView.menuContentView as? MenuContentViewLaunch {
+//            UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseInOut, animations: {
+//                menuContentView.contentLabel.alpha = 1.0
+//            }, completion: nil)
+//        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

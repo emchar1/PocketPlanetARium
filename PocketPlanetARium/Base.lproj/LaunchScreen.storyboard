@@ -19,7 +19,6 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5Play Apps" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fh0-x6-Ocs">
                                 <rect key="frame" x="123.5" y="427" width="167" height="42"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="32"/>
-                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
