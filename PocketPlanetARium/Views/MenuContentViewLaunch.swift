@@ -262,7 +262,6 @@ class MenuContentViewLaunch: UIView {
             button.layer.shadowColor = UIColor.black.cgColor
             button.layer.shadowOpacity = 0.3
             button.addGestureRecognizer(gesture)
-//            leftView.addGestureRecognizer(gesture)
 
             switch header {
             case "View:":
@@ -395,7 +394,7 @@ class MenuContentViewLaunch: UIView {
         audioManager.playSound(for: "ButtonPress", currentTime: 0.0)
         planetARiumViewButton.backgroundColor = .yellow
 
-        let alert = UIAlertController(title: nil, message: "Select PlanetARium View", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Select PlanetARium View", message: nil, preferredStyle: .actionSheet)
         let actionSolarSystem = UIAlertAction(title: "Solar System", style: .default) { _ in
             self.planetARiumViewButton.backgroundColor = .green
             print("Solar System pressed")
