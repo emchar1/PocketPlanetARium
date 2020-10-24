@@ -13,24 +13,19 @@ protocol MenuContentViewLaunchDelegate {
     func menuContentViewLaunch(_ controller: MenuContentViewLaunch, didPresentViewChangeWith alert: UIAlertController)
 }
 
-
-struct StackItems {
-    let button: UIButton
-    let title: String
-    let description: String
-}
-
-
 class MenuContentViewLaunch: UIView {
     var superView: MenuBezelView!
     var stackView: UIStackView!
     var launchButton: UIButton!
-
-    //Top stack properties
+    
+    // MARK: - Top Stack Properties
     var titleTopLabel: UILabel!
     var titleBottomLabel: UILabel!
 
-    //Bottom stack properties
+    // MARK: - Bottom Stack properties
+    static let headerView = "View:"
+    static let headerSound = "Sound:"
+    static let headerHints = "Hints:"
     var bottomStackView: UIStackView!
     var planetARiumViewButton: UIButton!
     var soundButton: UIButton?  //these need to be optional because they're used in didSet below, and may be nil at initialization
@@ -40,37 +35,26 @@ class MenuContentViewLaunch: UIView {
     var hintsLabel: UILabel!
     var creditsLabel: UILabel!
     
-    //Misc properties
+    // MARK: - Misc Properties
+    let buttonColor = UIColor(rgb: 0x3498db)
+    let buttonPressedColor = UIColor(named: K.color500)!
+    let descriptionColor = UIColor(red: 175, green: 255, blue: 255)
     var menuItem: MenuItem
     var isMuted: Bool {
         didSet {
-            soundButton?.backgroundColor = isMuted ? .red : .green
+            soundButton?.backgroundColor = isMuted ? buttonPressedColor : buttonColor
         }
     }
     var hintsAreOff: Bool {
         didSet {
-            hintsButton?.backgroundColor = hintsAreOff ? .red : .green
+            hintsButton?.backgroundColor = hintsAreOff ? buttonPressedColor : buttonColor
         }
     }
     var delegate: MenuContentViewLaunchDelegate?
 
 
+    // MARK: - Initialization
     
-    
-    
-    
-    
-    
-    //TOTALLY A TEST!!!
-//    var changeMusicButton: UIButton!
-//    var theme = 0
-
-
-
-
-    
-
-        
     init(in superView: MenuBezelView, with menuItem: MenuItem) {
         self.superView = superView
         self.menuItem = menuItem
@@ -92,10 +76,7 @@ class MenuContentViewLaunch: UIView {
         stackView.distribution = .fillEqually
         stackView.alignment = .fill
         stackView.axis = .vertical
-        
-        soundLabel = UILabel()
-        soundLabel.text = "Fiddle"
-        
+
         addSubview(stackView)
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -108,14 +89,14 @@ class MenuContentViewLaunch: UIView {
         setupStackBottom()
     }
     
+    
     /**
      Helper method to set up the first view in the stack.
      */
     private func setupStackTop() {
-        let holderView = UIView()
-        holderView.clipsToBounds = true
-        stackView.addArrangedSubview(holderView)
-        
+        let topView = UIView()
+        topView.clipsToBounds = true
+        stackView.addArrangedSubview(topView)
         
         let fontTitle: String = K.fontTitle
         let fontSize: CGFloat = 40
@@ -123,7 +104,10 @@ class MenuContentViewLaunch: UIView {
         let shadowOffset: CGFloat = 3.0
         
         //"Pocket" label
-        titleTopLabel = UILabel(frame: CGRect(x: -frame.width, y: frame.height / 4 - 25, width: frame.width, height: 50))
+        titleTopLabel = UILabel(frame: CGRect(x: -frame.width,
+                                              y: frame.height / 4 - (fontSize / 2 + 5),
+                                              width: frame.width,
+                                              height: fontSize + 10))
         titleTopLabel.font = UIFont(name: fontTitle, size: fontSize)
         titleTopLabel.textColor = textColor
         titleTopLabel.textAlignment = .center
@@ -135,7 +119,10 @@ class MenuContentViewLaunch: UIView {
         addSubview(titleTopLabel)
         
         //"PlanetARium" label
-        titleBottomLabel = UILabel(frame: CGRect(x: frame.width, y: frame.height / 4 + 25, width: frame.width, height: 50))
+        titleBottomLabel = UILabel(frame: CGRect(x: frame.width,
+                                                 y: frame.height / 4 + (fontSize / 2 + 5),
+                                                 width: frame.width,
+                                                 height: fontSize + 10))
         titleBottomLabel.font = UIFont(name: fontTitle, size: fontSize)
         titleBottomLabel.textColor = textColor
         titleBottomLabel.textAlignment = .center
@@ -158,13 +145,16 @@ class MenuContentViewLaunch: UIView {
         bottomStackView.axis = .vertical
         stackView.addArrangedSubview(bottomStackView)
         
-        setupHorizontalStack(header: "View:", description: "Solar System",
+        setupHorizontalStack(header: MenuContentViewLaunch.headerView,
+                             description: "Solar System",
                              gesture: UITapGestureRecognizer(target: self, action: #selector(changeView)))
         
-        setupHorizontalStack(header: "Sound:", description: isMuted ? "Off" : "On",
+        setupHorizontalStack(header: MenuContentViewLaunch.headerSound,
+                             description: isMuted ? "Off" : "On",
                              gesture: UITapGestureRecognizer(target: self, action: #selector(toggleSound)))
 
-        setupHorizontalStack(header: "Hints:", description: hintsAreOff ? "Off" : "On",
+        setupHorizontalStack(header: MenuContentViewLaunch.headerHints,
+                             description: hintsAreOff ? "Off" : "On",
                              gesture: UITapGestureRecognizer(target: self, action: #selector(toggleHints)))
         
         let creditsView = UIView()
@@ -174,7 +164,7 @@ class MenuContentViewLaunch: UIView {
 //        creditsLabel = UILabel()
 //        creditsLabel.attributedText = attributedText
 //        creditsLabel.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
-//        creditsLabel.textColor = UIColor(red: 175, green: 255, blue: 255)
+//        creditsLabel.textColor = descriptionColor
 //        creditsLabel.textAlignment = .center
 //        creditsView.addSubview(creditsLabel)
 //        creditsLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -184,13 +174,13 @@ class MenuContentViewLaunch: UIView {
 //                                     creditsView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: creditsLabel.trailingAnchor)])
         bottomStackView.addArrangedSubview(creditsView)
 
-        //Just a space filler...
+        //Just some space filler...
         setupHorizontalStack(header: "", description: "", gesture: nil)
         setupHorizontalStack(header: "", description: "", gesture: nil)
 
         //Launch button
         launchButton = UIButton(type: .system)
-        launchButton.backgroundColor = UIColor(rgb: 0x3498db)
+        launchButton.backgroundColor = buttonColor
         launchButton.setTitle("Launch PlanetARium", for: .normal)
         launchButton.titleLabel?.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
         launchButton.tintColor = .white
@@ -198,7 +188,7 @@ class MenuContentViewLaunch: UIView {
         launchButton.layer.shadowRadius = 4
         launchButton.layer.shadowColor = UIColor.black.cgColor
         launchButton.layer.shadowOpacity = 0.3
-        launchButton.addTarget(self, action: #selector(loadPlanetARium), for: .touchUpInside)
+        launchButton.addTarget(self, action: #selector(loadPlanetARium(_:)), for: .touchUpInside)
 
         bottomStackView.addSubview(launchButton)
 
@@ -207,32 +197,6 @@ class MenuContentViewLaunch: UIView {
                                      launchButton.heightAnchor.constraint(equalToConstant: 50),
                                      launchButton.centerXAnchor.constraint(equalTo: bottomStackView.centerXAnchor),
                                      bottomStackView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: launchButton.bottomAnchor, constant: K.padding)])
-
-
-        
-        
-        
-        
-        
-        
-        
-            //TOTALLY A TEST!!!
-//            changeMusicButton = UIButton()
-//            changeMusicButton.backgroundColor = UIColor(rgb: 0x3498db)
-//            changeMusicButton.layer.cornerRadius = 30
-//            changeMusicButton.layer.shadowRadius = 3
-//            changeMusicButton.layer.shadowColor = UIColor.black.cgColor
-//            changeMusicButton.layer.shadowOpacity = 0.3
-//            changeMusicButton.titleLabel?.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
-//            changeMusicButton.setTitle("Change Theme", for: .normal)
-//            changeMusicButton.addTarget(self, action: #selector(changeMusic), for: .touchUpInside)
-//            view2.addSubview(changeMusicButton)
-//            changeMusicButton.translatesAutoresizingMaskIntoConstraints = false
-//            NSLayoutConstraint.activate([changeMusicButton.widthAnchor.constraint(equalToConstant: 225),
-//                                         changeMusicButton.heightAnchor.constraint(equalToConstant: 60),
-//                                         changeMusicButton.centerXAnchor.constraint(equalTo: view2.centerXAnchor),
-//                                         view2.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: changeMusicButton.bottomAnchor, constant: 0)])
-
     }
     
     
@@ -240,14 +204,12 @@ class MenuContentViewLaunch: UIView {
      I hate hate hate this method!!! So inefficient, everything's hard coded, it could use a MAJOR refactor some day...
      */
     private func setupHorizontalStack(header: String, description: String, gesture: UIGestureRecognizer? = nil) {
-        let textPadding: CGFloat = 5.0
-        
         let horizontalStackView = UIStackView()
         horizontalStackView.distribution = .fillEqually
         horizontalStackView.alignment = .fill
         horizontalStackView.axis = .horizontal
 
-        //Button and Header Stackview
+        //Button/Header Stackview
         let leftStackView = UIStackView()
         leftStackView.distribution = .fillEqually
         leftStackView.alignment = .fill
@@ -256,55 +218,45 @@ class MenuContentViewLaunch: UIView {
         //Left part of the Button/Header stack
         let leftView = UIView()
         if let gesture = gesture {
+            let buttonSize: CGFloat = 30
             let button = UIButton(type: .system)
-            button.layer.cornerRadius = 10
+            button.layer.cornerRadius = buttonSize / 2
             button.layer.shadowRadius = 4
             button.layer.shadowColor = UIColor.black.cgColor
             button.layer.shadowOpacity = 0.3
             button.addGestureRecognizer(gesture)
 
             switch header {
-            case "View:":
-                button.backgroundColor = .green
+            case MenuContentViewLaunch.headerView:
+                button.backgroundColor = buttonColor
                 planetARiumViewButton = button
                 leftView.addSubview(planetARiumViewButton)
                 planetARiumViewButton.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate([planetARiumViewButton.widthAnchor.constraint(equalToConstant: 20),
-                                             planetARiumViewButton.heightAnchor.constraint(equalToConstant: 20),
+                NSLayoutConstraint.activate([planetARiumViewButton.widthAnchor.constraint(equalToConstant: buttonSize),
+                                             planetARiumViewButton.heightAnchor.constraint(equalToConstant: buttonSize),
                                              planetARiumViewButton.centerYAnchor.constraint(equalTo: leftView.safeAreaLayoutGuide.centerYAnchor),
                                              leftView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: planetARiumViewButton.trailingAnchor)])
-            case "Sound:":
-                button.backgroundColor = isMuted ? .red : .green
+            case MenuContentViewLaunch.headerSound:
+                button.backgroundColor = isMuted ? buttonPressedColor : buttonColor
                 soundButton = button
                 leftView.addSubview(soundButton!)
                 soundButton!.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate([soundButton!.widthAnchor.constraint(equalToConstant: 20),
-                                             soundButton!.heightAnchor.constraint(equalToConstant: 20),
+                NSLayoutConstraint.activate([soundButton!.widthAnchor.constraint(equalToConstant: buttonSize),
+                                             soundButton!.heightAnchor.constraint(equalToConstant: buttonSize),
                                              soundButton!.centerYAnchor.constraint(equalTo: leftView.safeAreaLayoutGuide.centerYAnchor),
                                              leftView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: soundButton!.trailingAnchor)])
-            case "Hints:":
-                button.backgroundColor = hintsAreOff ? .red : .green
+            case MenuContentViewLaunch.headerHints:
+                button.backgroundColor = hintsAreOff ? buttonPressedColor : buttonColor
                 hintsButton = button
                 leftView.addSubview(hintsButton!)
                 hintsButton!.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate([hintsButton!.widthAnchor.constraint(equalToConstant: 20),
-                                             hintsButton!.heightAnchor.constraint(equalToConstant: 20),
+                NSLayoutConstraint.activate([hintsButton!.widthAnchor.constraint(equalToConstant: buttonSize),
+                                             hintsButton!.heightAnchor.constraint(equalToConstant: buttonSize),
                                              hintsButton!.centerYAnchor.constraint(equalTo: leftView.safeAreaLayoutGuide.centerYAnchor),
                                              leftView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: hintsButton!.trailingAnchor)])
             default:
                 break
             }
-            
-            
-            
-            
-            //OLD WAY
-//            leftView.addSubview(button)
-//            button.translatesAutoresizingMaskIntoConstraints = false
-//            NSLayoutConstraint.activate([button.widthAnchor.constraint(equalToConstant: 20),
-//                                         button.heightAnchor.constraint(equalToConstant: 20),
-//                                         button.centerYAnchor.constraint(equalTo: leftView.safeAreaLayoutGuide.centerYAnchor),
-//                                         leftView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: button.trailingAnchor)])
         }
         
         //Right part of the Button/Header stack (i.e. middle view)
@@ -317,30 +269,23 @@ class MenuContentViewLaunch: UIView {
         midView.addSubview(headerLabel)
         headerLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([headerLabel.topAnchor.constraint(equalTo: midView.safeAreaLayoutGuide.topAnchor),
-                                     headerLabel.leadingAnchor.constraint(equalTo: midView.safeAreaLayoutGuide.leadingAnchor, constant: 2 * textPadding),
+                                     headerLabel.leadingAnchor.constraint(equalTo: midView.safeAreaLayoutGuide.leadingAnchor, constant: 10),
                                      midView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: headerLabel.bottomAnchor),
                                      midView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: headerLabel.trailingAnchor)])
         leftStackView.addArrangedSubview(leftView)
         leftStackView.addArrangedSubview(midView)
         horizontalStackView.addArrangedSubview(leftStackView)
 
-        
-        
-        
-        
-        
-        
-        
         //Description (menu selection) view
         let rightView = UIView()
         let descLabel = UILabel()
         descLabel.text = description
         descLabel.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
-        descLabel.textColor = UIColor(red: 175, green: 255, blue: 255)
+        descLabel.textColor = descriptionColor
         descLabel.textAlignment = .left
 
         switch header {
-        case "View:":
+        case MenuContentViewLaunch.headerView:
             planetARiumViewLabel = descLabel
             rightView.addSubview(planetARiumViewLabel)
             planetARiumViewLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -348,7 +293,7 @@ class MenuContentViewLaunch: UIView {
                                          planetARiumViewLabel.leadingAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.leadingAnchor),
                                          rightView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: planetARiumViewLabel.bottomAnchor),
                                          rightView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: planetARiumViewLabel.trailingAnchor)])
-        case "Sound:":
+        case MenuContentViewLaunch.headerSound:
             soundLabel = descLabel
             rightView.addSubview(soundLabel)
             soundLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -356,7 +301,7 @@ class MenuContentViewLaunch: UIView {
                                          soundLabel.leadingAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.leadingAnchor),
                                          rightView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: soundLabel.bottomAnchor),
                                          rightView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: soundLabel.trailingAnchor)])
-        case "Hints:":
+        case MenuContentViewLaunch.headerHints:
             hintsLabel = descLabel
             rightView.addSubview(hintsLabel)
             hintsLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -364,27 +309,17 @@ class MenuContentViewLaunch: UIView {
                                          hintsLabel.leadingAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.leadingAnchor),
                                          rightView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: hintsLabel.bottomAnchor),
                                          rightView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: hintsLabel.trailingAnchor)])
-
         default:
             break
         }
-
         
-        
-        
-        
-        
-        //OLD WAY
-//        rightView.addSubview(descLabel)
-//        descLabel.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([descLabel.topAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.topAnchor),
-//                                     descLabel.leadingAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.leadingAnchor),
-//                                     rightView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: descLabel.bottomAnchor),
-//                                     rightView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: descLabel.trailingAnchor)])
         horizontalStackView.addArrangedSubview(rightView)
         
         bottomStackView.addArrangedSubview(horizontalStackView)
     }
+    
+    
+    // MARK: - Menu Buttons
     
     /**
      One of the tap gesture recognizers that handles changing the planetarium view.
@@ -392,36 +327,42 @@ class MenuContentViewLaunch: UIView {
     @objc private func changeView() {
         K.addHapticFeedback(withStyle: .light)
         audioManager.playSound(for: "ButtonPress", currentTime: 0.0)
-        planetARiumViewButton.backgroundColor = .yellow
+        planetARiumViewButton.backgroundColor = buttonPressedColor
 
         let alert = UIAlertController(title: "Select PlanetARium View", message: nil, preferredStyle: .actionSheet)
         let actionSolarSystem = UIAlertAction(title: "Solar System", style: .default) { _ in
-            self.planetARiumViewButton.backgroundColor = .green
+            self.planetARiumViewButton.backgroundColor = self.buttonColor
             print("Solar System pressed")
         }
         let actionConstellations = UIAlertAction(title: "Constellations (coming soon!)", style: .default) { _ in
-            self.planetARiumViewButton.backgroundColor = .green
+            self.planetARiumViewButton.backgroundColor = self.buttonColor
             print("Constellations pressed")
         }
         let actionMilkyWay = UIAlertAction(title: "Milky Way Galaxy (coming soon!)", style: .default) { _ in
-            self.planetARiumViewButton.backgroundColor = .green
+            self.planetARiumViewButton.backgroundColor = self.buttonColor
             print("Milky Way pressed")
         }
         let actionAndromeda = UIAlertAction(title: "Andromeda Galaxy (coming soon!)", style: .default) { _ in
-            self.planetARiumViewButton.backgroundColor = .green
+            self.planetARiumViewButton.backgroundColor = self.buttonColor
             print("Andromeda pressed")
+        }
+        let actionVirgo = UIAlertAction(title: "Virgo Supercluster (coming soon!)", style: .default) { _ in
+            self.planetARiumViewButton.backgroundColor = self.buttonColor
+            print("Virgo pressed")
         }
 
         actionConstellations.isEnabled = false
         actionMilkyWay.isEnabled = false
         actionAndromeda.isEnabled = false
+        actionVirgo.isEnabled = false
         
         alert.addAction(actionSolarSystem)
         alert.addAction(actionConstellations)
         alert.addAction(actionMilkyWay)
         alert.addAction(actionAndromeda)
+        alert.addAction(actionVirgo)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in
-            self.planetARiumViewButton.backgroundColor = .green
+            self.planetARiumViewButton.backgroundColor = self.buttonColor
         })
         
         delegate?.menuContentViewLaunch(self, didPresentViewChangeWith: alert)
@@ -454,15 +395,17 @@ class MenuContentViewLaunch: UIView {
         hintsLabel.text = hintsAreOff ? "Off" : "On"
     }
     
-    
-    // MARK: - PlanetARium Segue
-            
+    /**
+     Launches the PlanetARium!
+     */
     @objc private func loadPlanetARium(_ sender: UIButton) {
         let duration: TimeInterval = 0.25
         
         K.addHapticFeedback(withStyle: .light)
         audioManager.playSound(for: "LaunchButton", currentTime: 0.0)
         audioManager.stopSound(for: "MenuScreen", fadeDuration: 2.0)
+        
+        sender.backgroundColor = buttonPressedColor
         
         UIView.animate(withDuration: duration, delay: duration / 2, options: .curveEaseIn, animations: {
             self.superView.label.alpha = K.masterAlpha
@@ -481,40 +424,5 @@ class MenuContentViewLaunch: UIView {
                 self.delegate?.menuContentViewLaunch(self, didPresentPlanetARiumController: planetARiumController)
             }
         }
-        
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    //TOTALLY A TEST!!!
-//    @objc func changeMusic(_ sender: UIButton) {
-//        K.addHapticFeedback(withStyle: .light)
-//
-//        theme += 1
-//        if theme > 2 {
-//            theme = 0
-//        }
-//        switch  theme {
-//        case 0:
-//            audioManager.setTheme(.main)
-//            sender.setTitle("Main Theme", for: .normal)
-//        case 1:
-//            audioManager.setTheme(.mario)
-//            sender.setTitle("Super Mario", for: .normal)
-//        case 2:
-//            audioManager.setTheme(.starWars)
-//            sender.setTitle("Star Wars", for: .normal)
-//        default:
-//            print("Unknown theme")
-//        }
-//        
-//        audioManager.setupSounds()
-//        audioManager.playSound(for: "ButtonPress", currentTime: 0.0)
-//    }
-
 }
