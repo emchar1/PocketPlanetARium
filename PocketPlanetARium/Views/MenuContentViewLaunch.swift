@@ -14,11 +14,18 @@ protocol MenuContentViewLaunchDelegate {
 }
 
 
+struct StackItems {
+    let button: UIButton
+    let title: String
+    let description: String
+}
+
+
 class MenuContentViewLaunch: UIView {
     var superView: MenuBezelView!
     var stackView: UIStackView!
-    var pocketLabel: UILabel!
-    var planetARiumLabel: UILabel!
+    var titleTopLabel: UILabel!
+    var titleBottomLabel: UILabel!
     var contentLabel: UILabel!
     var launchButton: UIButton!
     var menuItem: MenuItem
@@ -104,28 +111,28 @@ class MenuContentViewLaunch: UIView {
         let shadowOffset: CGFloat = 3.0
         
         //"Pocket" label
-        pocketLabel = UILabel(frame: CGRect(x: -frame.width, y: frame.height / 4 - 25, width: frame.width, height: 50))
-        pocketLabel.font = UIFont(name: fontTitle, size: fontSize)
-        pocketLabel.textColor = textColor
-        pocketLabel.textAlignment = .center
-        pocketLabel.numberOfLines = 0
-        pocketLabel.text = "Pocket"
-        pocketLabel.shadowColor = .darkGray
-        pocketLabel.shadowOffset = CGSize(width: shadowOffset, height: shadowOffset)
-        pocketLabel.alpha = 0.0
-        addSubview(pocketLabel)
+        titleTopLabel = UILabel(frame: CGRect(x: -frame.width, y: frame.height / 4 - 25, width: frame.width, height: 50))
+        titleTopLabel.font = UIFont(name: fontTitle, size: fontSize)
+        titleTopLabel.textColor = textColor
+        titleTopLabel.textAlignment = .center
+        titleTopLabel.numberOfLines = 0
+        titleTopLabel.text = "Pocket"
+        titleTopLabel.shadowColor = .darkGray
+        titleTopLabel.shadowOffset = CGSize(width: shadowOffset, height: shadowOffset)
+        titleTopLabel.alpha = 0.0
+        addSubview(titleTopLabel)
         
         //"PlanetARium" label
-        planetARiumLabel = UILabel(frame: CGRect(x: frame.width, y: frame.height / 4 + 25, width: frame.width, height: 50))
-        planetARiumLabel.font = UIFont(name: fontTitle, size: fontSize)
-        planetARiumLabel.textColor = textColor
-        planetARiumLabel.textAlignment = .center
-        planetARiumLabel.numberOfLines = 0
-        planetARiumLabel.text = "PlanetARium"
-        planetARiumLabel.shadowColor = .darkGray
-        planetARiumLabel.shadowOffset = CGSize(width: shadowOffset, height: shadowOffset)
-        planetARiumLabel.alpha = 0.0
-        addSubview(planetARiumLabel)
+        titleBottomLabel = UILabel(frame: CGRect(x: frame.width, y: frame.height / 4 + 25, width: frame.width, height: 50))
+        titleBottomLabel.font = UIFont(name: fontTitle, size: fontSize)
+        titleBottomLabel.textColor = textColor
+        titleBottomLabel.textAlignment = .center
+        titleBottomLabel.numberOfLines = 0
+        titleBottomLabel.text = "PlanetARium"
+        titleBottomLabel.shadowColor = .darkGray
+        titleBottomLabel.shadowOffset = CGSize(width: shadowOffset, height: shadowOffset)
+        titleBottomLabel.alpha = 0.0
+        addSubview(titleBottomLabel)
     }
     
     /**
@@ -149,17 +156,20 @@ class MenuContentViewLaunch: UIView {
                              gesture: UITapGestureRecognizer(target: self, action: #selector(toggleHints)))
         
         let creditsView = UIView()
-        creditsLabel = UILabel()
-        creditsLabel.text = "Credits"
-        creditsLabel.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
-        creditsLabel.textColor = .white
-        creditsLabel.textAlignment = .center
-        creditsView.addSubview(creditsLabel)
-        creditsLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([creditsLabel.topAnchor.constraint(equalTo: creditsView.safeAreaLayoutGuide.topAnchor),
-                                     creditsLabel.leadingAnchor.constraint(equalTo: creditsView.safeAreaLayoutGuide.leadingAnchor),
-                                     creditsView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: creditsLabel.bottomAnchor),
-                                     creditsView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: creditsLabel.trailingAnchor)])
+        //CREDITS PLACEHOLDER - Uncomment to use.
+//        let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue]
+//        let attributedText = NSAttributedString(string: "Credits", attributes: underlineAttribute)
+//        creditsLabel = UILabel()
+//        creditsLabel.attributedText = attributedText
+//        creditsLabel.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
+//        creditsLabel.textColor = UIColor(red: 175, green: 255, blue: 255)
+//        creditsLabel.textAlignment = .center
+//        creditsView.addSubview(creditsLabel)
+//        creditsLabel.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([creditsLabel.topAnchor.constraint(equalTo: creditsView.safeAreaLayoutGuide.topAnchor),
+//                                     creditsLabel.leadingAnchor.constraint(equalTo: creditsView.safeAreaLayoutGuide.leadingAnchor),
+//                                     creditsView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: creditsLabel.bottomAnchor),
+//                                     creditsView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: creditsLabel.trailingAnchor)])
         bottomStackView.addArrangedSubview(creditsView)
 
         //Just a space filler...
@@ -241,6 +251,9 @@ class MenuContentViewLaunch: UIView {
     }
     
     
+    /**
+     I hate hate hate this method!!! So inefficient, everything's hard coded, it could use a MAJOR refactor some day...
+     */
     private func setupHorizontalStack(in superStackView: UIStackView, header: String, description: String, gesture: UIGestureRecognizer? = nil) {
         let textPadding: CGFloat = 5.0
         
@@ -249,43 +262,119 @@ class MenuContentViewLaunch: UIView {
         horizontalStackView.alignment = .fill
         horizontalStackView.axis = .horizontal
 
-        //Header view
+        //Button and Header Stackview
+        let leftStackView = UIStackView()
+        leftStackView.distribution = .fillEqually
+        leftStackView.alignment = .fill
+        leftStackView.axis = .horizontal
+
+        //Left part of the Button/Header stack
         let leftView = UIView()
+        if let gesture = gesture {
+            let button = UIButton(type: .system)
+            button.backgroundColor = .green
+            button.layer.cornerRadius = 10
+            button.layer.shadowRadius = 2
+            button.layer.shadowColor = UIColor.black.cgColor
+            button.layer.shadowOpacity = 0.3
+            button.addGestureRecognizer(gesture)
+            leftView.addSubview(button)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([button.widthAnchor.constraint(equalToConstant: 20),
+                                         button.heightAnchor.constraint(equalToConstant: 20),
+                                         button.centerYAnchor.constraint(equalTo: leftView.safeAreaLayoutGuide.centerYAnchor),
+                                         leftView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: button.trailingAnchor)])
+        }
+        
+        //Right part of the Button/Header stack (i.e. middle view)
+        let midView = UIView()
         let headerLabel = UILabel()
         headerLabel.text = header
         headerLabel.font = UIFont(name: K.fontFaceSecondary, size: K.fontSizeMenu)
         headerLabel.textColor = .white
-        headerLabel.textAlignment = .right
-        leftView.addSubview(headerLabel)
+        headerLabel.textAlignment = .left
+        midView.addSubview(headerLabel)
         headerLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([headerLabel.topAnchor.constraint(equalTo: leftView.safeAreaLayoutGuide.topAnchor),
-                                     headerLabel.leadingAnchor.constraint(equalTo: leftView.safeAreaLayoutGuide.leadingAnchor),
-                                     leftView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: headerLabel.bottomAnchor),
-                                     leftView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: headerLabel.trailingAnchor, constant: textPadding)])
-        horizontalStackView.addArrangedSubview(leftView)
+        NSLayoutConstraint.activate([headerLabel.topAnchor.constraint(equalTo: midView.safeAreaLayoutGuide.topAnchor),
+                                     headerLabel.leadingAnchor.constraint(equalTo: midView.safeAreaLayoutGuide.leadingAnchor, constant: 2 * textPadding),
+                                     midView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: headerLabel.bottomAnchor),
+                                     midView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: headerLabel.trailingAnchor)])
+        leftStackView.addArrangedSubview(leftView)
+        leftStackView.addArrangedSubview(midView)
+        horizontalStackView.addArrangedSubview(leftStackView)
 
+        
+        
+        
+        
+        
+        
+        
         //Description (menu selection) view
         let rightView = UIView()
-        let descLabel = UILabel()
-        let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue]
-        let attributedText = NSAttributedString(string: description, attributes: underlineAttribute)
-        descLabel.attributedText = attributedText
-        descLabel.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
-        descLabel.textColor = UIColor(red: 175, green: 255, blue: 255)
-        descLabel.textAlignment = .left
-        rightView.addSubview(descLabel)
-        descLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([descLabel.topAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.topAnchor),
-                                     descLabel.leadingAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.leadingAnchor, constant: textPadding),
-                                     rightView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: descLabel.bottomAnchor),
-                                     rightView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: descLabel.trailingAnchor)])
+//        let descLabel = UILabel()
+//        descLabel.text = description
+//        descLabel.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
+//        descLabel.textColor = UIColor(red: 175, green: 255, blue: 255)
+//        descLabel.textAlignment = .left
+
+
+
+
+        
+        
+        
+
+        let descLabel = setupDescLabel(with: description)
+        switch header {
+        case "View:":
+            planetARiumViewLabel = descLabel
+            rightView.addSubview(planetARiumViewLabel)
+            planetARiumViewLabel.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([planetARiumViewLabel.topAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.topAnchor),
+                                         planetARiumViewLabel.leadingAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.leadingAnchor),
+                                         rightView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: planetARiumViewLabel.bottomAnchor),
+                                         rightView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: planetARiumViewLabel.trailingAnchor)])
+        case "Sound:":
+            soundLabel = descLabel
+            rightView.addSubview(soundLabel)
+            soundLabel.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([soundLabel.topAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.topAnchor),
+                                         soundLabel.leadingAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.leadingAnchor),
+                                         rightView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: soundLabel.bottomAnchor),
+                                         rightView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: soundLabel.trailingAnchor)])
+        case "Hints:":
+            hintsLabel = descLabel
+            rightView.addSubview(hintsLabel)
+            hintsLabel.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([hintsLabel.topAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.topAnchor),
+                                         hintsLabel.leadingAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.leadingAnchor),
+                                         rightView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: hintsLabel.bottomAnchor),
+                                         rightView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: hintsLabel.trailingAnchor)])
+
+        default:
+            break
+        }
+
+        
+        
+        
+        
+        
+        
+//        rightView.addSubview(descLabel)
+//        descLabel.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([descLabel.topAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.topAnchor),
+//                                     descLabel.leadingAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.leadingAnchor),
+//                                     rightView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: descLabel.bottomAnchor),
+//                                     rightView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: descLabel.trailingAnchor)])
         horizontalStackView.addArrangedSubview(rightView)
         
         //Calls one of the various @objc methods!
-        if let gesture = gesture {
-            descLabel.isUserInteractionEnabled = true
-            descLabel.addGestureRecognizer(gesture)
-        }
+//        if let gesture = gesture {
+//            descLabel.isUserInteractionEnabled = true
+//            descLabel.addGestureRecognizer(gesture)
+//        }
 
         superStackView.addArrangedSubview(horizontalStackView)
     }
@@ -296,9 +385,7 @@ class MenuContentViewLaunch: UIView {
      */
     private func setupDescLabel(with description: String) -> UILabel {
         let descLabel = UILabel()
-        let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue]
-        let attributedText = NSAttributedString(string: description, attributes: underlineAttribute)
-        descLabel.attributedText = attributedText
+        descLabel.text = description
         descLabel.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
         descLabel.textColor = UIColor(red: 175, green: 255, blue: 255)
         descLabel.textAlignment = .left
@@ -310,12 +397,12 @@ class MenuContentViewLaunch: UIView {
      One of the tap gesture recognizers that handles changing the planetarium view.
      */
     @objc private func changeView() {
-        let alert = UIAlertController(title: nil, message: "Select PlanetARium View", preferredStyle: .actionSheet)
+        K.addHapticFeedback(withStyle: .light)
+        audioManager.playSound(for: "ButtonPress", currentTime: 0.0)
 
+        let alert = UIAlertController(title: nil, message: "Select PlanetARium View", preferredStyle: .actionSheet)
         let actionSolarSystem = UIAlertAction(title: "Solar System", style: .default) { (action) in
             print("Solar System pressed")
-            K.addHapticFeedback(withStyle: .light)
-            audioManager.playSound(for: "ButtonPress")
         }
         let actionConstellations = UIAlertAction(title: "Constellations (coming soon!)", style: .default) { (action) in
             print("Constellations pressed")
@@ -351,7 +438,7 @@ class MenuContentViewLaunch: UIView {
         UserDefaults.standard.setValue(isMuted, forKey: K.userDefaultsKey_SoundIsMuted)
         audioManager.updateVolumes()
         
-        creditsLabel.text = "Sound"
+        soundLabel.text = isMuted ? "Off" : "On"
     }
     
     /**
@@ -364,7 +451,7 @@ class MenuContentViewLaunch: UIView {
         hintsAreOff = !hintsAreOff
         UserDefaults.standard.setValue(hintsAreOff, forKey: K.userDefaultsKey_HintsAreOff)
         
-        creditsLabel.text = "Hints"
+        hintsLabel.text = hintsAreOff ? "Off" : "On"
 
     }
     
