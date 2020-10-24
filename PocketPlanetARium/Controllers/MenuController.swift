@@ -15,7 +15,7 @@ class MenuController: UIViewController {
     
     private var pageController: UIPageViewController!
     private var menuItems: [MenuItem] = MenuItem.allCases
-    private var currentIndex = 5
+    private var currentIndex = UserDefaults.standard.bool(forKey: K.userDefaultsKey_HintsAreOff) ? MenuItem.lastItemIndex : MenuItem.firstItemIndex
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
 
     

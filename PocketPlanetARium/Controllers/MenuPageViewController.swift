@@ -27,7 +27,7 @@ class MenuPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        menuBezelView = MenuBezelView(in: view, showSubLabel: menuItem == .item5 ? false : true)
+        menuBezelView = MenuBezelView(in: view, showSubLabel: menuItem == MenuItem.lastItem ? false : true)
         view.addSubview(menuBezelView!)
         menuBezelView!.addContentView(in: self, with: menuItem)
     }
@@ -84,4 +84,8 @@ extension MenuPageViewController: MenuContentViewLaunchDelegate {
     func menuContentViewLaunch(_ controller: MenuContentViewLaunch, didPresentPlanetARiumController planetARiumController: PlanetARiumController) {
         self.present(planetARiumController, animated: true, completion: nil)
     }
+    
+    func menuContentViewLaunch(_ controller: MenuContentViewLaunch, didPresentViewChangeWith alert: UIAlertController) {
+        present(alert, animated: true, completion: nil)
+    }    
 }

@@ -13,6 +13,11 @@ typealias MenuIndex = (index: Int, description: String, video: (name: String, ty
 enum MenuItem: CaseIterable {
     case item0, item1, item2, item3, item4, item5
     
+    static let firstItemIndex: Int = 0
+    static let lastItemIndex: Int = 5
+    static let firstItem: MenuItem = item0
+    static let lastItem: MenuItem = item5
+    
     var item: MenuIndex {
         switch self {
         case .item0:

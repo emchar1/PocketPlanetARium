@@ -64,7 +64,7 @@ class MenuBezelView: UIView {
     }
     
     func addContentView(in controller: MenuContentViewLaunchDelegate, with menuItem: MenuItem) {
-        if menuItem == .item5 {
+        if menuItem == MenuItem.lastItem {
             menuContentView = MenuContentViewLaunch(in: self, with: menuItem)
 
             if let menuContentView = menuContentView as? MenuContentViewLaunch {
