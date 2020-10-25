@@ -25,8 +25,7 @@ class PlanetARiumController: UIViewController {
         loadingLabel.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
         loadingLabel.textColor = .white
         loadingLabel.textAlignment = .center
-//        loadingLabel.text = "May the Force be with you."
-        loadingLabel.text = "Remember to always be aware\nof your surroundings."
+        loadingLabel.text = audioManager.launchMessage
         loadingLabel.numberOfLines = 0
         return loadingLabel
     }()

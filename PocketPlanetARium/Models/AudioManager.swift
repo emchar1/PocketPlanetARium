@@ -48,6 +48,16 @@ struct AudioItem {
 struct AudioManager {
     var theme: AudioTheme = .main
     var audioItems: [String : AudioItem] = [:]
+    var launchMessage: String {
+        switch theme {
+        case .main:
+            return "Remember to always be aware\nof your surroundings."
+        case .mario:
+            return "Happy Mar10 Day!"
+        case .starWars:
+            return "May the Force be with you."
+        }
+    }
     
 
     // MARK: - Setup
@@ -68,13 +78,12 @@ struct AudioManager {
         }
         
         setTheme(theme)
-        setupSounds()
     }
 
     /**
      Sets up the individual audio players for the various sounds. It won't setup MenuScreen sound because that's set up in initialization.
      */
-    mutating func setupSounds() {
+    mutating private func setupSounds() {
         for (key, item) in audioItems {
             if let player = configureAudioPlayer(for: item), key != "MenuScreen" {
                 audioItems[key]?.player = player
@@ -199,6 +208,8 @@ struct AudioManager {
         case .starWars:
             setThemeStarWars()
         }
+        
+        setupSounds()
     }
 
     mutating private func setThemeMain() {
@@ -206,7 +217,7 @@ struct AudioManager {
         audioItems["MenuButton"] = AudioItem(fileName: "16613199_press-electronic-confirm-button_by_bant_preview", category: .soundFX, maxVolume: 0.5)
         audioItems["LaunchButton"] = AudioItem(fileName: "main_LaunchButton", category: .soundFX)
         audioItems["PlanetARiumOpen"] = AudioItem(fileName: "main_PlanetARiumOpen", category: .soundFX, maxVolume: 0.5)
-        audioItems["PlanetARiumMusic"] = AudioItem(fileName: "main_PlanetARiumMusic", category: .music)
+        audioItems["PlanetARiumMusic"] = AudioItem(fileName: "main_PlanetARiumMusic0", category: .music)
         audioItems["ButtonPress"] = AudioItem(fileName: "main_ButtonPress", category: .soundFX, maxVolume: 0.5)
         audioItems["ButtonPressInfo"] = AudioItem(fileName: "main_ButtonPress", category: .soundFX, maxVolume: 0.5)
         audioItems["ButtonPressPause"] = AudioItem(fileName: "main_ButtonPress", category: .soundFX, maxVolume: 0.5)
@@ -224,7 +235,7 @@ struct AudioManager {
         audioItems["MenuButton"] = AudioItem(fileName: "16613199_press-electronic-confirm-button_by_bant_preview", category: .soundFX, maxVolume: 0.5)
         audioItems["LaunchButton"] = AudioItem(fileName: "mario_LaunchButton", fileType: .wav, category: .soundFX)
         audioItems["PlanetARiumOpen"] = AudioItem(fileName: "main_PlanetARiumOpen", category: .soundFX, maxVolume: 0.5)
-        audioItems["PlanetARiumMusic"] = AudioItem(fileName: "mario_PlanetARiumMusic", category: .music)
+        audioItems["PlanetARiumMusic"] = AudioItem(fileName: "mario_PlanetARiumMusic\(Int.random(in: 0...1))", category: .music)
         audioItems["ButtonPress"] = AudioItem(fileName: "mario_ButtonPress", fileType: .wav, category: .soundFX)
         audioItems["ButtonPressInfo"] = AudioItem(fileName: "mario_ButtonPress", fileType: .wav, category: .soundFX)
         audioItems["ButtonPressPause"] = AudioItem(fileName: "mario_ButtonPressPause", fileType: .wav, category: .soundFX)
@@ -240,18 +251,18 @@ struct AudioManager {
     mutating private func setThemeStarWars() {
         audioItems["MenuTitle"] = AudioItem(fileName: "19652472_light-woosh_by_newsoundfx_preview", category: .soundFX)
         audioItems["MenuButton"] = AudioItem(fileName: "16613199_press-electronic-confirm-button_by_bant_preview", category: .soundFX, maxVolume: 0.5)
-        audioItems["LaunchButton"] = AudioItem(fileName: "main_LaunchButton", category: .soundFX)
+        audioItems["LaunchButton"] = AudioItem(fileName: "starWars_LaunchButton", category: .soundFX)
         audioItems["PlanetARiumOpen"] = AudioItem(fileName: "main_PlanetARiumOpen", category: .soundFX, maxVolume: 0.5)
-        audioItems["PlanetARiumMusic"] = AudioItem(fileName: "starWars_PlanetARiumMusic", category: .music)
+        audioItems["PlanetARiumMusic"] = AudioItem(fileName: "starWars_PlanetARiumMusic0", category: .music)
         audioItems["ButtonPress"] = AudioItem(fileName: "main_ButtonPress", category: .soundFX)
         audioItems["ButtonPressInfo"] = AudioItem(fileName: "main_ButtonPress", category: .soundFX, maxVolume: 0.5)
         audioItems["ButtonPressPause"] = AudioItem(fileName: "main_ButtonPress", category: .soundFX, maxVolume: 0.5)
         audioItems["ButtonPressReset"] = AudioItem(fileName: "main_ButtonPress", category: .soundFX, maxVolume: 0.5)
         audioItems["SettingsExpand"] = AudioItem(fileName: "starWars_SettingsExpand", category: .soundFX)
         audioItems["SettingsCollapse"] = AudioItem(fileName: "starWars_SettingsCollapse", category: .soundFX)
-        audioItems["PinchShrink"] = AudioItem(fileName: "main_Pinch", category: .soundFX)
-        audioItems["PinchGrow"] = AudioItem(fileName: "main_Pinch", category: .soundFX)
-        audioItems["DetailsOpen"] = AudioItem(fileName: "main_DetailsOpen", category: .soundFX)
-        audioItems["VenusSurface"] = AudioItem(fileName: "main_VenusSurface", category: .soundFX)
+        audioItems["PinchShrink"] = AudioItem(fileName: "starWars_pinchShrink", category: .soundFX)
+        audioItems["PinchGrow"] = AudioItem(fileName: "starWars_pinchGrow", category: .soundFX)
+        audioItems["DetailsOpen"] = AudioItem(fileName: "starWars_DetailsOpen", category: .soundFX)
+        audioItems["VenusSurface"] = AudioItem(fileName: "starWars_VenusSurface", category: .soundFX)
     }
 }

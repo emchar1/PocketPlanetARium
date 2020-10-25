@@ -27,13 +27,23 @@ class MenuContentViewLaunch: UIView {
     static let headerView = "View:"
     static let headerSound = "Sound:"
     static let headerHints = "Hints:"
+    static let headerMusic = "Music:"
     var bottomStackView: UIStackView!
     var planetARiumViewButton: UIButton!
     var soundButton: UIButton?  //these need to be optional because they're used in didSet below, and may be nil at initialization
     var hintsButton: UIButton?  //these need to be optional because they're used in didSet below, and may be nil at initialization
+    var musicThemeButton: UIButton!
     var planetARiumViewLabel: UILabel!
     var soundLabel: UILabel!
     var hintsLabel: UILabel!
+    var musicThemeLabel: UILabel!
+    var musicTheme: Int = 0 {
+        didSet {
+            if musicTheme > 2 {
+                musicTheme = 0
+            }
+        }
+    }
     var creditsLabel: UILabel!
     
     // MARK: - Misc Properties
@@ -171,23 +181,35 @@ class MenuContentViewLaunch: UIView {
                              description: hintsAreOff ? "Off" : "On",
                              gesture: UITapGestureRecognizer(target: self, action: #selector(toggleHints)))
         
-        let creditsView = UIView()
-        //CREDITS PLACEHOLDER - Uncomment to use.
-//        let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue]
-//        let attributedText = NSAttributedString(string: "Credits", attributes: underlineAttribute)
-//        creditsLabel = UILabel()
-//        creditsLabel.attributedText = attributedText
-//        creditsLabel.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
-//        creditsLabel.textColor = descriptionColor
-//        creditsLabel.textAlignment = .center
-//        creditsView.addSubview(creditsLabel)
-//        creditsLabel.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([creditsLabel.topAnchor.constraint(equalTo: creditsView.safeAreaLayoutGuide.topAnchor),
-//                                     creditsLabel.leadingAnchor.constraint(equalTo: creditsView.safeAreaLayoutGuide.leadingAnchor),
-//                                     creditsView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: creditsLabel.bottomAnchor),
-//                                     creditsView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: creditsLabel.trailingAnchor)])
-        bottomStackView.addArrangedSubview(creditsView)
+        
+        
+        
+        //ENABLE MUSIC THEME CHANGES = Buggy. Resets index when you swipe change views, but persists selected theme.
+        setupHorizontalStack(header: MenuContentViewLaunch.headerMusic,
+                             description: "Main Theme",
+                             gesture: UITapGestureRecognizer(target: self, action: #selector(toggleMusicThemes)))
+        
+//        let creditsView = UIView()
+//        //CREDITS PLACEHOLDER - Uncomment to use.
+////        let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue]
+////        let attributedText = NSAttributedString(string: "Credits", attributes: underlineAttribute)
+////        creditsLabel = UILabel()
+////        creditsLabel.attributedText = attributedText
+////        creditsLabel.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
+////        creditsLabel.textColor = descriptionColor
+////        creditsLabel.textAlignment = .center
+////        creditsView.addSubview(creditsLabel)
+////        creditsLabel.translatesAutoresizingMaskIntoConstraints = false
+////        NSLayoutConstraint.activate([creditsLabel.topAnchor.constraint(equalTo: creditsView.safeAreaLayoutGuide.topAnchor),
+////                                     creditsLabel.leadingAnchor.constraint(equalTo: creditsView.safeAreaLayoutGuide.leadingAnchor),
+////                                     creditsView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: creditsLabel.bottomAnchor),
+////                                     creditsView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: creditsLabel.trailingAnchor)])
+//        bottomStackView.addArrangedSubview(creditsView)
 
+        
+        
+        
+        
         //Just some space filler...
         setupHorizontalStack(header: "", description: "", gesture: nil)
         setupHorizontalStack(header: "", description: "", gesture: nil)
@@ -268,6 +290,15 @@ class MenuContentViewLaunch: UIView {
                                              hintsButton!.heightAnchor.constraint(equalToConstant: buttonSize),
                                              hintsButton!.centerYAnchor.constraint(equalTo: leftView.safeAreaLayoutGuide.centerYAnchor),
                                              leftView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: hintsButton!.trailingAnchor)])
+            case MenuContentViewLaunch.headerMusic:
+                button.backgroundColor = buttonColor
+                musicThemeButton = button
+                leftView.addSubview(musicThemeButton!)
+                musicThemeButton!.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([musicThemeButton!.widthAnchor.constraint(equalToConstant: buttonSize),
+                                             musicThemeButton!.heightAnchor.constraint(equalToConstant: buttonSize),
+                                             musicThemeButton!.centerYAnchor.constraint(equalTo: leftView.safeAreaLayoutGuide.centerYAnchor),
+                                             leftView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: musicThemeButton!.trailingAnchor)])
             default:
                 break
             }
@@ -323,6 +354,14 @@ class MenuContentViewLaunch: UIView {
                                          hintsLabel.leadingAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.leadingAnchor),
                                          rightView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: hintsLabel.bottomAnchor),
                                          rightView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: hintsLabel.trailingAnchor)])
+        case MenuContentViewLaunch.headerMusic:
+            musicThemeLabel = descLabel
+            rightView.addSubview(musicThemeLabel)
+            musicThemeLabel.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([musicThemeLabel.topAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.topAnchor),
+                                         musicThemeLabel.leadingAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.leadingAnchor),
+                                         rightView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: musicThemeLabel.bottomAnchor),
+                                         rightView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: musicThemeLabel.trailingAnchor)])
         default:
             break
         }
@@ -409,6 +448,32 @@ class MenuContentViewLaunch: UIView {
         hintsLabel.text = hintsAreOff ? "Off" : "On"
     }
     
+    @objc private func toggleMusicThemes() {
+        K.addHapticFeedback(withStyle: .light)
+        audioManager.playSound(for: "MenuButton", currentTime: 0.0)
+        
+        musicThemeButton.backgroundColor = buttonPressedColor
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
+            self.musicThemeButton.backgroundColor = self.buttonColor
+        } completion: { _ in
+            self.musicTheme += 1
+            
+            switch self.musicTheme {
+            case 0:
+                audioManager.setTheme(.main)
+                self.musicThemeLabel.text = "Main Theme"
+            case 1:
+                audioManager.setTheme(.mario)
+                self.musicThemeLabel.text = "Super Mario Bros."
+            case 2:
+                audioManager.setTheme(.starWars)
+                self.musicThemeLabel.text = "Star Wars"
+            default:
+                break
+            }
+        }
+    }
+    
     /**
      Launches the PlanetARium!
      */
@@ -420,6 +485,7 @@ class MenuContentViewLaunch: UIView {
         audioManager.stopSound(for: "MenuScreen", fadeDuration: 2.0)
         
         sender.backgroundColor = buttonPressedColor
+        superView.label.text = audioManager.launchMessage
         
         UIView.animate(withDuration: duration, delay: duration / 2, options: .curveEaseIn, animations: {
             self.superView.label.alpha = K.masterAlpha
