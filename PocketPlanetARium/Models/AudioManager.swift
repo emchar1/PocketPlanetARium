@@ -202,6 +202,8 @@ struct AudioManager {
     }
 
     mutating private func setThemeMain() {
+        audioItems["MenuTitle"] = AudioItem(fileName: "19652472_light-woosh_by_newsoundfx_preview", category: .soundFX)
+        audioItems["MenuButton"] = AudioItem(fileName: "16613199_press-electronic-confirm-button_by_bant_preview", category: .soundFX, maxVolume: 0.5)
         audioItems["LaunchButton"] = AudioItem(fileName: "main_LaunchButton", category: .soundFX)
         audioItems["PlanetARiumOpen"] = AudioItem(fileName: "main_PlanetARiumOpen", category: .soundFX, maxVolume: 0.5)
         audioItems["PlanetARiumMusic"] = AudioItem(fileName: "main_PlanetARiumMusic", category: .music)
@@ -218,6 +220,8 @@ struct AudioManager {
     }
         
     mutating private func setThemeMario() {
+        audioItems["MenuTitle"] = AudioItem(fileName: "19652472_light-woosh_by_newsoundfx_preview", category: .soundFX)
+        audioItems["MenuButton"] = AudioItem(fileName: "16613199_press-electronic-confirm-button_by_bant_preview", category: .soundFX)
         audioItems["LaunchButton"] = AudioItem(fileName: "mario_LaunchButton", fileType: .wav, category: .soundFX)
         audioItems["PlanetARiumOpen"] = AudioItem(fileName: "main_PlanetARiumOpen", category: .soundFX)
         audioItems["PlanetARiumMusic"] = AudioItem(fileName: "mario_PlanetARiumMusic", category: .music)
@@ -234,6 +238,8 @@ struct AudioManager {
     }
     
     mutating private func setThemeStarWars() {
+        audioItems["MenuTitle"] = AudioItem(fileName: "19652472_light-woosh_by_newsoundfx_preview", category: .soundFX)
+        audioItems["MenuButton"] = AudioItem(fileName: "16613199_press-electronic-confirm-button_by_bant_preview", category: .soundFX)
         audioItems["LaunchButton"] = AudioItem(fileName: "main_LaunchButton", category: .soundFX)
         audioItems["PlanetARiumOpen"] = AudioItem(fileName: "main_PlanetARiumOpen", category: .soundFX, maxVolume: 0.5)
         audioItems["PlanetARiumMusic"] = AudioItem(fileName: "starWars_PlanetARiumMusic", category: .music)

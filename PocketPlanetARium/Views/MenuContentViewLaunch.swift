@@ -326,7 +326,7 @@ class MenuContentViewLaunch: UIView {
      */
     @objc private func changeView() {
         K.addHapticFeedback(withStyle: .light)
-        audioManager.playSound(for: "ButtonPress", currentTime: 0.0)
+        audioManager.playSound(for: "MenuButton", currentTime: 0.0)
         planetARiumViewButton.backgroundColor = buttonPressedColor
 
         let alert = UIAlertController(title: "Select PlanetARium View", message: nil, preferredStyle: .actionSheet)
@@ -373,7 +373,7 @@ class MenuContentViewLaunch: UIView {
      */
     @objc private func toggleSound() {
         K.addHapticFeedback(withStyle: .light)
-        audioManager.playSound(for: "ButtonPress", currentTime: 0.0)
+        audioManager.playSound(for: "MenuButton", currentTime: 0.0)
         
         isMuted = !isMuted
         UserDefaults.standard.setValue(isMuted, forKey: K.userDefaultsKey_SoundIsMuted)
@@ -387,7 +387,7 @@ class MenuContentViewLaunch: UIView {
      */
     @objc private func toggleHints() {
         K.addHapticFeedback(withStyle: .light)
-        audioManager.playSound(for: "ButtonPress", currentTime: 0.0)
+        audioManager.playSound(for: "MenuButton", currentTime: 0.0)
         
         hintsAreOff = !hintsAreOff
         UserDefaults.standard.setValue(hintsAreOff, forKey: K.userDefaultsKey_HintsAreOff)
