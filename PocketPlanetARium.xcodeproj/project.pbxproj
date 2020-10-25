@@ -14,8 +14,8 @@
 		EA0636282545441800719E9C /* starWars_VenusSurface.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA0636272545441800719E9C /* starWars_VenusSurface.mp3 */; };
 		EA0636302545483900719E9C /* starWars_pinchShrink.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA06362E2545483800719E9C /* starWars_pinchShrink.mp3 */; };
 		EA0636312545483900719E9C /* starWars_pinchGrow.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA06362F2545483900719E9C /* starWars_pinchGrow.mp3 */; };
-		EA06363725456CC400719E9C /* main_MenuButton.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA06363625456CC400719E9C /* main_MenuButton.mp3 */; };
 		EA06363A25456CD100719E9C /* main_MenuTitle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA06363925456CD100719E9C /* main_MenuTitle.mp3 */; };
+		EA06364025456F3F00719E9C /* main_MenuButton.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA06363F25456F3F00719E9C /* main_MenuButton.mp3 */; };
 		EA2BCCA425180317007A13F5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2BCCA325180317007A13F5 /* Constants.swift */; };
 		EA40E9B0252ADFFF00726425 /* PlanetDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA40E9AF252ADFFF00726425 /* PlanetDetails.swift */; };
 		EA4328262539F4E600BCD31F /* MenuBezelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4328252539F4E600BCD31F /* MenuBezelView.swift */; };
@@ -85,8 +85,8 @@
 		EA0636272545441800719E9C /* starWars_VenusSurface.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = starWars_VenusSurface.mp3; sourceTree = "<group>"; };
 		EA06362E2545483800719E9C /* starWars_pinchShrink.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = starWars_pinchShrink.mp3; sourceTree = "<group>"; };
 		EA06362F2545483900719E9C /* starWars_pinchGrow.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = starWars_pinchGrow.mp3; sourceTree = "<group>"; };
-		EA06363625456CC400719E9C /* main_MenuButton.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = main_MenuButton.mp3; sourceTree = "<group>"; };
 		EA06363925456CD100719E9C /* main_MenuTitle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = main_MenuTitle.mp3; sourceTree = "<group>"; };
+		EA06363F25456F3F00719E9C /* main_MenuButton.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = main_MenuButton.mp3; sourceTree = "<group>"; };
 		EA2BCCA325180317007A13F5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EA40E9AF252ADFFF00726425 /* PlanetDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetDetails.swift; sourceTree = "<group>"; };
 		EA4328252539F4E600BCD31F /* MenuBezelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBezelView.swift; sourceTree = "<group>"; };
@@ -239,7 +239,7 @@
 				EA4328F8253E0BC100BCD31F /* main_ButtonPress.mp3 */,
 				EA4328CF253E021F00BCD31F /* main_DetailsOpen.mp3 */,
 				EA43290E253E567A00BCD31F /* main_LaunchButton.mp3 */,
-				EA06363625456CC400719E9C /* main_MenuButton.mp3 */,
+				EA06363F25456F3F00719E9C /* main_MenuButton.mp3 */,
 				EA432913253E574E00BCD31F /* main_MenuScreen.mp3 */,
 				EA06363925456CD100719E9C /* main_MenuTitle.mp3 */,
 				EA4328DC253E09CB00BCD31F /* main_Pinch.mp3 */,
@@ -387,9 +387,9 @@
 				EA43294C253FAF8E00BCD31F /* PantonNarrowDemo-LightItalic.otf in Resources */,
 				EA992FB22540B88F00992CB7 /* mario_SettingsCollapse.wav in Resources */,
 				EA0636282545441800719E9C /* starWars_VenusSurface.mp3 in Resources */,
-				EA06363725456CC400719E9C /* main_MenuButton.mp3 in Resources */,
 				EA43294B253FAF8E00BCD31F /* PantonNarrowDemo-Light.otf in Resources */,
 				EA432906253E28E700BCD31F /* mario_PlanetARiumMusic1.mp3 in Resources */,
+				EA06364025456F3F00719E9C /* main_MenuButton.mp3 in Resources */,
 				EA992FB62540C84B00992CB7 /* mario_DetailsOpen.wav in Resources */,
 				EA0636302545483900719E9C /* starWars_pinchShrink.mp3 in Resources */,
 				EA432918253E632A00BCD31F /* starWars_SettingsCollapse.mp3 in Resources */,
