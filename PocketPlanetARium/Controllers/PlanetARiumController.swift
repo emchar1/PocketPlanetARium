@@ -265,8 +265,14 @@ class PlanetARiumController: UIViewController {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first,
               view.traitCollection.forceTouchCapability == .available,
-              touch.force == touch.maximumPossibleForce,
               tappedPlanet != nil else {
+            return
+        }
+        
+        //Do shit while it expands...
+        
+        guard touch.force == touch.maximumPossibleForce else {
+            //Max force pressed reached
             return
         }
 

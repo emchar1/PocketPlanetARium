@@ -69,7 +69,7 @@ class PlanetPeekView: UIView {
                    backgroundColor: UIColor(named: K.color500) ?? .gray)
         
         setupLabel(&planetDetails,
-                   frame: CGRect(x: frame.origin.x + 8, y: 40, width: frame.size.width - 8, height: frame.size.height - 70),
+                   frame: CGRect(x: 8, y: 48, width: frame.size.width - 16, height: frame.size.height - 70),
                    font: UIFont(name: K.fontFace, size: K.fontSizePeekDetails))
         
         setupLabel(&instructions,
