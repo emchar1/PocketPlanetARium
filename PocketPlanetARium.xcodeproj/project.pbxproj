@@ -14,12 +14,13 @@
 		EA0636282545441800719E9C /* starWars_VenusSurface.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA0636272545441800719E9C /* starWars_VenusSurface.mp3 */; };
 		EA0636302545483900719E9C /* starWars_pinchShrink.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA06362E2545483800719E9C /* starWars_pinchShrink.mp3 */; };
 		EA0636312545483900719E9C /* starWars_pinchGrow.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA06362F2545483900719E9C /* starWars_pinchGrow.mp3 */; };
+		EA06363725456CC400719E9C /* main_MenuButton.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA06363625456CC400719E9C /* main_MenuButton.mp3 */; };
+		EA06363A25456CD100719E9C /* main_MenuTitle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA06363925456CD100719E9C /* main_MenuTitle.mp3 */; };
 		EA2BCCA425180317007A13F5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2BCCA325180317007A13F5 /* Constants.swift */; };
 		EA40E9B0252ADFFF00726425 /* PlanetDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA40E9AF252ADFFF00726425 /* PlanetDetails.swift */; };
 		EA4328262539F4E600BCD31F /* MenuBezelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4328252539F4E600BCD31F /* MenuBezelView.swift */; };
 		EA43284F253BAD2000BCD31F /* starWars_PlanetARiumMusic0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA43284E253BAD1F00BCD31F /* starWars_PlanetARiumMusic0.mp3 */; };
 		EA43288C253CC9B900BCD31F /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA43288B253CC9B800BCD31F /* AudioManager.swift */; };
-		EA4328B3253D5B8500BCD31F /* 17464625_button-tap_by_3dhome_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328B2253D5B8500BCD31F /* 17464625_button-tap_by_3dhome_preview.mp3 */; };
 		EA4328D0253E021F00BCD31F /* main_DetailsOpen.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328CF253E021F00BCD31F /* main_DetailsOpen.mp3 */; };
 		EA4328D9253E099100BCD31F /* main_VenusSurface.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328D8253E099100BCD31F /* main_VenusSurface.mp3 */; };
 		EA4328DD253E09CB00BCD31F /* main_Pinch.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328DC253E09CB00BCD31F /* main_Pinch.mp3 */; };
@@ -73,9 +74,6 @@
 		EA992FCE25423BFA00992CB7 /* mario_LaunchButton.wav in Resources */ = {isa = PBXBuildFile; fileRef = EA992FCD25423BFA00992CB7 /* mario_LaunchButton.wav */; };
 		EA992FD325423FCD00992CB7 /* Age-Normal.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA992FD225423FCD00992CB7 /* Age-Normal.otf */; };
 		EAC1F4D025149BD30097521A /* PlanetARium.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC1F4CF25149BD30097521A /* PlanetARium.swift */; };
-		EACFE76B2545134100107AC0 /* 16613199_press-electronic-confirm-button_by_bant_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EACFE76A2545134100107AC0 /* 16613199_press-electronic-confirm-button_by_bant_preview.mp3 */; };
-		EACFE76E254514EF00107AC0 /* 19652472_light-woosh_by_newsoundfx_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EACFE76D254514EF00107AC0 /* 19652472_light-woosh_by_newsoundfx_preview.mp3 */; };
-		EACFE77125451B2300107AC0 /* 15900935_electronic-button-press_by_bant_preview.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EACFE77025451B2300107AC0 /* 15900935_electronic-button-press_by_bant_preview.mp3 */; };
 		EAF7BEA925203CAE00C0D1A6 /* PlanetGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF7BEA825203CAE00C0D1A6 /* PlanetGroup.swift */; };
 /* End PBXBuildFile section */
 
@@ -87,12 +85,13 @@
 		EA0636272545441800719E9C /* starWars_VenusSurface.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = starWars_VenusSurface.mp3; sourceTree = "<group>"; };
 		EA06362E2545483800719E9C /* starWars_pinchShrink.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = starWars_pinchShrink.mp3; sourceTree = "<group>"; };
 		EA06362F2545483900719E9C /* starWars_pinchGrow.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = starWars_pinchGrow.mp3; sourceTree = "<group>"; };
+		EA06363625456CC400719E9C /* main_MenuButton.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = main_MenuButton.mp3; sourceTree = "<group>"; };
+		EA06363925456CD100719E9C /* main_MenuTitle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = main_MenuTitle.mp3; sourceTree = "<group>"; };
 		EA2BCCA325180317007A13F5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EA40E9AF252ADFFF00726425 /* PlanetDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetDetails.swift; sourceTree = "<group>"; };
 		EA4328252539F4E600BCD31F /* MenuBezelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBezelView.swift; sourceTree = "<group>"; };
 		EA43284E253BAD1F00BCD31F /* starWars_PlanetARiumMusic0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = starWars_PlanetARiumMusic0.mp3; sourceTree = "<group>"; };
 		EA43288B253CC9B800BCD31F /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
-		EA4328B2253D5B8500BCD31F /* 17464625_button-tap_by_3dhome_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "17464625_button-tap_by_3dhome_preview.mp3"; sourceTree = "<group>"; };
 		EA4328CF253E021F00BCD31F /* main_DetailsOpen.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = main_DetailsOpen.mp3; sourceTree = "<group>"; };
 		EA4328D8253E099100BCD31F /* main_VenusSurface.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = main_VenusSurface.mp3; sourceTree = "<group>"; };
 		EA4328DC253E09CB00BCD31F /* main_Pinch.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = main_Pinch.mp3; sourceTree = "<group>"; };
@@ -148,9 +147,6 @@
 		EA992FCD25423BFA00992CB7 /* mario_LaunchButton.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = mario_LaunchButton.wav; sourceTree = "<group>"; };
 		EA992FD225423FCD00992CB7 /* Age-Normal.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Age-Normal.otf"; sourceTree = "<group>"; };
 		EAC1F4CF25149BD30097521A /* PlanetARium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetARium.swift; sourceTree = "<group>"; };
-		EACFE76A2545134100107AC0 /* 16613199_press-electronic-confirm-button_by_bant_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "16613199_press-electronic-confirm-button_by_bant_preview.mp3"; sourceTree = "<group>"; };
-		EACFE76D254514EF00107AC0 /* 19652472_light-woosh_by_newsoundfx_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "19652472_light-woosh_by_newsoundfx_preview.mp3"; sourceTree = "<group>"; };
-		EACFE77025451B2300107AC0 /* 15900935_electronic-button-press_by_bant_preview.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "15900935_electronic-button-press_by_bant_preview.mp3"; sourceTree = "<group>"; };
 		EAF7BEA825203CAE00C0D1A6 /* PlanetGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetGroup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -168,10 +164,6 @@
 		EA43284D253BAD0700BCD31F /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				EACFE77025451B2300107AC0 /* 15900935_electronic-button-press_by_bant_preview.mp3 */,
-				EACFE76D254514EF00107AC0 /* 19652472_light-woosh_by_newsoundfx_preview.mp3 */,
-				EACFE76A2545134100107AC0 /* 16613199_press-electronic-confirm-button_by_bant_preview.mp3 */,
-				EA4328B2253D5B8500BCD31F /* 17464625_button-tap_by_3dhome_preview.mp3 */,
 				EA992FA02540B4CD00992CB7 /* mainTheme */,
 				EA992FA22540B58D00992CB7 /* marioTheme */,
 				EA992FA32540B5A000992CB7 /* starWarsTheme */,
@@ -247,7 +239,9 @@
 				EA4328F8253E0BC100BCD31F /* main_ButtonPress.mp3 */,
 				EA4328CF253E021F00BCD31F /* main_DetailsOpen.mp3 */,
 				EA43290E253E567A00BCD31F /* main_LaunchButton.mp3 */,
+				EA06363625456CC400719E9C /* main_MenuButton.mp3 */,
 				EA432913253E574E00BCD31F /* main_MenuScreen.mp3 */,
+				EA06363925456CD100719E9C /* main_MenuTitle.mp3 */,
 				EA4328DC253E09CB00BCD31F /* main_Pinch.mp3 */,
 				EA4328E4253E0A5300BCD31F /* main_PlanetARiumMusic0.mp3 */,
 				EA4328E8253E0A9300BCD31F /* main_PlanetARiumOpen.mp3 */,
@@ -393,6 +387,7 @@
 				EA43294C253FAF8E00BCD31F /* PantonNarrowDemo-LightItalic.otf in Resources */,
 				EA992FB22540B88F00992CB7 /* mario_SettingsCollapse.wav in Resources */,
 				EA0636282545441800719E9C /* starWars_VenusSurface.mp3 in Resources */,
+				EA06363725456CC400719E9C /* main_MenuButton.mp3 in Resources */,
 				EA43294B253FAF8E00BCD31F /* PantonNarrowDemo-Light.otf in Resources */,
 				EA432906253E28E700BCD31F /* mario_PlanetARiumMusic1.mp3 in Resources */,
 				EA992FB62540C84B00992CB7 /* mario_DetailsOpen.wav in Resources */,
@@ -400,11 +395,10 @@
 				EA432918253E632A00BCD31F /* starWars_SettingsCollapse.mp3 in Resources */,
 				EA4328DD253E09CB00BCD31F /* main_Pinch.mp3 in Resources */,
 				EA4328FF253E100000BCD31F /* main_SettingsExpand.mp3 in Resources */,
+				EA06363A25456CD100719E9C /* main_MenuTitle.mp3 in Resources */,
 				EA992FAC2540B88F00992CB7 /* mario_ButtonPressPause.wav in Resources */,
 				EA43294D253FAF8E00BCD31F /* PantonNarrowDemo-BlackItalic.otf in Resources */,
-				EACFE76E254514EF00107AC0 /* 19652472_light-woosh_by_newsoundfx_preview.mp3 in Resources */,
 				EA0636122545312300719E9C /* planetHardPress.mov in Resources */,
-				EA4328B3253D5B8500BCD31F /* 17464625_button-tap_by_3dhome_preview.mp3 in Resources */,
 				EA4328F9253E0BC100BCD31F /* main_ButtonPress.mp3 in Resources */,
 				EA063625254543C000719E9C /* starWars_DetailsOpen.mp3 in Resources */,
 				EA432950253FAF8E00BCD31F /* PantonNarrowDemo-Black.otf in Resources */,
@@ -433,13 +427,11 @@
 				EA992FCE25423BFA00992CB7 /* mario_LaunchButton.wav in Resources */,
 				EA43294F253FAF8E00BCD31F /* PantonDemo-LightItalic.otf in Resources */,
 				EA4328E5253E0A5300BCD31F /* main_PlanetARiumMusic0.mp3 in Resources */,
-				EACFE76B2545134100107AC0 /* 16613199_press-electronic-confirm-button_by_bant_preview.mp3 in Resources */,
 				EA5B0C03251055B300B1E910 /* LaunchScreen.storyboard in Resources */,
 				EA992FAE2540B88F00992CB7 /* mario_PinchGrow.wav in Resources */,
 				EA5B0C00251055B300B1E910 /* Assets.xcassets in Resources */,
 				EA5B0BFE251055B300B1E910 /* Main.storyboard in Resources */,
 				EA4328D9253E099100BCD31F /* main_VenusSurface.mp3 in Resources */,
-				EACFE77125451B2300107AC0 /* 15900935_electronic-button-press_by_bant_preview.mp3 in Resources */,
 				EA432940253FAF7300BCD31F /* Prime-Light.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

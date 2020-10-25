@@ -213,8 +213,8 @@ struct AudioManager {
     }
 
     mutating private func setThemeMain() {
-        audioItems["MenuTitle"] = AudioItem(fileName: "19652472_light-woosh_by_newsoundfx_preview", category: .soundFX)
-        audioItems["MenuButton"] = AudioItem(fileName: "16613199_press-electronic-confirm-button_by_bant_preview", category: .soundFX, maxVolume: 0.5)
+        audioItems["MenuTitle"] = AudioItem(fileName: "main_MenuTitle", category: .soundFX)
+        audioItems["MenuButton"] = AudioItem(fileName: "main_MenuButton", category: .soundFX, maxVolume: 0.5)
         audioItems["LaunchButton"] = AudioItem(fileName: "main_LaunchButton", category: .soundFX)
         audioItems["PlanetARiumOpen"] = AudioItem(fileName: "main_PlanetARiumOpen", category: .soundFX, maxVolume: 0.5)
         audioItems["PlanetARiumMusic"] = AudioItem(fileName: "main_PlanetARiumMusic0", category: .music)
@@ -224,15 +224,15 @@ struct AudioManager {
         audioItems["ButtonPressReset"] = AudioItem(fileName: "main_ButtonPress", category: .soundFX, maxVolume: 0.5)
         audioItems["SettingsExpand"] = AudioItem(fileName: "main_SettingsExpand", category: .soundFX)
         audioItems["SettingsCollapse"] = AudioItem(fileName: "main_SettingsCollapse", category: .soundFX, maxVolume: 0.5)
-        audioItems["PinchShrink"] = AudioItem(fileName: "main_Pinch", category: .soundFX)
+        audioItems["PinchShrink"] = AudioItem(fileName: "main_MenuTitle", category: .soundFX)
         audioItems["PinchGrow"] = AudioItem(fileName: "main_Pinch", category: .soundFX)
         audioItems["DetailsOpen"] = AudioItem(fileName: "main_DetailsOpen", category: .soundFX)
         audioItems["VenusSurface"] = AudioItem(fileName: "main_VenusSurface", category: .soundFX)
     }
         
     mutating private func setThemeMario() {
-        audioItems["MenuTitle"] = AudioItem(fileName: "19652472_light-woosh_by_newsoundfx_preview", category: .soundFX)
-        audioItems["MenuButton"] = AudioItem(fileName: "16613199_press-electronic-confirm-button_by_bant_preview", category: .soundFX, maxVolume: 0.5)
+        audioItems["MenuTitle"] = AudioItem(fileName: "main_MenuTitle", category: .soundFX)
+        audioItems["MenuButton"] = AudioItem(fileName: "main_MenuButton", category: .soundFX, maxVolume: 0.5)
         audioItems["LaunchButton"] = AudioItem(fileName: "mario_LaunchButton", fileType: .wav, category: .soundFX)
         audioItems["PlanetARiumOpen"] = AudioItem(fileName: "main_PlanetARiumOpen", category: .soundFX, maxVolume: 0.5)
         audioItems["PlanetARiumMusic"] = AudioItem(fileName: "mario_PlanetARiumMusic\(Int.random(in: 0...1))", category: .music)
@@ -249,8 +249,8 @@ struct AudioManager {
     }
     
     mutating private func setThemeStarWars() {
-        audioItems["MenuTitle"] = AudioItem(fileName: "19652472_light-woosh_by_newsoundfx_preview", category: .soundFX)
-        audioItems["MenuButton"] = AudioItem(fileName: "16613199_press-electronic-confirm-button_by_bant_preview", category: .soundFX, maxVolume: 0.5)
+        audioItems["MenuTitle"] = AudioItem(fileName: "main_MenuTitle", category: .soundFX)
+        audioItems["MenuButton"] = AudioItem(fileName: "main_MenuButton", category: .soundFX, maxVolume: 0.5)
         audioItems["LaunchButton"] = AudioItem(fileName: "starWars_LaunchButton", category: .soundFX)
         audioItems["PlanetARiumOpen"] = AudioItem(fileName: "main_PlanetARiumOpen", category: .soundFX, maxVolume: 0.5)
         audioItems["PlanetARiumMusic"] = AudioItem(fileName: "starWars_PlanetARiumMusic0", category: .music)

@@ -185,26 +185,26 @@ class MenuContentViewLaunch: UIView {
         
         
         //ENABLE MUSIC THEME CHANGES = Buggy. Resets index when you swipe change views, but persists selected theme.
-        setupHorizontalStack(header: MenuContentViewLaunch.headerMusic,
-                             description: "Main Theme",
-                             gesture: UITapGestureRecognizer(target: self, action: #selector(toggleMusicThemes)))
+//        setupHorizontalStack(header: MenuContentViewLaunch.headerMusic,
+//                             description: "Main Theme",
+//                             gesture: UITapGestureRecognizer(target: self, action: #selector(toggleMusicThemes)))
         
-//        let creditsView = UIView()
-//        //CREDITS PLACEHOLDER - Uncomment to use.
-////        let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue]
-////        let attributedText = NSAttributedString(string: "Credits", attributes: underlineAttribute)
-////        creditsLabel = UILabel()
-////        creditsLabel.attributedText = attributedText
-////        creditsLabel.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
-////        creditsLabel.textColor = descriptionColor
-////        creditsLabel.textAlignment = .center
-////        creditsView.addSubview(creditsLabel)
-////        creditsLabel.translatesAutoresizingMaskIntoConstraints = false
-////        NSLayoutConstraint.activate([creditsLabel.topAnchor.constraint(equalTo: creditsView.safeAreaLayoutGuide.topAnchor),
-////                                     creditsLabel.leadingAnchor.constraint(equalTo: creditsView.safeAreaLayoutGuide.leadingAnchor),
-////                                     creditsView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: creditsLabel.bottomAnchor),
-////                                     creditsView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: creditsLabel.trailingAnchor)])
-//        bottomStackView.addArrangedSubview(creditsView)
+        let creditsView = UIView()
+        //CREDITS PLACEHOLDER - Uncomment to use.
+//        let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue]
+//        let attributedText = NSAttributedString(string: "Credits", attributes: underlineAttribute)
+//        creditsLabel = UILabel()
+//        creditsLabel.attributedText = attributedText
+//        creditsLabel.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
+//        creditsLabel.textColor = descriptionColor
+//        creditsLabel.textAlignment = .center
+//        creditsView.addSubview(creditsLabel)
+//        creditsLabel.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([creditsLabel.topAnchor.constraint(equalTo: creditsView.safeAreaLayoutGuide.topAnchor),
+//                                     creditsLabel.leadingAnchor.constraint(equalTo: creditsView.safeAreaLayoutGuide.leadingAnchor),
+//                                     creditsView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: creditsLabel.bottomAnchor),
+//                                     creditsView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: creditsLabel.trailingAnchor)])
+        bottomStackView.addArrangedSubview(creditsView)
 
         
         
@@ -380,27 +380,26 @@ class MenuContentViewLaunch: UIView {
     @objc private func changeView() {
         K.addHapticFeedback(withStyle: .light)
         audioManager.playSound(for: "MenuButton", currentTime: 0.0)
+
         planetARiumViewButton.backgroundColor = buttonPressedColor
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
+            self.planetARiumViewButton.backgroundColor = self.buttonColor
+        }
 
         let alert = UIAlertController(title: "Select PlanetARium View", message: nil, preferredStyle: .actionSheet)
         let actionSolarSystem = UIAlertAction(title: "Solar System", style: .default) { _ in
-            self.planetARiumViewButton.backgroundColor = self.buttonColor
             print("Solar System pressed")
         }
         let actionConstellations = UIAlertAction(title: "Constellations (coming soon!)", style: .default) { _ in
-            self.planetARiumViewButton.backgroundColor = self.buttonColor
             print("Constellations pressed")
         }
         let actionMilkyWay = UIAlertAction(title: "Milky Way Galaxy (coming soon!)", style: .default) { _ in
-            self.planetARiumViewButton.backgroundColor = self.buttonColor
             print("Milky Way pressed")
         }
         let actionAndromeda = UIAlertAction(title: "Andromeda Galaxy (coming soon!)", style: .default) { _ in
-            self.planetARiumViewButton.backgroundColor = self.buttonColor
             print("Andromeda pressed")
         }
         let actionVirgo = UIAlertAction(title: "Virgo Supercluster (coming soon!)", style: .default) { _ in
-            self.planetARiumViewButton.backgroundColor = self.buttonColor
             print("Virgo pressed")
         }
 
@@ -414,9 +413,7 @@ class MenuContentViewLaunch: UIView {
         alert.addAction(actionMilkyWay)
         alert.addAction(actionAndromeda)
         alert.addAction(actionVirgo)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in
-            self.planetARiumViewButton.backgroundColor = self.buttonColor
-        })
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         delegate?.menuContentViewLaunch(self, didPresentViewChangeWith: alert)
     }
