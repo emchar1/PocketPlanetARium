@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gfj-Kv-Wff">
-    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <device id="retina5_9" orientation="landscape" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -14,7 +14,7 @@
             <objects>
                 <viewController id="gfj-Kv-Wff" customClass="MenuController" customModule="PocketPlanetARium" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="d5x-nQ-eYp">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="812" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="c6d-I4-O6H"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -30,14 +30,14 @@
             <objects>
                 <viewController storyboardIdentifier="PlanetARiumController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BV1-FR-VrT" customClass="PlanetARiumController" customModule="PocketPlanetARium" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="U0K-SW-4ec">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="812" height="375"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T8A-IK-4ul" userLabel="Bezel View">
-                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
+                                <rect key="frame" x="44" y="0.0" width="724" height="354"/>
                                 <subviews>
                                     <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BrB-h1-WRS">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="734"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="724" height="354"/>
                                         <gestureRecognizers/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -49,7 +49,7 @@
                                         </connections>
                                     </arscnView>
                                     <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rda-l7-hc1">
-                                        <rect key="frame" x="47.666666666666657" y="317" width="280" height="100"/>
+                                        <rect key="frame" x="222" y="127" width="280" height="100"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For optimal performance, move to a brighter location." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G7N-6Z-Pug" userLabel="lowLightWarningLabel">
                                                 <rect key="frame" x="25" y="29" width="230" height="42"/>
@@ -119,14 +119,14 @@
             <objects>
                 <viewController storyboardIdentifier="PlanetDetails" modalTransitionStyle="crossDissolve" modalPresentationStyle="pageSheet" id="Zct-LL-3e1" customClass="PlanetDetailsController" customModule="PocketPlanetARium" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CKJ-co-Yxg">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <rect key="frame" x="0.0" y="0.0" width="812" height="375"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="bWl-5y-AHu" userLabel="Main Stack">
-                                <rect key="frame" x="20" y="20" width="335" height="684"/>
+                                <rect key="frame" x="64" y="20" width="728" height="314"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zuz-Zc-OBd" userLabel="Planet Title View">
-                                        <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="728" height="40"/>
                                         <subviews>
                                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="We4-dF-vYt" userLabel="Close Button">
                                                 <rect key="frame" x="0.0" y="4" width="24" height="24"/>
@@ -148,7 +148,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QA6-6G-Qqu">
-                                                <rect key="frame" x="0.0" y="0.0" width="335" height="28"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="728" height="28"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="Age-Normal" family="Age" pointSize="24"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -166,16 +166,16 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dwk-qX-0mN" userLabel="Sub Stack">
-                                        <rect key="frame" x="0.0" y="48" width="335" height="636"/>
+                                        <rect key="frame" x="0.0" y="48" width="728" height="266"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="NkC-rC-PWD" userLabel="Inner Stack">
-                                                <rect key="frame" x="0.0" y="0.0" width="335" height="245.33333333333334"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="728" height="266"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1lr-Gx-rW1" userLabel="Planet View">
-                                                        <rect key="frame" x="0.0" y="0.0" width="163.66666666666666" height="245.33333333333334"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="177.33333333333334" height="266"/>
                                                         <subviews>
                                                             <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="XKF-x8-rri">
-                                                                <rect key="frame" x="0.0" y="41" width="163.66666666666666" height="163.33333333333334"/>
+                                                                <rect key="frame" x="0.0" y="44.333333333333329" width="177.33333333333334" height="177.33333333333337"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="XKF-x8-rri" secondAttribute="height" multiplier="1:1" id="1Y3-jl-YPK"/>
@@ -192,21 +192,21 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cnO-9c-Gz9" userLabel="Planet Table View">
-                                                        <rect key="frame" x="171.66666666666663" y="0.0" width="163.33333333333337" height="245.33333333333334"/>
+                                                        <rect key="frame" x="185.33333333333331" y="0.0" width="177.33333333333331" height="266"/>
                                                         <subviews>
                                                             <tableView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="24" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="42C-Uu-nzs">
-                                                                <rect key="frame" x="0.0" y="0.0" width="163.33333333333334" height="245.33333333333334"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="177.33333333333334" height="266"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <prototypes>
                                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="statCell" id="aBg-lJ-bk4" customClass="PlanetStatsCell" customModule="PocketPlanetARium" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="28" width="163.33333333333334" height="24"/>
+                                                                        <rect key="frame" x="0.0" y="28" width="177.33333333333334" height="24"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aBg-lJ-bk4" id="y9X-vd-hvP">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="163.33333333333334" height="24"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="177.33333333333334" height="24"/>
                                                                             <autoresizingMask key="autoresizingMask"/>
                                                                             <subviews>
                                                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TAx-pJ-LGA" userLabel="Stat Stack">
-                                                                                    <rect key="frame" x="0.0" y="4" width="163.33333333333334" height="16.333333333333332"/>
+                                                                                    <rect key="frame" x="0.0" y="4" width="177.33333333333334" height="16.333333333333332"/>
                                                                                     <subviews>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" text="Stat" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YZf-MW-zWA">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="75" height="16.333333333333332"/>
@@ -219,7 +219,7 @@
                                                                                             <nil key="highlightedColor"/>
                                                                                         </label>
                                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hbb-1N-jnQ">
-                                                                                            <rect key="frame" x="75" y="0.0" width="88.333333333333314" height="16.333333333333332"/>
+                                                                                            <rect key="frame" x="75" y="0.0" width="102.33333333333331" height="16.333333333333332"/>
                                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                             <fontDescription key="fontDescription" name="Prime-Regular" family="Prime" pointSize="14"/>
                                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -253,10 +253,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YFz-nP-B0b" userLabel="Planet Details Landscape View">
-                                                        <rect key="frame" x="335" y="0.0" width="0.0" height="245.33333333333334"/>
+                                                        <rect key="frame" x="370.66666666666674" y="0.0" width="357.33333333333326" height="266"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="AWt-TX-aMc">
-                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="245.33333333333334"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="AWt-TX-aMc">
+                                                                <rect key="frame" x="0.0" y="0.0" width="357.33333333333331" height="266"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <string key="text">Neptune is the eighth and farthest known Solar planet from the Sun. In the Solar System, it is the fourth largest planet by diameter, the third most massive planet, and the densest giant planet. Neptune is not visible to the unaided eye and is the only planet in the Solar System found by mathematical prediction rather than by empirical observation. Its largest moon, Triton, was discovered shortly thereafter, though none of the planet's remaining 13 known moons were located telescopically until the 20th century. Neptune's atmosphere has active and visible weather patterns. The planet's southern hemisphere has a Great Dark Spot driven by the strongest sustained winds of any planet in the Solar System, with recorded wind speeds as high as 1,300 mph.</string>
                                                                 <fontDescription key="fontDescription" name="Prime-Regular" family="Prime" pointSize="18"/>
@@ -277,10 +277,10 @@
                                                 <variation key="heightClass=compact" distribution="fill"/>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yrs-3o-8rA" userLabel="Planet Details View">
-                                                <rect key="frame" x="0.0" y="253.33333333333329" width="335" height="382.66666666666674"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="728" height="0.0"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" verticalHuggingPriority="1000" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="tfU-en-dNF" userLabel="Planet Details Label">
-                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="382.66666666666669"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" verticalHuggingPriority="1000" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="tfU-en-dNF" userLabel="Planet Details Label">
+                                                        <rect key="frame" x="0.0" y="0.0" width="728" height="0.0"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <string key="text">Neptune is the eighth and farthest known Solar planet from the Sun. In the Solar System, it is the fourth largest planet by diameter, the third most massive planet, and the densest giant planet. Neptune is not visible to the unaided eye and is the only planet in the Solar System found by mathematical prediction rather than by empirical observation. Its largest moon, Triton, was discovered shortly thereafter, though none of the planet's remaining 13 known moons were located telescopically until the 20th century. Neptune's atmosphere has active and visible weather patterns. The planet's southern hemisphere has a Great Dark Spot driven by the strongest sustained winds of any planet in the Solar System, with recorded wind speeds as high as 1,300 mph.</string>
                                                         <fontDescription key="fontDescription" name="Prime-Regular" family="Prime" pointSize="18"/>

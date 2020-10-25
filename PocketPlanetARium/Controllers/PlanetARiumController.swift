@@ -270,6 +270,7 @@ class PlanetARiumController: UIViewController {
         }
         
         //Do shit while it expands...
+        peekView?.expand(by: touch.force / touch.maximumPossibleForce)
         
         guard touch.force == touch.maximumPossibleForce else {
             //Max force pressed reached
@@ -313,6 +314,7 @@ extension PlanetARiumController: PlanetDetailsControllerDelegate {
         }
     }
 }
+
 
 
 
