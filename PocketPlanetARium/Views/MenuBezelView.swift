@@ -54,7 +54,7 @@ class MenuBezelView: UIView {
         
         if showSubLabel {
             subLabel = UILabel(frame: CGRect(x: 0, y: height - 40, width: width, height: 40))
-            subLabel!.font = UIFont(name: K.fontFaceItalic, size: K.fontSizePeekDetails)
+            subLabel!.font = UIFont(name: K.fontFace, size: K.fontSizePeekDetails)
             subLabel!.textColor = .white
             subLabel!.textAlignment = .center
             subLabel!.text = "(Swipe left to proceed)"

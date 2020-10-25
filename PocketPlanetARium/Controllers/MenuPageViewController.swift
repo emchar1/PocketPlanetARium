@@ -63,6 +63,10 @@ class MenuPageViewController: UIViewController {
                 menuContentView.titleTopLabel.frame.origin.x = 0
                 menuContentView.titleBottomLabel.frame.origin.x = 0
             }, completion: nil)
+            
+            UIView.animate(withDuration: 0.5, delay: 0.5, options: .curveEaseInOut, animations: {
+                menuContentView.trulyImmersiveLabel.alpha = 1.0
+            }, completion: nil)
         }
     }
         

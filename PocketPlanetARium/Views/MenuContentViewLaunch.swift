@@ -21,6 +21,7 @@ class MenuContentViewLaunch: UIView {
     // MARK: - Top Stack Properties
     var titleTopLabel: UILabel!
     var titleBottomLabel: UILabel!
+    var trulyImmersiveLabel: UILabel!
 
     // MARK: - Bottom Stack properties
     static let headerView = "View:"
@@ -100,12 +101,13 @@ class MenuContentViewLaunch: UIView {
         
         let fontTitle: String = K.fontTitle
         let fontSize: CGFloat = 40
+        let titlePadding: CGFloat = 0.0
         let textColor = UIColor.getRandom(redRange: 175...255, greenRange: 175...255, blueRange: 175...255)
         let shadowOffset: CGFloat = 3.0
         
         //"Pocket" label
         titleTopLabel = UILabel(frame: CGRect(x: -frame.width,
-                                              y: frame.height / 4 - (fontSize / 2 + 5),
+                                              y: frame.height / 4 - fontSize - titlePadding,
                                               width: frame.width,
                                               height: fontSize + 10))
         titleTopLabel.font = UIFont(name: fontTitle, size: fontSize)
@@ -120,7 +122,7 @@ class MenuContentViewLaunch: UIView {
         
         //"PlanetARium" label
         titleBottomLabel = UILabel(frame: CGRect(x: frame.width,
-                                                 y: frame.height / 4 + (fontSize / 2 + 5),
+                                                 y: frame.height / 4,
                                                  width: frame.width,
                                                  height: fontSize + 10))
         titleBottomLabel.font = UIFont(name: fontTitle, size: fontSize)
@@ -132,6 +134,18 @@ class MenuContentViewLaunch: UIView {
         titleBottomLabel.shadowOffset = CGSize(width: shadowOffset, height: shadowOffset)
         titleBottomLabel.alpha = 0.0
         addSubview(titleBottomLabel)
+        
+        //"A truly immersive experience!
+        trulyImmersiveLabel = UILabel(frame: CGRect(x: 0,
+                                                    y: frame.height / 4 + fontSize + titlePadding,
+                                                    width: frame.width,
+                                                    height: fontSize + 10))
+        trulyImmersiveLabel.font = UIFont(name: K.fontFace, size: K.fontSizePeekDetails)
+        trulyImmersiveLabel.textColor = .white
+        trulyImmersiveLabel.textAlignment = .center
+        trulyImmersiveLabel.text = "A truly immersive experience!"
+        trulyImmersiveLabel.alpha = 0.0
+        addSubview(trulyImmersiveLabel)
     }
     
     /**

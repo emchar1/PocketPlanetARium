@@ -21,7 +21,7 @@ enum MenuItem: CaseIterable {
     var item: MenuIndex {
         switch self {
         case .item0:
-            return (0, "Imagine the universe in the palm of your hand...\n\nWith the Pocket PlanetARium, you can do just that. Get up, move around, and discover the planets in Augmented Reality!", nil)
+            return (0, "Imagine the universe in the palm of your hand...\n\nWith the Pocket PlanetARium, you can do just that. Get up, move around, and discover the planets in Augmented Reality - a truly immersive experience!", nil)
         case .item1:
             return (1, "When first launching the app, make sure to hold your device at a comfortable distance from your face, perpendicular to the floor.\n\nMake sure the lighting in the room is adequate to get the best experience.", nil)
         case .item2:
