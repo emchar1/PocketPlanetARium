@@ -39,9 +39,13 @@ class MenuContentViewSingle: UIView {
         superView.addSubview(contentLabel)
   
         contentLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([contentLabel.topAnchor.constraint(equalTo: superView.safeAreaLayoutGuide.topAnchor, constant: K.padding),
-                                     contentLabel.leadingAnchor.constraint(equalTo: superView.safeAreaLayoutGuide.leadingAnchor, constant: K.padding),
-                                     superView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: contentLabel.bottomAnchor, constant: K.padding),
-                                     superView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: contentLabel.trailingAnchor, constant: K.padding)])
+        NSLayoutConstraint.activate([contentLabel.topAnchor.constraint(equalTo: superView.safeAreaLayoutGuide.topAnchor,
+                                                                       constant: K.padding),
+                                     contentLabel.leadingAnchor.constraint(equalTo: superView.safeAreaLayoutGuide.leadingAnchor,
+                                                                           constant: K.padding),
+                                     superView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: contentLabel.bottomAnchor,
+                                                                                           constant: K.padding),
+                                     superView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: contentLabel.trailingAnchor,
+                                                                                             constant: K.padding)])
     }
 }
