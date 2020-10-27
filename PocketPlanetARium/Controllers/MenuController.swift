@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 //Need to add this as a global var to be shared across all files!
 var audioManager = AudioManager(with: .main)
@@ -20,6 +21,8 @@ class MenuController: UIViewController {
 
     
     override func viewDidLoad() {
+        requestCamera()
+        
         setupPageController()
     }
     
@@ -73,5 +76,27 @@ extension MenuController: UIPageViewControllerDataSource, UIPageViewControllerDe
     
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         return currentIndex
+    }
+}
+
+
+extension MenuController {
+    func requestCamera() {
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .authorized: // The user has previously granted access to the camera.
+            return
+        case .notDetermined: // The user has not yet been asked for camera access.
+            AVCaptureDevice.requestAccess(for: .video) { granted in
+                if granted {
+                    return
+                }
+            }
+        case .denied: // The user has previously denied access.
+            return
+        case .restricted: // The user can't grant access due to restrictions.
+            return
+        default:
+            return
+        }
     }
 }

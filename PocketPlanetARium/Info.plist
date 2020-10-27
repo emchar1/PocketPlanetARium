@@ -21,7 +21,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string></string>
+	<string>This app requires access to your camera in order to enable Augmented Reality.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Age-Normal.otf</string>
