@@ -40,7 +40,7 @@ class PlanetPeekView: UIView {
         self.planet = planet
         planetTitle.text = planet.getName()
         planetDetails.text = planet.getDetails().details
-        instructions.text = "(Hold to read more)"
+        instructions.text = "(Press/Hold to read more)"
         
         setupView()
     }
