@@ -48,7 +48,7 @@ struct K {
     /**
      Typical padding. Can be used for views, cells, etc. Takes into account screen size to determine what the padding should be.
      */
-    static let padding: CGFloat = UIScreen.main.bounds.width / 18.75
+    static let padding: CGFloat = 20//UIScreen.main.bounds.width / 18.75
     
     /**
      Period of a planetary orbit.
