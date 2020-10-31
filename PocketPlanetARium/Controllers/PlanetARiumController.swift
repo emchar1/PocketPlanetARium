@@ -46,9 +46,11 @@ class PlanetARiumController: UIViewController {
     var pinchChanged: CGFloat?
     var pinchBoundsCount = 0
     var pinchBoundsLimit = 10
+    let scaleValueMin: Float = 0
+    let scaleValueMax: Float = 1
     var scaleValue: Float = 0.218 {
         didSet {
-            scaleValue = scaleValue.clamp(min: 0, max: 1)
+            scaleValue = scaleValue.clamp(min: scaleValueMin, max: scaleValueMax)
         }
     }
         
@@ -92,14 +94,18 @@ class PlanetARiumController: UIViewController {
                                     view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: scaleLabel.bottomAnchor, constant: K.padding)])
         
         
+        
+        
+        
+        //SPELLS
+        
         //Long press to replace 3D press (for iPad that doesn't have 3D touch technology)
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPress))
         longPressGesture.minimumPressDuration = 1.5
         sceneView.addGestureRecognizer(longPressGesture)
 
         
-        
-        
+
         
         
         
@@ -197,7 +203,7 @@ class PlanetARiumController: UIViewController {
 
             scaleValue += diff / diffScale
             
-            if scaleValue > 0 && scaleValue < 1 {
+            if scaleValue > scaleValueMin && scaleValue < scaleValueMax {
                 pinchBoundsCount = 0
                 
                 planetarium.beginAnimation(scale: scaleValue, toNode: sceneView)
@@ -269,15 +275,22 @@ class PlanetARiumController: UIViewController {
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first,
-              view.traitCollection.forceTouchCapability == .available,
               tappedPlanet != nil else {
             return
         }
 
-        //Do shit while it expands...
-        peekView?.expand(by: touch.force / touch.maximumPossibleForce)
+//        let initialTouch: CGPoint = touch.location(in: sceneView)
+//        do {
+//            try summonPlanet(with: initialTouch)
+//        }
+//        catch {
+//            print(error)
+//        }
+//        //Do shit while it expands...
+//        peekView?.expand(by: touch.force / touch.maximumPossibleForce)
 
-        guard touch.force == touch.maximumPossibleForce else {
+        guard view.traitCollection.forceTouchCapability == .available,
+              touch.force == touch.maximumPossibleForce else {
             //Max force pressed reached
             return
         }
@@ -294,7 +307,7 @@ class PlanetARiumController: UIViewController {
     /**
      Alternative to 3D touch (for iPad users)
      */
-    @objc func longPress(_ sender: UILongPressGestureRecognizer) {
+    @objc func longPress(_ recognizer: UILongPressGestureRecognizer) {
         guard tappedPlanet != nil else {
             return
         }

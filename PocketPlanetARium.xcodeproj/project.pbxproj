@@ -61,6 +61,7 @@
 		EA5B0C03251055B300B1E910 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA5B0C01251055B300B1E910 /* LaunchScreen.storyboard */; };
 		EA5B0C0B2510677E00B1E910 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5B0C0A2510677E00B1E910 /* Planet.swift */; };
 		EA764A6A254B76B300F1C606 /* PocketPlanetARiumTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA764A69254B76B300F1C606 /* PocketPlanetARiumTests.swift */; };
+		EA764A7E254D34B200F1C606 /* TapPlanetGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA764A7D254D34B200F1C606 /* TapPlanetGesture.swift */; };
 		EA89D9D7251D621D002B82F3 /* SunParticles.scn in Resources */ = {isa = PBXBuildFile; fileRef = EA89D9D6251D621D002B82F3 /* SunParticles.scn */; };
 		EA992FAC2540B88F00992CB7 /* mario_ButtonPressPause.wav in Resources */ = {isa = PBXBuildFile; fileRef = EA992FA52540B88E00992CB7 /* mario_ButtonPressPause.wav */; };
 		EA992FAD2540B88F00992CB7 /* mario_SettingsExpand.wav in Resources */ = {isa = PBXBuildFile; fileRef = EA992FA62540B88E00992CB7 /* mario_SettingsExpand.wav */; };
@@ -147,6 +148,7 @@
 		EA764A67254B76B300F1C606 /* PocketPlanetARiumTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PocketPlanetARiumTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA764A69254B76B300F1C606 /* PocketPlanetARiumTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PocketPlanetARiumTests.swift; sourceTree = "<group>"; };
 		EA764A6B254B76B300F1C606 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EA764A7D254D34B200F1C606 /* TapPlanetGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapPlanetGesture.swift; sourceTree = "<group>"; };
 		EA89D9D6251D621D002B82F3 /* SunParticles.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = SunParticles.scn; sourceTree = "<group>"; };
 		EA992FA52540B88E00992CB7 /* mario_ButtonPressPause.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = mario_ButtonPressPause.wav; sourceTree = "<group>"; };
 		EA992FA62540B88E00992CB7 /* mario_SettingsExpand.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = mario_SettingsExpand.wav; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 		EA5B0BF5251055B300B1E910 /* PocketPlanetARium */ = {
 			isa = PBXGroup;
 			children = (
+				EA764A7A254D2C4000F1C606 /* Spells */,
 				EA5B0BF6251055B300B1E910 /* AppDelegate.swift */,
 				EAC1F4CE251320030097521A /* Models */,
 				EAC1F4CC25131FF40097521A /* Controllers */,
@@ -263,6 +266,14 @@
 				EA764A6B254B76B300F1C606 /* Info.plist */,
 			);
 			path = PocketPlanetARiumTests;
+			sourceTree = "<group>";
+		};
+		EA764A7A254D2C4000F1C606 /* Spells */ = {
+			isa = PBXGroup;
+			children = (
+				EA764A7D254D34B200F1C606 /* TapPlanetGesture.swift */,
+			);
+			path = Spells;
 			sourceTree = "<group>";
 		};
 		EA992FA02540B4CD00992CB7 /* mainTheme */ = {
@@ -521,6 +532,7 @@
 				EA40E9B0252ADFFF00726425 /* PlanetDetails.swift in Sources */,
 				EA43CB55252669D300102879 /* SettingsView.swift in Sources */,
 				EAC1F4D025149BD30097521A /* PlanetARium.swift in Sources */,
+				EA764A7E254D34B200F1C606 /* TapPlanetGesture.swift in Sources */,
 				EA5B0BF7251055B300B1E910 /* AppDelegate.swift in Sources */,
 				EA57370C2538BF3500CF442B /* MenuContentView.swift in Sources */,
 			);
