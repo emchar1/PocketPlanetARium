@@ -60,6 +60,7 @@
 		EA5B0C00251055B300B1E910 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA5B0BFF251055B300B1E910 /* Assets.xcassets */; };
 		EA5B0C03251055B300B1E910 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA5B0C01251055B300B1E910 /* LaunchScreen.storyboard */; };
 		EA5B0C0B2510677E00B1E910 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA5B0C0A2510677E00B1E910 /* Planet.swift */; };
+		EA764A6A254B76B300F1C606 /* PocketPlanetARiumTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA764A69254B76B300F1C606 /* PocketPlanetARiumTests.swift */; };
 		EA89D9D7251D621D002B82F3 /* SunParticles.scn in Resources */ = {isa = PBXBuildFile; fileRef = EA89D9D6251D621D002B82F3 /* SunParticles.scn */; };
 		EA992FAC2540B88F00992CB7 /* mario_ButtonPressPause.wav in Resources */ = {isa = PBXBuildFile; fileRef = EA992FA52540B88E00992CB7 /* mario_ButtonPressPause.wav */; };
 		EA992FAD2540B88F00992CB7 /* mario_SettingsExpand.wav in Resources */ = {isa = PBXBuildFile; fileRef = EA992FA62540B88E00992CB7 /* mario_SettingsExpand.wav */; };
@@ -76,6 +77,16 @@
 		EAC1F4D025149BD30097521A /* PlanetARium.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC1F4CF25149BD30097521A /* PlanetARium.swift */; };
 		EAF7BEA925203CAE00C0D1A6 /* PlanetGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF7BEA825203CAE00C0D1A6 /* PlanetGroup.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EA764A6C254B76B300F1C606 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA5B0BEB251055B300B1E910 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EA5B0BF2251055B300B1E910;
+			remoteInfo = PocketPlanetARium;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		EA0636112545312300719E9C /* planetHardPress.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = planetHardPress.mov; sourceTree = "<group>"; };
@@ -133,6 +144,9 @@
 		EA5B0C02251055B300B1E910 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EA5B0C04251055B300B1E910 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA5B0C0A2510677E00B1E910 /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
+		EA764A67254B76B300F1C606 /* PocketPlanetARiumTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PocketPlanetARiumTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA764A69254B76B300F1C606 /* PocketPlanetARiumTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PocketPlanetARiumTests.swift; sourceTree = "<group>"; };
+		EA764A6B254B76B300F1C606 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA89D9D6251D621D002B82F3 /* SunParticles.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = SunParticles.scn; sourceTree = "<group>"; };
 		EA992FA52540B88E00992CB7 /* mario_ButtonPressPause.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = mario_ButtonPressPause.wav; sourceTree = "<group>"; };
 		EA992FA62540B88E00992CB7 /* mario_SettingsExpand.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = mario_SettingsExpand.wav; sourceTree = "<group>"; };
@@ -152,6 +166,13 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		EA5B0BF0251055B300B1E910 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EA764A64254B76B300F1C606 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -203,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				EA5B0BF5251055B300B1E910 /* PocketPlanetARium */,
+				EA764A68254B76B300F1C606 /* PocketPlanetARiumTests */,
 				EA5B0BF4251055B300B1E910 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -211,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				EA5B0BF3251055B300B1E910 /* PocketPlanetARium.app */,
+				EA764A67254B76B300F1C606 /* PocketPlanetARiumTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -231,6 +254,15 @@
 				EA5B0C04251055B300B1E910 /* Info.plist */,
 			);
 			path = PocketPlanetARium;
+			sourceTree = "<group>";
+		};
+		EA764A68254B76B300F1C606 /* PocketPlanetARiumTests */ = {
+			isa = PBXGroup;
+			children = (
+				EA764A69254B76B300F1C606 /* PocketPlanetARiumTests.swift */,
+				EA764A6B254B76B300F1C606 /* Info.plist */,
+			);
+			path = PocketPlanetARiumTests;
 			sourceTree = "<group>";
 		};
 		EA992FA02540B4CD00992CB7 /* mainTheme */ = {
@@ -345,18 +377,40 @@
 			productReference = EA5B0BF3251055B300B1E910 /* PocketPlanetARium.app */;
 			productType = "com.apple.product-type.application";
 		};
+		EA764A66254B76B300F1C606 /* PocketPlanetARiumTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EA764A70254B76B300F1C606 /* Build configuration list for PBXNativeTarget "PocketPlanetARiumTests" */;
+			buildPhases = (
+				EA764A63254B76B300F1C606 /* Sources */,
+				EA764A64254B76B300F1C606 /* Frameworks */,
+				EA764A65254B76B300F1C606 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EA764A6D254B76B300F1C606 /* PBXTargetDependency */,
+			);
+			name = PocketPlanetARiumTests;
+			productName = PocketPlanetARiumTests;
+			productReference = EA764A67254B76B300F1C606 /* PocketPlanetARiumTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		EA5B0BEB251055B300B1E910 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1170;
+				LastSwiftUpdateCheck = 1210;
 				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Eddie Char";
 				TargetAttributes = {
 					EA5B0BF2251055B300B1E910 = {
 						CreatedOnToolsVersion = 11.7;
+					};
+					EA764A66254B76B300F1C606 = {
+						CreatedOnToolsVersion = 12.1;
+						TestTargetID = EA5B0BF2251055B300B1E910;
 					};
 				};
 			};
@@ -374,6 +428,7 @@
 			projectRoot = "";
 			targets = (
 				EA5B0BF2251055B300B1E910 /* PocketPlanetARium */,
+				EA764A66254B76B300F1C606 /* PocketPlanetARiumTests */,
 			);
 		};
 /* End PBXProject section */
@@ -436,6 +491,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EA764A65254B76B300F1C606 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -464,7 +526,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EA764A63254B76B300F1C606 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA764A6A254B76B300F1C606 /* PocketPlanetARiumTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EA764A6D254B76B300F1C606 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EA5B0BF2251055B300B1E910 /* PocketPlanetARium */;
+			targetProxy = EA764A6C254B76B300F1C606 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		EA5B0BFC251055B300B1E910 /* Main.storyboard */ = {
@@ -642,6 +720,48 @@
 			};
 			name = Release;
 		};
+		EA764A6E254B76B300F1C606 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LZ8V996BTJ;
+				INFOPLIST_FILE = PocketPlanetARiumTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.5play-apps.PocketPlanetARiumTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PocketPlanetARium.app/PocketPlanetARium";
+			};
+			name = Debug;
+		};
+		EA764A6F254B76B300F1C606 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LZ8V996BTJ;
+				INFOPLIST_FILE = PocketPlanetARiumTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.5play-apps.PocketPlanetARiumTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PocketPlanetARium.app/PocketPlanetARium";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -659,6 +779,15 @@
 			buildConfigurations = (
 				EA5B0C08251055B300B1E910 /* Debug */,
 				EA5B0C09251055B300B1E910 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EA764A70254B76B300F1C606 /* Build configuration list for PBXNativeTarget "PocketPlanetARiumTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EA764A6E254B76B300F1C606 /* Debug */,
+				EA764A6F254B76B300F1C606 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

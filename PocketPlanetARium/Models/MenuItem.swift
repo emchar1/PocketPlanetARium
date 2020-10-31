@@ -27,7 +27,7 @@ enum MenuItem: CaseIterable {
         case .item2:
             return (2, "Pinch with two fingers to zoom in and out. The PlanetARium will scale from as small as 10 feet to as large as one mile in diameter!", (name: "planetPinch", type: "mov"))
         case .item3:
-            return (3, "Tap and hold on any planet to get quick info. Continue to press harder to get more details on the planet.", (name: "planetHardPress", type: "mov"))
+            return (3, "Tap and hold on any planet to get quick info. Continue holding down with your finger to get more details on the planet.", (name: "planetHardPress", type: "mov"))
         case .item4:
             return (4, "Use the controls at the bottom right to toggle the sound on/off, display planet names, pause animation, and reset your location.\n\nIf you lose your positioning, reset your location to place you back in the center of the PlanetARium.", (name: "planetSettings", type: "mov"))
         case .item5:
