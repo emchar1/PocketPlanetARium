@@ -43,7 +43,7 @@ class PlanetDetailsController: UIViewController, SCNSceneRendererDelegate {
     }
     
     func setupPlanetView(for planet: Planet) {
-        view.backgroundColor = UIColor(named: K.color900) ?? .gray
+        view.backgroundColor = K.color900
         
         //Setup labels
         planetTitleLabel.text = planet.getName()

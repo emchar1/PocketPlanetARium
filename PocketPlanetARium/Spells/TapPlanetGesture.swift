@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 protocol TapPlanetGestureDelegate {
-    func touchesBegan(in point: CGPoint)
-    func touchesEnded()
+    func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent)
+    func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent)
 }
 
 class TapPlanetGesture: UIGestureRecognizer {
@@ -31,17 +31,11 @@ class TapPlanetGesture: UIGestureRecognizer {
 //              let tappedPlanet = planetarium.getPlanet(withName: planetNodeName) else {
 //            return
 //        }
-//        
-        
-        guard let touch = touches.first else {
-            print("No touches.first found")
-            return
-        }
-        
-        tapDelegate?.touchesBegan(in: touch.location(in: self.view))
+//                
+        tapDelegate?.touchesBegan(touches, with: event)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
-        tapDelegate?.touchesEnded()
+        tapDelegate?.touchesEnded(touches, with: event)
     }
 }

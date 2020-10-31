@@ -34,7 +34,7 @@ class MenuBezelView: UIView {
         
         frame = CGRect(x: 0, y: 0, width: width, height: height)
         center = CGPoint(x: superView.frame.width / 2, y: superView.frame.height / 2)
-        backgroundColor = UIColor(named: K.color900) ?? .gray
+        backgroundColor = K.color900
         
         layer.cornerRadius = 18
         layer.shadowColor = UIColor.black.cgColor

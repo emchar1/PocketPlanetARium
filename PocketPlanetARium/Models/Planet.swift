@@ -18,7 +18,6 @@ enum PlanetType {
     case sun, moon, planet, comet, asteroid, spacestation, miscellany
 }
 
-
 /**
  Planet structure. Houses various information pertaining to a Planet object, such as the planet's name, type, size, node information and orbital center node information.
  */
@@ -45,6 +44,9 @@ struct Planet {
     private let labelNode: SCNNode
     private let labelColor: UIColor
     private let labelSize: Float
+    
+    //Magic
+    private var isSummoning = false
 
     
     // MARK: - Initializers
@@ -151,6 +153,19 @@ struct Planet {
                                                 z: 0,
                                                 duration: rotationSpeed)
         node.runAction(SCNAction.repeatForever(rotationAction), forKey: "rotatePlanet")
+    }
+    
+    /**
+     Summons a planet to right in front of you.
+     */
+    func summon() {
+        let speed: TimeInterval = 2.0
+        let moveAction = SCNAction.move(to: SCNVector3(x: 0, y: 0, z: -1), duration: speed)
+        let scaleAction = SCNAction.scale(to: 0.5, duration: speed)
+        let rotationAction = SCNAction.rotateBy(x: 0, y: 0.5, z: 0, duration: speed)
+
+        node.removeAllActions()
+        node.runAction(SCNAction.group([moveAction, scaleAction, rotationAction]), forKey: "summonPlanet")
     }
     
     

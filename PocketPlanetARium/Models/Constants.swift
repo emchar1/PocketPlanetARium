@@ -30,13 +30,14 @@ struct K {
     static let fontSizePeekDetails: CGFloat = 14
     
     //Color Themes
-    static var color = "BlueGrey"
-    static let color000 = "\(K.color)000"
-    static let color100 = "\(K.color)100"
-    static let color300 = "\(K.color)300"
-    static let color500 = "\(K.color)500"
-    static let color700 = "\(K.color)700"
-    static let color900 = "\(K.color)900"
+    static var colorName = "BlueGrey"
+    static let color000 = UIColor(named: "\(K.colorName)000") ?? .gray
+    static let color100 = UIColor(named: "\(K.colorName)100") ?? .gray
+    static let color300 = UIColor(named: "\(K.colorName)300") ?? .gray
+    static let color500 = UIColor(named: "\(K.colorName)500") ?? .gray
+    static let color700 = UIColor(named: "\(K.colorName)700") ?? .gray
+    static let color900 = UIColor(named: "\(K.colorName)900") ?? .gray
+    static let colorIcyBlue = UIColor(red: 175, green: 255, blue: 255)
     
 
 

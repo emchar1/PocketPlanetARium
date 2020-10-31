@@ -16,6 +16,11 @@ struct PlanetARium {
     private let scaleMinimum: Float = 0.123
     private let scaleMaximum: Float = 1
     private let scaleSpeed: TimeInterval = 128
+    //The sweet spot for Merlyne's magic to work = 39ft i.e. my age in years.
+    private let sweetSpotRound: Float = 100
+    private var sweetSpot: Float {
+        return round(pow(0.6, 1.0 / scaleFactor) * sweetSpotRound) / sweetSpotRound
+    }
 
     //PlanetARium variables
     private var planets = PlanetGroup()
@@ -133,14 +138,14 @@ struct PlanetARium {
     /**
      Returns the physical distance from the Sun to Mercury, in feet.
      */
-    func getDistanceSunTo(_ planetName: String) -> String {
+    func getDistanceSunTo(_ planetName: String, scaleValue: Float) -> (text: String, textColor: UIColor?) {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.minimumFractionDigits = 2
         formatter.maximumFractionDigits = 2
         
         guard let planet = planets.getPlanet(withName: planetName) else {
-            return "nil"
+            return ("nil", nil)
         }
         
         let distance = planet.getNode().position.z * -39.3701/12.0
@@ -151,10 +156,23 @@ struct PlanetARium {
         }
         
         guard let distanceToReturn = formatter.string(from: NSNumber(value: distance)) else {
-            return "nil"
+            return ("nil", nil)
         }
-
-        return "Sun to \(planetName): " + distanceToReturn + " ft"
+        
+        let scaleValueAtMax: Bool = scaleValue > 0.99 * scaleMaximum
+        
+        print("DistanceSunToEarth: z: \(planet.getNode().position.z) zFt: \(distance) scale: \(scaleValue)")
+        return ("Sun to \(planetName): " + (scaleValueAtMax ? "MAX" : distanceToReturn + " ft"),
+                sweetSpotReached(for: scaleValue) ? K.colorIcyBlue : .white)
+    }
+    
+    /**
+     Returns true if the "sweet spot," i.e. scaling when Sun-Earth distance is 39ft, i.e. my age.
+     - parameter scaleValue: the scaleValue of the parent view.
+     */
+    func sweetSpotReached(for scaleValue: Float) -> Bool {
+        print("sweetSpotReached: scaleValue: \(scaleValue), sweetSpot: \(sweetSpot)")
+        return round(scaleValue * sweetSpotRound) / sweetSpotRound == sweetSpot
     }
             
     

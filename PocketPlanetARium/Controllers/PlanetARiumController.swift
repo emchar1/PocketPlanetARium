@@ -58,7 +58,7 @@ class PlanetARiumController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
                 
-        view.backgroundColor = UIColor(named: K.color500) ?? .gray
+        view.backgroundColor = K.color500
         view.addSubview(loadingLabel)
 
 
@@ -79,7 +79,7 @@ class PlanetARiumController: UIViewController {
         bezelView.frame = CGRect(x: 0, y: 0, width: width, height: height)
                 
         bezelView.center = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
-        bezelView.backgroundColor = UIColor(named: K.color900) ?? .gray
+        bezelView.backgroundColor = K.color900
         bezelView.layer.cornerRadius = 18
         bezelView.layer.shadowColor = UIColor.black.cgColor
         bezelView.layer.shadowOpacity = 0.3
@@ -103,8 +103,13 @@ class PlanetARiumController: UIViewController {
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPress))
         longPressGesture.minimumPressDuration = 1.5
         sceneView.addGestureRecognizer(longPressGesture)
-
         
+        let tapPlanetGesture = TapPlanetGesture(target: self, action: nil)
+        tapPlanetGesture.tapDelegate = self
+        sceneView.addGestureRecognizer(tapPlanetGesture)
+
+        let summonPlanetGesture = UIPanGestureRecognizer(target: self, action: #selector(planetSummoned))
+        sceneView.addGestureRecognizer(summonPlanetGesture)
 
         
         
@@ -232,8 +237,11 @@ class PlanetARiumController: UIViewController {
     }
     
     private func showScaleLabel() {
+        let distanceToEarth = planetarium.getDistanceSunTo("Earth", scaleValue: scaleValue)
+        
         scaleLabel.alpha = K.masterAlpha
-        scaleLabel.text = planetarium.getDistanceSunTo("Earth")
+        scaleLabel.text = distanceToEarth.text
+        scaleLabel.textColor = distanceToEarth.textColor
         
         UIView.animate(withDuration: 0.25, delay: 2.0, options: .curveEaseOut, animations: {
             self.scaleLabel.alpha = 0.0
@@ -243,66 +251,98 @@ class PlanetARiumController: UIViewController {
     
     // MARK: - Planet Details Peek n Pop
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first, touches.count == 1 else {
-            return
-        }
-
-        let location = touch.location(in: sceneView)
-        let hitResults = sceneView.hitTest(location, options: nil)
-
-        guard hitResults.count > 0,
-              let result = hitResults.first,
-              let planetNodeName = result.node.name,
-              let tappedPlanet = planetarium.getPlanet(withName: planetNodeName) else {
-            return
-        }
-        
-        self.tappedPlanet = tappedPlanet
-        
-        //Prevents touching two planets in tandem while one finger is held down.
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        guard let touch = touches.first, touches.count == 1 else {
+//            return
+//        }
+//
+//        let location = touch.location(in: sceneView)
+//        let hitResults = sceneView.hitTest(location, options: nil)
+//
+//        guard hitResults.count > 0,
+//              let result = hitResults.first,
+//              let planetNodeName = result.node.name,
+//              let tappedPlanet = planetarium.getPlanet(withName: planetNodeName) else {
+//            return
+//        }
+//
+//        self.tappedPlanet = tappedPlanet
+//
+//        //Prevents touching two planets in tandem while one finger is held down.
+//        peekView?.removeFromSuperview()
+//
+//        peekView = PlanetPeekView(with: tappedPlanet)
+////        peekView!.delegate = self
+//        peekView!.show(in: view, at: location)
+//    }
+    
+//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        peekView?.removeFromSuperview()
+//        tappedPlanet = nil
+//    }
+    
+//    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        guard let touch = touches.first,
+//              tappedPlanet != nil else {
+//            return
+//        }
+//
+//
+//
+//
+////        let initialTouch: CGPoint = touch.location(in: sceneView)
+////        do {
+////            try summonPlanet(with: initialTouch)
+////        }
+////        catch {
+////            print(error)
+////        }
+////        //Do shit while it expands...
+////        peekView?.expand(by: touch.force / touch.maximumPossibleForce)
+//
+//        guard view.traitCollection.forceTouchCapability == .available,
+//              touch.force == touch.maximumPossibleForce else {
+//            //Max force pressed reached
+//            return
+//        }
+//
+//        K.addHapticFeedback(withStyle: .heavy)
+//
+//        planetarium.pauseAnimation()
+//        performSegue(withIdentifier: "PlanetDetailsSegue", sender: nil)
+//        peekView?.removeFromSuperview()
+//
+//        tappedPlanet = nil
+//    }
+    
+    
+    @objc func planetSummoned(_ recognizer: UIPanGestureRecognizer) {
         peekView?.removeFromSuperview()
+
+        if recognizer.state == .ended {
+            tappedPlanet = nil
+        }
         
-        peekView = PlanetPeekView(with: tappedPlanet)
-//        peekView!.delegate = self
-        peekView!.show(in: view, at: location)
+        guard let tappedPlanet = tappedPlanet else {
+            print("No planet tapped, WAP")
+            return
+        }
+        
+        guard planetarium.sweetSpotReached(for: scaleValue) else {
+            print("PlanetARium not in Sweet spot of 39")
+            print("Scale value: \(scaleValue)")
+            return
+        }
+        
+        //Need a magic spell soundFX
+        audioManager.playSound(for: "VenusSurface", currentTime: 0.0)
+//        UIView.animate(withDuration: 2.0, delay: 0.0, options: .curveEaseIn, animations: {
+//            self.tappedPlanet!.getNode().opacity = 0.0
+//        }, completion: nil)
+        tappedPlanet.summon()
+        print("Summoning of \(tappedPlanet.getName()) complete.")
     }
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        peekView?.removeFromSuperview()
-        tappedPlanet = nil
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first,
-              tappedPlanet != nil else {
-            return
-        }
-
-//        let initialTouch: CGPoint = touch.location(in: sceneView)
-//        do {
-//            try summonPlanet(with: initialTouch)
-//        }
-//        catch {
-//            print(error)
-//        }
-//        //Do shit while it expands...
-//        peekView?.expand(by: touch.force / touch.maximumPossibleForce)
-
-        guard view.traitCollection.forceTouchCapability == .available,
-              touch.force == touch.maximumPossibleForce else {
-            //Max force pressed reached
-            return
-        }
-
-        K.addHapticFeedback(withStyle: .heavy)
-
-        planetarium.pauseAnimation()
-        performSegue(withIdentifier: "PlanetDetailsSegue", sender: nil)
-        peekView?.removeFromSuperview()
-
-        tappedPlanet = nil
-    }
     
     /**
      Alternative to 3D touch (for iPad users)
@@ -444,5 +484,40 @@ extension PlanetARiumController: SettingsViewDelegate {
         else {
             planetarium.resumeAnimation(to: scaleValue)
         }
+    }
+}
+
+
+// MARK: - Spells
+
+extension PlanetARiumController: TapPlanetGestureDelegate {
+    func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
+        guard let touch = touches.first, touches.count == 1 else {
+            return
+        }
+
+        let location = touch.location(in: sceneView)
+        let hitResults = sceneView.hitTest(location, options: nil)
+
+        guard hitResults.count > 0,
+              let result = hitResults.first,
+              let planetNodeName = result.node.name,
+              let tappedPlanet = planetarium.getPlanet(withName: planetNodeName) else {
+            return
+        }
+        
+        self.tappedPlanet = tappedPlanet
+        
+        //Prevents touching two planets in tandem while one finger is held down.
+        peekView?.removeFromSuperview()
+        
+        peekView = PlanetPeekView(with: tappedPlanet)
+//        peekView!.delegate = self
+        peekView!.show(in: view, at: location)
+    }
+    
+    func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
+        peekView?.removeFromSuperview()
+        tappedPlanet = nil
     }
 }
