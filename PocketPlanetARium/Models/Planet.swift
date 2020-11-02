@@ -45,10 +45,7 @@ struct Planet {
     private let labelColor: UIColor
     private let labelSize: Float
     
-    //Magic
-    private var isSummoning = false
 
-    
     // MARK: - Initializers
     
     /**
@@ -157,15 +154,22 @@ struct Planet {
     
     /**
      Summons a planet to right in front of you.
+     - parameter completion: completion handler that executes when the function is done running node actions
      */
-    func summon() {
-        let speed: TimeInterval = 2.0
-        let moveAction = SCNAction.move(to: SCNVector3(x: 0, y: 0, z: -1), duration: speed)
-        let scaleAction = SCNAction.scale(to: 0.5, duration: speed)
-        let rotationAction = SCNAction.rotateBy(x: 0, y: 0.5, z: 0, duration: speed)
-
+    mutating func summon(completion: (() -> Void)?) {
         node.removeAllActions()
-        node.runAction(SCNAction.group([moveAction, scaleAction, rotationAction]), forKey: "summonPlanet")
+        orbitalCenterNode.removeAllActions()
+        
+        //Need Magical SFX
+        audioManager.playSound(for: "VenusSurface", currentTime: 0.0)
+        
+        let speed: TimeInterval = 2.0
+        let moveActionNode = SCNAction.move(to: SCNVector3(x: 0, y: 0, z: 0), duration: speed)
+        let moveActionOrbit = SCNAction.move(to: SCNVector3(x: 0, y: 0, z: -0.2), duration: speed)
+        let scaleAction = SCNAction.scale(to: 0.08 / CGFloat(radius), duration: speed)
+        let rotationAction = SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: 0.2, z: 0, duration: speed))
+        node.runAction(SCNAction.group([moveActionNode, scaleAction, rotationAction]), forKey: "summonPlanet")
+        orbitalCenterNode.runAction(moveActionOrbit, forKey: "summonPlanetOrbit", completionHandler: completion)
     }
     
     
@@ -246,6 +250,7 @@ struct Planet {
         ambientLight.type = .ambient
         ambientLight.intensity = ambientLumens
         let ambientLightNode = SCNNode()
+        ambientLightNode.name = "ambientLightNode"
         ambientLightNode.light = ambientLight
         ambientLightNode.position = SCNVector3(x: 0, y: 0, z: 0)
         node.addChildNode(ambientLightNode)
@@ -254,9 +259,34 @@ struct Planet {
         omniLight.type = .omni
         omniLight.intensity = omniLumens
         let omniLightNode = SCNNode()
+        omniLightNode.name = "omniLightNode"
         omniLightNode.light = omniLight
         omniLightNode.position = SCNVector3(x: 0, y: 0, z: 0)
         node.addChildNode(omniLightNode)
+    }
+    
+    func removeAllLightSources() {
+        node.enumerateChildNodes { (childNode, stop) in
+            if childNode.name == "omniLightNode" {
+                SCNTransaction.animationDuration = 0.5
+                childNode.light?.intensity = 0
+            }
+        }
+    }
+    
+    func addSpotLight(lumens: CGFloat, in sceneView: ARSCNView) {
+        let spotLight = SCNLight()
+        spotLight.type = .spot
+        spotLight.intensity = lumens
+        let box = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0.0)
+        box.firstMaterial?.diffuse.contents = UIColor.red
+        let spotLightNode = SCNNode(geometry: box)
+        spotLightNode.name = "spotLightNode"
+        spotLightNode.light = spotLight
+        spotLightNode.position = SCNVector3(x: 0, y: 1, z: 0)
+//        spotLightNode.eulerAngles = SCNVector3(x: 0, y: K.degToRad(90), z: 0)
+//        orbitalCenterNode.addChildNode(spotLightNode)
+        sceneView.scene.rootNode.addChildNode(spotLightNode)
     }
     
     /**
@@ -284,7 +314,7 @@ struct Planet {
      Adds a particle system. For use for the sun, mostly.
      */
     func addParticles() {
-        guard let particleScene = SCNScene(named: "SunParticles.scn"),
+        guard let particleScene = SCNScene(named: "art.scnassets/SunParticles.scn"),
               let particleNode = particleScene.rootNode.childNode(withName: "particles", recursively: true),
               let particleSystem = particleNode.particleSystems?.first else {
             print("Unable to load SunParticles.scn: particles")
@@ -311,5 +341,31 @@ struct Planet {
         }
     }
     
+    /**
+     Adds a soundEffect to the planet node.
+     - parameters:
+        - fileName: name of the sound file, e.g. "magicspell.wav"
+        - loop: determines whether sound loops or not.
+     */
+    func addSound(with fileName: String, loop: Bool) {
+        guard let audioSource = SCNAudioSource(fileNamed: fileName) else {
+            return
+        }
+        
+        removeSounds()
+        
+        let audioPlayer = SCNAudioPlayer(source: audioSource)
+        audioSource.isPositional = true
+        audioSource.loops = loop
+        audioSource.load()
+        
+        node.addAudioPlayer(audioPlayer)
+    }
     
+    /**
+     Stops all playback of sounds attached to the planet node.
+     */
+    func removeSounds() {
+        node.removeAllAudioPlayers()
+    }
 }

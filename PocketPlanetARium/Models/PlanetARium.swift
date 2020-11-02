@@ -90,6 +90,26 @@ struct PlanetARium {
         
         beginAnimation(scale: scale, topSpeed: adjustedSpeed, toNode: sceneView)
     }
+    
+    mutating func summonPlanet(_ planet: Planet, in sceneView: ARSCNView, completion: (() -> Void)?) {
+        print("Summoning...")
+        var tappedPlanet = planet
+        tappedPlanet.summon(completion: completion)
+//        tappedPlanet.addSound(with: "cocktailShaker.wav", loop: true)
+        
+        if let sun = getPlanet(withName: "Sun") {
+            sun.removeAllLightSources()
+        }
+
+//        let spotLight = SCNLight()
+//        spotLight.type = .spot
+//        spotLight.intensity = 1000
+//        let lightNode = SCNNode()
+//        lightNode.position = SCNVector3(x: 0, y: 1, z: 0)
+//        lightNode.light = spotLight
+//        tappedPlanet.getNode().addChildNode(lightNode)
+        tappedPlanet.addSpotLight(lumens: 5000, in: sceneView)
+    }
         
     
     // MARK: - Customization
@@ -160,10 +180,10 @@ struct PlanetARium {
         }
         
         let scaleValueAtMax: Bool = scaleValue > 0.99 * scaleMaximum
+        let scaleValueAtMin: Bool = scaleValue < scaleMinimum
+        let distanceInFeet = scaleValueAtMax ? "MAX" : (scaleValueAtMin ? "0 ft" : distanceToReturn + " ft")
         
-        print("DistanceSunToEarth: z: \(planet.getNode().position.z) zFt: \(distance) scale: \(scaleValue)")
-        return ("Sun to \(planetName): " + (scaleValueAtMax ? "MAX" : distanceToReturn + " ft"),
-                sweetSpotReached(for: scaleValue) ? K.colorIcyBlue : .white)
+        return ("Sun to \(planetName): \(distanceInFeet)", sweetSpotReached(for: scaleValue) ? K.colorIcyBlue : .white)
     }
     
     /**
@@ -171,7 +191,6 @@ struct PlanetARium {
      - parameter scaleValue: the scaleValue of the parent view.
      */
     func sweetSpotReached(for scaleValue: Float) -> Bool {
-        print("sweetSpotReached: scaleValue: \(scaleValue), sweetSpot: \(sweetSpot)")
         return round(scaleValue * sweetSpotRound) / sweetSpotRound == sweetSpot
     }
             
