@@ -21,7 +21,7 @@ struct PlanetARium {
     private var sweetSpot: Float {
         return round(pow(0.6, 1.0 / scaleFactor) * sweetSpotRound) / sweetSpotRound
     }
-
+    
     //PlanetARium variables
     private var planets = PlanetGroup()
     private var labelsOn = false
@@ -91,26 +91,51 @@ struct PlanetARium {
         beginAnimation(scale: scale, topSpeed: adjustedSpeed, toNode: sceneView)
     }
     
-    mutating func summonPlanet(_ planet: Planet, in sceneView: ARSCNView, completion: (() -> Void)?) {
-        print("Summoning...")
-        var tappedPlanet = planet
-        tappedPlanet.summon(completion: completion)
-//        tappedPlanet.addSound(with: "cocktailShaker.wav", loop: true)
-        
-        if let sun = getPlanet(withName: "Sun") {
-            sun.removeAllLightSources()
-        }
-
-//        let spotLight = SCNLight()
-//        spotLight.type = .spot
-//        spotLight.intensity = 1000
-//        let lightNode = SCNNode()
-//        lightNode.position = SCNVector3(x: 0, y: 1, z: 0)
-//        lightNode.light = spotLight
-//        tappedPlanet.getNode().addChildNode(lightNode)
-        tappedPlanet.addSpotLight(lumens: 5000, in: sceneView)
-    }
-        
+    
+    
+    
+    
+//    mutating func summonPlanet(_ planet: Planet, in sceneView: ARSCNView, completion: (() -> Void)?) {
+//
+//        guard summonedPlanet == nil else {
+//            summonedPlanet!.unsummon(completion: completion)
+//            summonedPlanet = nil
+//
+//            if let sun = getPlanet(withName: "Sun") {
+//                sun.addLightSource(omniLumens: 1000, ambientLumens: 40)
+//            }
+//
+//            return
+//        }
+//
+//
+//        print("Summoning...")
+//        var tappedPlanet = planet
+//        tappedPlanet.summon(completion: completion)
+////        tappedPlanet.addSound(with: "cocktailShaker.wav", loop: true)
+//
+//        if let sun = getPlanet(withName: "Sun") {
+//            sun.removeAllLightSources()
+//        }
+//
+////        let spotLight = SCNLight()
+////        spotLight.type = .spot
+////        spotLight.intensity = 1000
+////        let lightNode = SCNNode()
+////        lightNode.position = SCNVector3(x: 0, y: 1, z: 0)
+////        lightNode.light = spotLight
+////        tappedPlanet.getNode().addChildNode(lightNode)
+////        tappedPlanet.addSpotLight(lumens: 5000, in: sceneView)
+//
+//        summonedPlanet = tappedPlanet
+//    }
+    
+    
+    
+    
+    
+    
+    
     
     // MARK: - Customization
     

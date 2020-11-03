@@ -53,12 +53,7 @@ class PlanetARiumController: UIViewController {
             scaleValue = scaleValue.clamp(min: scaleValueMin, max: scaleValueMax)
         }
     }
-    
-    //Summon properties
-    var summonBegan: CGFloat?
-    var summonChanged: CGFloat?
-    var isSummoning = false
-        
+            
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -151,8 +146,8 @@ class PlanetARiumController: UIViewController {
         tapPlanetGesture.tapDelegate = self
         sceneView.addGestureRecognizer(tapPlanetGesture)
 
-        let summonPlanetGesture = UIPanGestureRecognizer(target: self, action: #selector(planetSummoned))
-        sceneView.addGestureRecognizer(summonPlanetGesture)
+//        let summonPlanetGesture = UIPanGestureRecognizer(target: self, action: #selector(planetSummoned))
+//        sceneView.addGestureRecognizer(summonPlanetGesture)
         
         //View for the impending doom on earth
         let sceneView2 = SCNView(frame: CGRect(x: 20, y: 80, width: 100, height: 100))
@@ -281,51 +276,63 @@ class PlanetARiumController: UIViewController {
         }, completion: nil)
     }
     
-    /**
-     Summons a planet
-     */
-    @objc func planetSummoned(_ recognizer: UIPanGestureRecognizer) {
-        peekView?.removeFromSuperview()
-
-        if recognizer.state == .ended {
-//            print("It Ended. are you appy?")
-            tappedPlanet = nil
-            
-            summonBegan = nil
-            summonChanged = nil
-        }
-        
-        guard let tappedPlanet = tappedPlanet,
-              tappedPlanet.getType() != .sun,
-              !isSummoning/*,
-              planetarium.sweetSpotReached(for: scaleValue)*/ else {
-            print("isSummoning: \(isSummoning)")
-            return
-        }
-        
-        isSummoning = true
-        
-        switch recognizer.state {
-        case .began:
-            break
-//            print("Began")
-//            summonBegan = recognizer.location(in: sceneView)
-        case .changed:
-            print("Changed - translation: \(recognizer.translation(in: sceneView)), velocity: \(recognizer.velocity(in: sceneView))")
-//            summonChanged = recognizer.location(in: sceneView)
-        case .ended:
-//            print("Ended")
-            break
-        default:
-            break
-        }
-
-        print("We are summoning....")
-        planetarium.summonPlanet(tappedPlanet, in: sceneView) { [self] in
-            isSummoning = false
-            print("Summning done (isSummoning == false)")
-        }
-    }
+    
+    
+    
+    
+    
+//    /**
+//     Summons a planet
+//     */
+//    @objc func planetSummoned(_ recognizer: UIPanGestureRecognizer) {
+//        peekView?.removeFromSuperview()
+//
+//        if recognizer.state == .ended {
+////            print("It Ended. are you appy?")
+//            tappedPlanet = nil
+//
+//            summonBegan = nil
+//            summonChanged = nil
+//        }
+//
+//        guard let tappedPlanet = tappedPlanet,
+//              tappedPlanet.getType() != .sun,
+//              !isSummoning/*,
+//              planetarium.sweetSpotReached(for: scaleValue)*/ else {
+//            print("isSummoning: \(isSummoning)")
+//            return
+//        }
+//
+//        isSummoning = true
+//
+//        switch recognizer.state {
+//        case .began:
+//            break
+////            print("Began")
+////            summonBegan = recognizer.location(in: sceneView)
+//        case .changed:
+//            print("Changed - translation: \(recognizer.translation(in: sceneView)), velocity: \(recognizer.velocity(in: sceneView))")
+////            summonChanged = recognizer.location(in: sceneView)
+//        case .ended:
+////            print("Ended")
+//            break
+//        default:
+//            break
+//        }
+//
+//        print("We are summoning....")
+//        planetarium.summonPlanet(tappedPlanet, in: sceneView) { [self] in
+//            isSummoning = false
+//            print("Summning done (isSummoning == false)")
+//        }
+//    }
+    
+    
+    
+    
+    
+    
+    
     
     /**
      Alternative to 3D touch (for iPad users)
@@ -456,6 +463,7 @@ extension PlanetARiumController: SettingsViewDelegate {
     func settingsView(_ controller: SettingsView, didPressResetAnimationButton settingsSubButton: SettingsSubButton?) {
         sceneView.session.run(ARWorldTrackingConfiguration(), options: [.resetTracking, .removeExistingAnchors])
         planetarium.resetAnimation(withScale: scaleValue, toNode: sceneView)
+//        isSummoning = false
 
         handlePlayPause(for: controller)
         
