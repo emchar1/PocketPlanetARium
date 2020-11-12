@@ -15,7 +15,7 @@ struct PlanetARium {
     private let scaleFactor: Float = 3
     private let scaleMinimum: Float = 0.123
     private let scaleMaximum: Float = 1
-    private let scaleSpeed: TimeInterval = 128
+    private let scaleSpeed: TimeInterval = 64
     //The sweet spot for Merlyne's magic to work = 39ft i.e. my age in years.
     private let sweetSpotRound: Float = 100
     private var sweetSpot: Float {
@@ -45,7 +45,7 @@ struct PlanetARium {
         
         addPlanets(earthRadius: adjustedScale * 3,
                    earthDistance: adjustedScale * -20,
-                   earthDay: 8 / adjustedSpeed,
+                   earthDay: 32 / adjustedSpeed,
                    earthYear: 365 / adjustedSpeed)
         
         animatePlanets(to: sceneView)
@@ -331,8 +331,12 @@ struct PlanetARium {
                                                        PlanetStats.year.rawValue : "365 days"],
                                                details: "Home, sweet home! Earth is the third planet from the Sun and the only astronomical object known to harbor life. According to radiometric dating estimation and other evidence, Earth formed over 4.5 billion years ago. Within the first billion years of Earth's history, life appeared in the oceans and began to affect Earth's atmosphere and surface, leading to the proliferation of anaerobic and, later, aerobic organisms. Some geological evidence indicates that life may have arisen as early as 4 billion years ago. Since then, the combination of Earth's distance from the Sun, physical properties and geological history have allowed life to evolve and thrive. Over 99% of all species that ever lived on Earth are extinct."))
         
-        //Add earth's moon.
+        //Add earth's features
         if let earth = planets.getPlanet(withName: "Earth") {
+//            earth.addEarthSpecular(imageFileName: "earth_specular", to: earth.getNode())
+            earth.addEarthEmission(imageFileName: "earth_clouds", to: earth.getNode())
+            earth.addEarthNormal(imageFileName: "earth_normal", to: earth.getNode())
+            
             let moonCheck = planets.getPlanet(withName: "Moon")
 
             addPlanetHelper(name: "Moon",

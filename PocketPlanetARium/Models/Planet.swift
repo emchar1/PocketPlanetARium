@@ -376,6 +376,37 @@ struct Planet {
     }
     
     /**
+     Adds a specular material to the node, i.e. shiny waters
+     - parameters:
+        - imageFileName: name of the image file
+        - node: node for which to apply the material
+     */
+    func addEarthSpecular(imageFileName: String, to node: SCNNode) {
+        node.geometry?.firstMaterial?.specular.contents = UIImage(named: "art.scnassets/" + imageFileName.lowercased() + ".jpg") ?? UIColor.lightGray.withAlphaComponent(0.8)
+    }
+
+    /**
+     Adds an emission material to the node, i.e. clouds
+     - parameters:
+        - imageFileName: name of the image file
+        - node: node for which to apply the material
+     */
+    func addEarthEmission(imageFileName: String, to node: SCNNode) {
+        node.geometry?.firstMaterial?.emission.contents = UIImage(named: "art.scnassets/" + imageFileName.lowercased() + ".jpg") ?? UIColor.lightGray.withAlphaComponent(0.8)
+    }
+    
+    /**
+     Adds a normal material to the node, i.e. topography
+     - parameters:
+        - imageFileName: name of the image file
+        - node: node for which to apply the material
+     */
+    func addEarthNormal(imageFileName: String, to node: SCNNode) {
+        node.geometry?.firstMaterial?.normal.contents = UIImage(named: "art.scnassets/" + imageFileName.lowercased() + ".jpg") ?? UIColor.lightGray.withAlphaComponent(0.8)
+    }
+
+
+    /**
      Shows or hides the planet label.
      - parameter show: show (true) or hide (false) the planet's label
      */
