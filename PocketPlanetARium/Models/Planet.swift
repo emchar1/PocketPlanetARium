@@ -266,6 +266,40 @@ struct Planet {
     }
     
     /**
+     Adds a cloud emission for the Earth
+     - parameters:
+        - imageFileName: name of the file with just the file name sans extension
+        - node: the Earth node to apply the emission to
+     */
+    func addEarthClouds(imageFileName: String, to node: SCNNode) {
+        let cloudsNode = SCNNode(geometry: node.geometry)
+        cloudsNode.geometry?.firstMaterial?.emission.contents = UIImage(named: "art.scnassets/" + imageFileName.lowercased() + ".jpg") ?? UIColor.clear
+        
+        node.addChildNode(cloudsNode)
+    }
+    
+    /**
+     Adds a specular for the Earth, adding a spotlight on the white mask of the earth_specular.jpg, i.e. the water only
+     - parameters:
+        - imageFileName: name of the file with just the file name sans extension
+        - node: the Earth node to apply the specular to
+     */
+    func addEarthSpecular(imageFileName: String, to node: SCNNode) {
+        node.geometry?.firstMaterial?.specular.contents = UIImage(named: "art.scnassets/" + imageFileName.lowercased() + ".jpg") ?? UIColor.clear
+    }
+    
+    /**
+     Adds a normal for the Earth, i.e. topographic features, e.g. mountains
+     - parameters:
+        - imageFileName: name of the file with just the file name sans extension
+        - node: the Earth node to apply the normal to
+     */
+    func addEarthNormal(imageFileName: String, to node: SCNNode) {
+        node.geometry?.firstMaterial?.normal.contents = UIImage(named: "art.scnassets/" + imageFileName.lowercased() + ".jpg") ?? UIColor.clear
+    }
+    
+    
+    /**
      Adds a particle system. For use for the sun, mostly.
      */
     func addParticles() {
