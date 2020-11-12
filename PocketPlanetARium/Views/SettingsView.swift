@@ -120,23 +120,23 @@ class SettingsView: UIView {
         //The order of adding the button to the subviews MATTER!
         setupButton(&settingsSubButtons[SubButtonType.resetAnimation.rawValue],
                     systemName: "arrow.counterclockwise",
-                    backgroundColor: UIColor(named: K.color700) ?? .gray,
+                    backgroundColor: K.color700,
                     targetAction: #selector(resetAnimationPressed))
 
         setupButton(&settingsSubButtons[SubButtonType.playPause.rawValue],
                     systemName: "pause.fill",
-                    backgroundColor: UIColor(named: K.color500) ?? .gray,
+                    backgroundColor: K.color500,
                     targetAction: #selector(playPausePressed))
 
         setupButton(&settingsSubButtons[SubButtonType.labels.rawValue],
                     systemName: "info",
-                    backgroundColor: UIColor(named: K.color300) ?? .gray,
+                    backgroundColor: K.color300,
                     targetAction: #selector(labelsPressed))
 
         setupButton(&settingsSubButtons[SubButtonType.sound.rawValue],
                     systemName: isMuted ? "speaker.slash.fill" : "speaker.2.fill",
-                    backgroundColor: UIColor(named: K.color100) ?? .gray,
-                    tintColor: UIColor(named: K.color900) ?? .white,
+                    backgroundColor: K.color100,
+                    tintColor: K.color900,
                     targetAction: #selector(soundPressed))
 
         settingsButton.frame = CGRect(x: homePosition.x,
@@ -144,7 +144,7 @@ class SettingsView: UIView {
                                       width: SettingsView.buttonSize,
                                       height: SettingsView.buttonSize)
         settingsButton.setBackgroundImage(UIImage(named: "settings"), for: .normal)
-        settingsButton.tintColor = UIColor(named: K.color000) ?? .gray
+        settingsButton.tintColor = K.color000
         settingsButton.layer.shadowOpacity = 0.4
         settingsButton.layer.shadowOffset = .zero
         settingsButton.alpha = K.masterAlpha

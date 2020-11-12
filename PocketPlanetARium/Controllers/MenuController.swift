@@ -34,7 +34,7 @@ class MenuController: UIViewController {
         pageController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         pageController.dataSource = self
         pageController.delegate = self
-        pageController.view.backgroundColor = UIColor(named: K.color500) ?? .gray
+        pageController.view.backgroundColor = K.color500
         pageController.view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         
         //Makes this ad hoc pageController a child of MenuController.

@@ -48,8 +48,8 @@ class MenuContentViewLaunch: UIView {
     
     // MARK: - Misc Properties
     let buttonColor = UIColor(rgb: 0x3498db)
-    let buttonPressedColor = UIColor(named: K.color500)!
-    let descriptionColor = UIColor(red: 175, green: 255, blue: 255)
+    let buttonPressedColor = K.color500
+    let descriptionColor = K.colorIcyBlue
     var menuItem: MenuItem
     var isMuted: Bool {
         didSet {
