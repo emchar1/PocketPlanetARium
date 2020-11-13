@@ -40,6 +40,7 @@ class PlanetARiumController: UIViewController {
     //Lighting properties
     var lowLightTimer: TimeInterval?
     var lowLightTimerBegin = false
+    var lowLightActivated = false
 
     //Scaling properties
     var pinchBegan: CGFloat?
@@ -150,19 +151,19 @@ class PlanetARiumController: UIViewController {
 //        sceneView.addGestureRecognizer(summonPlanetGesture)
         
         //View for the impending doom on earth
-        let sceneView2 = SCNView(frame: CGRect(x: 20, y: 80, width: 100, height: 100))
-        let urth = SCNSphere(radius: 0.5)
-        urth.materials.first?.diffuse.contents = UIImage(named: "art.scnassets/earth.jpg")
-        let urthNode = SCNNode(geometry: urth)
-        urthNode.position = SCNVector3(x: 0, y: 0, z: -1.0)
-
-        let scene = SCNScene()
-        sceneView2.allowsCameraControl = true
-        sceneView2.autoenablesDefaultLighting = true
-        sceneView2.backgroundColor = .clear
-        sceneView2.scene = scene
-        scene.rootNode.addChildNode(urthNode)
-        view.addSubview(sceneView2)
+//        let sceneView2 = SCNView(frame: CGRect(x: 20, y: 80, width: 100, height: 100))
+//        let urth = SCNSphere(radius: 0.5)
+//        urth.materials.first?.diffuse.contents = UIImage(named: "art.scnassets/earth.jpg")
+//        let urthNode = SCNNode(geometry: urth)
+//        urthNode.position = SCNVector3(x: 0, y: 0, z: -1.0)
+//
+//        let scene = SCNScene()
+//        sceneView2.allowsCameraControl = true
+//        sceneView2.autoenablesDefaultLighting = true
+//        sceneView2.backgroundColor = .clear
+//        sceneView2.scene = scene
+//        scene.rootNode.addChildNode(urthNode)
+//        view.addSubview(sceneView2)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -415,29 +416,24 @@ extension PlanetARiumController: ARSCNViewDelegate {
                 lowLightTimer = time + 3
             }
             else {
-                if let lowLightTimer = lowLightTimer, time > lowLightTimer {
+                if let lowLightTimer = lowLightTimer, time > lowLightTimer, !lowLightActivated {
+                    lowLightActivated = true
                     DispatchQueue.main.async {
                         self.lowLightWarning.alpha = 0.6
+                    }
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
+                            self.lowLightWarning.alpha = 0.0
+                        }, completion: nil)
                     }
                 }
             }
         }
         else if lightEstimate.ambientIntensity > 500 {
-            if lowLightTimerBegin {
-                lowLightTimerBegin = false
-                lowLightTimer = time + 3
-            }
-            else {
-                if let lowLightTimer = lowLightTimer, time > lowLightTimer {
-                    DispatchQueue.main.async {
-                        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
-                            self.lowLightWarning.alpha = 0.0
-                        }, completion: { _ in
-                            self.lowLightTimer = nil
-                        })
-                    }
-                }
-            }
+            lowLightTimer = nil
+            lowLightTimerBegin = false
+            lowLightActivated = false
         }
     }
 

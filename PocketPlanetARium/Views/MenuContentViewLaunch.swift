@@ -191,19 +191,22 @@ class MenuContentViewLaunch: UIView {
         
         let creditsView = UIView()
         //CREDITS PLACEHOLDER - Uncomment to use.
-//        let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue]
-//        let attributedText = NSAttributedString(string: "Credits", attributes: underlineAttribute)
-//        creditsLabel = UILabel()
-//        creditsLabel.attributedText = attributedText
-//        creditsLabel.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
-//        creditsLabel.textColor = descriptionColor
-//        creditsLabel.textAlignment = .center
-//        creditsView.addSubview(creditsLabel)
-//        creditsLabel.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([creditsLabel.topAnchor.constraint(equalTo: creditsView.safeAreaLayoutGuide.topAnchor),
-//                                     creditsLabel.leadingAnchor.constraint(equalTo: creditsView.safeAreaLayoutGuide.leadingAnchor),
-//                                     creditsView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: creditsLabel.bottomAnchor),
-//                                     creditsView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: creditsLabel.trailingAnchor)])
+        let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue]
+        let attributedText = NSAttributedString(string: "Credits", attributes: underlineAttribute)
+        let creditsTapGesture = UITapGestureRecognizer(target: self, action: #selector(viewCredits))
+        creditsLabel = UILabel()
+        creditsLabel.attributedText = attributedText
+        creditsLabel.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
+        creditsLabel.textColor = descriptionColor
+        creditsLabel.textAlignment = .center
+        creditsLabel.addGestureRecognizer(creditsTapGesture)
+        creditsLabel.isUserInteractionEnabled = true
+        
+        creditsView.addSubview(creditsLabel)
+        creditsLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([creditsLabel.topAnchor.constraint(equalTo: creditsView.safeAreaLayoutGuide.topAnchor),
+                                     creditsView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: creditsLabel.bottomAnchor),
+                                     creditsLabel.centerXAnchor.constraint(equalTo: creditsView.centerXAnchor)])
         bottomStackView.addArrangedSubview(creditsView)
 
         
@@ -469,6 +472,10 @@ class MenuContentViewLaunch: UIView {
                 break
             }
         }
+    }
+    
+    @objc private func viewCredits() {
+        K.addHapticFeedback(withStyle: .light)
     }
     
     /**

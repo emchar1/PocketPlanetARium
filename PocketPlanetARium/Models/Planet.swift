@@ -360,11 +360,11 @@ struct Planet {
     /**
      Adds a particle system. For use for the sun, mostly.
      */
-    func addParticles() {
-        guard let particleScene = SCNScene(named: "art.scnassets/SunParticles.scn"),
+    func addParticles(scenefileName: String) {
+        guard let particleScene = SCNScene(named: "art.scnassets/" + scenefileName + ".scn"),
               let particleNode = particleScene.rootNode.childNode(withName: "particles", recursively: true),
               let particleSystem = particleNode.particleSystems?.first else {
-            print("Unable to load SunParticles.scn: particles")
+            print("Unable to load \(scenefileName).scn: particles")
             return
         }
         
@@ -381,8 +381,8 @@ struct Planet {
         - imageFileName: name of the image file
         - node: node for which to apply the material
      */
-    func addEarthSpecular(imageFileName: String, to node: SCNNode) {
-        node.geometry?.firstMaterial?.specular.contents = UIImage(named: "art.scnassets/" + imageFileName.lowercased() + ".jpg") ?? UIColor.lightGray.withAlphaComponent(0.8)
+    func addSpecular(imageFileName: String) {
+        node.geometry?.firstMaterial?.specular.contents = UIImage(named: "art.scnassets/" + imageFileName + ".jpg") ?? UIColor.lightGray.withAlphaComponent(0.8)
     }
 
     /**
@@ -391,8 +391,8 @@ struct Planet {
         - imageFileName: name of the image file
         - node: node for which to apply the material
      */
-    func addEarthEmission(imageFileName: String, to node: SCNNode) {
-        node.geometry?.firstMaterial?.emission.contents = UIImage(named: "art.scnassets/" + imageFileName.lowercased() + ".jpg") ?? UIColor.lightGray.withAlphaComponent(0.8)
+    func addEmission(imageFileName: String) {
+        node.geometry?.firstMaterial?.emission.contents = UIImage(named: "art.scnassets/" + imageFileName + ".jpg") ?? UIColor.lightGray.withAlphaComponent(0.8)
     }
     
     /**
@@ -401,8 +401,8 @@ struct Planet {
         - imageFileName: name of the image file
         - node: node for which to apply the material
      */
-    func addEarthNormal(imageFileName: String, to node: SCNNode) {
-        node.geometry?.firstMaterial?.normal.contents = UIImage(named: "art.scnassets/" + imageFileName.lowercased() + ".jpg") ?? UIColor.lightGray.withAlphaComponent(0.8)
+    func addNormal(imageFileName: String) {
+        node.geometry?.firstMaterial?.normal.contents = UIImage(named: "art.scnassets/" + imageFileName + ".jpg") ?? UIColor.lightGray.withAlphaComponent(0.8)
     }
 
 

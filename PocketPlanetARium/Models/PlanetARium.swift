@@ -253,7 +253,7 @@ struct PlanetARium {
             return
         }
         
-        sun.addParticles()
+        sun.addParticles(scenefileName: "SunParticles")
         
         
         addPlanetHelper(name: "Mercury",
@@ -333,9 +333,9 @@ struct PlanetARium {
         
         //Add earth's features
         if let earth = planets.getPlanet(withName: "Earth") {
-//            earth.addEarthSpecular(imageFileName: "earth_specular", to: earth.getNode())
-            earth.addEarthEmission(imageFileName: "earth_clouds", to: earth.getNode())
-            earth.addEarthNormal(imageFileName: "earth_normal", to: earth.getNode())
+//            earth.addSpecular(imageFileName: "earth_specular")
+            earth.addEmission(imageFileName: "earth_clouds")
+            earth.addNormal(imageFileName: "earth_normal")
             
             let moonCheck = planets.getPlanet(withName: "Moon")
 

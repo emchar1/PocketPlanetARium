@@ -62,7 +62,7 @@ class PlanetDetailsController: UIViewController, SCNSceneRendererDelegate {
         }
 
         if planet.getType() == .sun {
-            planet.addParticles()
+            planet.addParticles(scenefileName: "SunParticles")
         }
         
         if planet.getName() == "Venus Surface" {
