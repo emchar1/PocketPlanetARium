@@ -125,12 +125,20 @@ class PlanetPeekView: UIView {
         
         superView.addSubview(self)
         
-        UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: 0, delay: 0, options: .curveEaseIn, animations: {
             self.alpha = K.masterAlpha
         }, completion: nil)
         
         NSLayoutConstraint.activate([centerXAnchor.constraint(equalTo: superView.leadingAnchor, constant: xCenter),
                                      centerYAnchor.constraint(equalTo: superView.topAnchor, constant: yCenter)])
+    }
+    
+    func unshow() {
+        UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
+            self.alpha = 0
+        }, completion: { _ in
+            self.removeFromSuperview()
+        })
     }
     
 

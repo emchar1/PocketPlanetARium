@@ -510,7 +510,7 @@ extension PlanetARiumController: TapPlanetGestureDelegate {
     }
     
     func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
-        peekView?.removeFromSuperview()
+        peekView?.unshow()
         tappedPlanet = nil
     }
 }
