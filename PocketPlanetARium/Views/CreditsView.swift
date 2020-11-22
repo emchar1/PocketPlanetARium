@@ -10,6 +10,7 @@ import UIKit
 
 class CreditsView: UIView {
     let padding: CGFloat = 20
+    let heightOffset: CGFloat = 180
     let superView: UIView!
     let creditsLabel: UILabel!
     let creditsText = """
@@ -50,34 +51,39 @@ class CreditsView: UIView {
         self.creditsLabel = UILabel(frame: CGRect(x: 0,
                                                   y: 0,
                                                   width: superView.frame.width,
-                                                  height: superView.frame.height))
+                                                  height: superView.frame.height + heightOffset))
         super.init(frame: CGRect(x: 0,
                                  y: padding,
                                  width: superView.frame.width,
                                  height: superView.frame.height - 2 * padding))
         
         backgroundColor = K.color900
-//        backgroundColor = .systemPink
         layer.masksToBounds = true
         
-//        creditsLabel.backgroundColor = .purple
+        let shadowAttribute = NSShadow()
+        shadowAttribute.shadowOffset = CGSize(width: 2.0, height: 2.0)
+        shadowAttribute.shadowColor = UIColor.darkGray
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 6.0
         let titleAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: K.fontTitle, size: K.fontSizeMenu + 2)!,
-            .foregroundColor: UIColor.getRandom(redRange: 175...255, greenRange: 175...255, blueRange: 175...255)]
+            .font: UIFont(name: K.fontTitle, size: K.fontSizeMenu + 4)!,
+            .foregroundColor: UIColor.getRandom(redRange: 175...255, greenRange: 175...255, blueRange: 175...255),
+            .shadow: shadowAttribute]
         let textAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont(name: K.fontFace, size: K.fontSizeMenu)!,
-            .foregroundColor: UIColor.white]
+            .foregroundColor: UIColor.white,
+            .paragraphStyle: paragraphStyle]
         let subtitleAttributes: [NSAttributedString.Key: Any] = [
             .underlineStyle: true,
             .foregroundColor: K.colorIcyBlue]
+        
         let creditsAttributedText = NSMutableAttributedString(string: creditsText, attributes: nil)
+        creditsAttributedText.addAttributes(textAttributes, range: NSRange(location: 0, length: creditsText.count))
         creditsAttributedText.addAttributes(titleAttributes, range: NSRange(location: 0, length: 7))
-        creditsAttributedText.addAttributes(textAttributes, range: NSRange(location: 7, length: creditsText.count - 7))
         creditsAttributedText.addAttributes(subtitleAttributes, range: NSRange(location: 7, length: 14))
         creditsAttributedText.addAttributes(subtitleAttributes, range: NSRange(location: 42, length: 26))
         creditsAttributedText.addAttributes(subtitleAttributes, range: NSRange(location: 191, length: 17))
         creditsAttributedText.addAttributes(subtitleAttributes, range: NSRange(location: 245, length: 10))
-        print(creditsText.count)
         
         creditsLabel.attributedText = creditsAttributedText
         creditsLabel.textAlignment = .center
@@ -92,6 +98,9 @@ class CreditsView: UIView {
         fatalError("Unable to load init!")
     }
     
+    /**
+     Plays the credits page animation.
+     */
     func play() {
         resetView()
 
@@ -100,22 +109,31 @@ class CreditsView: UIView {
         }, completion: nil)
         
         UIView.animate(withDuration: 30.0, delay: 0, options: .curveLinear, animations: {
-            self.creditsLabel.frame.origin.y = -self.superView.frame.height
+            self.creditsLabel.frame.origin.y = -self.superView.frame.height - self.heightOffset
         }, completion: { _ in
             self.removeFromView()
         })
     }
     
+    /**
+     Handles screen taps, i.e. remove credits page view.
+     */
     @objc func tapped(_ sender: UITapGestureRecognizer) {
         removeFromView()
     }
     
+    /**
+     Resets the location of the credits page, resets the alpha channel to 0, and adds the view to the superView.
+     */
     private func resetView() {
         creditsLabel.frame.origin.y = superView.frame.height
         alpha = 0.0
         superView.addSubview(self)
     }
     
+    /**
+     Resets the page (with animation) and removes it from the superview.
+     */
     private func removeFromView() {
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
             self.alpha = 0.0
