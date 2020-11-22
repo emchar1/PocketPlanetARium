@@ -36,6 +36,7 @@ class MenuContentViewLaunch: UIView {
     var planetARiumViewLabel: UILabel!
     var soundLabel: UILabel!
     var hintsLabel: UILabel!
+    var creditsView: CreditsView!
     var musicThemeLabel: UILabel!
     var musicTheme: Int = 0 {
         didSet {
@@ -189,7 +190,7 @@ class MenuContentViewLaunch: UIView {
 //                             description: "Main Theme",
 //                             gesture: UITapGestureRecognizer(target: self, action: #selector(toggleMusicThemes)))
         
-        let creditsView = UIView()
+        let credits = UIView()
         //CREDITS PLACEHOLDER - Uncomment to use.
         let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue]
         let attributedText = NSAttributedString(string: "Credits", attributes: underlineAttribute)
@@ -202,14 +203,15 @@ class MenuContentViewLaunch: UIView {
         creditsLabel.addGestureRecognizer(creditsTapGesture)
         creditsLabel.isUserInteractionEnabled = true
         
-        creditsView.addSubview(creditsLabel)
+        credits.addSubview(creditsLabel)
         creditsLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([creditsLabel.topAnchor.constraint(equalTo: creditsView.safeAreaLayoutGuide.topAnchor),
-                                     creditsView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: creditsLabel.bottomAnchor),
-                                     creditsLabel.centerXAnchor.constraint(equalTo: creditsView.centerXAnchor)])
-        bottomStackView.addArrangedSubview(creditsView)
+        NSLayoutConstraint.activate([creditsLabel.topAnchor.constraint(equalTo: credits.safeAreaLayoutGuide.topAnchor),
+                                     credits.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: creditsLabel.bottomAnchor),
+                                     creditsLabel.centerXAnchor.constraint(equalTo: credits.centerXAnchor)])
+        bottomStackView.addArrangedSubview(credits)
 
-        
+        creditsView = CreditsView(in: self)
+
         
         
         
@@ -476,6 +478,9 @@ class MenuContentViewLaunch: UIView {
     
     @objc private func viewCredits() {
         K.addHapticFeedback(withStyle: .light)
+        audioManager.playSound(for: "MenuButton", currentTime: 0.0)
+        
+        creditsView.play()
     }
     
     /**

@@ -53,6 +53,7 @@
 		EA764A6A254B76B300F1C606 /* PocketPlanetARiumTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA764A69254B76B300F1C606 /* PocketPlanetARiumTests.swift */; };
 		EA764A7E254D34B200F1C606 /* TapPlanetGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA764A7D254D34B200F1C606 /* TapPlanetGesture.swift */; };
 		EA764AA1254F486500F1C606 /* PopPlanetDetailsGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA764AA0254F486500F1C606 /* PopPlanetDetailsGesture.swift */; };
+		EA97F8CB25698DED007A2CBB /* CreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA97F8CA25698DED007A2CBB /* CreditsView.swift */; };
 		EA992FBA2542124400992CB7 /* MenuContentViewSingle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA992FB92542124400992CB7 /* MenuContentViewSingle.swift */; };
 		EA992FCA254235D300992CB7 /* MenuContentViewLaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA992FC9254235D300992CB7 /* MenuContentViewLaunch.swift */; };
 		EA992FD325423FCD00992CB7 /* Age-Normal.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA992FD225423FCD00992CB7 /* Age-Normal.otf */; };
@@ -122,6 +123,7 @@
 		EA764A6B254B76B300F1C606 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA764A7D254D34B200F1C606 /* TapPlanetGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapPlanetGesture.swift; sourceTree = "<group>"; };
 		EA764AA0254F486500F1C606 /* PopPlanetDetailsGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopPlanetDetailsGesture.swift; sourceTree = "<group>"; };
+		EA97F8CA25698DED007A2CBB /* CreditsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsView.swift; sourceTree = "<group>"; };
 		EA992FB92542124400992CB7 /* MenuContentViewSingle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuContentViewSingle.swift; sourceTree = "<group>"; };
 		EA992FC9254235D300992CB7 /* MenuContentViewLaunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuContentViewLaunch.swift; sourceTree = "<group>"; };
 		EA992FD225423FCD00992CB7 /* Age-Normal.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Age-Normal.otf"; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 				EA992FB92542124400992CB7 /* MenuContentViewSingle.swift */,
 				EA57370B2538BF3500CF442B /* MenuContentView.swift */,
 				EA992FC9254235D300992CB7 /* MenuContentViewLaunch.swift */,
+				EA97F8CA25698DED007A2CBB /* CreditsView.swift */,
 				EA43CB54252669D300102879 /* SettingsView.swift */,
 				EA57EA7225281F0D00FC2323 /* PlanetPeekView.swift */,
 			);
@@ -442,6 +445,7 @@
 				EA764AA1254F486500F1C606 /* PopPlanetDetailsGesture.swift in Sources */,
 				EA43288C253CC9B900BCD31F /* AudioManager.swift in Sources */,
 				EA40E9B0252ADFFF00726425 /* PlanetDetails.swift in Sources */,
+				EA97F8CB25698DED007A2CBB /* CreditsView.swift in Sources */,
 				EA43CB55252669D300102879 /* SettingsView.swift in Sources */,
 				EAC1F4D025149BD30097521A /* PlanetARium.swift in Sources */,
 				EA764A7E254D34B200F1C606 /* TapPlanetGesture.swift in Sources */,
