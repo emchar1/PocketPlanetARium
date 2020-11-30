@@ -56,6 +56,7 @@ class PlanetARiumController: UIViewController {
     }
     
     //Hint pop ups
+    var hintDevice: HintsView!
     var hintSettings: HintsView!
     var hintPlanetTap: HintsView!
     var hintPinchZoom: HintsView!
@@ -152,6 +153,7 @@ class PlanetARiumController: UIViewController {
         
         //HINTS
         
+        hintDevice = HintsView(in: sceneView)
         hintSettings = HintsView(in: sceneView)
         hintPlanetTap = HintsView(in: sceneView)
         hintPinchZoom = HintsView(in: sceneView)
@@ -204,12 +206,20 @@ class PlanetARiumController: UIViewController {
         
         //Hints
         if !UserDefaults.standard.bool(forKey: K.userDefaultsKey_HintsAreOff) {
+            hintDevice.showHint(text: "Move your device around until you can see the planets.",
+                                image: "hintDevice",
+                                ofSize: CGSize(width: 150, height: 200),
+                                anchorToBottomRight: false,
+                                forDuration: 5.0,
+                                withDelay: 7.0,
+                                iconAnimationType: .device)
+
             hintSettings.showHint(text: "Tap on the gear to open Settings.",
                                   image: "hintArrow",
                                   ofSize: CGSize(width: 150, height: 150),
                                   anchorToBottomRight: true,
                                   forDuration: 5.0,
-                                  withDelay: 7.0,
+                                  withDelay: 19.0,
                                   iconAnimationType: .settings)
                         
             hintPinchZoom.showHint(text: "Pinch the screen with two fingers to resize the PlanetARium.",
@@ -217,7 +227,7 @@ class PlanetARiumController: UIViewController {
                                    ofSize: CGSize(width: 150, height: 200),
                                    anchorToBottomRight: false,
                                    forDuration: 5.0,
-                                   withDelay: 19.0,
+                                   withDelay: 31.0,
                                    iconAnimationType: .pinchZoom)
             
             hintPlanetTap.showHint(text: "Tap and hold on a planet to view more details.",
@@ -225,7 +235,7 @@ class PlanetARiumController: UIViewController {
                                    ofSize: CGSize(width: 150, height: 200),
                                    anchorToBottomRight: false,
                                    forDuration: 5.0,
-                                   withDelay: 31.0,
+                                   withDelay: 43.0,
                                    iconAnimationType: .planetTap)
         }
     }

@@ -9,7 +9,7 @@
 import UIKit
 
 enum IconAnimationType {
-    case settings, planetTap, pinchZoom
+    case device, settings, planetTap, pinchZoom
 }
 
 class HintsView: UIView {
@@ -194,6 +194,10 @@ class HintsView: UIView {
      */
     private func animateIcon(ofType type: IconAnimationType, withDelay delay: TimeInterval, frameSize size: CGSize, imageSize: CGFloat) {
         switch type {
+        case .device:
+            UIView.animate(withDuration: 1.0, delay: delay, options: [.repeat, .curveLinear, .autoreverse], animations: { [self] in
+                imageView.frame.origin.x = size.width - 2.5 * imageSize
+            }, completion: nil)
         case .settings:
             UIView.animate(withDuration: 0.5, delay: delay, usingSpringWithDamping: 0.8, initialSpringVelocity: 2, options: [.repeat, .curveEaseIn, .autoreverse], animations: { [self] in
                 imageView.frame.origin.x = size.width - imageSize
