@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "icons8-circled-down-right-52.png",
+      "filename" : "icons8-circled-up-left-52.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "icons8-circled-down-right-53.png",
+      "filename" : "icons8-circled-up-left-53.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "icons8-circled-down-right-54.png",
+      "filename" : "icons8-circled-up-left-54.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

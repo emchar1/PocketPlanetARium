@@ -29,8 +29,6 @@ class HintsView: UIView {
         self.superView = superView
         super.init(frame: .zero)
         superView.addSubview(self)
-        
-//        backgroundColor = .blue
     }
     
     required init?(coder: NSCoder) {
@@ -99,36 +97,28 @@ class HintsView: UIView {
                                                       y: size.height / 2,
                                                       width: size.width,
                                                       height: size.height / 2))
-//            imageSuperView.backgroundColor = .orange
             addSubview(imageSuperView)
             
-            guard var actualImage = UIImage(named: image!) else {
+            guard let actualImage = UIImage(named: image!) else {
                 fatalError("Unable to find image file: \(image!)")
             }
             
-            if isPinch {
-                actualImage = actualImage.rotate(radians: 3 * .pi / 4)
-            }
-            
-            imageView = UIImageView(frame: CGRect(x: size.width - (isPinch ? 2.5 : 2) * imageSize,
+            imageView = UIImageView(frame: CGRect(x: size.width - 2 * imageSize,
                                                   y: size.height / 4 - imageSize / 2,
-                                                  width: imageSize,
-                                                  height: imageSize))
+                                                  width: isPinch ? imageSize / 2 : imageSize,
+                                                  height: isPinch ? imageSize / 2 : imageSize))
             
             imageView.image = actualImage.withRenderingMode(.alwaysTemplate)
-//            imageView.backgroundColor = .systemPink
             imageView.tintColor = messageColor
             imageView.alpha = 0.0
             imageSuperView.addSubview(imageView)
             
             if isPinch {
-                actualImage = actualImage.rotate(radians: .pi)
-
-                imageView2 = UIImageView(frame: CGRect(x: size.width - imageSize,
+                imageView2 = UIImageView(frame: CGRect(x: size.width - 1 * imageSize,
                                                        y: size.height / 4 + imageSize / 2,
-                                                       width: imageSize,
-                                                       height: imageSize))
-                imageView2!.image = actualImage.withRenderingMode(.alwaysTemplate)
+                                                       width: imageSize / 2,
+                                                       height: imageSize / 2))
+                imageView2!.image = UIImage(named: "hintPinch2")!.withRenderingMode(.alwaysTemplate)
                 imageView2!.tintColor = messageColor
                 imageView2!.alpha = 0.0
                 imageSuperView.addSubview(imageView2!)
@@ -160,6 +150,10 @@ class HintsView: UIView {
         
     }
     
+    /**
+     Helper function to hide the hint.
+     - parameter delay: delay before hiding the hint
+     */
     private func hideHint(with delay: TimeInterval = 0) {
         //...Next the bigger quick expansion...
         UIView.animate(withDuration: 0.25, delay: delay, options: .curveEaseIn, animations: { [self] in
@@ -190,6 +184,14 @@ class HintsView: UIView {
         })
     }
     
+    /**
+     Animates the imageView icon.
+     - parameters:
+        - type: the IconAnimationType
+        - delay: the time delay before animating
+        - size: size of the superView
+        - imageSize: size of the imageView
+     */
     private func animateIcon(ofType type: IconAnimationType, withDelay delay: TimeInterval, frameSize size: CGSize, imageSize: CGFloat) {
         switch type {
         case .settings:
@@ -203,9 +205,9 @@ class HintsView: UIView {
             }, completion: nil)
         case .pinchZoom:
             UIView.animate(withDuration: 0.5, delay: delay, usingSpringWithDamping: 0.8, initialSpringVelocity: 2, options: [.repeat, .curveEaseIn, .autoreverse], animations: { [self] in
-                imageView.frame.origin = CGPoint(x: size.width - 2.25 * imageSize,
+                imageView.frame.origin = CGPoint(x: size.width - 1.75 * imageSize,
                                                  y: size.height / 4 - imageSize / 4)
-                imageView2?.frame.origin = CGPoint(x: size.width - 1.275 * imageSize,
+                imageView2?.frame.origin = CGPoint(x: size.width - 1.25 * imageSize,
                                                    y: size.height / 4 + imageSize / 4)
             }, completion: nil)
         }
