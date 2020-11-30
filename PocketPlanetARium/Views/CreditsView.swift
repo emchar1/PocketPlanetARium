@@ -23,16 +23,13 @@ class CreditsView: UIView {
 
 
     Sound FX (AudioJungle.net)
-    3DHome
-    audiopros
+    Audio Pros
     BANT
-    biggest
-    HappyMusicHappySounds
+    Happy Music Happy Sounds
     NewSoundFX
-    royaltyfreesounds
     Stockwaves
     Stormwave Audio
-    volkovsound
+    Volkov Sound
 
 
     Background Music
@@ -83,14 +80,27 @@ class CreditsView: UIView {
         creditsAttributedText.addAttributes(titleAttributes, range: NSRange(location: 0, length: 7))
         creditsAttributedText.addAttributes(subtitleAttributes, range: NSRange(location: 7, length: 14))
         creditsAttributedText.addAttributes(subtitleAttributes, range: NSRange(location: 49, length: 26))
-        creditsAttributedText.addAttributes(subtitleAttributes, range: NSRange(location: 198, length: 17))
-        creditsAttributedText.addAttributes(subtitleAttributes, range: NSRange(location: 252, length: 10))
+        creditsAttributedText.addAttributes(subtitleAttributes, range: NSRange(location: 170, length: 17))
+        creditsAttributedText.addAttributes(subtitleAttributes, range: NSRange(location: 224, length: 10))
         
         creditsLabel.attributedText = creditsAttributedText
         creditsLabel.textAlignment = .center
         creditsLabel.numberOfLines = 0
         addSubview(creditsLabel)
         
+        let gradientHeight: CGFloat = 80
+        let gradientTop = CAGradientLayer()
+        gradientTop.frame = CGRect(x: 0, y: 0, width: frame.width, height: gradientHeight)
+        gradientTop.colors = [K.color900.cgColor, K.color900.withAlphaComponent(0.0).cgColor]
+        gradientTop.locations = [0, 1.0]
+        layer.addSublayer(gradientTop)
+        
+        let gradientBottom = CAGradientLayer()
+        gradientBottom.frame = CGRect(x: 0, y: frame.height - gradientHeight, width: frame.width, height: gradientHeight)
+        gradientBottom.colors = [K.color900.withAlphaComponent(0.0).cgColor, K.color900.cgColor]
+        gradientBottom.locations = [0, 1.0]
+        layer.addSublayer(gradientBottom)
+                
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapped))
         addGestureRecognizer(tapGestureRecognizer)
     }

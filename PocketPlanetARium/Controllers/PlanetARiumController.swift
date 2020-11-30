@@ -67,14 +67,6 @@ class PlanetARiumController: UIViewController {
         view.backgroundColor = K.color500
         view.addSubview(loadingLabel)
 
-
-        
-        
-        
-        
-        
-        
-        //*****Do I like this???
         let bezelRatio: CGFloat = 612/335
         let possibleWidth = view.frame.width - 2 * K.padding
         let possibleHeight = view.frame.height - 6 * K.padding
@@ -96,19 +88,10 @@ class PlanetARiumController: UIViewController {
         scaleLabel.textColor = .white
         view.addSubview(scaleLabel)
         scaleLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([scaleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: K.padding),
-                                    view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: scaleLabel.bottomAnchor, constant: K.padding)])
-        
-        
-        
-        
-        
-       
-
-        
-        
-        
-        
+        NSLayoutConstraint.activate([scaleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                                                                         constant: K.padding),
+                                     view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: scaleLabel.bottomAnchor,
+                                                                                      constant: K.padding)])
         
         settingsButtons.delegate = self
         settingsButtons.alpha = 0.0
@@ -118,7 +101,6 @@ class PlanetARiumController: UIViewController {
 
         sceneView.delegate = self
         sceneView.autoenablesDefaultLighting = true
-//        sceneView.showsStatistics = true
         sceneView.translatesAutoresizingMaskIntoConstraints = true
         sceneView.frame = CGRect(x: 0, y: 0, width: bezelView.frame.width, height: bezelView.frame.height)
         sceneView.alpha = 0.0
@@ -132,12 +114,7 @@ class PlanetARiumController: UIViewController {
         
         
         
-        
-        
-        
-        
-        
-        //SPELLS
+        //GESTURES
         
         //Long press to replace 3D press (for iPad that doesn't have 3D touch technology)
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPress))
@@ -169,6 +146,8 @@ class PlanetARiumController: UIViewController {
 //        sceneView2.scene = scene
 //        scene.rootNode.addChildNode(urthNode)
 //        view.addSubview(sceneView2)
+        
+        
         
         
         //HINTS
@@ -233,7 +212,7 @@ class PlanetARiumController: UIViewController {
                                   withDelay: 7.0,
                                   iconAnimationType: .settings)
                         
-            hintPinchZoom.showHint(text: "Pinch the view with two fingers to resize the solar system.",
+            hintPinchZoom.showHint(text: "Pinch the screen with two fingers to resize the PlanetARium.",
                                    image: "hintPinch",
                                    ofSize: CGSize(width: 150, height: 200),
                                    anchorToBottomRight: false,
@@ -515,10 +494,6 @@ extension PlanetARiumController: SettingsViewDelegate {
         }
     }
 }
-
-
-
-
 
 
 // MARK: - Gesture Handling Delegates

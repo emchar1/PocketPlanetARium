@@ -16,7 +16,7 @@ enum MenuItem: CaseIterable {
     static let firstItemIndex: Int = 0
     static let lastItemIndex: Int = 2//5
     static let firstItem: MenuItem = item0
-    static let lastItem: MenuItem = item2//5
+    static let lastItem: MenuItem = item2//item5
     
     var item: MenuIndex {
         switch self {
@@ -26,7 +26,6 @@ enum MenuItem: CaseIterable {
             return (1, "When first launching the app, make sure to hold your device at a comfortable distance from your face, perpendicular to the floor.\n\nMake sure the lighting in the room is adequate to get the best experience.", nil)
         case .item2:
             return (2, "View: Solar System\n\nSound: On\n\nHints on Startup: On\n\nCredits", nil)
-
 //            return (2, "Pinch with two fingers to zoom in and out. The PlanetARium will scale from as small as 10 feet to as large as one mile in diameter!", (name: "planetPinch", type: "mov"))
 //        case .item3:
 //            return (3, "Tap and hold on any planet to get quick info. Continue holding down with your finger to get more details on the planet.", (name: "planetHardPress", type: "mov"))

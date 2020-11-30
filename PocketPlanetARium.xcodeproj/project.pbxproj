@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EA0636122545312300719E9C /* planetHardPress.mov in Resources */ = {isa = PBXBuildFile; fileRef = EA0636112545312300719E9C /* planetHardPress.mov */; };
-		EA06361A2545329F00719E9C /* planetSettings.mov in Resources */ = {isa = PBXBuildFile; fileRef = EA0636192545329F00719E9C /* planetSettings.mov */; };
 		EA06363A25456CD100719E9C /* main_MenuTitle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA06363925456CD100719E9C /* main_MenuTitle.mp3 */; };
 		EA06364025456F3F00719E9C /* main_MenuButton.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA06363F25456F3F00719E9C /* main_MenuButton.mp3 */; };
 		EA13B76D2573404B00442171 /* HintsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA13B76C2573404B00442171 /* HintsView.swift */; };
@@ -26,7 +24,6 @@
 		EA4328FF253E100000BCD31F /* main_SettingsExpand.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA4328FE253E100000BCD31F /* main_SettingsExpand.mp3 */; };
 		EA43290F253E567A00BCD31F /* main_LaunchButton.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA43290E253E567A00BCD31F /* main_LaunchButton.mp3 */; };
 		EA432914253E574E00BCD31F /* main_MenuScreen.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA432913253E574E00BCD31F /* main_MenuScreen.mp3 */; };
-		EA432932253F70E900BCD31F /* planetPinch.mov in Resources */ = {isa = PBXBuildFile; fileRef = EA432930253F70E900BCD31F /* planetPinch.mov */; };
 		EA43293F253FAF7300BCD31F /* Prime-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA43293D253FAF7300BCD31F /* Prime-Regular.otf */; };
 		EA432940253FAF7300BCD31F /* Prime-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA43293E253FAF7300BCD31F /* Prime-Light.otf */; };
 		EA43294A253FAF8E00BCD31F /* PantonDemo-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA432942253FAF8D00BCD31F /* PantonDemo-Light.otf */; };
@@ -59,7 +56,6 @@
 		EA992FCA254235D300992CB7 /* MenuContentViewLaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA992FC9254235D300992CB7 /* MenuContentViewLaunch.swift */; };
 		EA992FD325423FCD00992CB7 /* Age-Normal.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA992FD225423FCD00992CB7 /* Age-Normal.otf */; };
 		EAC1F4D025149BD30097521A /* PlanetARium.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC1F4CF25149BD30097521A /* PlanetARium.swift */; };
-		EAEEF14D254F902F00BDC1D2 /* cocktailShaker.wav in Resources */ = {isa = PBXBuildFile; fileRef = EAEEF14C254F902F00BDC1D2 /* cocktailShaker.wav */; };
 		EAF7BEA925203CAE00C0D1A6 /* PlanetGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF7BEA825203CAE00C0D1A6 /* PlanetGroup.swift */; };
 /* End PBXBuildFile section */
 
@@ -74,8 +70,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		EA0636112545312300719E9C /* planetHardPress.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = planetHardPress.mov; sourceTree = "<group>"; };
-		EA0636192545329F00719E9C /* planetSettings.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = planetSettings.mov; sourceTree = "<group>"; };
 		EA06363925456CD100719E9C /* main_MenuTitle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = main_MenuTitle.mp3; sourceTree = "<group>"; };
 		EA06363F25456F3F00719E9C /* main_MenuButton.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = main_MenuButton.mp3; sourceTree = "<group>"; };
 		EA13B76C2573404B00442171 /* HintsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintsView.swift; sourceTree = "<group>"; };
@@ -93,7 +87,6 @@
 		EA4328FE253E100000BCD31F /* main_SettingsExpand.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = main_SettingsExpand.mp3; sourceTree = "<group>"; };
 		EA43290E253E567A00BCD31F /* main_LaunchButton.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = main_LaunchButton.mp3; sourceTree = "<group>"; };
 		EA432913253E574E00BCD31F /* main_MenuScreen.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = main_MenuScreen.mp3; sourceTree = "<group>"; };
-		EA432930253F70E900BCD31F /* planetPinch.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = planetPinch.mov; sourceTree = "<group>"; };
 		EA43293D253FAF7300BCD31F /* Prime-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Prime-Regular.otf"; sourceTree = "<group>"; };
 		EA43293E253FAF7300BCD31F /* Prime-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Prime-Light.otf"; sourceTree = "<group>"; };
 		EA432942253FAF8D00BCD31F /* PantonDemo-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PantonDemo-Light.otf"; sourceTree = "<group>"; };
@@ -130,7 +123,6 @@
 		EA992FC9254235D300992CB7 /* MenuContentViewLaunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuContentViewLaunch.swift; sourceTree = "<group>"; };
 		EA992FD225423FCD00992CB7 /* Age-Normal.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Age-Normal.otf"; sourceTree = "<group>"; };
 		EAC1F4CF25149BD30097521A /* PlanetARium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetARium.swift; sourceTree = "<group>"; };
-		EAEEF14C254F902F00BDC1D2 /* cocktailShaker.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cocktailShaker.wav; sourceTree = "<group>"; };
 		EAF7BEA825203CAE00C0D1A6 /* PlanetGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetGroup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -155,20 +147,9 @@
 		EA43284D253BAD0700BCD31F /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				EAEEF14C254F902F00BDC1D2 /* cocktailShaker.wav */,
 				EA992FA02540B4CD00992CB7 /* mainTheme */,
 			);
 			path = Sounds;
-			sourceTree = "<group>";
-		};
-		EA43291C253EA1BE00BCD31F /* Movies */ = {
-			isa = PBXGroup;
-			children = (
-				EA0636112545312300719E9C /* planetHardPress.mov */,
-				EA432930253F70E900BCD31F /* planetPinch.mov */,
-				EA0636192545329F00719E9C /* planetSettings.mov */,
-			);
-			path = Movies;
 			sourceTree = "<group>";
 		};
 		EA43293C253FAF1000BCD31F /* Fonts */ = {
@@ -216,7 +197,6 @@
 				EAC1F4CC25131FF40097521A /* Controllers */,
 				EAC1F4CD25131FFE0097521A /* Views */,
 				EA43284D253BAD0700BCD31F /* Sounds */,
-				EA43291C253EA1BE00BCD31F /* Movies */,
 				EA43293C253FAF1000BCD31F /* Fonts */,
 				EA5B0BFF251055B300B1E910 /* Assets.xcassets */,
 				EA5B0BF8251055B300B1E910 /* art.scnassets */,
@@ -389,24 +369,20 @@
 				EA43294C253FAF8E00BCD31F /* PantonNarrowDemo-LightItalic.otf in Resources */,
 				EA43294B253FAF8E00BCD31F /* PantonNarrowDemo-Light.otf in Resources */,
 				EA06364025456F3F00719E9C /* main_MenuButton.mp3 in Resources */,
-				EAEEF14D254F902F00BDC1D2 /* cocktailShaker.wav in Resources */,
 				EA4328DD253E09CB00BCD31F /* main_Pinch.mp3 in Resources */,
 				EA4328FF253E100000BCD31F /* main_SettingsExpand.mp3 in Resources */,
 				EA06363A25456CD100719E9C /* main_MenuTitle.mp3 in Resources */,
 				EA43294D253FAF8E00BCD31F /* PantonNarrowDemo-BlackItalic.otf in Resources */,
-				EA0636122545312300719E9C /* planetHardPress.mov in Resources */,
 				EA4328F9253E0BC100BCD31F /* main_ButtonPress.mp3 in Resources */,
 				EA432950253FAF8E00BCD31F /* PantonNarrowDemo-Black.otf in Resources */,
 				EA43290F253E567A00BCD31F /* main_LaunchButton.mp3 in Resources */,
 				EA43294A253FAF8E00BCD31F /* PantonDemo-Light.otf in Resources */,
 				EA4328D0253E021F00BCD31F /* main_DetailsOpen.mp3 in Resources */,
-				EA432932253F70E900BCD31F /* planetPinch.mov in Resources */,
 				EA432914253E574E00BCD31F /* main_MenuScreen.mp3 in Resources */,
 				EA43294E253FAF8E00BCD31F /* PantonDemo-Black.otf in Resources */,
 				EA43293F253FAF7300BCD31F /* Prime-Regular.otf in Resources */,
 				EA4328ED253E0AC800BCD31F /* main_SettingsCollapse.mp3 in Resources */,
 				EA432951253FAF8E00BCD31F /* PantonDemo-BlackItalic.otf in Resources */,
-				EA06361A2545329F00719E9C /* planetSettings.mov in Resources */,
 				EA4328E9253E0A9300BCD31F /* main_PlanetARiumOpen.mp3 in Resources */,
 				EA5B0BF9251055B300B1E910 /* art.scnassets in Resources */,
 				EA43294F253FAF8E00BCD31F /* PantonDemo-LightItalic.otf in Resources */,
