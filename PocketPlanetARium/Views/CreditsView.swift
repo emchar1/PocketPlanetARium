@@ -41,7 +41,7 @@ class CreditsView: UIView {
     Eddie Char
 
 
-    © 2020
+    ©2020 5Play Apps
     """
     
     init(in superView: UIView) {
