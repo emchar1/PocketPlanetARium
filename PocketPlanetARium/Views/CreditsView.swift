@@ -10,7 +10,7 @@ import UIKit
 
 class CreditsView: UIView {
     let padding: CGFloat = 20
-    let heightOffset: CGFloat = 180
+    let heightOffset: CGFloat = 200
     let superView: UIView!
     let creditsLabel: UILabel!
     let creditsText = """
@@ -19,6 +19,7 @@ class CreditsView: UIView {
 
     Art Assets
     Solar System Scope
+    Icons8
 
 
     Sound FX (AudioJungle.net)
@@ -81,9 +82,9 @@ class CreditsView: UIView {
         creditsAttributedText.addAttributes(textAttributes, range: NSRange(location: 0, length: creditsText.count))
         creditsAttributedText.addAttributes(titleAttributes, range: NSRange(location: 0, length: 7))
         creditsAttributedText.addAttributes(subtitleAttributes, range: NSRange(location: 7, length: 14))
-        creditsAttributedText.addAttributes(subtitleAttributes, range: NSRange(location: 42, length: 26))
-        creditsAttributedText.addAttributes(subtitleAttributes, range: NSRange(location: 191, length: 17))
-        creditsAttributedText.addAttributes(subtitleAttributes, range: NSRange(location: 245, length: 10))
+        creditsAttributedText.addAttributes(subtitleAttributes, range: NSRange(location: 49, length: 26))
+        creditsAttributedText.addAttributes(subtitleAttributes, range: NSRange(location: 198, length: 17))
+        creditsAttributedText.addAttributes(subtitleAttributes, range: NSRange(location: 252, length: 10))
         
         creditsLabel.attributedText = creditsAttributedText
         creditsLabel.textAlignment = .center

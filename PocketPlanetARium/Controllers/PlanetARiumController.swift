@@ -54,6 +54,11 @@ class PlanetARiumController: UIViewController {
             scaleValue = scaleValue.clamp(min: scaleValueMin, max: scaleValueMax)
         }
     }
+    
+    //Hint pop ups
+    var hintSettings: HintsView!
+    var hintPlanetTap: HintsView!
+    var hintPinchZoom: HintsView!
             
 
     override func viewDidLoad() {
@@ -164,6 +169,13 @@ class PlanetARiumController: UIViewController {
 //        sceneView2.scene = scene
 //        scene.rootNode.addChildNode(urthNode)
 //        view.addSubview(sceneView2)
+        
+        
+        //HINTS
+        
+        hintSettings = HintsView(in: sceneView)
+        hintPlanetTap = HintsView(in: sceneView)
+        hintPinchZoom = HintsView(in: sceneView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -209,6 +221,34 @@ class PlanetARiumController: UIViewController {
         //PLAY MUSIC!!!
         audioManager.playSound(for: "PlanetARiumOpen")
         audioManager.playSound(for: "PlanetARiumMusic")
+        
+        
+        //Hints
+        if !UserDefaults.standard.bool(forKey: K.userDefaultsKey_HintsAreOff) {
+            hintSettings.showHint(text: "Tap on the gear to open Settings.",
+                                  image: "hintArrow",
+                                  ofSize: CGSize(width: 150, height: 150),
+                                  anchorToBottomRight: true,
+                                  forDuration: 5.0,
+                                  withDelay: 7.0,
+                                  iconAnimationType: .settings)
+                        
+            hintPinchZoom.showHint(text: "Pinch the view with two fingers to resize the solar system.",
+                                   image: "hintPinch",
+                                   ofSize: CGSize(width: 150, height: 200),
+                                   anchorToBottomRight: false,
+                                   forDuration: 5.0,
+                                   withDelay: 19.0,
+                                   iconAnimationType: .pinchZoom)
+            
+            hintPlanetTap.showHint(text: "Tap and hold on a planet to view more details.",
+                                   image: "hintTap",
+                                   ofSize: CGSize(width: 150, height: 200),
+                                   anchorToBottomRight: false,
+                                   forDuration: 5.0,
+                                   withDelay: 31.0,
+                                   iconAnimationType: .planetTap)
+        }
     }
     
     @objc private func orientationDidChange(_ notification: NSNotification) {
