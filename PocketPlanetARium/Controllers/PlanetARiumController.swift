@@ -56,10 +56,10 @@ class PlanetARiumController: UIViewController {
     }
     
     //Hint pop ups
-    var hintDevice: HintsView!
-    var hintSettings: HintsView!
-    var hintPlanetTap: HintsView!
-    var hintPinchZoom: HintsView!
+    var hintDevice: HintView!
+    var hintSettings: HintView!
+    var hintPlanetTap: HintView!
+    var hintPinchZoom: HintView!
             
 
     override func viewDidLoad() {
@@ -153,10 +153,10 @@ class PlanetARiumController: UIViewController {
         
         //HINTS
         
-        hintDevice = HintsView(in: sceneView)
-        hintSettings = HintsView(in: sceneView)
-        hintPlanetTap = HintsView(in: sceneView)
-        hintPinchZoom = HintsView(in: sceneView)
+        hintDevice = HintView(in: sceneView, ofSize: CGSize(width: 150, height: 200), anchorToBottomRight: false)
+        hintSettings = HintView(in: sceneView, ofSize: CGSize(width: 150, height: 150), anchorToBottomRight: true)
+        hintPlanetTap = HintView(in: sceneView, ofSize: CGSize(width: 150, height: 200), anchorToBottomRight: false)
+        hintPinchZoom = HintView(in: sceneView, ofSize: CGSize(width: 150, height: 200), anchorToBottomRight: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -208,32 +208,24 @@ class PlanetARiumController: UIViewController {
         if !UserDefaults.standard.bool(forKey: K.userDefaultsKey_HintsAreOff) {
             hintDevice.showHint(text: "Move your device around until you can see the planets.",
                                 image: "hintDevice",
-                                ofSize: CGSize(width: 150, height: 200),
-                                anchorToBottomRight: false,
                                 forDuration: 5.0,
-                                withDelay: 7.0,
+                                withDelay: 4.0,
                                 iconAnimationType: .device)
 
             hintSettings.showHint(text: "Tap on the gear to open Settings.",
                                   image: "hintArrow",
-                                  ofSize: CGSize(width: 150, height: 150),
-                                  anchorToBottomRight: true,
                                   forDuration: 5.0,
-                                  withDelay: 19.0,
+                                  withDelay: 16.0,
                                   iconAnimationType: .settings)
                         
             hintPinchZoom.showHint(text: "Pinch the screen with two fingers to resize the PlanetARium.",
                                    image: "hintPinch",
-                                   ofSize: CGSize(width: 150, height: 200),
-                                   anchorToBottomRight: false,
                                    forDuration: 5.0,
                                    withDelay: 31.0,
                                    iconAnimationType: .pinchZoom)
             
             hintPlanetTap.showHint(text: "Tap and hold on a planet to view more details.",
                                    image: "hintTap",
-                                   ofSize: CGSize(width: 150, height: 200),
-                                   anchorToBottomRight: false,
                                    forDuration: 5.0,
                                    withDelay: 43.0,
                                    iconAnimationType: .planetTap)

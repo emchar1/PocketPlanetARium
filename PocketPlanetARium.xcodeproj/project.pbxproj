@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		EA06363A25456CD100719E9C /* main_MenuTitle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA06363925456CD100719E9C /* main_MenuTitle.mp3 */; };
 		EA06364025456F3F00719E9C /* main_MenuButton.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EA06363F25456F3F00719E9C /* main_MenuButton.mp3 */; };
-		EA13B76D2573404B00442171 /* HintsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA13B76C2573404B00442171 /* HintsView.swift */; };
+		EA13B76D2573404B00442171 /* HintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA13B76C2573404B00442171 /* HintView.swift */; };
 		EA2BCCA425180317007A13F5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2BCCA325180317007A13F5 /* Constants.swift */; };
 		EA40E9B0252ADFFF00726425 /* PlanetDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA40E9AF252ADFFF00726425 /* PlanetDetails.swift */; };
 		EA4328262539F4E600BCD31F /* MenuBezelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4328252539F4E600BCD31F /* MenuBezelView.swift */; };
@@ -72,7 +72,7 @@
 /* Begin PBXFileReference section */
 		EA06363925456CD100719E9C /* main_MenuTitle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = main_MenuTitle.mp3; sourceTree = "<group>"; };
 		EA06363F25456F3F00719E9C /* main_MenuButton.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = main_MenuButton.mp3; sourceTree = "<group>"; };
-		EA13B76C2573404B00442171 /* HintsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintsView.swift; sourceTree = "<group>"; };
+		EA13B76C2573404B00442171 /* HintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintView.swift; sourceTree = "<group>"; };
 		EA2BCCA325180317007A13F5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EA40E9AF252ADFFF00726425 /* PlanetDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetDetails.swift; sourceTree = "<group>"; };
 		EA4328252539F4E600BCD31F /* MenuBezelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBezelView.swift; sourceTree = "<group>"; };
@@ -265,7 +265,7 @@
 				EA97F8CA25698DED007A2CBB /* CreditsView.swift */,
 				EA43CB54252669D300102879 /* SettingsView.swift */,
 				EA57EA7225281F0D00FC2323 /* PlanetPeekView.swift */,
-				EA13B76C2573404B00442171 /* HintsView.swift */,
+				EA13B76C2573404B00442171 /* HintView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -414,7 +414,7 @@
 				EA5B0C0B2510677E00B1E910 /* Planet.swift in Sources */,
 				EA5B0BFB251055B300B1E910 /* PlanetARiumController.swift in Sources */,
 				EA5736F42532E86700CF442B /* MenuPageViewController.swift in Sources */,
-				EA13B76D2573404B00442171 /* HintsView.swift in Sources */,
+				EA13B76D2573404B00442171 /* HintView.swift in Sources */,
 				EA57EA7325281F0D00FC2323 /* PlanetPeekView.swift in Sources */,
 				EA58D013251F3D79007A8DB5 /* PlanetDetailsController.swift in Sources */,
 				EA4328262539F4E600BCD31F /* MenuBezelView.swift in Sources */,
@@ -593,7 +593,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = LZ8V996BTJ;
 				INFOPLIST_FILE = PocketPlanetARium/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -613,7 +613,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = LZ8V996BTJ;
 				INFOPLIST_FILE = PocketPlanetARium/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
