@@ -21,7 +21,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>This app requires access to your camera in order to enable Augmented Reality.</string>
+	<string>In order to unlock the full capabilities of Augmented Reality, the Pocket PlanetARium requires access to your device&apos;s camera.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Age-Normal.otf</string>

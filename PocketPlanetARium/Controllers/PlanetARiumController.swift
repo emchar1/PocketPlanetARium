@@ -153,7 +153,7 @@ class PlanetARiumController: UIViewController {
         
         //HINTS
         
-        hintDevice = HintView(in: sceneView, ofSize: CGSize(width: 150, height: 200), anchorToBottomRight: false)
+        hintDevice = HintView(in: sceneView, ofSize: CGSize(width: 175, height: 250), anchorToBottomRight: false)
         hintSettings = HintView(in: sceneView, ofSize: CGSize(width: 150, height: 150), anchorToBottomRight: true)
         hintPlanetTap = HintView(in: sceneView, ofSize: CGSize(width: 150, height: 200), anchorToBottomRight: false)
         hintPinchZoom = HintView(in: sceneView, ofSize: CGSize(width: 150, height: 200), anchorToBottomRight: false)
@@ -206,9 +206,9 @@ class PlanetARiumController: UIViewController {
         
         //Hints
         if !UserDefaults.standard.bool(forKey: K.userDefaultsKey_HintsAreOff) {
-            hintDevice.showHint(text: "Move your device around until you can see the planets.",
+            hintDevice.showHint(text: "Move your device around until you can see the planets. Try physically walking up to a planet!",
                                 image: "hintDevice",
-                                forDuration: 5.0,
+                                forDuration: 7.0,
                                 withDelay: 4.0,
                                 iconAnimationType: .device)
 
