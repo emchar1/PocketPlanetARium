@@ -373,6 +373,8 @@ class PlanetARiumController: UIViewController {
         peekView?.removeFromSuperview()
         
         tappedPlanet = nil
+        
+        AppStoreReviewManager.requestReviewIfAppropriate()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

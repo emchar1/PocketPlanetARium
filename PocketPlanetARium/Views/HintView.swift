@@ -156,7 +156,8 @@ class HintView: UIView {
         
         
         //Animate the message label. First, the expansion...
-        UIView.animate(withDuration: 0.5, delay: delay, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: .curveEaseIn, animations: { [self] in
+        UIView.animate(withDuration: 0.5, delay: delay, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: .curveEaseIn, animations: { [unowned self] in
+            
             messageView.frame = CGRect(x: 0,
                                        y: 0,
                                        width: messageViewSize.width,
@@ -170,7 +171,7 @@ class HintView: UIView {
             imageView.alpha = 1.0
             imageView2?.alpha = 1.0
             
-        }, completion: { [self] _ in
+        }, completion: { [unowned self] _ in
             hideHint(with: duration)
         })
         
@@ -182,7 +183,7 @@ class HintView: UIView {
      */
     private func hideHint(with delay: TimeInterval = 0) {
         //...Next the bigger quick expansion...
-        UIView.animate(withDuration: 0.25, delay: delay, options: .curveEaseIn, animations: { [self] in
+        UIView.animate(withDuration: 0.25, delay: delay, options: .curveEaseIn, animations: { [unowned self] in
             let overshoot: CGFloat = 16
 
             messageView.frame = CGRect(x: -overshoot / 2,
@@ -190,19 +191,19 @@ class HintView: UIView {
                                        width: messageViewSize.width + overshoot,
                                        height: messageViewSize.height + overshoot)
             
-        }, completion: { [self] _ in
+        }, completion: { [unowned self] _ in
             imageView.removeFromSuperview()
             imageView2?.removeFromSuperview()
             
             //...Lastly, the contraction...
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 2, options: .curveEaseOut, animations: { [self] in
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 2, options: .curveEaseOut, animations: { [unowned self] in
                 messageView.frame = CGRect(x: messageViewSize.width / 2,
                                            y: messageViewSize.height / 2,
                                            width: 0,
                                            height: 0)
 
                 messageLabel.frame = .zero
-            }, completion: { [self] _ in
+            }, completion: { [unowned self] _ in
                 
                 //...And remove from view!
                 messageView.removeFromSuperview()
@@ -221,20 +222,20 @@ class HintView: UIView {
     private func animateIcon(ofType type: IconAnimationType, withDelay delay: TimeInterval, frameSize size: CGSize, imageSize: CGFloat) {
         switch type {
         case .device:
-            UIView.animate(withDuration: 1.0, delay: delay, options: [.repeat, .curveLinear, .autoreverse], animations: { [self] in
+            UIView.animate(withDuration: 1.0, delay: delay, options: [.repeat, .curveLinear, .autoreverse], animations: { [unowned self] in
                 imageView.frame.origin.x = size.width - 2.5 * imageSize
             }, completion: nil)
         case .settings:
-            UIView.animate(withDuration: 0.5, delay: delay, usingSpringWithDamping: 0.8, initialSpringVelocity: 2, options: [.repeat, .curveEaseIn, .autoreverse], animations: { [self] in
+            UIView.animate(withDuration: 0.5, delay: delay, usingSpringWithDamping: 0.8, initialSpringVelocity: 2, options: [.repeat, .curveEaseIn, .autoreverse], animations: { [unowned self] in
                 imageView.frame.origin.x = size.width - imageSize
             }, completion: nil)
         case .planetTap:
-            UIView.animate(withDuration: 0.5, delay: delay, usingSpringWithDamping: 0.8, initialSpringVelocity: 2, options: [.repeat, .curveEaseIn, .autoreverse], animations: { [self] in
+            UIView.animate(withDuration: 0.5, delay: delay, usingSpringWithDamping: 0.8, initialSpringVelocity: 2, options: [.repeat, .curveEaseIn, .autoreverse], animations: { [unowned self] in
                 imageView.frame.size.width *= 0.8
                 imageView.frame.size.height *= 0.8
             }, completion: nil)
         case .pinchZoom:
-            UIView.animate(withDuration: 0.5, delay: delay, usingSpringWithDamping: 0.8, initialSpringVelocity: 2, options: [.repeat, .curveEaseIn, .autoreverse], animations: { [self] in
+            UIView.animate(withDuration: 0.5, delay: delay, usingSpringWithDamping: 0.8, initialSpringVelocity: 2, options: [.repeat, .curveEaseIn, .autoreverse], animations: { [unowned self] in
                 imageView.frame.origin = CGPoint(x: size.width - 1.75 * imageSize,
                                                  y: size.height / 4 - imageSize / 4)
                 imageView2?.frame.origin = CGPoint(x: size.width - 1.25 * imageSize,

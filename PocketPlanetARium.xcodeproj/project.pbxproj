@@ -51,6 +51,8 @@
 		EA764A6A254B76B300F1C606 /* PocketPlanetARiumTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA764A69254B76B300F1C606 /* PocketPlanetARiumTests.swift */; };
 		EA764A7E254D34B200F1C606 /* TapPlanetGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA764A7D254D34B200F1C606 /* TapPlanetGesture.swift */; };
 		EA764AA1254F486500F1C606 /* PopPlanetDetailsGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA764AA0254F486500F1C606 /* PopPlanetDetailsGesture.swift */; };
+		EA91010025BAABD400733FD9 /* AppStoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9100FF25BAABD400733FD9 /* AppStoreReviewManager.swift */; };
+		EA91010525BAACF300733FD9 /* UserDefaults+Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA91010425BAACF300733FD9 /* UserDefaults+Key.swift */; };
 		EA97F8CB25698DED007A2CBB /* CreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA97F8CA25698DED007A2CBB /* CreditsView.swift */; };
 		EA992FBA2542124400992CB7 /* MenuContentViewSingle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA992FB92542124400992CB7 /* MenuContentViewSingle.swift */; };
 		EA992FCA254235D300992CB7 /* MenuContentViewLaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA992FC9254235D300992CB7 /* MenuContentViewLaunch.swift */; };
@@ -118,6 +120,8 @@
 		EA764A6B254B76B300F1C606 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA764A7D254D34B200F1C606 /* TapPlanetGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapPlanetGesture.swift; sourceTree = "<group>"; };
 		EA764AA0254F486500F1C606 /* PopPlanetDetailsGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopPlanetDetailsGesture.swift; sourceTree = "<group>"; };
+		EA9100FF25BAABD400733FD9 /* AppStoreReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReviewManager.swift; sourceTree = "<group>"; };
+		EA91010425BAACF300733FD9 /* UserDefaults+Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Key.swift"; sourceTree = "<group>"; };
 		EA97F8CA25698DED007A2CBB /* CreditsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsView.swift; sourceTree = "<group>"; };
 		EA992FB92542124400992CB7 /* MenuContentViewSingle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuContentViewSingle.swift; sourceTree = "<group>"; };
 		EA992FC9254235D300992CB7 /* MenuContentViewLaunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuContentViewLaunch.swift; sourceTree = "<group>"; };
@@ -193,6 +197,7 @@
 			children = (
 				EA764A7A254D2C4000F1C606 /* Spells */,
 				EA5B0BF6251055B300B1E910 /* AppDelegate.swift */,
+				EA91010325BAACE100733FD9 /* Utilities */,
 				EAC1F4CE251320030097521A /* Models */,
 				EAC1F4CC25131FF40097521A /* Controllers */,
 				EAC1F4CD25131FFE0097521A /* Views */,
@@ -222,6 +227,14 @@
 				EA764AA0254F486500F1C606 /* PopPlanetDetailsGesture.swift */,
 			);
 			path = Spells;
+			sourceTree = "<group>";
+		};
+		EA91010325BAACE100733FD9 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				EA91010425BAACF300733FD9 /* UserDefaults+Key.swift */,
+			);
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 		EA992FA02540B4CD00992CB7 /* mainTheme */ = {
@@ -280,6 +293,7 @@
 				EA40E9AF252ADFFF00726425 /* PlanetDetails.swift */,
 				EAF7BEA825203CAE00C0D1A6 /* PlanetGroup.swift */,
 				EAC1F4CF25149BD30097521A /* PlanetARium.swift */,
+				EA9100FF25BAABD400733FD9 /* AppStoreReviewManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -422,6 +436,7 @@
 				EA992FBA2542124400992CB7 /* MenuContentViewSingle.swift in Sources */,
 				EA5736F025317C0700CF442B /* MenuController.swift in Sources */,
 				EAF7BEA925203CAE00C0D1A6 /* PlanetGroup.swift in Sources */,
+				EA91010025BAABD400733FD9 /* AppStoreReviewManager.swift in Sources */,
 				EA764AA1254F486500F1C606 /* PopPlanetDetailsGesture.swift in Sources */,
 				EA43288C253CC9B900BCD31F /* AudioManager.swift in Sources */,
 				EA40E9B0252ADFFF00726425 /* PlanetDetails.swift in Sources */,
@@ -430,6 +445,7 @@
 				EAC1F4D025149BD30097521A /* PlanetARium.swift in Sources */,
 				EA764A7E254D34B200F1C606 /* TapPlanetGesture.swift in Sources */,
 				EA5B0BF7251055B300B1E910 /* AppDelegate.swift in Sources */,
+				EA91010525BAACF300733FD9 /* UserDefaults+Key.swift in Sources */,
 				EA57370C2538BF3500CF442B /* MenuContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -593,14 +609,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = LZ8V996BTJ;
 				INFOPLIST_FILE = PocketPlanetARium/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fiveplay-apps.PocketPlanetARium";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -613,14 +629,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = LZ8V996BTJ;
 				INFOPLIST_FILE = PocketPlanetARium/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fiveplay-apps.PocketPlanetARium";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
