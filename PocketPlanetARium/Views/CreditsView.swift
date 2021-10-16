@@ -10,7 +10,7 @@ import UIKit
 
 class CreditsView: UIView {
     let padding: CGFloat = 20
-    let heightOffset: CGFloat = 200
+    let heightOffset: CGFloat = 0
     let superView: UIView!
     let creditsLabel: UILabel!
     let creditsText = """
@@ -119,7 +119,7 @@ class CreditsView: UIView {
             self.alpha = 1.0
         }, completion: nil)
         
-        UIView.animate(withDuration: 30.0, delay: 0, options: .curveLinear, animations: {
+        UIView.animate(withDuration: 25.0, delay: 0, options: .curveLinear, animations: {
             self.creditsLabel.frame.origin.y = -self.superView.frame.height - self.heightOffset
         }, completion: { _ in
             self.removeFromView()

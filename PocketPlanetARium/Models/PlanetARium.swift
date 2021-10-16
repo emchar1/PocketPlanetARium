@@ -48,7 +48,7 @@ struct PlanetARium {
                    earthDay: 32 / adjustedSpeed,
                    earthYear: 365 / adjustedSpeed)
         
-        animatePlanets(to: sceneView)
+        animatePlanets(to: sceneView, with: scale)
         
         resumeAnimation(to: scale)
         
@@ -566,7 +566,7 @@ struct PlanetARium {
      Adds all the planet nodes and animates them to the scene view.
      - parameter sceneView: the scene view to add the solar system to
      */
-    private func animatePlanets(to sceneView: ARSCNView) {
+    private func animatePlanets(to sceneView: ARSCNView, with scale: Float) {
         guard let sun = planets.getPlanets(withType: PlanetType.sun).first else {
             print("Sun not found.")
             return
@@ -585,6 +585,7 @@ struct PlanetARium {
 
         sun.animate()
         sun.addLightSource(omniLumens: 1000, ambientLumens: 40)
+//        print("scale: \(scale)")
 
         sceneView.scene.rootNode.addChildNode(sun.getOrbitalCenterNode())
     }

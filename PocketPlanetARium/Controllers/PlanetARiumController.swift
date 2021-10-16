@@ -105,6 +105,7 @@ class PlanetARiumController: UIViewController {
         sceneView.translatesAutoresizingMaskIntoConstraints = true
         sceneView.frame = CGRect(x: 0, y: 0, width: bezelView.frame.width, height: bezelView.frame.height)
         sceneView.alpha = 0.0
+//        sceneView.showsStatistics = true
 
         lowLightWarning.clipsToBounds = true
         lowLightWarning.layer.cornerRadius = 7
