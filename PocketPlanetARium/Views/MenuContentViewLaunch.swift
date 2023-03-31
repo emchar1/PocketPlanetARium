@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol MenuContentViewLaunchDelegate {
+protocol MenuContentViewLaunchDelegate: AnyObject {
     func menuContentViewLaunch(_ controller: MenuContentViewLaunch, didPresentPlanetARiumController planetARiumController: PlanetARiumController)
     func menuContentViewLaunch(_ controller: MenuContentViewLaunch, didPresentViewChangeWith alert: UIAlertController)
 }
@@ -62,7 +62,7 @@ class MenuContentViewLaunch: UIView {
             hintsButton?.backgroundColor = hintsAreOff ? buttonPressedColor : buttonColor
         }
     }
-    var delegate: MenuContentViewLaunchDelegate?
+    weak var delegate: MenuContentViewLaunchDelegate?
 
 
     // MARK: - Initialization

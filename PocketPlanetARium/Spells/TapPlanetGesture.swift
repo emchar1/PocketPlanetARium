@@ -9,13 +9,13 @@
 import Foundation
 import UIKit
 
-protocol TapPlanetGestureDelegate {
+protocol TapPlanetGestureDelegate: AnyObject {
     func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent)
     func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent)
 }
 
 class TapPlanetGesture: UIGestureRecognizer {
-    var tapDelegate: TapPlanetGestureDelegate?
+    weak var tapDelegate: TapPlanetGestureDelegate?
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
         tapDelegate?.touchesBegan(touches, with: event)

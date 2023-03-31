@@ -9,7 +9,7 @@
 import UIKit
 import SceneKit
 
-protocol PlanetDetailsControllerDelegate {
+protocol PlanetDetailsControllerDelegate: AnyObject {
     func didDismiss(_ controller: PlanetDetailsController)
 }
 
@@ -21,7 +21,7 @@ class PlanetDetailsController: UIViewController, SCNSceneRendererDelegate {
     @IBOutlet weak var planetDetailsLandscapeLabel: UILabel!
     
     var planet: Planet?
-    var delegate: PlanetDetailsControllerDelegate?
+    weak var delegate: PlanetDetailsControllerDelegate?
 
     
     override func viewDidLoad() {

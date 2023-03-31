@@ -9,12 +9,12 @@
 import Foundation
 import UIKit
 
-protocol PopPlanetDetailsGestureDelegate {
+protocol PopPlanetDetailsGestureDelegate: AnyObject {
     func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent)
 }
 
 class PopPlanetDetailsGesture: UIGestureRecognizer {
-    var popDelegate: PopPlanetDetailsGestureDelegate?
+    weak var popDelegate: PopPlanetDetailsGestureDelegate?
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
         popDelegate?.touchesMoved(touches, with: event)

@@ -9,7 +9,7 @@
 import UIKit
 
 //******TEST
-protocol PlanetPeekViewDelegate {
+protocol PlanetPeekViewDelegate: AnyObject {
     func planetPeekView(_ controller: PlanetPeekView, willPerformSegue: Bool)
 }
 
@@ -27,7 +27,7 @@ class PlanetPeekView: UIView {
     
     
     //******TEST
-    var delegate: PlanetPeekViewDelegate?
+    weak var delegate: PlanetPeekViewDelegate?
     
     
     // MARK: - Initialization

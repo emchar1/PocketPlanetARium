@@ -10,7 +10,7 @@ import Foundation
 import SceneKit
 import ARKit
 
-struct PlanetARium {
+class PlanetARium {
     //Don't touch these values!
     private let scaleFactor: Float = 3
     private let scaleMinimum: Float = 0.123
@@ -37,7 +37,7 @@ struct PlanetARium {
         - toNode: the scene view to add the solar system to
      - The higher the topSpeed, the faster the animation. Suggested values: 2, 4, 8, 16, 32, 64, 128, 256
      */
-    mutating func beginAnimation(scale: Float, topSpeed speed: TimeInterval? = nil, toNode sceneView: ARSCNView) {
+    func beginAnimation(scale: Float, topSpeed speed: TimeInterval? = nil, toNode sceneView: ARSCNView) {
         let adjustedScale = pow(scale.clamp(min: scaleMinimum, max: scaleMaximum), scaleFactor)
         let adjustedSpeed = speed ?? scaleSpeed
         
@@ -83,7 +83,7 @@ struct PlanetARium {
         - topSpeed: max speed of the animation
         - toNode: the scene view to add the solar system to
      */
-    mutating func resetAnimation(withScale scale: Float, topSpeed speed: TimeInterval? = nil, toNode sceneView: ARSCNView) {
+    func resetAnimation(withScale scale: Float, topSpeed speed: TimeInterval? = nil, toNode sceneView: ARSCNView) {
         let adjustedSpeed = speed ?? scaleSpeed
 
         planets = PlanetGroup()
@@ -169,7 +169,7 @@ struct PlanetARium {
     /**
      Toggles the labelsOn, i.e. switch on and off, turn true or false, switch 1 and 0... you get it.
      */
-    mutating func toggleLabels() {
+    func toggleLabels() {
         labelsOn = !labelsOn
     }
     
@@ -230,7 +230,7 @@ struct PlanetARium {
         - earthYear: length of time it takes for the Earth to make one revolution around the sun, in seconds
      - This function allows for more independent customization regarding size of planets, orbital distances, and speed of animation.
      */
-    mutating private func addPlanets(earthRadius: Float, earthDistance: Float, earthDay: TimeInterval, earthYear: TimeInterval) {
+    private func addPlanets(earthRadius: Float, earthDistance: Float, earthDay: TimeInterval, earthYear: TimeInterval) {
         addPlanetHelper(name: "Sun",
                         type: PlanetType.sun,
                         radius: (abs(earthDistance) * 0.2).clamp(min: 0.008, max: 0.02),
@@ -508,23 +508,23 @@ struct PlanetARium {
         - orbitalCenterRotationSpeed: time it takes planet to complete one revolution around its orbital center.
         - labelColor: color of the planet label
      */
-    private mutating func addPlanetHelper(name: String, type: PlanetType, radius: Float, tilt: SCNVector3, position: SCNVector3, rotationSpeed: TimeInterval, orbitalCenterTilt: SCNVector3, orbitalCenterPosition: SCNVector3, orbitalCenterRotationSpeed: TimeInterval?, labelColor: UIColor, details: PlanetDetails) {
+    private func addPlanetHelper(name: String, type: PlanetType, radius: Float, tilt: SCNVector3, position: SCNVector3, rotationSpeed: TimeInterval, orbitalCenterTilt: SCNVector3, orbitalCenterPosition: SCNVector3, orbitalCenterRotationSpeed: TimeInterval?, labelColor: UIColor, details: PlanetDetails) {
         
         let planet = planets.getPlanet(withName: name)
         let lastTilt = planet == nil ? tilt : planet!.getNode().eulerAngles
         let lastOrbitalCenterTilt = planet == nil ? orbitalCenterTilt : planet!.getOrbitalCenterNode().eulerAngles
 
         planets.addPlanet(Planet(name: name,
-                                       type: type,
-                                       radius: radius,
-                                       tilt: lastTilt,
-                                       position: position,
-                                       rotationSpeed: rotationSpeed,
-                                       orbitalCenterTilt: lastOrbitalCenterTilt,
-                                       orbitalCenterPosition: orbitalCenterPosition,
-                                       orbitalCenterRotationSpeed: orbitalCenterRotationSpeed,
-                                       labelColor: labelColor,
-                                       details: details))
+                                 type: type,
+                                 radius: radius,
+                                 tilt: lastTilt,
+                                 position: position,
+                                 rotationSpeed: rotationSpeed,
+                                 orbitalCenterTilt: lastOrbitalCenterTilt,
+                                 orbitalCenterPosition: orbitalCenterPosition,
+                                 orbitalCenterRotationSpeed: orbitalCenterRotationSpeed,
+                                 labelColor: labelColor,
+                                 details: details))
     }
     
     /**
@@ -537,19 +537,19 @@ struct PlanetARium {
         - rotationSpeed: time in seconds to complete one rotation around a planet's axis
         - labelColor: color of the planet label
      */
-    private mutating func addPlanetHelper(name: String, type: PlanetType, radius: Float, tilt: SCNVector3, position: SCNVector3, rotationSpeed: TimeInterval, labelColor: UIColor, details: PlanetDetails) {
+    private func addPlanetHelper(name: String, type: PlanetType, radius: Float, tilt: SCNVector3, position: SCNVector3, rotationSpeed: TimeInterval, labelColor: UIColor, details: PlanetDetails) {
         
         let planet = planets.getPlanet(withName: name)
         let lastTilt = planet == nil ? tilt : planet!.getNode().eulerAngles
 
         planets.addPlanet(Planet(name: name,
-                                       type: type,
-                                       radius: radius,
-                                       tilt: lastTilt,
-                                       position: position,
-                                       rotationSpeed: rotationSpeed,
-                                       labelColor: labelColor,
-                                       details: details))
+                                 type: type,
+                                 radius: radius,
+                                 tilt: lastTilt,
+                                 position: position,
+                                 rotationSpeed: rotationSpeed,
+                                 labelColor: labelColor,
+                                 details: details))
     }
     
     /**

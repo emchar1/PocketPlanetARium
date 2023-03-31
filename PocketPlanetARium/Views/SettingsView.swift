@@ -31,7 +31,7 @@ struct SettingsSubButton {
 
 // MARK: - SettingsView Delegate Function Headers
 
-protocol SettingsViewDelegate {
+protocol SettingsViewDelegate: AnyObject {
     func settingsView(_ controller: SettingsView, didPressSoundButton settingsSubButton: SettingsSubButton?)
     func settingsView(_ controller: SettingsView, didPressLabelsButton settingsSubButton: SettingsSubButton?)
     func settingsView(_ controller: SettingsView, didPressPlayPauseButton settingsSubButton: SettingsSubButton?)
@@ -78,7 +78,7 @@ class SettingsView: UIView {
     var lastOrientation: UIDeviceOrientation = .portrait
     
     //Delegate var
-    var delegate: SettingsViewDelegate?
+    weak var delegate: SettingsViewDelegate?
     
     
     // MARK: - Initialization
