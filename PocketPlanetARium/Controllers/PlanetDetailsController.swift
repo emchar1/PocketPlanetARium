@@ -42,7 +42,30 @@ class PlanetDetailsController: UIViewController, SCNSceneRendererDelegate {
         delegate?.didDismiss(self)
     }
     
-    func setupPlanetView(for planet: Planet) {
+    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
+        guard let planet = planet else { return }
+        
+        if UIDevice.current.orientation.isLandscape, UIDevice.isiPad {
+            planetDetailsLabel.text = "Hold device in Portrait Mode to view more interesting facts on \(planet.getName() == "Sun" ? "the Sun" : planet.getName())!"
+        }
+        else {
+            planetDetailsLabel.text = planet.getDetails().details
+        }
+    }
+
+    override func viewWillLayoutSubviews() {
+        updateTableViewContentInset()
+    }
+    
+    private func updateTableViewContentInset() {
+        let viewHeight: CGFloat = planetStatsTV.frame.height
+        let tableViewContentHeight: CGFloat = planetStatsTV.contentSize.height
+        let marginHeight: CGFloat = (viewHeight - tableViewContentHeight) / 2
+        
+        planetStatsTV.contentInset = UIEdgeInsets(top: marginHeight, left: 0, bottom: -marginHeight, right: 0)
+    }
+    
+    private func setupPlanetView(for planet: Planet) {
         view.backgroundColor = K.color900
         
         //Setup labels
@@ -138,6 +161,10 @@ extension PlanetDetailsController: UITableViewDelegate, UITableViewDataSource {
         }
 
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UIDevice.isiPad ? 40 : 24
     }
 }
 

@@ -26,9 +26,9 @@ struct K {
     static let fontFaceItalic = "Prime-Light"
     static let fontFaceSecondary = "PantonNarrowDemo-Black"
     static let fontFaceSecondaryItalic = "PantonNarrowDemo-BlackItalic"
-    static let fontSizeMenu: CGFloat = 18
-    static let fontSizePeekTitle: CGFloat = 18
-    static let fontSizePeekDetails: CGFloat = 14
+    static let fontSizeMenu: CGFloat = UIDevice.isiPad ? 28 : 18
+    static let fontSizePeekTitle: CGFloat = UIDevice.isiPad ? 28 : 18
+    static let fontSizePeekDetails: CGFloat = UIDevice.isiPad ? 20 : 14
     
     //Color Themes
     static var colorName = "BlueGrey"

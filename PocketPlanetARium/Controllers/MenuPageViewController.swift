@@ -94,5 +94,13 @@ extension MenuPageViewController: MenuContentViewLaunchDelegate {
     
     func menuContentViewLaunch(_ controller: MenuContentViewLaunch, didPresentViewChangeWith alert: UIAlertController) {
         present(alert, animated: true, completion: nil)
-    }    
+        
+        //IMPORTANT!! Required for iPad, else program crashes
+        if let popOver = alert.popoverPresentationController {
+            let deviceFrame: CGRect = view.superview?.frame ?? .zero
+            
+            popOver.sourceView = self.view
+            popOver.sourceRect = CGRect(origin: CGPoint(x: deviceFrame.size.width / 2, y: deviceFrame.size.height / 2 + 60), size: .zero)
+        }
+    }
 }

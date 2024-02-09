@@ -154,10 +154,10 @@ class PlanetARiumController: UIViewController {
         
         //HINTS
         
-        hintDevice = HintView(in: sceneView, ofSize: CGSize(width: 175, height: 250), anchorToBottomRight: false)
-        hintSettings = HintView(in: sceneView, ofSize: CGSize(width: 150, height: 150), anchorToBottomRight: true)
-        hintPlanetTap = HintView(in: sceneView, ofSize: CGSize(width: 150, height: 200), anchorToBottomRight: false)
-        hintPinchZoom = HintView(in: sceneView, ofSize: CGSize(width: 150, height: 200), anchorToBottomRight: false)
+        hintDevice = HintView(in: sceneView, ofSize: CGSize(width: UIDevice.isiPad ? 250 : 175, height: UIDevice.isiPad ? 350 : 250), anchorToBottomRight: false)
+        hintSettings = HintView(in: sceneView, ofSize: CGSize(width: UIDevice.isiPad ? 200 : 150, height: UIDevice.isiPad ? 225 : 150), anchorToBottomRight: true)
+        hintPlanetTap = HintView(in: sceneView, ofSize: CGSize(width: UIDevice.isiPad ? 250 : 150, height: UIDevice.isiPad ? 250 : 200), anchorToBottomRight: false)
+        hintPinchZoom = HintView(in: sceneView, ofSize: CGSize(width: UIDevice.isiPad ? 250 : 150, height: UIDevice.isiPad ? 250 : 200), anchorToBottomRight: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {

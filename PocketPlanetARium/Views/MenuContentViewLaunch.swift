@@ -111,7 +111,7 @@ class MenuContentViewLaunch: UIView {
         stackView.addArrangedSubview(topView)
         
         let fontTitle: String = K.fontTitle
-        let fontSize: CGFloat = 40
+        let fontSize: CGFloat = UIDevice.isiPad ? 64 : 40
         let titlePadding: CGFloat = 0.0
         let textColor = UIColor.getRandom(redRange: 175...255, greenRange: 175...255, blueRange: 175...255)
         let shadowOffset: CGFloat = 3.0
@@ -225,8 +225,8 @@ class MenuContentViewLaunch: UIView {
         launchButton.setTitle("Launch PlanetARium", for: .normal)
         launchButton.titleLabel?.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
         launchButton.tintColor = .white
-        launchButton.layer.cornerRadius = 25
-        launchButton.layer.shadowRadius = 4
+        launchButton.layer.cornerRadius = UIDevice.isiPad ? 37.5 : 25
+        launchButton.layer.shadowRadius = UIDevice.isiPad ? 6 : 4
         launchButton.layer.shadowColor = UIColor.black.cgColor
         launchButton.layer.shadowOpacity = 0.3
         launchButton.addTarget(self, action: #selector(loadPlanetARium(_:)), for: .touchUpInside)
@@ -234,8 +234,8 @@ class MenuContentViewLaunch: UIView {
         bottomStackView.addSubview(launchButton)
 
         launchButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([launchButton.widthAnchor.constraint(equalToConstant: 225),
-                                     launchButton.heightAnchor.constraint(equalToConstant: 50),
+        NSLayoutConstraint.activate([launchButton.widthAnchor.constraint(equalToConstant: UIDevice.isiPad ? 400 : 225),
+                                     launchButton.heightAnchor.constraint(equalToConstant: UIDevice.isiPad ? 75 : 50),
                                      launchButton.centerXAnchor.constraint(equalTo: bottomStackView.centerXAnchor),
                                      bottomStackView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: launchButton.bottomAnchor, constant: K.padding)])
     }
@@ -259,10 +259,10 @@ class MenuContentViewLaunch: UIView {
         //Left part of the Button/Header stack
         let leftView = UIView()
         if let gesture = gesture {
-            let buttonSize: CGFloat = 30
+            let buttonSize: CGFloat = UIDevice.isiPad ? 40 : 30
             let button = UIButton(type: .system)
             button.layer.cornerRadius = buttonSize / 2
-            button.layer.shadowRadius = 4
+            button.layer.shadowRadius = UIDevice.isiPad ? 6 : 4
             button.layer.shadowColor = UIColor.black.cgColor
             button.layer.shadowOpacity = 0.3
             button.addGestureRecognizer(gesture)

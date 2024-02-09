@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
-        return supportedOrientations
+        return .portrait
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

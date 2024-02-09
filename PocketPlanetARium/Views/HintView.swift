@@ -110,7 +110,7 @@ class HintView: UIView {
 
         messageLabel = UILabel(frame: .zero)
         messageLabel.text = text
-        messageLabel.font = UIFont(name: "Futura", size: 16.0)
+        messageLabel.font = UIFont(name: "Futura", size: UIDevice.isiPad ? 22.0 : 16.0)
         messageLabel.textColor = .white
         messageLabel.numberOfLines = 0
         messageView.addSubview(messageLabel)

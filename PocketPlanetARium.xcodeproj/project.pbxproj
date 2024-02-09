@@ -58,6 +58,7 @@
 		EA992FCA254235D300992CB7 /* MenuContentViewLaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA992FC9254235D300992CB7 /* MenuContentViewLaunch.swift */; };
 		EA992FD325423FCD00992CB7 /* Age-Normal.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA992FD225423FCD00992CB7 /* Age-Normal.otf */; };
 		EAC1F4D025149BD30097521A /* PlanetARium.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC1F4CF25149BD30097521A /* PlanetARium.swift */; };
+		EAD90A1C2B75E84300ACE934 /* Extension+UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD90A1B2B75E84300ACE934 /* Extension+UIDevice.swift */; };
 		EAF7BEA925203CAE00C0D1A6 /* PlanetGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF7BEA825203CAE00C0D1A6 /* PlanetGroup.swift */; };
 /* End PBXBuildFile section */
 
@@ -127,6 +128,7 @@
 		EA992FC9254235D300992CB7 /* MenuContentViewLaunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuContentViewLaunch.swift; sourceTree = "<group>"; };
 		EA992FD225423FCD00992CB7 /* Age-Normal.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Age-Normal.otf"; sourceTree = "<group>"; };
 		EAC1F4CF25149BD30097521A /* PlanetARium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetARium.swift; sourceTree = "<group>"; };
+		EAD90A1B2B75E84300ACE934 /* Extension+UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIDevice.swift"; sourceTree = "<group>"; };
 		EAF7BEA825203CAE00C0D1A6 /* PlanetGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetGroup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -233,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				EA91010425BAACF300733FD9 /* UserDefaults+Key.swift */,
+				EAD90A1B2B75E84300ACE934 /* Extension+UIDevice.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -436,6 +439,7 @@
 				EA5737032536969700CF442B /* MenuItem.swift in Sources */,
 				EA992FBA2542124400992CB7 /* MenuContentViewSingle.swift in Sources */,
 				EA5736F025317C0700CF442B /* MenuController.swift in Sources */,
+				EAD90A1C2B75E84300ACE934 /* Extension+UIDevice.swift in Sources */,
 				EAF7BEA925203CAE00C0D1A6 /* PlanetGroup.swift in Sources */,
 				EA91010025BAABD400733FD9 /* AppStoreReviewManager.swift in Sources */,
 				EA764AA1254F486500F1C606 /* PopPlanetDetailsGesture.swift in Sources */,

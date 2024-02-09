@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina6_1" orientation="portrait" appearance="dark"/>
+    <device id="ipad12_9rounded" orientation="portrait" layout="fullscreen" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
@@ -15,18 +15,18 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5Play Apps" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fh0-x6-Ocs">
-                                <rect key="frame" x="152.5" y="398" width="109" height="100"/>
+                                <rect key="frame" x="430.5" y="633" width="163.5" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="sIb-dF-LNr"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="32"/>
                                 <color key="textColor" name="BlueGreyLaunchText"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="widthClass=regular">
+                                <variation key="heightClass=regular-widthClass=regular">
                                     <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="48"/>
                                 </variation>
                             </label>
@@ -46,7 +46,7 @@
     </scenes>
     <resources>
         <namedColor name="BlueGreyLaunchText">
-            <color red="0.078431372549019607" green="0.11764705882352941" blue="0.13725490196078433" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.078000001609325409" green="0.11800000071525574" blue="0.13699999451637268" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
