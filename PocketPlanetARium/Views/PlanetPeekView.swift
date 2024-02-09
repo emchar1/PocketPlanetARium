@@ -8,14 +8,9 @@
 
 import UIKit
 
-//******TEST
 protocol PlanetPeekViewDelegate: AnyObject {
-    func planetPeekView(_ controller: PlanetPeekView, willPerformSegue: Bool)
+    func didTapPeekView()
 }
-
-
-
-
 
 class PlanetPeekView: UIView {
     
@@ -23,10 +18,7 @@ class PlanetPeekView: UIView {
     var planetTitle = UILabel()
     var planetDetails = UILabel()
     var instructions = UILabel()
-    
-    
-    
-    //******TEST
+
     weak var delegate: PlanetPeekViewDelegate?
     
     
@@ -40,7 +32,7 @@ class PlanetPeekView: UIView {
         self.planet = planet
         planetTitle.text = planet.getName()
         planetDetails.text = planet.getDetails().details
-        instructions.text = "(Press/Hold to read more)"
+        instructions.text = "(Tap to read more)"
         
         setupView()
     }
@@ -92,6 +84,13 @@ class PlanetPeekView: UIView {
     }
     
     
+    // MARK: - UITouch
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        delegate?.didTapPeekView()
+    }
+    
+    
     // MARK: - Screen Display
     
     func show(in superView: UIView, at location: CGPoint) {
@@ -137,29 +136,6 @@ class PlanetPeekView: UIView {
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
             self.alpha = 0
         }, completion: { _ in
-            self.removeFromSuperview()
-        })
-    }
-    
-
-    /**
-     Expand the peek view to varying degrees of touch pressure. Good luck on that!
-     */
-    func expand(by multiplier: CGFloat) {
-//        frame.size.width += multiplier * 10
-//
-//        print(frame.size.width)
-    }
-    
-    
-    
-    //******TEST
-    func performSegue(to size: CGSize) {
-        UIView.animate(withDuration: 5.0, delay: 0, options: .curveEaseInOut, animations: {
-            self.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-            self.alpha = 0.0
-        }, completion: { _ in
-            self.delegate?.planetPeekView(self, willPerformSegue: true)
             self.removeFromSuperview()
         })
     }

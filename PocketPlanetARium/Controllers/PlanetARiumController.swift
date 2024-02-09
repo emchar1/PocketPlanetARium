@@ -399,6 +399,9 @@ class PlanetARiumController: UIViewController {
     }
 }
 
+
+// MARK: - PlanetDetailsControllerDelegate
+
 extension PlanetARiumController: PlanetDetailsControllerDelegate {
     func didDismiss(_ controller: PlanetDetailsController) {
         if !settingsButtons.isPaused {
@@ -408,14 +411,11 @@ extension PlanetARiumController: PlanetDetailsControllerDelegate {
 }
 
 
+// MARK: - PlanetPeekViewDelegate
 
-
-
-
-//******TEST
 extension PlanetARiumController: PlanetPeekViewDelegate {
-    func planetPeekView(_ controller: PlanetPeekView, willPerformSegue: Bool) {
-        performSegue(withIdentifier: "PlanetDetailsSegue", sender: nil)
+    func didTapPeekView() {
+        seguePlanetDetails()
     }
 }
 
@@ -505,13 +505,14 @@ extension PlanetARiumController: SettingsViewDelegate {
 
 extension PlanetARiumController: TapPlanetGestureDelegate {
     func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
-        guard let touch = touches.first, touches.count == 1 else {
-            return
-        }
-
+        guard let touch = touches.first, touches.count == 1 else { return }
+        
         let location = touch.location(in: sceneView)
         let hitResults = sceneView.hitTest(location, options: nil)
-
+        
+        peekView?.unshow()
+        self.tappedPlanet = nil
+        
         guard hitResults.count > 0,
               let result = hitResults.first,
               let planetNodeName = result.node.name,
@@ -525,13 +526,12 @@ extension PlanetARiumController: TapPlanetGestureDelegate {
         peekView?.removeFromSuperview()
         
         peekView = PlanetPeekView(with: tappedPlanet)
-//        peekView!.delegate = self
+        peekView!.delegate = self
         peekView!.show(in: view, at: location)
     }
     
     func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
-        peekView?.unshow()
-        tappedPlanet = nil
+        //No implementation needed
     }
 }
 
