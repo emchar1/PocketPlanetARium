@@ -18,6 +18,7 @@ class PlanetPeekView: UIView {
     var planetTitle = UILabel()
     var planetDetails = UILabel()
     var instructions = UILabel()
+    var timer: Timer!
 
     weak var delegate: PlanetPeekViewDelegate?
     
@@ -94,6 +95,8 @@ class PlanetPeekView: UIView {
     // MARK: - Screen Display
     
     func show(in superView: UIView, at location: CGPoint) {
+        timer = Timer()
+        
         var xCenter: CGFloat = 0 {
             didSet {
                 if xCenter < frame.size.width / 2 + K.padding {
@@ -123,7 +126,9 @@ class PlanetPeekView: UIView {
         alpha = 0
         
         superView.addSubview(self)
-        
+                
+        timer = Timer.scheduledTimer(timeInterval: 8, target: self, selector: #selector(unshow), userInfo: nil, repeats: false)
+
         UIView.animate(withDuration: 0, delay: 0, options: .curveEaseIn, animations: {
             self.alpha = K.masterAlpha
         }, completion: nil)
@@ -132,7 +137,7 @@ class PlanetPeekView: UIView {
                                      centerYAnchor.constraint(equalTo: superView.topAnchor, constant: yCenter)])
     }
     
-    func unshow() {
+    @objc func unshow() {
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
             self.alpha = 0
         }, completion: { _ in

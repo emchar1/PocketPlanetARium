@@ -117,12 +117,6 @@ class PlanetDetailsController: UIViewController, SCNSceneRendererDelegate {
 }
 
 
-
-class PlanetStatsCell: UITableViewCell {
-    @IBOutlet weak var stat: UILabel!
-    @IBOutlet weak var value: UILabel!
-}
-
 extension PlanetDetailsController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return planet?.getDetails().stats.count ?? 1

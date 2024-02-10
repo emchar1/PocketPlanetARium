@@ -29,10 +29,10 @@ class HintView: UIView {
     var bottomAnchorConstraint: NSLayoutConstraint?
     var trailingAnchorConstraint: NSLayoutConstraint?
     var topAnchorConstant: CGFloat {
-        CGFloat.random(in: 80...(superView.frame.height / 2))
+        CGFloat.random(in: 80...max(81, (superView.frame.height / 2)))
     }
     var leadingAnchorConstant: CGFloat {
-        CGFloat.random(in: 40...(superView.frame.width - max(hintViewSize.width, hintViewSize.height) - 40))
+        CGFloat.random(in: 40...max(41, (superView.frame.width - max(hintViewSize.width, hintViewSize.height) - 40)))
     }
     
     
@@ -96,10 +96,9 @@ class HintView: UIView {
                   withDelay delay: TimeInterval = 0,
                   iconAnimationType: IconAnimationType) {
         
-
-            
         let messageColor = UIColor(rgb: 0x3498db)
         let messagePadding: CGFloat = 8
+
         messageView = UIView(frame: CGRect(x: messageViewSize.width / 2,
                                            y: messageViewSize.height / 2,
                                            width: 0,

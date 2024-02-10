@@ -204,7 +204,7 @@ class PlanetARium {
             return ("nil", nil)
         }
         
-        let scaleValueAtMax: Bool = scaleValue >= scaleMaximum
+//        let scaleValueAtMax: Bool = scaleValue >= scaleMaximum
         let scaleValueAtMin: Bool = scaleValue < scaleMinimum
         let distanceInFeet = scaleValueAtMin ? "0 ft" : distanceToReturn + " ft"
         

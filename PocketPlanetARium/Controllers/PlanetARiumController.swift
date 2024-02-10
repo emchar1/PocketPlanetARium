@@ -260,8 +260,6 @@ class PlanetARiumController: UIViewController {
             
             scaleValue += diff / diffScale
             
-            print("pinchBegan: \(pinchBegan), pinchChanged: \(pinchChanged), diff: \(diff), diffScale: \(diffScale), scaleValue: \(scaleValue), scaleValue: (\(scaleValueMin), \(scaleValueMax))")
-            
             if scaleValue > scaleValueMin && scaleValue < scaleValueMax {
                 pinchBoundsCount = 0
                 
