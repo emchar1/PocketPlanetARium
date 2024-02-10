@@ -225,7 +225,7 @@ class PlanetARiumController: UIViewController {
                                    withDelay: 31.0,
                                    iconAnimationType: .pinchZoom)
             
-            hintPlanetTap.showHint(text: "Tap and hold on a planet to view more details.",
+            hintPlanetTap.showHint(text: "Tap on a planet to view more details.",
                                    image: "hintTap",
                                    forDuration: 5.0,
                                    withDelay: 43.0,
@@ -257,8 +257,10 @@ class PlanetARiumController: UIViewController {
         if let began = pinchBegan, let changed = pinchChanged {
             let diff = Float(changed - began)
             let diffScale: Float = diff < 0 ? 50 : 200
-
+            
             scaleValue += diff / diffScale
+            
+            print("pinchBegan: \(pinchBegan), pinchChanged: \(pinchChanged), diff: \(diff), diffScale: \(diffScale), scaleValue: \(scaleValue), scaleValue: (\(scaleValueMin), \(scaleValueMax))")
             
             if scaleValue > scaleValueMin && scaleValue < scaleValueMax {
                 pinchBoundsCount = 0

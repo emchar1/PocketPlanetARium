@@ -204,9 +204,9 @@ class PlanetARium {
             return ("nil", nil)
         }
         
-        let scaleValueAtMax: Bool = scaleValue > 0.99 * scaleMaximum
+        let scaleValueAtMax: Bool = scaleValue >= scaleMaximum
         let scaleValueAtMin: Bool = scaleValue < scaleMinimum
-        let distanceInFeet = scaleValueAtMax ? "MAX" : (scaleValueAtMin ? "0 ft" : distanceToReturn + " ft")
+        let distanceInFeet = scaleValueAtMin ? "0 ft" : distanceToReturn + " ft"
         
         return ("Sun to \(planetName): \(distanceInFeet)", sweetSpotReached(for: scaleValue) ? K.colorIcyBlue : .white)
     }
