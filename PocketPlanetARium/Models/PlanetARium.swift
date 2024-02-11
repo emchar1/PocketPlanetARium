@@ -12,9 +12,9 @@ import ARKit
 
 class PlanetARium {
     //Don't touch these values!
+    let scaleMinimum: Float = 0.123
+    let scaleMaximum: Float = 1
     private let scaleFactor: Float = 3
-    private let scaleMinimum: Float = 0.123
-    private let scaleMaximum: Float = 1
     private let scaleSpeed: TimeInterval = 64
     //The sweet spot for Merlyne's magic to work = 39ft i.e. my age in years.
     private let sweetSpotRound: Float = 100

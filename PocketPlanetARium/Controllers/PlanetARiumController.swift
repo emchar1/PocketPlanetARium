@@ -32,6 +32,7 @@ class PlanetARiumController: UIViewController {
 
     //Settings buttons
     let settingsButtons = SettingsView()
+    var zoomScaleSlider: ZoomScaleSlider!
 
     //PlanetARium properties
     var planetarium = PlanetARium()
@@ -47,11 +48,9 @@ class PlanetARiumController: UIViewController {
     var pinchChanged: CGFloat?
     var pinchBoundsCount = 0
     var pinchBoundsLimit = 10
-    let scaleValueMin: Float = 0
-    let scaleValueMax: Float = 1
     var scaleValue: Float = 0.218 {
         didSet {
-            scaleValue = scaleValue.clamp(min: scaleValueMin, max: scaleValueMax)
+            scaleValue = scaleValue.clamp(min: planetarium.scaleMinimum, max: planetarium.scaleMaximum)
         }
     }
     
@@ -89,16 +88,18 @@ class PlanetARiumController: UIViewController {
         scaleLabel.textColor = .white
         view.addSubview(scaleLabel)
         scaleLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([scaleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
-                                                                         constant: K.padding),
-                                     view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: scaleLabel.bottomAnchor,
-                                                                                      constant: K.padding)])
+        NSLayoutConstraint.activate([scaleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                                     view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: scaleLabel.bottomAnchor, constant: 0)])
         
         settingsButtons.delegate = self
         settingsButtons.alpha = 0.0
         view.addSubview(settingsButtons)
         NSLayoutConstraint.activate([view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: settingsButtons.bottomAnchor, constant: K.padding),
                                      view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: settingsButtons.trailingAnchor, constant: K.padding)])
+        
+        zoomScaleSlider = ZoomScaleSlider(initialScale: scaleValue, minScale: planetarium.scaleMinimum, maxScale: planetarium.scaleMaximum)
+        zoomScaleSlider.delegate = self
+        view.addSubview(zoomScaleSlider)
 
         sceneView.delegate = self
         sceneView.autoenablesDefaultLighting = true
@@ -260,11 +261,12 @@ class PlanetARiumController: UIViewController {
             
             scaleValue += diff / diffScale
             
-            if scaleValue > scaleValueMin && scaleValue < scaleValueMax {
+            if scaleValue > planetarium.scaleMinimum && scaleValue < planetarium.scaleMaximum {
                 pinchBoundsCount = 0
                 
                 planetarium.beginAnimation(scale: scaleValue, toNode: sceneView)
                 handlePlayPause(for: settingsButtons)
+                zoomScaleSlider.updateValue(to: scaleValue)
                 
                 if diff < 0 {
                     audioManager.playSound(for: "PinchShrink")
@@ -292,7 +294,7 @@ class PlanetARiumController: UIViewController {
         
         scaleLabel.alpha = K.masterAlpha
         scaleLabel.text = distanceToEarth.text
-        scaleLabel.textColor = .white//distanceToEarth.textColor
+        scaleLabel.textColor = .systemOrange//distanceToEarth.textColor
         
         UIView.animate(withDuration: 0.25, delay: 2.0, options: .curveEaseOut, animations: {
             self.scaleLabel.alpha = 0.0
@@ -464,9 +466,33 @@ extension PlanetARiumController: ARSCNViewDelegate {
 }
 
 
+// MARK: - ZoomScaleSlider Delegate
+
+extension PlanetARiumController: ZoomScaleSliderDelegate {
+    func zoomScaleSlider(_ controller: ZoomScaleSlider, didUpdateValue value: Float) {
+        planetarium.beginAnimation(scale: value, toNode: sceneView)
+        handlePlayPause(for: settingsButtons)
+        showScaleLabel()
+        
+        scaleValue = value
+        
+        peekView?.removeFromSuperview()
+    }
+}
+
+
 // MARK: - Settings View Delegate
 
 extension PlanetARiumController: SettingsViewDelegate {
+    func settingsView(_ controller: SettingsView, didOpenSettings: Bool) {
+        if didOpenSettings {
+            zoomScaleSlider.showSlider()
+        }
+        else {
+            zoomScaleSlider.unshowSlider()
+        }
+    }
+    
     func settingsView(_ controller: SettingsView, didPressSoundButton settingsSubButton: SettingsSubButton?) {
 
     }

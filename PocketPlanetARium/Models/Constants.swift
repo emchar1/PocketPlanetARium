@@ -41,6 +41,10 @@ struct K {
     static let colorIcyBlue = UIColor(red: 175, green: 255, blue: 255)
     
 
+    /**
+     Returns the device's screen size
+     */
+    static let screenSize: CGSize = UIScreen.main.bounds.size
 
     /**
      Returns the screen ratio of the device.

@@ -12,6 +12,7 @@ import UIKit
 // MARK: - SettingsView Delegate Function Headers
 
 protocol SettingsViewDelegate: AnyObject {
+    func settingsView(_ controller: SettingsView, didOpenSettings: Bool)
     func settingsView(_ controller: SettingsView, didPressSoundButton settingsSubButton: SettingsSubButton?)
     func settingsView(_ controller: SettingsView, didPressLabelsButton settingsSubButton: SettingsSubButton?)
     func settingsView(_ controller: SettingsView, didPressPlayPauseButton settingsSubButton: SettingsSubButton?)
@@ -78,10 +79,10 @@ class SettingsView: UIView {
         viewHeightAnchor = heightAnchor.constraint(equalToConstant: frame.height)
         NSLayoutConstraint.activate([viewWidthAnchor!, viewHeightAnchor!])
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(orientationDidChange(_:)),
-                                               name: UIDevice.orientationDidChangeNotification,
-                                               object: nil)
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: #selector(orientationDidChange(_:)),
+//                                               name: UIDevice.orientationDidChangeNotification,
+//                                               object: nil)
 
         if UIDevice.current.orientation.isValidInterfaceOrientation {
             lastOrientation = UIDevice.current.orientation
@@ -323,6 +324,8 @@ class SettingsView: UIView {
                 }
             }
         }
+        
+        delegate?.settingsView(self, didOpenSettings: showSettings)
     }
 
     /**

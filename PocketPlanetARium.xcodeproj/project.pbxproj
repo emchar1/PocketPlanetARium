@@ -59,6 +59,8 @@
 		EA992FD325423FCD00992CB7 /* Age-Normal.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA992FD225423FCD00992CB7 /* Age-Normal.otf */; };
 		EA9A26972B78090300CFE30B /* PlanetStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9A26962B78090300CFE30B /* PlanetStatsCell.swift */; };
 		EA9A26992B780A1500CFE30B /* SettingsSubButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9A26982B780A1500CFE30B /* SettingsSubButton.swift */; };
+		EA9A269B2B78620300CFE30B /* ZoomScaleSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9A269A2B78620300CFE30B /* ZoomScaleSlider.swift */; };
+		EA9A269D2B78A36900CFE30B /* Extension+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9A269C2B78A36900CFE30B /* Extension+UIImage.swift */; };
 		EAC1F4D025149BD30097521A /* PlanetARium.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC1F4CF25149BD30097521A /* PlanetARium.swift */; };
 		EAD90A1C2B75E84300ACE934 /* Extension+UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD90A1B2B75E84300ACE934 /* Extension+UIDevice.swift */; };
 		EAD90A1E2B78019800ACE934 /* Extension+UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD90A1D2B78019800ACE934 /* Extension+UILabel.swift */; };
@@ -135,6 +137,8 @@
 		EA992FD225423FCD00992CB7 /* Age-Normal.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Age-Normal.otf"; sourceTree = "<group>"; };
 		EA9A26962B78090300CFE30B /* PlanetStatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetStatsCell.swift; sourceTree = "<group>"; };
 		EA9A26982B780A1500CFE30B /* SettingsSubButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSubButton.swift; sourceTree = "<group>"; };
+		EA9A269A2B78620300CFE30B /* ZoomScaleSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomScaleSlider.swift; sourceTree = "<group>"; };
+		EA9A269C2B78A36900CFE30B /* Extension+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImage.swift"; sourceTree = "<group>"; };
 		EAC1F4CF25149BD30097521A /* PlanetARium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetARium.swift; sourceTree = "<group>"; };
 		EAD90A1B2B75E84300ACE934 /* Extension+UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIDevice.swift"; sourceTree = "<group>"; };
 		EAD90A1D2B78019800ACE934 /* Extension+UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UILabel.swift"; sourceTree = "<group>"; };
@@ -252,6 +256,7 @@
 				EAD90A1F2B7801C600ACE934 /* Extension+UIView.swift */,
 				EAD90A212B78020900ACE934 /* Extension+UIColor.swift */,
 				EAD90A232B78023500ACE934 /* Extension+Comparable.swift */,
+				EA9A269C2B78A36900CFE30B /* Extension+UIImage.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -298,6 +303,7 @@
 				EA97F8CA25698DED007A2CBB /* CreditsView.swift */,
 				EA9A26982B780A1500CFE30B /* SettingsSubButton.swift */,
 				EA43CB54252669D300102879 /* SettingsView.swift */,
+				EA9A269A2B78620300CFE30B /* ZoomScaleSlider.swift */,
 				EA57EA7225281F0D00FC2323 /* PlanetPeekView.swift */,
 				EA13B76C2573404B00442171 /* HintView.swift */,
 			);
@@ -445,6 +451,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA9A269B2B78620300CFE30B /* ZoomScaleSlider.swift in Sources */,
 				EA992FCA254235D300992CB7 /* MenuContentViewLaunch.swift in Sources */,
 				EA2BCCA425180317007A13F5 /* Constants.swift in Sources */,
 				EA5B0C0B2510677E00B1E910 /* Planet.swift in Sources */,
@@ -456,6 +463,7 @@
 				EA57EA7325281F0D00FC2323 /* PlanetPeekView.swift in Sources */,
 				EA58D013251F3D79007A8DB5 /* PlanetDetailsController.swift in Sources */,
 				EAD90A1E2B78019800ACE934 /* Extension+UILabel.swift in Sources */,
+				EA9A269D2B78A36900CFE30B /* Extension+UIImage.swift in Sources */,
 				EA4328262539F4E600BCD31F /* MenuBezelView.swift in Sources */,
 				EA5737032536969700CF442B /* MenuItem.swift in Sources */,
 				EA992FBA2542124400992CB7 /* MenuContentViewSingle.swift in Sources */,
@@ -642,7 +650,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = LZ8V996BTJ;
 				INFOPLIST_FILE = PocketPlanetARium/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -665,7 +673,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = LZ8V996BTJ;
 				INFOPLIST_FILE = PocketPlanetARium/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
