@@ -59,7 +59,7 @@ class HintView: UIView {
                                      heightAnchor.constraint(equalToConstant: hintViewSize.height)])
         
         if anchorToBottomRight {
-            bottomAnchorConstraint = superView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: bottomAnchor, constant: K.padding)
+            bottomAnchorConstraint = superView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: bottomAnchor, constant: K.paddingWithAd)
             trailingAnchorConstraint = superView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 2 * K.padding + SettingsView.buttonSize)
 
             bottomAnchorConstraint!.isActive = true

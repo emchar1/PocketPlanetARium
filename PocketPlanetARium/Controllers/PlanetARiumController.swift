@@ -94,7 +94,7 @@ class PlanetARiumController: UIViewController {
         settingsButtons.delegate = self
         settingsButtons.alpha = 0.0
         view.addSubview(settingsButtons)
-        NSLayoutConstraint.activate([view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: settingsButtons.bottomAnchor, constant: K.padding),
+        NSLayoutConstraint.activate([view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: settingsButtons.bottomAnchor, constant: K.paddingWithAd),
                                      view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: settingsButtons.trailingAnchor, constant: K.padding)])
         
         zoomScaleSlider = ZoomScaleSlider(initialScale: scaleValue, minScale: planetarium.scaleMinimum, maxScale: planetarium.scaleMaximum)
@@ -114,7 +114,7 @@ class PlanetARiumController: UIViewController {
         
         planetarium.beginAnimation(scale: scaleValue, toNode: sceneView)
         
-        
+        AdMobManager.shared.addBannerView(to: self)
         
         
         //GESTURES

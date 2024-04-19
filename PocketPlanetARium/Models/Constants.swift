@@ -57,6 +57,11 @@ struct K {
     static let padding: CGFloat = 20//UIScreen.main.bounds.width / 18.75
     
     /**
+     Padding taking into account banner ad at the bottom. As per the documentation guide (https://developers.google.com/admob/ios/banner) the aspect ratio is similar to 320x50 industry standard.
+     */
+    static let paddingWithAd: CGFloat = UIScreen.main.bounds.height * (50 / 320) * 0.5
+    
+    /**
      Period of a planetary orbit.
      */
     static let period = 2 * Float.pi

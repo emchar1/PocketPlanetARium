@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,6 +22,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        //Register testing devices here...
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [
+            "3e6fb037c3803580c0f3fa7d30fce576" //Eddie's iPhone 14 Pro
+        ]
+
+        //Initialize Google AdMob
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
+
         return true
     }
     
