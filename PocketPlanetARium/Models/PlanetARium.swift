@@ -154,12 +154,9 @@ class PlanetARium {
     
     /**
      Toggles the space background on and off.
-     - parameters:
-        - shouldShow: if `true` then show the background. Else don't
-        - sceneView: the ARSCNView background that will be toggled on/off
      */
     func toggleBackground() {
-        // FIXME: - This isn't right
+        // FIXME: - This isn't right!
         if isOriginalSource {
             sceneView.scene.background.contents = UIImage(named: "art.scnassets/background.jpg")
         }
@@ -585,7 +582,6 @@ class PlanetARium {
     
     /**
      Removes all the Planet object nodes, i.e. wipes the scene view. Should be called before adding the solar system to the scene view.
-     - parameter sceneView: the scene view to remove the solar system from
      */
     private func removePlanets() {
         sceneView.scene.rootNode.enumerateChildNodes { (node, stop) in
@@ -595,7 +591,6 @@ class PlanetARium {
     
     /**
      Adds all the planet nodes and animates them to the scene view.
-     - parameter sceneView: the scene view to add the solar system to
      */
     private func animatePlanets(with scale: Float) {
         guard let sun = planets.getPlanets(withType: PlanetType.sun).first else {
