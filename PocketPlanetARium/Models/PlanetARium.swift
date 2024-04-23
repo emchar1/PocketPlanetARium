@@ -19,14 +19,13 @@ class PlanetARium {
     let scaleMaximum: Float = 1
     private let scaleFactor: Float = 3
     private let scaleSpeed: TimeInterval = 64
-    private(set) var sceneView: ARSCNView
-    private(set) var originalSource: Any?
+    private var sceneView: ARSCNView
+    private var originalSource: Any?
+    private var isOriginalSource = true
 
     //The sweet spot for Merlyne's magic to work = 39ft i.e. my age in years.
     private let sweetSpotRound: Float = 100
-    private var sweetSpot: Float {
-        return round(pow(0.6, 1.0 / scaleFactor) * sweetSpotRound) / sweetSpotRound
-    }
+    private var sweetSpot: Float { round(pow(0.6, 1.0 / scaleFactor) * sweetSpotRound) / sweetSpotRound }
     
     //PlanetARium variables
     private var planets = PlanetGroup()
@@ -159,14 +158,16 @@ class PlanetARium {
         - shouldShow: if `true` then show the background. Else don't
         - sceneView: the ARSCNView background that will be toggled on/off
      */
-    func toggleBackground(shouldShow: Bool) {
-        // FIXME: - This isn't right...
-        if shouldShow {
+    func toggleBackground() {
+        // FIXME: - This isn't right
+        if isOriginalSource {
             sceneView.scene.background.contents = UIImage(named: "art.scnassets/background.jpg")
         }
         else {
             sceneView.scene.background.contents = originalSource
         }
+        
+        isOriginalSource.toggle()
     }
     
     /**
