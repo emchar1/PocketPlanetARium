@@ -62,34 +62,7 @@ class PlanetARiumController: UIViewController {
         setupViews()
         layoutViews()
         
-        
-        //GOOGLE ADMOB SETUP
-        AdMobManager.shared.addBannerView(to: self)
 
-        
-        //GESTURES SETUP
-        //Long press to replace 3D press (for iPad that doesn't have 3D touch technology)
-        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPress))
-        longPressGesture.minimumPressDuration = 1.5
-        sceneView.addGestureRecognizer(longPressGesture)
-        
-        let popPlanetDetailsGesture = PopPlanetDetailsGesture(target: self, action: nil)
-        popPlanetDetailsGesture.popDelegate = self
-        sceneView.addGestureRecognizer(popPlanetDetailsGesture)
-        
-        let tapPlanetGesture = TapPlanetGesture(target: self, action: nil)
-        tapPlanetGesture.tapDelegate = self
-        sceneView.addGestureRecognizer(tapPlanetGesture)
-        
-        
-        //HINTS SETUP
-        hintDevice = HintView(in: sceneView, ofSize: CGSize(width: UIDevice.isiPad ? 250 : 175, height: UIDevice.isiPad ? 350 : 250), anchorToBottomRight: false)
-        hintSettings = HintView(in: sceneView, ofSize: CGSize(width: UIDevice.isiPad ? 200 : 150, height: UIDevice.isiPad ? 225 : 150), anchorToBottomRight: true)
-        hintPlanetTap = HintView(in: sceneView, ofSize: CGSize(width: UIDevice.isiPad ? 250 : 150, height: UIDevice.isiPad ? 250 : 200), anchorToBottomRight: false)
-        hintPinchZoom = HintView(in: sceneView, ofSize: CGSize(width: UIDevice.isiPad ? 250 : 150, height: UIDevice.isiPad ? 250 : 200), anchorToBottomRight: false)
-
-        
-        
         
 //        let summonPlanetGesture = UIPanGestureRecognizer(target: self, action: #selector(planetSummoned))
 //        sceneView.addGestureRecognizer(summonPlanetGesture)
@@ -122,39 +95,6 @@ class PlanetARiumController: UIViewController {
         
     override func viewDidAppear(_ animated: Bool) {
         animateViews()
-        
-        
-        //Play music
-        audioManager.playSound(for: "PlanetARiumOpen")
-        audioManager.playSound(for: "PlanetARiumMusic")
-        
-        
-        //Hints
-        if !UserDefaults.standard.bool(forKey: K.userDefaultsKey_HintsAreOff) {
-            hintDevice.showHint(text: "Move your device around until you can see the planets. Try physically walking up to a planet!",
-                                image: "hintDevice",
-                                forDuration: 7.0,
-                                withDelay: 4.0,
-                                iconAnimationType: .device)
-
-            hintSettings.showHint(text: "Tap on the gear to open Settings.",
-                                  image: "hintArrow",
-                                  forDuration: 5.0,
-                                  withDelay: 16.0,
-                                  iconAnimationType: .settings)
-                        
-            hintPinchZoom.showHint(text: "Pinch the screen with two fingers to resize the PlanetARium.",
-                                   image: "hintPinch",
-                                   forDuration: 5.0,
-                                   withDelay: 31.0,
-                                   iconAnimationType: .pinchZoom)
-            
-            hintPlanetTap.showHint(text: "Tap on a planet to view more details.",
-                                   image: "hintTap",
-                                   forDuration: 5.0,
-                                   withDelay: 43.0,
-                                   iconAnimationType: .planetTap)
-        }
     }
     
     private func setupViews() {
@@ -209,6 +149,32 @@ class PlanetARiumController: UIViewController {
         lowLightWarning.clipsToBounds = true
         lowLightWarning.layer.cornerRadius = 7
         lowLightWarning.alpha = 0.0
+        
+        
+        //GOOGLE ADMOB SETUP
+        AdMobManager.shared.addBannerView(to: self)
+
+        
+        //GESTURES SETUP
+        //Long press to replace 3D press (for iPad that doesn't have 3D touch technology)
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPress))
+        longPressGesture.minimumPressDuration = 1.5
+        sceneView.addGestureRecognizer(longPressGesture)
+        
+        let popPlanetDetailsGesture = PopPlanetDetailsGesture(target: self, action: nil)
+        popPlanetDetailsGesture.popDelegate = self
+        sceneView.addGestureRecognizer(popPlanetDetailsGesture)
+        
+        let tapPlanetGesture = TapPlanetGesture(target: self, action: nil)
+        tapPlanetGesture.tapDelegate = self
+        sceneView.addGestureRecognizer(tapPlanetGesture)
+        
+        
+        //HINTS SETUP
+        hintDevice = HintView(in: sceneView, ofSize: CGSize(width: UIDevice.isiPad ? 250 : 175, height: UIDevice.isiPad ? 350 : 250), anchorToBottomRight: false)
+        hintSettings = HintView(in: sceneView, ofSize: CGSize(width: UIDevice.isiPad ? 200 : 150, height: UIDevice.isiPad ? 225 : 150), anchorToBottomRight: true)
+        hintPlanetTap = HintView(in: sceneView, ofSize: CGSize(width: UIDevice.isiPad ? 250 : 150, height: UIDevice.isiPad ? 250 : 200), anchorToBottomRight: false)
+        hintPinchZoom = HintView(in: sceneView, ofSize: CGSize(width: UIDevice.isiPad ? 250 : 150, height: UIDevice.isiPad ? 250 : 200), anchorToBottomRight: false)
     }
     
     private func layoutViews() {
@@ -217,15 +183,27 @@ class PlanetARiumController: UIViewController {
         view.addSubview(zoomScaleSlider)
         view.addSubview(scaleLabel)
 
+        if let bannerView = AdMobManager.shared.bannerView {
+            NSLayoutConstraint.activate([
+                bannerView.topAnchor.constraint(equalTo: settingsButtons.bottomAnchor, constant: 8)
+            ])
+        }
+        else {
+            //This shouldn't ever happen, but just in case, need a default value here...
+            NSLayoutConstraint.activate([
+                view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: settingsButtons.bottomAnchor, constant: K.paddingWithAd)
+            ])
+        }
+        
         NSLayoutConstraint.activate([
-            view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: settingsButtons.bottomAnchor, constant: K.paddingWithAd),
+            //layout constraints for settingsButtons.bottomAnchor, above
             view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: settingsButtons.trailingAnchor, constant: K.padding),
 
             zoomScaleSlider.widthAnchor.constraint(equalToConstant: zoomScaleSlider.sliderSize.width),
             zoomScaleSlider.heightAnchor.constraint(equalToConstant: zoomScaleSlider.sliderSize.height),
             zoomScaleSlider.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: zoomScaleSlider.bottomAnchor,
-                                                             constant: K.paddingWithAd + settingsButtons.frame.size.height / 2),
+            settingsButtons.bottomAnchor.constraint(equalTo: zoomScaleSlider.bottomAnchor,
+                                                    constant: settingsButtons.frame.size.height / 2 - zoomScaleSlider.sliderSize.height / 2),
 
             scaleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             scaleLabel.topAnchor.constraint(equalTo: zoomScaleSlider.bottomAnchor, constant: 4)
@@ -261,6 +239,39 @@ class PlanetARiumController: UIViewController {
         UIView.animate(withDuration: duration / 2, delay: duration / 2, options: .curveEaseInOut, animations: {
             self.settingsButtons.alpha = K.masterAlpha
         }, completion: nil)
+        
+        
+        //Play music
+        audioManager.playSound(for: "PlanetARiumOpen")
+        audioManager.playSound(for: "PlanetARiumMusic")
+        
+        
+        //Hints
+        if !UserDefaults.standard.bool(forKey: K.userDefaultsKey_HintsAreOff) {
+            hintDevice.showHint(text: "Move your device around until you can see the planets. Try physically walking up to a planet!",
+                                image: "hintDevice",
+                                forDuration: 7.0,
+                                withDelay: 4.0,
+                                iconAnimationType: .device)
+
+            hintSettings.showHint(text: "Tap on the gear to open Settings.",
+                                  image: "hintArrow",
+                                  forDuration: 5.0,
+                                  withDelay: 16.0,
+                                  iconAnimationType: .settings)
+                        
+            hintPinchZoom.showHint(text: "Pinch the screen with two fingers to resize the PlanetARium.",
+                                   image: "hintPinch",
+                                   forDuration: 5.0,
+                                   withDelay: 31.0,
+                                   iconAnimationType: .pinchZoom)
+            
+            hintPlanetTap.showHint(text: "Tap on a planet to view more details.",
+                                   image: "hintTap",
+                                   forDuration: 5.0,
+                                   withDelay: 43.0,
+                                   iconAnimationType: .planetTap)
+        }
     }
     
     @objc private func orientationDidChange(_ notification: NSNotification) {
