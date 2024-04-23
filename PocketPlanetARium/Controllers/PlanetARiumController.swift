@@ -35,7 +35,7 @@ class PlanetARiumController: UIViewController {
     var zoomScaleSlider: ZoomScaleSlider!
 
     //PlanetARium properties
-    var planetarium = PlanetARium()
+    var planetarium: PlanetARium!
     var tappedPlanet: Planet?
 
     //Lighting properties
@@ -83,24 +83,6 @@ class PlanetARiumController: UIViewController {
         bezelView.layer.shadowOpacity = 0.3
         bezelView.layer.shadowRadius = 10
 
-        scaleLabel = UILabel()
-        scaleLabel.font = UIFont(name: K.fontFace, size: K.fontSizePeekDetails)
-        scaleLabel.textColor = .white
-        view.addSubview(scaleLabel)
-        scaleLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([scaleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                                     view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: scaleLabel.bottomAnchor, constant: 0)])
-        
-        settingsButtons.delegate = self
-        settingsButtons.alpha = 0.0
-        view.addSubview(settingsButtons)
-        NSLayoutConstraint.activate([view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: settingsButtons.bottomAnchor, constant: K.paddingWithAd),
-                                     view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: settingsButtons.trailingAnchor, constant: K.padding)])
-        
-        zoomScaleSlider = ZoomScaleSlider(initialScale: scaleValue, minScale: planetarium.scaleMinimum, maxScale: planetarium.scaleMaximum)
-        zoomScaleSlider.delegate = self
-        view.addSubview(zoomScaleSlider)
-
         sceneView.delegate = self
         sceneView.autoenablesDefaultLighting = true
         sceneView.translatesAutoresizingMaskIntoConstraints = true
@@ -108,11 +90,42 @@ class PlanetARiumController: UIViewController {
         sceneView.alpha = 0.0
 //        sceneView.showsStatistics = true
 
+        planetarium = PlanetARium(to: sceneView)
+        planetarium.beginAnimation(scale: scaleValue)
+        
+        settingsButtons.delegate = self
+        settingsButtons.alpha = 0.0
+        view.addSubview(settingsButtons)
+        NSLayoutConstraint.activate([
+            view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: settingsButtons.bottomAnchor, constant: K.paddingWithAd),
+            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: settingsButtons.trailingAnchor, constant: K.padding)
+        ])
+
+        zoomScaleSlider = ZoomScaleSlider(initialScale: scaleValue, minScale: planetarium.scaleMinimum, maxScale: planetarium.scaleMaximum)
+        zoomScaleSlider.delegate = self
+        view.addSubview(zoomScaleSlider)
+        zoomScaleSlider.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            zoomScaleSlider.widthAnchor.constraint(equalToConstant: zoomScaleSlider.sliderSize.width),
+            zoomScaleSlider.heightAnchor.constraint(equalToConstant: zoomScaleSlider.sliderSize.height),
+            zoomScaleSlider.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: zoomScaleSlider.bottomAnchor,
+                                                             constant: K.paddingWithAd + settingsButtons.frame.size.height / 2)
+        ])
+
+        scaleLabel = UILabel()
+        scaleLabel.font = UIFont(name: K.fontFace, size: K.fontSizePeekDetails)
+        scaleLabel.textColor = .white
+        view.addSubview(scaleLabel)
+        scaleLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            scaleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            scaleLabel.topAnchor.constraint(equalTo: zoomScaleSlider.bottomAnchor, constant: 4)
+        ])
+
         lowLightWarning.clipsToBounds = true
         lowLightWarning.layer.cornerRadius = 7
         lowLightWarning.alpha = 0.0
-        
-        planetarium.beginAnimation(scale: scaleValue, toNode: sceneView)
         
         AdMobManager.shared.addBannerView(to: self)
         
@@ -264,7 +277,7 @@ class PlanetARiumController: UIViewController {
             if scaleValue > planetarium.scaleMinimum && scaleValue < planetarium.scaleMaximum {
                 pinchBoundsCount = 0
                 
-                planetarium.beginAnimation(scale: scaleValue, toNode: sceneView)
+                planetarium.beginAnimation(scale: scaleValue)
                 handlePlayPause(for: settingsButtons)
                 zoomScaleSlider.updateValue(to: scaleValue)
                 
@@ -470,7 +483,7 @@ extension PlanetARiumController: ARSCNViewDelegate {
 
 extension PlanetARiumController: ZoomScaleSliderDelegate {
     func zoomScaleSlider(_ controller: ZoomScaleSlider, didUpdateValue value: Float) {
-        planetarium.beginAnimation(scale: value, toNode: sceneView)
+        planetarium.beginAnimation(scale: value)
         handlePlayPause(for: settingsButtons)
         showScaleLabel()
         
@@ -508,7 +521,7 @@ extension PlanetARiumController: SettingsViewDelegate {
     
     func settingsView(_ controller: SettingsView, didPressResetAnimationButton settingsSubButton: SettingsSubButton?) {
         sceneView.session.run(ARWorldTrackingConfiguration(), options: [.resetTracking, .removeExistingAnchors])
-        planetarium.resetAnimation(withScale: scaleValue, toNode: sceneView)
+        planetarium.resetAnimation(withScale: scaleValue)
 //        isSummoning = false
 
         handlePlayPause(for: controller)

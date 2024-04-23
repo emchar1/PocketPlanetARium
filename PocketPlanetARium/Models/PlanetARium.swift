@@ -11,11 +11,17 @@ import SceneKit
 import ARKit
 
 class PlanetARium {
+    
+    // MARK: - Properties
+
     //Don't touch these values!
     let scaleMinimum: Float = 0.123
     let scaleMaximum: Float = 1
     private let scaleFactor: Float = 3
     private let scaleSpeed: TimeInterval = 64
+    private(set) var sceneView: ARSCNView
+    private(set) var originalSource: Any?
+
     //The sweet spot for Merlyne's magic to work = 39ft i.e. my age in years.
     private let sweetSpotRound: Float = 100
     private var sweetSpot: Float {
@@ -25,6 +31,14 @@ class PlanetARium {
     //PlanetARium variables
     private var planets = PlanetGroup()
     private var labelsOn = false
+    
+    
+    // MARK: - Initialization
+    
+    init(to sceneView: ARSCNView) {
+        self.sceneView = sceneView
+        self.originalSource = sceneView.scene.background.contents
+    }
     
         
     // MARK: - Animation Controls
@@ -37,18 +51,18 @@ class PlanetARium {
         - toNode: the scene view to add the solar system to
      - The higher the topSpeed, the faster the animation. Suggested values: 2, 4, 8, 16, 32, 64, 128, 256
      */
-    func beginAnimation(scale: Float, topSpeed speed: TimeInterval? = nil, toNode sceneView: ARSCNView) {
+    func beginAnimation(scale: Float, topSpeed speed: TimeInterval? = nil) {
         let adjustedScale = pow(scale.clamp(min: scaleMinimum, max: scaleMaximum), scaleFactor)
         let adjustedSpeed = speed ?? scaleSpeed
         
-        removePlanets(from: sceneView)
+        removePlanets()
         
         addPlanets(earthRadius: adjustedScale * 3,
                    earthDistance: adjustedScale * -20,
                    earthDay: 32 / adjustedSpeed,
                    earthYear: 365 / adjustedSpeed)
         
-        animatePlanets(to: sceneView, with: scale)
+        animatePlanets(with: scale)
         
         resumeAnimation(to: scale)
         
@@ -83,12 +97,12 @@ class PlanetARium {
         - topSpeed: max speed of the animation
         - toNode: the scene view to add the solar system to
      */
-    func resetAnimation(withScale scale: Float, topSpeed speed: TimeInterval? = nil, toNode sceneView: ARSCNView) {
+    func resetAnimation(withScale scale: Float, topSpeed speed: TimeInterval? = nil) {
         let adjustedSpeed = speed ?? scaleSpeed
 
         planets = PlanetGroup()
         
-        beginAnimation(scale: scale, topSpeed: adjustedSpeed, toNode: sceneView)
+        beginAnimation(scale: scale, topSpeed: adjustedSpeed)
     }
     
     
@@ -556,7 +570,7 @@ class PlanetARium {
      Removes all the Planet object nodes, i.e. wipes the scene view. Should be called before adding the solar system to the scene view.
      - parameter sceneView: the scene view to remove the solar system from
      */
-    private func removePlanets(from sceneView: ARSCNView) {
+    private func removePlanets() {
         sceneView.scene.rootNode.enumerateChildNodes { (node, stop) in
             node.removeFromParentNode()
         }
@@ -566,7 +580,7 @@ class PlanetARium {
      Adds all the planet nodes and animates them to the scene view.
      - parameter sceneView: the scene view to add the solar system to
      */
-    private func animatePlanets(to sceneView: ARSCNView, with scale: Float) {
+    private func animatePlanets(with scale: Float) {
         guard let sun = planets.getPlanets(withType: PlanetType.sun).first else {
             print("Sun not found.")
             return

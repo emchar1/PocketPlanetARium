@@ -17,7 +17,7 @@ class ZoomScaleSlider: UISlider {
     
     // MARK: - Properties
     
-    private let sliderSize: CGSize = CGSize(width: K.screenSize.width / 2, height: 30)
+    let sliderSize: CGSize = CGSize(width: K.screenSize.width / 2, height: 30)
     private let initialScale: Float
     private let minScale: Float
     private let maxScale: Float
@@ -32,9 +32,7 @@ class ZoomScaleSlider: UISlider {
         self.minScale = minScale
         self.maxScale = maxScale
 
-        let sliderPadding: CGFloat = SettingsView.buttonSize + K.paddingWithAd + 15
-
-        super.init(frame: CGRect(origin: CGPoint(x: K.screenSize.width / 2 - sliderSize.width / 2, y: K.screenSize.height - sliderPadding), size: sliderSize))
+        super.init(frame: .zero)
         
         setupViews()
     }
