@@ -11,6 +11,8 @@ import SceneKit
 import ARKit
 
 class PlanetARiumController: UIViewController {
+    
+    // MARK: - Properties
 
     @IBOutlet weak var bezelView: UIView!
     @IBOutlet var sceneView: ARSCNView!
@@ -19,19 +21,10 @@ class PlanetARiumController: UIViewController {
     override var prefersStatusBarHidden: Bool { return true }
     var scaleLabel: UILabel!
     var peekView: PlanetPeekView?
-    lazy var loadingLabel: UILabel = {
-        let loadingLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
-        loadingLabel.center = view.center
-        loadingLabel.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
-        loadingLabel.textColor = .white
-        loadingLabel.textAlignment = .center
-        loadingLabel.text = audioManager.launchMessage
-        loadingLabel.numberOfLines = 0
-        return loadingLabel
-    }()
+    var loadingLabel: UILabel!
 
     //Settings buttons
-    let settingsButtons = SettingsView()
+    var settingsButtons: SettingsView!
     var zoomScaleSlider: ZoomScaleSlider!
 
     //PlanetARium properties
@@ -60,78 +53,21 @@ class PlanetARiumController: UIViewController {
     var hintPlanetTap: HintView!
     var hintPinchZoom: HintView!
             
+    
+    // MARK: - Initialization
 
     override func viewDidLoad() {
         super.viewDidLoad()
                 
-        view.backgroundColor = K.color500
-        view.addSubview(loadingLabel)
-
-        let bezelRatio: CGFloat = 612/335
-        let possibleWidth = view.frame.width - 2 * K.padding
-        let possibleHeight = view.frame.height - 6 * K.padding
-        let width = bezelRatio < K.screenRatio ? possibleWidth : possibleHeight / bezelRatio
-        let height = bezelRatio < K.screenRatio ? possibleWidth * bezelRatio : possibleHeight
-
-        bezelView.translatesAutoresizingMaskIntoConstraints = true
-        bezelView.frame = CGRect(x: 0, y: 0, width: width, height: height)
-                
-        bezelView.center = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
-        bezelView.backgroundColor = K.color900
-        bezelView.layer.cornerRadius = 18
-        bezelView.layer.shadowColor = UIColor.black.cgColor
-        bezelView.layer.shadowOpacity = 0.3
-        bezelView.layer.shadowRadius = 10
-
-        sceneView.delegate = self
-        sceneView.autoenablesDefaultLighting = true
-        sceneView.translatesAutoresizingMaskIntoConstraints = true
-        sceneView.frame = CGRect(x: 0, y: 0, width: bezelView.frame.width, height: bezelView.frame.height)
-        sceneView.alpha = 0.0
-//        sceneView.showsStatistics = true
-
-        planetarium = PlanetARium(to: sceneView)
-        planetarium.beginAnimation(scale: scaleValue)
+        setupViews()
+        layoutViews()
         
-        settingsButtons.delegate = self
-        settingsButtons.alpha = 0.0
-        view.addSubview(settingsButtons)
-        NSLayoutConstraint.activate([
-            view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: settingsButtons.bottomAnchor, constant: K.paddingWithAd),
-            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: settingsButtons.trailingAnchor, constant: K.padding)
-        ])
-
-        zoomScaleSlider = ZoomScaleSlider(initialScale: scaleValue, minScale: planetarium.scaleMinimum, maxScale: planetarium.scaleMaximum)
-        zoomScaleSlider.delegate = self
-        view.addSubview(zoomScaleSlider)
-        zoomScaleSlider.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            zoomScaleSlider.widthAnchor.constraint(equalToConstant: zoomScaleSlider.sliderSize.width),
-            zoomScaleSlider.heightAnchor.constraint(equalToConstant: zoomScaleSlider.sliderSize.height),
-            zoomScaleSlider.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: zoomScaleSlider.bottomAnchor,
-                                                             constant: K.paddingWithAd + settingsButtons.frame.size.height / 2)
-        ])
-
-        scaleLabel = UILabel()
-        scaleLabel.font = UIFont(name: K.fontFace, size: K.fontSizePeekDetails)
-        scaleLabel.textColor = .white
-        view.addSubview(scaleLabel)
-        scaleLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            scaleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            scaleLabel.topAnchor.constraint(equalTo: zoomScaleSlider.bottomAnchor, constant: 4)
-        ])
-
-        lowLightWarning.clipsToBounds = true
-        lowLightWarning.layer.cornerRadius = 7
-        lowLightWarning.alpha = 0.0
         
+        //GOOGLE ADMOB SETUP
         AdMobManager.shared.addBannerView(to: self)
+
         
-        
-        //GESTURES
-        
+        //GESTURES SETUP
         //Long press to replace 3D press (for iPad that doesn't have 3D touch technology)
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPress))
         longPressGesture.minimumPressDuration = 1.5
@@ -144,11 +80,21 @@ class PlanetARiumController: UIViewController {
         let tapPlanetGesture = TapPlanetGesture(target: self, action: nil)
         tapPlanetGesture.tapDelegate = self
         sceneView.addGestureRecognizer(tapPlanetGesture)
+        
+        
+        //HINTS SETUP
+        hintDevice = HintView(in: sceneView, ofSize: CGSize(width: UIDevice.isiPad ? 250 : 175, height: UIDevice.isiPad ? 350 : 250), anchorToBottomRight: false)
+        hintSettings = HintView(in: sceneView, ofSize: CGSize(width: UIDevice.isiPad ? 200 : 150, height: UIDevice.isiPad ? 225 : 150), anchorToBottomRight: true)
+        hintPlanetTap = HintView(in: sceneView, ofSize: CGSize(width: UIDevice.isiPad ? 250 : 150, height: UIDevice.isiPad ? 250 : 200), anchorToBottomRight: false)
+        hintPinchZoom = HintView(in: sceneView, ofSize: CGSize(width: UIDevice.isiPad ? 250 : 150, height: UIDevice.isiPad ? 250 : 200), anchorToBottomRight: false)
 
+        
+        
+        
 //        let summonPlanetGesture = UIPanGestureRecognizer(target: self, action: #selector(planetSummoned))
 //        sceneView.addGestureRecognizer(summonPlanetGesture)
-        
-        //View for the impending doom on earth
+//        
+//        //View for the impending doom on earth
 //        let sceneView2 = SCNView(frame: CGRect(x: 20, y: 80, width: 100, height: 100))
 //        let urth = SCNSphere(radius: 0.5)
 //        urth.materials.first?.diffuse.contents = UIImage(named: "art.scnassets/earth.jpg")
@@ -162,16 +108,6 @@ class PlanetARiumController: UIViewController {
 //        sceneView2.scene = scene
 //        scene.rootNode.addChildNode(urthNode)
 //        view.addSubview(sceneView2)
-        
-        
-        
-        
-        //HINTS
-        
-        hintDevice = HintView(in: sceneView, ofSize: CGSize(width: UIDevice.isiPad ? 250 : 175, height: UIDevice.isiPad ? 350 : 250), anchorToBottomRight: false)
-        hintSettings = HintView(in: sceneView, ofSize: CGSize(width: UIDevice.isiPad ? 200 : 150, height: UIDevice.isiPad ? 225 : 150), anchorToBottomRight: true)
-        hintPlanetTap = HintView(in: sceneView, ofSize: CGSize(width: UIDevice.isiPad ? 250 : 150, height: UIDevice.isiPad ? 250 : 200), anchorToBottomRight: false)
-        hintPinchZoom = HintView(in: sceneView, ofSize: CGSize(width: UIDevice.isiPad ? 250 : 150, height: UIDevice.isiPad ? 250 : 200), anchorToBottomRight: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -185,36 +121,10 @@ class PlanetARiumController: UIViewController {
     }
         
     override func viewDidAppear(_ animated: Bool) {
-        let duration: TimeInterval = 2.0
+        animateViews()
         
-        UIView.animate(withDuration: duration / 2, delay: 0.0, options: .curveEaseIn) {
-            self.loadingLabel.alpha = 0.0
-        } completion: { _ in
-            self.loadingLabel.removeFromSuperview()
-        }
-
-        UIView.animate(withDuration: duration, delay: 0.0, options: .curveEaseOut) {
-            self.bezelView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
-            self.sceneView.frame = self.bezelView.frame
-            self.sceneView.alpha = 1.0
-        } completion: { _ in
-            self.view.backgroundColor = .clear
-            self.bezelView.backgroundColor = .clear
-            
-            //Enable device rotation only after the bezel finishes animating!
-            (UIApplication.shared.delegate as! AppDelegate).supportedOrientations = [.allButUpsideDown]
-
-            NotificationCenter.default.addObserver(self,
-                                                   selector: #selector(self.orientationDidChange(_:)),
-                                                   name: UIDevice.orientationDidChangeNotification,
-                                                   object: nil)
-        }
-
-        UIView.animate(withDuration: duration / 2, delay: duration / 2, options: .curveEaseInOut, animations: {
-            self.settingsButtons.alpha = K.masterAlpha
-        }, completion: nil)
         
-        //PLAY MUSIC!!!
+        //Play music
         audioManager.playSound(for: "PlanetARiumOpen")
         audioManager.playSound(for: "PlanetARiumMusic")
         
@@ -245,6 +155,112 @@ class PlanetARiumController: UIViewController {
                                    withDelay: 43.0,
                                    iconAnimationType: .planetTap)
         }
+    }
+    
+    private func setupViews() {
+        view.backgroundColor = K.color500
+
+        let bezelRatio: CGFloat = 612/335
+        let possibleWidth = view.frame.width - 2 * K.padding
+        let possibleHeight = view.frame.height - 6 * K.padding
+        let width = bezelRatio < K.screenRatio ? possibleWidth : possibleHeight / bezelRatio
+        let height = bezelRatio < K.screenRatio ? possibleWidth * bezelRatio : possibleHeight
+        
+        loadingLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+        loadingLabel.center = view.center
+        loadingLabel.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
+        loadingLabel.textColor = .white
+        loadingLabel.textAlignment = .center
+        loadingLabel.text = audioManager.launchMessage
+        loadingLabel.numberOfLines = 0
+
+        bezelView.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        bezelView.center = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
+        bezelView.backgroundColor = K.color900
+        bezelView.layer.cornerRadius = 18
+        bezelView.layer.shadowColor = UIColor.black.cgColor
+        bezelView.layer.shadowOpacity = 0.3
+        bezelView.layer.shadowRadius = 10
+        bezelView.translatesAutoresizingMaskIntoConstraints = true
+
+        sceneView.frame = CGRect(x: 0, y: 0, width: bezelView.frame.width, height: bezelView.frame.height)
+        sceneView.autoenablesDefaultLighting = true
+        sceneView.alpha = 0.0
+        sceneView.delegate = self
+        sceneView.translatesAutoresizingMaskIntoConstraints = true
+//        sceneView.showsStatistics = true
+
+        planetarium = PlanetARium(to: sceneView)
+        planetarium.beginAnimation(scale: scaleValue)
+        
+        settingsButtons = SettingsView()
+        settingsButtons.alpha = 0.0
+        settingsButtons.delegate = self
+
+        zoomScaleSlider = ZoomScaleSlider(initialScale: scaleValue, minScale: planetarium.scaleMinimum, maxScale: planetarium.scaleMaximum)
+        zoomScaleSlider.delegate = self
+        zoomScaleSlider.translatesAutoresizingMaskIntoConstraints = false
+
+        scaleLabel = UILabel()
+        scaleLabel.font = UIFont(name: K.fontFace, size: K.fontSizePeekDetails)
+        scaleLabel.textColor = .white
+        scaleLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        lowLightWarning.clipsToBounds = true
+        lowLightWarning.layer.cornerRadius = 7
+        lowLightWarning.alpha = 0.0
+    }
+    
+    private func layoutViews() {
+        view.addSubview(loadingLabel)
+        view.addSubview(settingsButtons)
+        view.addSubview(zoomScaleSlider)
+        view.addSubview(scaleLabel)
+
+        NSLayoutConstraint.activate([
+            view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: settingsButtons.bottomAnchor, constant: K.paddingWithAd),
+            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: settingsButtons.trailingAnchor, constant: K.padding),
+
+            zoomScaleSlider.widthAnchor.constraint(equalToConstant: zoomScaleSlider.sliderSize.width),
+            zoomScaleSlider.heightAnchor.constraint(equalToConstant: zoomScaleSlider.sliderSize.height),
+            zoomScaleSlider.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: zoomScaleSlider.bottomAnchor,
+                                                             constant: K.paddingWithAd + settingsButtons.frame.size.height / 2),
+
+            scaleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            scaleLabel.topAnchor.constraint(equalTo: zoomScaleSlider.bottomAnchor, constant: 4)
+        ])
+    }
+    
+    private func animateViews() {
+        let duration: TimeInterval = 2.0
+        
+        UIView.animate(withDuration: duration / 2, delay: 0.0, options: .curveEaseIn) {
+            self.loadingLabel.alpha = 0.0
+        } completion: { _ in
+            self.loadingLabel.removeFromSuperview()
+        }
+
+        UIView.animate(withDuration: duration, delay: 0.0, options: .curveEaseOut) {
+            self.bezelView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
+            self.sceneView.frame = self.bezelView.frame
+            self.sceneView.alpha = 1.0
+        } completion: { _ in
+            self.view.backgroundColor = .clear
+            self.bezelView.backgroundColor = .clear
+            
+            //Enable device rotation only after the bezel finishes animating!
+            (UIApplication.shared.delegate as! AppDelegate).supportedOrientations = [.allButUpsideDown]
+
+            NotificationCenter.default.addObserver(self,
+                                                   selector: #selector(self.orientationDidChange(_:)),
+                                                   name: UIDevice.orientationDidChangeNotification,
+                                                   object: nil)
+        }
+
+        UIView.animate(withDuration: duration / 2, delay: duration / 2, options: .curveEaseInOut, animations: {
+            self.settingsButtons.alpha = K.masterAlpha
+        }, completion: nil)
     }
     
     @objc private func orientationDidChange(_ notification: NSNotification) {

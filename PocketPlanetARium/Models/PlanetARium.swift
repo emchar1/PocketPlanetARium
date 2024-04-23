@@ -66,7 +66,7 @@ class PlanetARium {
         
         resumeAnimation(to: scale)
         
-        sceneView.scene.background.contents = UIImage(named: "art.scnassets/background.jpg")            
+        sceneView.scene.background.contents = UIImage(named: "art.scnassets/background.jpg")
     }
         
     /**
@@ -152,6 +152,22 @@ class PlanetARium {
     
     
     // MARK: - Customization
+    
+    /**
+     Toggles the space background on and off.
+     - parameters:
+        - shouldShow: if `true` then show the background. Else don't
+        - sceneView: the ARSCNView background that will be toggled on/off
+     */
+    func toggleBackground(shouldShow: Bool) {
+        // FIXME: - This isn't right...
+        if shouldShow {
+            sceneView.scene.background.contents = UIImage(named: "art.scnassets/background.jpg")
+        }
+        else {
+            sceneView.scene.background.contents = originalSource
+        }
+    }
     
     /**
      Return the requested planet, sun, or moon. (This will grow inefficiently. Have a struct to house the planets? PlanetDirectory.
