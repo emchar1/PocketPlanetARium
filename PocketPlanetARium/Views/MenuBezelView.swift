@@ -41,12 +41,18 @@ class MenuBezelView: UIView {
         layer.shadowOpacity = 0.3
         layer.shadowRadius = 10
         
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        paragraphStyle.lineSpacing = 8
+
+        let attributedString = NSMutableAttributedString(string: audioManager.launchMessage)
+        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
+        
         label = UILabel(frame: frame)
         label.frame.origin = .zero
         label.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
+        label.attributedText = attributedString
         label.textColor = .white
-        label.textAlignment = .center
-        label.text = audioManager.launchMessage
         label.numberOfLines = 0
         label.alpha = 0.0
         addSubview(label)

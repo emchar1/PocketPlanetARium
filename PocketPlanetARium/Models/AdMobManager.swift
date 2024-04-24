@@ -7,6 +7,7 @@
 //
 
 import GoogleMobileAds
+import AppTrackingTransparency
 
 class AdMobManager: NSObject {
     
@@ -48,6 +49,28 @@ class AdMobManager: NSObject {
             viewController.view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: bannerView!.bottomAnchor)
         ])
     }
+    
+    func requestIDFAPermission() {
+        if #available(iOS 14.0, *) {
+            ATTrackingManager.requestTrackingAuthorization { status in
+                switch status {
+                case .authorized:
+                    print("Request IDFA authorized")
+                case .denied, .restricted:
+                    print("Request IDFA denied")
+                case .notDetermined:
+                    print("Request IDFA undetermined")
+                @unknown default:
+                    print("Request IDFA @unknown")
+                }
+            }
+        }
+        else {
+            //Fallback on earlier versions
+        }
+    }
+    
+    
 }
 
 

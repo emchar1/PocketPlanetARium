@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>This ensures the app remains free and the ads you see are personalized.</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>GADApplicationIdentifier</key>

@@ -28,12 +28,18 @@ class MenuContentViewSingle: UIView {
     }
     
     private func setupViews() {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        paragraphStyle.lineSpacing = 8
+
+        let attributedString = NSMutableAttributedString(string: menuItem.item.description)
+        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
+        
         contentLabel = UILabel()
         contentLabel.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
+        contentLabel.attributedText = attributedString
         contentLabel.textColor = .white
-        contentLabel.textAlignment = .center
         contentLabel.numberOfLines = 0
-        contentLabel.text = menuItem.item.description
         contentLabel.alpha = 0.0
         
         superView.addSubview(contentLabel)

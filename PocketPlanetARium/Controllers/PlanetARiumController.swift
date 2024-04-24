@@ -106,12 +106,18 @@ class PlanetARiumController: UIViewController {
         let width = bezelRatio < K.screenRatio ? possibleWidth : possibleHeight / bezelRatio
         let height = bezelRatio < K.screenRatio ? possibleWidth * bezelRatio : possibleHeight
         
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        paragraphStyle.lineSpacing = 8
+
+        let attributedString = NSMutableAttributedString(string: audioManager.launchMessage)
+        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
+        
         loadingLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
         loadingLabel.center = view.center
         loadingLabel.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
+        loadingLabel.attributedText = attributedString
         loadingLabel.textColor = .white
-        loadingLabel.textAlignment = .center
-        loadingLabel.text = audioManager.launchMessage
         loadingLabel.numberOfLines = 0
 
         bezelView.frame = CGRect(x: 0, y: 0, width: width, height: height)

@@ -493,8 +493,15 @@ class MenuContentViewLaunch: UIView {
         audioManager.playSound(for: "LaunchButton", currentTime: 0.0)
         audioManager.stopSound(for: "MenuScreen", fadeDuration: 2.0)
         
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        paragraphStyle.lineSpacing = 8
+
+        let attributedString = NSMutableAttributedString(string: audioManager.launchMessage)
+        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
+        
         sender.backgroundColor = buttonPressedColor
-        superView.label.text = audioManager.launchMessage
+        superView.label.attributedText = attributedString
         
         UIView.animate(withDuration: duration, delay: duration / 2, options: .curveEaseIn, animations: {
             self.superView.label.alpha = K.masterAlpha

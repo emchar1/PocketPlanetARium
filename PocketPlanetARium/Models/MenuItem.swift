@@ -11,28 +11,31 @@ import Foundation
 typealias MenuIndex = (index: Int, description: String, video: (name: String, type: String)?)
 
 enum MenuItem: CaseIterable {
-    case item0, item1, item2//, item3, item4, item5
+    case item0, item1, item2, item3, item4
     
     static let firstItemIndex: Int = 0
-    static let lastItemIndex: Int = 2//5
+    static let lastItemIndex: Int = 4
     static let firstItem: MenuItem = item0
-    static let lastItem: MenuItem = item2//item5
+    static let lastItem: MenuItem = item4
     
     var item: MenuIndex {
+        let menuIndex: MenuIndex
+        
         switch self {
         case .item0:
-            return (0, "Imagine the universe in the palm of your hand...\n\nWith the Pocket PlanetARium, you can do just that. Get up, move around, and discover the planets in Augmented Reality - a truly immersive experience!", nil)
+            menuIndex = (0, "Imagine the universe in the palm of your hand...\n\nWith the Pocket PlanetARium, you can do just that. Get up, move around, and discover the planets in Augmented Reality - a truly immersive experience!", nil)
         case .item1:
-            return (1, "When first launching the app, make sure to hold your device at a comfortable distance from your face, perpendicular to the floor.\n\nMake sure the lighting in the room is adequate to get the best experience.", nil)
+            menuIndex = (1, "In order to enjoy the PlanetARium, you will need to allow the app access to your camera. Swipe left, then tap OK on the following pop-up window to allow access.", nil)
         case .item2:
-            return (2, "View: Solar System\n\nSound: On\n\nHints on Startup: On\n\nCredits", nil)
-//            return (2, "Pinch with two fingers to zoom in and out. The PlanetARium will scale from as small as 10 feet to as large as one mile in diameter!", (name: "planetPinch", type: "mov"))
-//        case .item3:
-//            return (3, "Tap and hold on any planet to get quick info. Continue holding down with your finger to get more details on the planet.", (name: "planetHardPress", type: "mov"))
-//        case .item4:
-//            return (4, "Use the controls at the bottom right to toggle the sound on/off, display planet names, pause animation, and reset your location.\n\nIf you lose your positioning, reset your location to place you back in the center of the PlanetARium.", (name: "planetSettings", type: "mov"))
-//        case .item5:
-//            return (5, "View: Solar System\n\nSound: On\n\nHints on Startup: On\n\nCredits", nil)
+            menuIndex = (2, "This app can also deliver personalized ads to you. To enable this feature swipe left, then tap OK on the following pop-up window.", nil)
+        case .item3:
+            menuIndex = (3, "Thank you for your responses!\n\nWhen first launching the app, make sure to hold your device at a comfortable distance from your face, perpendicular to the floor.\n\nMake sure the lighting in the room is adequate to get the best experience.", nil)
+        case .item4:
+            menuIndex = (4, "View: Solar System\n\nSound: On\n\nHints: On\n\nStartup: On\n\nCredits", nil) //Filler needed so that the menu page will be included
         }
+        
+        return menuIndex
     }
+    
+    
 }

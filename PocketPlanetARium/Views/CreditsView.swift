@@ -39,9 +39,11 @@ class CreditsView: UIView {
 
     Created by
     Eddie Char
-
-
-    ©2020 5Play Apps
+    
+    
+    
+    ©2024 5Play Apps
+    All rights reserved.
     """
     
     init(in superView: UIView) {
@@ -49,7 +51,8 @@ class CreditsView: UIView {
         self.creditsLabel = UILabel(frame: CGRect(x: 0,
                                                   y: 0,
                                                   width: superView.frame.width,
-                                                  height: superView.frame.height + heightOffset))
+                                                  height: superView.frame.height * 1.5 + heightOffset))
+        
         super.init(frame: CGRect(x: 0,
                                  y: padding,
                                  width: superView.frame.width,
@@ -62,7 +65,7 @@ class CreditsView: UIView {
         shadowAttribute.shadowOffset = CGSize(width: 2.0, height: 2.0)
         shadowAttribute.shadowColor = UIColor.darkGray
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 6.0
+        paragraphStyle.lineSpacing = 8
         let titleAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont(name: K.fontTitle, size: K.fontSizeMenu + 4)!,
             .foregroundColor: UIColor.getRandom(redRange: 175...255, greenRange: 175...255, blueRange: 175...255),
@@ -119,8 +122,8 @@ class CreditsView: UIView {
             self.alpha = 1.0
         }, completion: nil)
         
-        UIView.animate(withDuration: 25.0, delay: 0, options: .curveLinear, animations: {
-            self.creditsLabel.frame.origin.y = -self.superView.frame.height - self.heightOffset
+        UIView.animate(withDuration: 37.5, delay: 0, options: .curveLinear, animations: {
+            self.creditsLabel.frame.origin.y = -self.creditsLabel.frame.size.height
         }, completion: { _ in
             self.removeFromView()
         })
