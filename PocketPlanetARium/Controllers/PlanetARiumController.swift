@@ -254,7 +254,7 @@ class PlanetARiumController: UIViewController {
         
         //Hints
         if !UserDefaults.standard.bool(forKey: K.userDefaultsKey_HintsAreOff) {
-            hintDevice.showHint(text: "Move your device around until you can see the planets. Try physically walking up to a planet!",
+            hintDevice.showHint(text: AudioManager.shared.checkForCamera() == .authorized ? "Move your device around until you can see the planets. Try physically walking up to a planet!" : "Camera access is required for proper PlanetARium viewing. Enable this in your device Settings.",
                                 image: "hintDevice",
                                 forDuration: 7.0,
                                 withDelay: 4.0,

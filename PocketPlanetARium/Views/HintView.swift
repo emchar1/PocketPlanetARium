@@ -8,11 +8,10 @@
 
 import UIKit
 
-enum IconAnimationType {
-    case device, settings, planetTap, pinchZoom
-}
-
 class HintView: UIView {
+    
+    // MARK: - Properties
+    
     var superView: UIView!
     var hintViewSize: CGSize
     var messageViewSize: CGSize {
@@ -35,6 +34,12 @@ class HintView: UIView {
         CGFloat.random(in: 40...max(41, (superView.frame.width - max(hintViewSize.width, hintViewSize.height) - 40)))
     }
     
+    enum IconAnimationType {
+        case device, settings, planetTap, pinchZoom
+    }
+
+    
+    // MARK: - Initialization
     
     /**
      Initialize the hint with a size of 0.
@@ -82,6 +87,8 @@ class HintView: UIView {
         fatalError("Unable to initialize HintsView object.")
     }
     
+    
+    // MARK: - Functions
 
     /**
      Hint for the settings sprocket.
