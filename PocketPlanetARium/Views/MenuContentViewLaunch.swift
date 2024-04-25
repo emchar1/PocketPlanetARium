@@ -10,7 +10,7 @@ import UIKit
 
 protocol MenuContentViewLaunchDelegate: AnyObject {
     func menuContentViewLaunch(_ controller: MenuContentViewLaunch, didPresentPlanetARiumController planetARiumController: PlanetARiumController)
-    func menuContentViewLaunch(_ controller: MenuContentViewLaunch, didPresentViewChangeWith alert: UIAlertController)
+    func menuContentViewLaunch(_ controller: MenuContentViewLaunch, didPresentViewChangeWith alert: UIAlertController, handler: (() -> Void)?)
 }
 
 class MenuContentViewLaunch: UIView {
@@ -231,7 +231,7 @@ class MenuContentViewLaunch: UIView {
         launchButton.layer.shadowRadius = UIDevice.isiPad ? 6 : 4
         launchButton.layer.shadowColor = UIColor.black.cgColor
         launchButton.layer.shadowOpacity = 0.3
-        launchButton.addTarget(self, action: #selector(loadPlanetARium(_:)), for: .touchUpInside)
+        launchButton.addTarget(self, action: #selector(assessCameraAccess(_:)), for: .touchUpInside)
 
         bottomStackView.addSubview(launchButton)
 
@@ -422,7 +422,7 @@ class MenuContentViewLaunch: UIView {
         alert.addAction(actionVirgo)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
-        delegate?.menuContentViewLaunch(self, didPresentViewChangeWith: alert)
+        delegate?.menuContentViewLaunch(self, didPresentViewChangeWith: alert, handler: nil)
     }
     
     /**
@@ -486,15 +486,55 @@ class MenuContentViewLaunch: UIView {
     }
     
     /**
-     Launches the PlanetARium!
+     Assess whether or not camera has been access and give user one last time to change, if recently denied.
      */
-    @objc private func loadPlanetARium(_ sender: UIButton) {
-        let duration: TimeInterval = 0.25
+    @objc private func assessCameraAccess(_ sender: UIButton) {
+        tapButton(sender)
         
+        guard AudioManager.shared.checkForCamera() == .authorized else {
+            let alertController = UIAlertController(title: "⚠️ Camera Denied", message: "Camera request was denied. To change this, tap Open Settings and enable Camera access. This will restart the app.", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Open Settings", style: .default, handler: { _ in
+                guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
+                    return
+                }
+                
+                if UIApplication.shared.canOpenURL(settingsURL) {
+                    UIApplication.shared.open(settingsURL)
+                }
+            }))
+            alertController.addAction(UIAlertAction(title: "Proceed Anyway", style: .default, handler: { [unowned self] _ in
+                loadPlanetARium()
+            }))
+            
+            delegate?.menuContentViewLaunch(self, didPresentViewChangeWith: alertController) { [unowned self] in
+                print("WARNING!!")
+                untapButton(sender)
+            }
+
+            return
+        }
+        
+        loadPlanetARium()
+        untapButton(sender)
+    }
+    
+    private func tapButton(_ sender: UIButton) {
+        sender.backgroundColor = buttonPressedColor
         K.addHapticFeedback(withStyle: .light)
         AudioManager.shared.playSound(for: "LaunchButton", currentTime: 0.0)
         AudioManager.shared.stopSound(for: "MenuScreen", fadeDuration: 2.0)
         
+        print("Launch Button tapped! 🚀")
+    }
+    
+    private func untapButton(_ sender: UIButton) {
+        sender.backgroundColor = buttonColor
+    }
+    
+    /**
+     Launches the PlanetARium!
+     */
+    private func loadPlanetARium() {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
         paragraphStyle.lineSpacing = 8
@@ -502,8 +542,10 @@ class MenuContentViewLaunch: UIView {
         let attributedString = NSMutableAttributedString(string: AudioManager.shared.launchMessage)
         attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
         
-        sender.backgroundColor = buttonPressedColor
         superView.label.attributedText = attributedString
+        
+
+        let duration: TimeInterval = 0.25
         
         UIView.animate(withDuration: duration, delay: duration / 2, options: .curveEaseIn, animations: {
             self.superView.label.alpha = K.masterAlpha
@@ -522,5 +564,7 @@ class MenuContentViewLaunch: UIView {
                 self.delegate?.menuContentViewLaunch(self, didPresentPlanetARiumController: planetARiumController)
             }
         }
-    }
+    }//end loadPlanetARium()
+    
+    
 }

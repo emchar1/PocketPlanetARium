@@ -55,14 +55,19 @@ class AudioManager {
     var theme: AudioTheme = .main
     var audioItems: [String : AudioItem] = [:]
     var launchMessage: String {
+        let noCameraAccessString = "Camera access is denied.\nPlanetARium may act unpredictably."
+        var successString: String
+        
         switch theme {
         case .main:
-            return "Remember to always be aware\nof your surroundings."
+            successString = "Remember to always be aware\nof your surroundings."
         case .mario:
-            return "Happy Mar10 Day!"
+            successString = "Happy Mar10 Day!"
         case .starWars:
-            return "May the Force be with you."
+            successString =  "May the Force be with you."
         }
+        
+        return AudioManager.shared.checkForCamera() == .authorized ? successString : noCameraAccessString
     }
     
 

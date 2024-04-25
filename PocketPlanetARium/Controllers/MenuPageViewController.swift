@@ -92,8 +92,8 @@ extension MenuPageViewController: MenuContentViewLaunchDelegate {
         self.present(planetARiumController, animated: true, completion: nil)
     }
     
-    func menuContentViewLaunch(_ controller: MenuContentViewLaunch, didPresentViewChangeWith alert: UIAlertController) {
-        present(alert, animated: true, completion: nil)
+    func menuContentViewLaunch(_ controller: MenuContentViewLaunch, didPresentViewChangeWith alert: UIAlertController, handler: (() -> Void)?) {
+        present(alert, animated: true, completion: handler)
         
         //IMPORTANT!! Required for iPad, else program crashes
         if let popOver = alert.popoverPresentationController {

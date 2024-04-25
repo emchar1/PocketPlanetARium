@@ -25,7 +25,7 @@ enum MenuItem: CaseIterable {
         case .item0:
             menuIndex = (0, "Imagine the universe in the palm of your hand...\n\nWith the Pocket PlanetARium, you can do just that. Get up, move around, and discover the planets in Augmented Reality - a truly immersive experience!", nil)
         case .item1:
-            menuIndex = (1, "In order to enjoy the PlanetARium, you will need to allow the app access to your camera. To allow access swipe left, then tap OK on the pop-up window.", nil)
+            menuIndex = (1, "In order to enjoy the PlanetARium, you will need to allow the app access to your camera. To allow access swipe left, then tap Allow on the pop-up window.", nil)
         case .item2:
             menuIndex = (2, "This app can also deliver personalized ads to you. To enable this feature swipe left, then tap Allow on the pop-up window.", nil)
         case .item3:
