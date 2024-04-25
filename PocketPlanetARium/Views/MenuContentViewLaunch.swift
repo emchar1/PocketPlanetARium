@@ -76,6 +76,8 @@ class MenuContentViewLaunch: UIView {
         super.init(frame: CGRect(x: 0, y: 0, width: superView.frame.width, height: superView.frame.height))
         
         setupViews()
+        
+        AudioManager.shared.requestCamera()
     }
 
     required init?(coder: NSCoder) {
@@ -384,7 +386,7 @@ class MenuContentViewLaunch: UIView {
      */
     @objc private func changeView() {
         K.addHapticFeedback(withStyle: .light)
-        audioManager.playSound(for: "MenuButton", currentTime: 0.0)
+        AudioManager.shared.playSound(for: "MenuButton", currentTime: 0.0)
 
         planetARiumViewButton.backgroundColor = buttonPressedColor
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
@@ -428,11 +430,11 @@ class MenuContentViewLaunch: UIView {
      */
     @objc private func toggleSound() {
         K.addHapticFeedback(withStyle: .light)
-        audioManager.playSound(for: "MenuButton", currentTime: 0.0)
+        AudioManager.shared.playSound(for: "MenuButton", currentTime: 0.0)
         
         isMuted = !isMuted
         UserDefaults.standard.setValue(isMuted, forKey: K.userDefaultsKey_SoundIsMuted)
-        audioManager.updateVolumes()
+        AudioManager.shared.updateVolumes()
         
         soundLabel.text = isMuted ? "Off" : "On"
     }
@@ -442,7 +444,7 @@ class MenuContentViewLaunch: UIView {
      */
     @objc private func toggleHints() {
         K.addHapticFeedback(withStyle: .light)
-        audioManager.playSound(for: "MenuButton", currentTime: 0.0)
+        AudioManager.shared.playSound(for: "MenuButton", currentTime: 0.0)
         
         hintsAreOff = !hintsAreOff
         UserDefaults.standard.setValue(hintsAreOff, forKey: K.userDefaultsKey_HintsAreOff)
@@ -452,7 +454,7 @@ class MenuContentViewLaunch: UIView {
     
     @objc private func toggleMusicThemes() {
         K.addHapticFeedback(withStyle: .light)
-        audioManager.playSound(for: "MenuButton", currentTime: 0.0)
+        AudioManager.shared.playSound(for: "MenuButton", currentTime: 0.0)
         
         musicThemeButton.backgroundColor = buttonPressedColor
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut) {
@@ -462,13 +464,13 @@ class MenuContentViewLaunch: UIView {
             
             switch self.musicTheme {
             case 0:
-                audioManager.setTheme(.main)
+                AudioManager.shared.setTheme(.main)
                 self.musicThemeLabel.text = "Main Theme"
             case 1:
-                audioManager.setTheme(.mario)
+                AudioManager.shared.setTheme(.mario)
                 self.musicThemeLabel.text = "Super Mario Bros."
             case 2:
-                audioManager.setTheme(.starWars)
+                AudioManager.shared.setTheme(.starWars)
                 self.musicThemeLabel.text = "Star Wars"
             default:
                 break
@@ -478,7 +480,7 @@ class MenuContentViewLaunch: UIView {
     
     @objc private func viewCredits() {
         K.addHapticFeedback(withStyle: .light)
-        audioManager.playSound(for: "MenuButton", currentTime: 0.0)
+        AudioManager.shared.playSound(for: "MenuButton", currentTime: 0.0)
         
         creditsView.play()
     }
@@ -490,14 +492,14 @@ class MenuContentViewLaunch: UIView {
         let duration: TimeInterval = 0.25
         
         K.addHapticFeedback(withStyle: .light)
-        audioManager.playSound(for: "LaunchButton", currentTime: 0.0)
-        audioManager.stopSound(for: "MenuScreen", fadeDuration: 2.0)
+        AudioManager.shared.playSound(for: "LaunchButton", currentTime: 0.0)
+        AudioManager.shared.stopSound(for: "MenuScreen", fadeDuration: 2.0)
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
         paragraphStyle.lineSpacing = 8
 
-        let attributedString = NSMutableAttributedString(string: audioManager.launchMessage)
+        let attributedString = NSMutableAttributedString(string: AudioManager.shared.launchMessage)
         attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
         
         sender.backgroundColor = buttonPressedColor

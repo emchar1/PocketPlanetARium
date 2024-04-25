@@ -45,7 +45,13 @@ struct AudioItem {
 
 // MARK: - AudioManager
 
-struct AudioManager {
+class AudioManager {
+    static let shared: AudioManager = {
+        let instance = AudioManager()
+        //additional setup, if needed
+        return instance
+    }()
+    
     var theme: AudioTheme = .main
     var audioItems: [String : AudioItem] = [:]
     var launchMessage: String {
@@ -83,7 +89,7 @@ struct AudioManager {
     /**
      Sets up the individual audio players for the various sounds. It won't setup MenuScreen sound because that's set up in initialization.
      */
-    mutating private func setupSounds() {
+    private func setupSounds() {
         for (key, item) in audioItems {
             if let player = configureAudioPlayer(for: item), key != "MenuScreen" {
                 audioItems[key]?.player = player
@@ -197,7 +203,7 @@ struct AudioManager {
     
     // MARK: - Set Sound Themes
     
-    mutating func setTheme(_ theme: AudioTheme) {
+    func setTheme(_ theme: AudioTheme) {
         self.theme = theme
 
         switch theme {
@@ -212,7 +218,7 @@ struct AudioManager {
         setupSounds()
     }
 
-    mutating private func setThemeMain() {
+    private func setThemeMain() {
         audioItems["MenuTitle"] = AudioItem(fileName: "main_MenuTitle", category: .soundFX)
         audioItems["MenuButton"] = AudioItem(fileName: "main_MenuButton", category: .soundFX, maxVolume: 0.5)
         audioItems["LaunchButton"] = AudioItem(fileName: "main_LaunchButton", category: .soundFX)
@@ -236,7 +242,7 @@ struct AudioManager {
     
     
     //EXPERIMENTAL SOUNDS
-    mutating private func setThemeMario() {
+    private func setThemeMario() {
         audioItems["MenuTitle"] = AudioItem(fileName: "main_MenuTitle", category: .soundFX)
         audioItems["MenuButton"] = AudioItem(fileName: "main_MenuButton", category: .soundFX, maxVolume: 0.5)
         audioItems["LaunchButton"] = AudioItem(fileName: "mario_LaunchButton", fileType: .wav, category: .soundFX)
@@ -254,7 +260,7 @@ struct AudioManager {
         audioItems["VenusSurface"] = AudioItem(fileName: "mario_VenusSurface", fileType: .wav, category: .soundFX)
     }
     
-    mutating private func setThemeStarWars() {
+    private func setThemeStarWars() {
         audioItems["MenuTitle"] = AudioItem(fileName: "main_MenuTitle", category: .soundFX)
         audioItems["MenuButton"] = AudioItem(fileName: "main_MenuButton", category: .soundFX, maxVolume: 0.5)
         audioItems["LaunchButton"] = AudioItem(fileName: "starWars_LaunchButton", category: .soundFX)
@@ -270,5 +276,35 @@ struct AudioManager {
         audioItems["PinchGrow"] = AudioItem(fileName: "starWars_pinchGrow", category: .soundFX)
         audioItems["DetailsOpen"] = AudioItem(fileName: "starWars_DetailsOpen", category: .soundFX)
         audioItems["VenusSurface"] = AudioItem(fileName: "starWars_VenusSurface", category: .soundFX)
+    }
+    
+    
+    // MARK: - Other Functions
+    
+    func requestCamera() {
+        guard checkForCamera() == .notDetermined else { return print("   AudioManager.requestCamera() status: !(.notDetermined), exiting...") }
+        
+        AVCaptureDevice.requestAccess(for: .video) { _ in
+            print("   AudioManager.requestCamera() status: .notDetermined, requesting access...")
+        }
+    }
+    
+    @discardableResult func checkForCamera() -> AVAuthorizationStatus {
+        let status = AVCaptureDevice.authorizationStatus(for: .video)
+        
+        switch status {
+        case .authorized:       //User previously granted access to camera
+            print("AudioManager.checkForCamera() status: .authorized")
+        case .notDetermined:    //User hasn't been asked for camera access
+            print("AudioManager.checkForCamera() status: .notDetermined")
+        case .denied:           //User previously denied access
+            print("AudioManager.checkForCamera() status: .denied")
+        case .restricted:       //User unable to grant access due to restrictions
+            print("AudioManager.checkForCamera() status: .restricted")
+        @unknown default:       //Handle any future cases not listed
+            print("AudioManager.checkForCamera() status: @unknown")
+        }
+        
+        return status
     }
 }

@@ -53,7 +53,7 @@ class MenuPageViewController: UIViewController {
         if let menuContentView = menuBezelView.menuContentView as? MenuContentViewLaunch {
             //Only play whoosh when label is out of frame.
             if menuContentView.titleTopLabel.frame.origin.x < 0 {
-                audioManager.playSound(for: "MenuTitle", currentTime: 0.0)
+                AudioManager.shared.playSound(for: "MenuTitle", currentTime: 0.0)
             }
             
             menuContentView.titleTopLabel.alpha = 1.0

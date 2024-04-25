@@ -50,27 +50,34 @@ class AdMobManager: NSObject {
         ])
     }
     
+    @available(iOS 14, *)
     func requestIDFAPermission() {
-        if #available(iOS 14.0, *) {
-            ATTrackingManager.requestTrackingAuthorization { status in
-                switch status {
-                case .authorized:
-                    print("Request IDFA authorized")
-                case .denied, .restricted:
-                    print("Request IDFA denied")
-                case .notDetermined:
-                    print("Request IDFA undetermined")
-                @unknown default:
-                    print("Request IDFA @unknown")
-                }
-            }
-        }
-        else {
-            //Fallback on earlier versions
+        guard checkForIDFAPermission() == .notDetermined else { return print("   AdMobManager.requestIDFAPermission() status: !(.notDetermined), exiting...") }
+        
+        ATTrackingManager.requestTrackingAuthorization { _ in
+            print("   AdMobManager.requestIDFAPermission() status: .notDetermined, requesting access...")
         }
     }
     
-    
+    @available(iOS 14, *)
+    @discardableResult func checkForIDFAPermission() -> ATTrackingManager.AuthorizationStatus {
+        let status = ATTrackingManager.trackingAuthorizationStatus
+        
+        switch status {
+        case .authorized:
+            print("AdMobManager.checkForIDFAPermission() status: .authorized")
+        case .denied:
+            print("AdMobManager.checkForIDFAPermission() status: .denied")
+        case .restricted:
+            print("AdMobManager.checkForIDFAPermission() status: .restricted")
+        case .notDetermined:
+            print("AdMobManager.checkForIDFAPermission() status: .notDetermined")
+        @unknown default:
+            print("AdMobManager.checkForIDFAPermission() status: @unknown")
+        }
+        
+        return status
+    }
 }
 
 

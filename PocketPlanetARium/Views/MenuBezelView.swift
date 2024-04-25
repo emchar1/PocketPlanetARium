@@ -45,7 +45,7 @@ class MenuBezelView: UIView {
         paragraphStyle.alignment = .center
         paragraphStyle.lineSpacing = 8
 
-        let attributedString = NSMutableAttributedString(string: audioManager.launchMessage)
+        let attributedString = NSMutableAttributedString(string: AudioManager.shared.launchMessage)
         attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
         
         label = UILabel(frame: frame)

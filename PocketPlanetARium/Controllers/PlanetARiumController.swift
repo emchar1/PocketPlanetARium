@@ -110,7 +110,7 @@ class PlanetARiumController: UIViewController {
         paragraphStyle.alignment = .center
         paragraphStyle.lineSpacing = 8
 
-        let attributedString = NSMutableAttributedString(string: audioManager.launchMessage)
+        let attributedString = NSMutableAttributedString(string: AudioManager.shared.launchMessage)
         attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
         
         loadingLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
@@ -248,8 +248,8 @@ class PlanetARiumController: UIViewController {
         
         
         //Play music
-        audioManager.playSound(for: "PlanetARiumOpen")
-        audioManager.playSound(for: "PlanetARiumMusic")
+        AudioManager.shared.playSound(for: "PlanetARiumOpen")
+        AudioManager.shared.playSound(for: "PlanetARiumMusic")
         
         
         //Hints
@@ -315,10 +315,10 @@ class PlanetARiumController: UIViewController {
                 zoomScaleSlider.updateValue(to: scaleValue)
                 
                 if diff < 0 {
-                    audioManager.playSound(for: "PinchShrink")
+                    AudioManager.shared.playSound(for: "PinchShrink")
                 }
                 else {
-                    audioManager.playSound(for: "PinchGrow")
+                    AudioManager.shared.playSound(for: "PinchGrow")
                 }
             }
             else {

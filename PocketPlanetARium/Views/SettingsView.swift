@@ -215,7 +215,7 @@ class SettingsView: UIView {
         showSettings = !showSettings
         
         if showSettings {
-            audioManager.playSound(for: "SettingsExpand", currentTime: 0)
+            AudioManager.shared.playSound(for: "SettingsExpand", currentTime: 0)
             
             //Need to reset all buttons while resizing the frame and constraints!!
 //            if UIDevice.current.orientation.isPortrait ||
@@ -270,7 +270,7 @@ class SettingsView: UIView {
         }
         else {
             K.addHapticFeedback(withStyle: .medium)
-            audioManager.playSound(for: "SettingsCollapse", currentTime: 0)
+            AudioManager.shared.playSound(for: "SettingsCollapse", currentTime: 0)
 
             //Need to reset all buttons while resizing the frame and constraints!!
             frame.size.width = collapsedViewSize
@@ -333,7 +333,7 @@ class SettingsView: UIView {
      */
     @objc private func soundPressed() {
         K.addHapticFeedback(withStyle: .light)
-        audioManager.playSound(for: "ButtonPress", currentTime: 0, pan: 1.0)
+        AudioManager.shared.playSound(for: "ButtonPress", currentTime: 0, pan: 1.0)
 
         isMuted = !isMuted
         handleSound()
@@ -346,7 +346,7 @@ class SettingsView: UIView {
      */
     @objc private func labelsPressed() {
         K.addHapticFeedback(withStyle: .light)
-        audioManager.playSound(for: "ButtonPressInfo", currentTime: 0, pan: 0.5)
+        AudioManager.shared.playSound(for: "ButtonPressInfo", currentTime: 0, pan: 0.5)
 
         delegate?.settingsView(self, didPressLabelsButton: settingsSubButtons[SubButtonType.labels.rawValue])
     }
@@ -356,7 +356,7 @@ class SettingsView: UIView {
      */
     @objc private func playPausePressed() {
         K.addHapticFeedback(withStyle: .light)
-        audioManager.playSound(for: "ButtonPressPause", currentTime: 0, pan: -0.5)
+        AudioManager.shared.playSound(for: "ButtonPressPause", currentTime: 0, pan: -0.5)
 
         isPaused = !isPaused
         handlePlayPause()
@@ -369,7 +369,7 @@ class SettingsView: UIView {
      */
     @objc private func resetAnimationPressed() {
         K.addHapticFeedback(withStyle: .light)
-        audioManager.playSound(for: "ButtonPressReset", currentTime: 0, pan: -1.0)
+        AudioManager.shared.playSound(for: "ButtonPressReset", currentTime: 0, pan: -1.0)
 
         delegate?.settingsView(self, didPressResetAnimationButton: settingsSubButtons[SubButtonType.resetAnimation.rawValue])
     }
@@ -386,7 +386,7 @@ class SettingsView: UIView {
         }
                 
         UserDefaults.standard.setValue(isMuted, forKey: K.userDefaultsKey_SoundIsMuted)
-        audioManager.updateVolumes()
+        AudioManager.shared.updateVolumes()
                 
         if isMuted {
             soundButton.button.setImage(UIImage(systemName: "speaker.slash.fill"), for: .normal)

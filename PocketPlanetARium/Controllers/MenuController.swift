@@ -7,28 +7,28 @@
 //
 
 import UIKit
-import AVFoundation
-
-//Need to add this as a global var to be shared across all files!
-var audioManager = AudioManager(with: .main)
 
 class MenuController: UIViewController {
+    
+    // MARK: - Properties
     
     private var pageController: UIPageViewController!
     private var menuItems: [MenuItem] = MenuItem.allCases
     private var currentIndex = UserDefaults.standard.bool(forKey: K.userDefaultsKey_LaunchedBefore) ? MenuItem.lastItemIndex : MenuItem.firstItemIndex
+    private var previousIndex: Int?
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
 
     
+    // MARK: - Initialization
+    
     override func viewDidLoad() {
-        requestCamera()
         setupPageController()
         
         UserDefaults.standard.setValue(true, forKey: K.userDefaultsKey_LaunchedBefore)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        audioManager.playSound(for: "MenuScreen")
+        AudioManager.shared.playSound(for: "MenuScreen")
     }
 
     private func setupPageController() {
@@ -52,7 +52,33 @@ class MenuController: UIViewController {
 }
 
 
+// MARK: - UPageViewController DataSource & Delegate
+
 extension MenuController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        
+        guard completed else { return }
+        guard let menuPageViewController = pageViewController.viewControllers?.first as? MenuPageViewController else { return }
+
+        previousIndex = currentIndex
+        currentIndex = menuPageViewController.menuItem.item.index
+        
+        guard let previousIndex = previousIndex, previousIndex < currentIndex else { return }
+
+        switch currentIndex {
+        case 2:
+            AudioManager.shared.requestCamera()
+        case 3:
+            if #available(iOS 14, *) {
+                AdMobManager.shared.requestIDFAPermission()
+            } else {
+                // Fallback on earlier versions
+            }
+        default:
+            break
+        }
+    }
+    
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         return scrollPage(for: viewController, forward: false)
     }
@@ -78,26 +104,6 @@ extension MenuController: UIPageViewControllerDataSource, UIPageViewControllerDe
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         return currentIndex
     }
-}
-
-
-extension MenuController {
-    func requestCamera() {
-        switch AVCaptureDevice.authorizationStatus(for: .video) {
-        case .authorized: // The user has previously granted access to the camera.
-            return
-        case .notDetermined: // The user has not yet been asked for camera access.
-            AVCaptureDevice.requestAccess(for: .video) { granted in
-                if granted {
-                    return
-                }
-            }
-        case .denied: // The user has previously denied access.
-            return
-        case .restricted: // The user can't grant access due to restrictions.
-            return
-        default:
-            return
-        }
-    }
+    
+    
 }

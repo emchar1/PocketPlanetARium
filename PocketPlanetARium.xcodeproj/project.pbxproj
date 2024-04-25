@@ -355,13 +355,13 @@
 			children = (
 				EA2BCCA325180317007A13F5 /* Constants.swift */,
 				EA43288B253CC9B800BCD31F /* AudioManager.swift */,
+				EAD149EE2BD19AE00047D018 /* AdMobManager.swift */,
 				EA5737022536969700CF442B /* MenuItem.swift */,
 				EA5B0C0A2510677E00B1E910 /* Planet.swift */,
 				EA40E9AF252ADFFF00726425 /* PlanetDetails.swift */,
 				EAF7BEA825203CAE00C0D1A6 /* PlanetGroup.swift */,
 				EAC1F4CF25149BD30097521A /* PlanetARium.swift */,
 				EA9100FF25BAABD400733FD9 /* AppStoreReviewManager.swift */,
-				EAD149EE2BD19AE00047D018 /* AdMobManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
