@@ -492,7 +492,7 @@ class MenuContentViewLaunch: UIView {
         tapButton(sender)
         
         guard AudioManager.shared.checkForCamera() == .authorized else {
-            let alertController = UIAlertController(title: "⚠️ Camera Denied", message: "Camera request was denied. To change this, tap Open Settings and enable Camera access. This will restart the app.", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "⚠️ Camera Denied", message: "Camera request was denied. To change this, tap Open Settings and enable Camera access.", preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "Open Settings", style: .default, handler: { _ in
                 guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
                     return
@@ -507,7 +507,6 @@ class MenuContentViewLaunch: UIView {
             }))
             
             delegate?.menuContentViewLaunch(self, didPresentViewChangeWith: alertController) { [unowned self] in
-                print("WARNING!!")
                 untapButton(sender)
             }
 
@@ -523,8 +522,6 @@ class MenuContentViewLaunch: UIView {
         K.addHapticFeedback(withStyle: .light)
         AudioManager.shared.playSound(for: "LaunchButton", currentTime: 0.0)
         AudioManager.shared.stopSound(for: "MenuScreen", fadeDuration: 2.0)
-        
-        print("Launch Button tapped! 🚀")
     }
     
     private func untapButton(_ sender: UIButton) {
