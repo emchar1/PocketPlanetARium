@@ -18,7 +18,7 @@ struct K {
     //UserDefault Keys
     static let userDefaultsKey_SoundIsMuted = "SoundIsMuted"
     static let userDefaultsKey_HintsAreOff = "HintsAreOff"
-    static let userDefaultsKey_LaunchedBefore = "LaunchedBefore"
+    static let userDefaultsKey_LaunchedBefore = "LaunchedBefore2.0"
     
     //Fonts
     static let fontTitle = "Age-Normal"
