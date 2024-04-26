@@ -21,9 +21,24 @@ class NotificationsManager {
     }
     
     private let randomFactoids: [String] = [
-        "Venus is the hottest planet in the solar system. Tap to learn more...",
-        "Mars has 2 moons, Phobos and Deimos. Tap to learn more...",
-        "The Milky Way is 105,700 light years in diameter. Tap to learn more..."
+        "Venus is the hottest planet in the solar system. Tap to learn more.",
+        "Mars has 2 moons, Phobos and Deimos. Tap to learn more.",
+        "The Milky Way is a whopping 105,700 light years in diameter! Tap to learn more.",
+        "Uranus spins sideways probably due to a titanic collision. Tap to learn more.",
+        "Mars has a volcano larger than the state of Hawaii. Tap to learn more.",
+        "Spacecrafts have visited every planet in our Solar System. Tap to learn more.",
+        "Our moon drifts farther and farther away each day. Tap to learn more.",
+        "Jupiter's great red spot is shrinking. Tap to learn more.",
+        "Saturn has a raging six-sided storm nicknamed \"the hexagon\".",
+        "The Sun's atmosphere is millions of degrees hotter than its surface.",
+        "One million Earths could fit inside the Sun. Tap to learn more.",
+        "If you could fly a plane to Pluto, it would take over 800 years!",
+        "The sunset on Mars appears blue. Tap to learn more.",
+        "There are more stars in the universe than grains of sand on Earth!",
+        "Earth's moon is the reason why we have tides. Tap to learn more.",
+        "95% of the universe is invisible. Tap to learn more.",
+        "The Fermi Paradox posits that we are indeed alone in the universe.",
+        "A supermassive black hole exists at the center of our galaxy named Sagittarius A*." //This is the longest string allowed without truncation
     ]
     
     
@@ -62,7 +77,7 @@ class NotificationsManager {
         content.sound = .none
         content.badge = 1
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 24 * 60 * 60, repeats: true)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 12 * 60 * 60, repeats: true)
         let request = UNNotificationRequest.init(identifier: UUID().uuidString, content: content, trigger: trigger)
         
         UNUserNotificationCenter.current().add(request)
