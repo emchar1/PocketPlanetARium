@@ -25,7 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //Register testing devices here...
         GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [
-            "3e6fb037c3803580c0f3fa7d30fce576" //Eddie's iPhone 14 Pro
+            "3e6fb037c3803580c0f3fa7d30fce576", //Eddie's iPhone 14 Pro
+            "8efe992acf0ecea7399f5ab50a5901e7" //Eddie's phone as of 4/25/24 (why did it change??)
         ]
 
         //Initialize Google AdMob
@@ -41,6 +42,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+
+        NotificationsManager.shared.removeAllNotifications()
+        NotificationsManager.shared.repeatNotifications()
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -53,6 +57,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        NotificationsManager.shared.removeAllNotifications()
     }
 
 

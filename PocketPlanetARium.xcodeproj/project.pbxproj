@@ -66,6 +66,7 @@
 		EAC1F4D025149BD30097521A /* PlanetARium.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC1F4CF25149BD30097521A /* PlanetARium.swift */; };
 		EAD149EF2BD19AE00047D018 /* AdMobManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD149EE2BD19AE00047D018 /* AdMobManager.swift */; };
 		EAD149F12BD8E0910047D018 /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD149F02BD8E0910047D018 /* AppTrackingTransparency.framework */; };
+		EAD149F72BDBAC8B0047D018 /* NotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD149F62BDBAC8B0047D018 /* NotificationsManager.swift */; };
 		EAD90A1C2B75E84300ACE934 /* Extension+UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD90A1B2B75E84300ACE934 /* Extension+UIDevice.swift */; };
 		EAD90A1E2B78019800ACE934 /* Extension+UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD90A1D2B78019800ACE934 /* Extension+UILabel.swift */; };
 		EAD90A202B7801C600ACE934 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD90A1F2B7801C600ACE934 /* Extension+UIView.swift */; };
@@ -153,6 +154,7 @@
 		EAD149EE2BD19AE00047D018 /* AdMobManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdMobManager.swift; sourceTree = "<group>"; };
 		EAD149F02BD8E0910047D018 /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
 		EAD149F22BD8E0E50047D018 /* GoogleMobileAds.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:CSTR6SUWN9:AdMob, Inc."; lastKnownFileType = wrapper.xcframework; name = GoogleMobileAds.xcframework; path = "Pods/Google-Mobile-Ads-SDK/Frameworks/GoogleMobileAdsFramework/GoogleMobileAds.xcframework"; sourceTree = "<group>"; };
+		EAD149F62BDBAC8B0047D018 /* NotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsManager.swift; sourceTree = "<group>"; };
 		EAD90A1B2B75E84300ACE934 /* Extension+UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIDevice.swift"; sourceTree = "<group>"; };
 		EAD90A1D2B78019800ACE934 /* Extension+UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UILabel.swift"; sourceTree = "<group>"; };
 		EAD90A1F2B7801C600ACE934 /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 				EA2BCCA325180317007A13F5 /* Constants.swift */,
 				EA43288B253CC9B800BCD31F /* AudioManager.swift */,
 				EAD149EE2BD19AE00047D018 /* AdMobManager.swift */,
+				EAD149F62BDBAC8B0047D018 /* NotificationsManager.swift */,
 				EA5737022536969700CF442B /* MenuItem.swift */,
 				EA5B0C0A2510677E00B1E910 /* Planet.swift */,
 				EA40E9AF252ADFFF00726425 /* PlanetDetails.swift */,
@@ -567,6 +570,7 @@
 				EA5B0BFB251055B300B1E910 /* PlanetARiumController.swift in Sources */,
 				EA9A26972B78090300CFE30B /* PlanetStatsCell.swift in Sources */,
 				EA5736F42532E86700CF442B /* MenuPageViewController.swift in Sources */,
+				EAD149F72BDBAC8B0047D018 /* NotificationsManager.swift in Sources */,
 				EA13B76D2573404B00442171 /* HintView.swift in Sources */,
 				EA57EA7325281F0D00FC2323 /* PlanetPeekView.swift in Sources */,
 				EA58D013251F3D79007A8DB5 /* PlanetDetailsController.swift in Sources */,

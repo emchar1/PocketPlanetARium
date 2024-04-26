@@ -69,6 +69,8 @@ extension MenuController: UIPageViewControllerDataSource, UIPageViewControllerDe
         case 2:
             AudioManager.shared.requestCamera()
         case 3:
+            NotificationsManager.shared.requestNotifications()
+        case 4:
             if #available(iOS 14, *) {
                 AdMobManager.shared.requestIDFAPermission()
             } else {
