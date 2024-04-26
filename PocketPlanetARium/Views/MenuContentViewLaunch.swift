@@ -492,7 +492,7 @@ class MenuContentViewLaunch: UIView {
         tapButton(sender)
         
         guard AudioManager.shared.checkForCamera() == .authorized else {
-            let alertController = UIAlertController(title: "⚠️ Camera Denied", message: "Camera request was denied. To change this, tap Open Settings and enable Camera access.", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "⚠️Camera Denied", message: "For the best AR experience, tap Open Settings and enable Camera access.", preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "Open Settings", style: .default, handler: { _ in
                 guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
                     return
