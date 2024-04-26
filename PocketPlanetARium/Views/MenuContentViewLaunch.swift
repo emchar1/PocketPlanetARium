@@ -521,7 +521,6 @@ class MenuContentViewLaunch: UIView {
         sender.backgroundColor = buttonPressedColor
         K.addHapticFeedback(withStyle: .light)
         AudioManager.shared.playSound(for: "LaunchButton", currentTime: 0.0)
-        AudioManager.shared.stopSound(for: "MenuScreen", fadeDuration: 2.0)
     }
     
     private func untapButton(_ sender: UIButton) {
@@ -561,6 +560,8 @@ class MenuContentViewLaunch: UIView {
                 self.delegate?.menuContentViewLaunch(self, didPresentPlanetARiumController: planetARiumController)
             }
         }
+        
+        AudioManager.shared.stopSound(for: "MenuScreen", fadeDuration: 2.0)
     }//end loadPlanetARium()
     
     
