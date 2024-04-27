@@ -12,11 +12,9 @@ class HintView: UIView {
     
     // MARK: - Properties
     
-    var superView: UIView!
+    var superView: UIView
     var hintViewSize: CGSize
-    var messageViewSize: CGSize {
-        return CGSize(width: hintViewSize.width, height: hintViewSize.height / 2)
-    }
+    var messageViewSize: CGSize { return CGSize(width: hintViewSize.width, height: hintViewSize.height / 2) }
     var messageView = UIView()
     var messageLabel = UILabel()
     var imageView = UIImageView()
@@ -27,12 +25,8 @@ class HintView: UIView {
     var leadingAnchorConstraint: NSLayoutConstraint?
     var bottomAnchorConstraint: NSLayoutConstraint?
     var trailingAnchorConstraint: NSLayoutConstraint?
-    var topAnchorConstant: CGFloat {
-        CGFloat.random(in: 80...max(81, (superView.frame.height / 2)))
-    }
-    var leadingAnchorConstant: CGFloat {
-        CGFloat.random(in: 40...max(41, (superView.frame.width - max(hintViewSize.width, hintViewSize.height) - 40)))
-    }
+    var topAnchorConstant: CGFloat { CGFloat.random(in: 80...max(81, (superView.frame.height / 2))) }
+    var leadingAnchorConstant: CGFloat { CGFloat.random(in: 40...max(41, (superView.frame.width - max(hintViewSize.width, hintViewSize.height) - 40))) }
     
     enum IconAnimationType {
         case device, settings, planetTap, pinchZoom
@@ -51,17 +45,31 @@ class HintView: UIView {
         self.anchorToBottomRight = anchorToBottomRight
         
         super.init(frame: .zero)
-        superView.addSubview(self)
         
+        setupViews()
+        layoutViews()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("Unable to initialize HintsView object.")
+    }
+    
+    private func setupViews() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(orientationDidChange(_:)),
                                                name: UIDevice.orientationDidChangeNotification,
                                                object: nil)
-        
-        //does this make sense to activate the constraints in the init?
+    }
+    
+    private func layoutViews() {
         translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([widthAnchor.constraint(equalToConstant: hintViewSize.width),
-                                     heightAnchor.constraint(equalToConstant: hintViewSize.height)])
+
+        superView.addSubview(self)
+        
+        NSLayoutConstraint.activate([
+            widthAnchor.constraint(equalToConstant: hintViewSize.width),
+            heightAnchor.constraint(equalToConstant: hintViewSize.height)
+        ])
         
         if anchorToBottomRight {
             bottomAnchorConstraint = superView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: bottomAnchor, constant: K.paddingWithAd)
@@ -79,12 +87,6 @@ class HintView: UIView {
             topAnchorConstraint!.isActive = true
             leadingAnchorConstraint!.isActive = true
         }
-
-
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("Unable to initialize HintsView object.")
     }
     
     

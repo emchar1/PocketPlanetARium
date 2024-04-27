@@ -55,7 +55,7 @@ class AudioManager {
     var theme: AudioTheme = .main
     var audioItems: [String : AudioItem] = [:]
     var launchMessage: String {
-        let noCameraAccessString = "Camera access is denied.\nPlanetARium may act unpredictably."
+        let noCameraAccessString = "Camera access was denied.\nPlanetARium may behave unpredictably."
         var successString: String
         
         switch theme {

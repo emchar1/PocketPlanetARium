@@ -505,7 +505,8 @@ class MenuContentViewLaunch: UIView {
             alertController.addAction(UIAlertAction(title: "Proceed Anyway", style: .default, handler: { [unowned self] _ in
                 loadPlanetARium()
             }))
-            
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+
             delegate?.menuContentViewLaunch(self, didPresentViewChangeWith: alertController) { [unowned self] in
                 untapButton(sender)
             }
