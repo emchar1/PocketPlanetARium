@@ -20,13 +20,13 @@ class HintView: UIView {
     var imageView = UIImageView()
     var imageView2: UIImageView?
     
-    var anchorToBottomRight: Bool = true
     var topAnchorConstraint: NSLayoutConstraint?
     var leadingAnchorConstraint: NSLayoutConstraint?
     var bottomAnchorConstraint: NSLayoutConstraint?
     var trailingAnchorConstraint: NSLayoutConstraint?
     var topAnchorConstant: CGFloat { CGFloat.random(in: 80...max(81, (superView.frame.height / 2))) }
     var leadingAnchorConstant: CGFloat { CGFloat.random(in: 40...max(41, (superView.frame.width - max(hintViewSize.width, hintViewSize.height) - 40))) }
+    var settingsViewAnchor: SettingsView?
     
     enum IconAnimationType {
         case device, settings, planetTap, pinchZoom
@@ -39,10 +39,10 @@ class HintView: UIView {
      Initialize the hint with a size of 0.
      - parameter superView: the parent view that will display the HintsView
      */
-    init(in superView: UIView, ofSize size: CGSize, anchorToBottomRight: Bool) {
+    init(in superView: UIView, ofSize size: CGSize, settingsViewAnchor: SettingsView? = nil) {
         self.superView = superView
         self.hintViewSize = size
-        self.anchorToBottomRight = anchorToBottomRight
+        self.settingsViewAnchor = settingsViewAnchor
         
         super.init(frame: .zero)
         
@@ -71,9 +71,9 @@ class HintView: UIView {
             heightAnchor.constraint(equalToConstant: hintViewSize.height)
         ])
         
-        if anchorToBottomRight {
-            bottomAnchorConstraint = superView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: bottomAnchor, constant: K.paddingWithAd)
-            trailingAnchorConstraint = superView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 2 * K.padding + SettingsView.buttonSize)
+        if let settingsViewAnchor = settingsViewAnchor {
+            bottomAnchorConstraint = settingsViewAnchor.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0)
+            trailingAnchorConstraint = settingsViewAnchor.leadingAnchor.constraint(equalTo: trailingAnchor, constant: 8)
 
             bottomAnchorConstraint!.isActive = true
             trailingAnchorConstraint!.isActive = true
@@ -260,7 +260,7 @@ class HintView: UIView {
      */
     @objc private func orientationDidChange(_ notification: NSNotification) {
         //Only need to reposition if settings are expanded and device orientation is portrait or landscape only.
-        guard UIDevice.current.orientation.isValidInterfaceOrientation, !anchorToBottomRight else {
+        guard UIDevice.current.orientation.isValidInterfaceOrientation else {
             return
         }
         

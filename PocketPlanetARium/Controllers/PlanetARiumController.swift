@@ -59,9 +59,10 @@ class PlanetARiumController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
                 
+        //CALL IN THIS ORDER!!
         setupViews()
         layoutViews()
-        
+        additionalSetup()
 
         
 //        let summonPlanetGesture = UIPanGestureRecognizer(target: self, action: #selector(planetSummoned))
@@ -155,32 +156,6 @@ class PlanetARiumController: UIViewController {
         lowLightWarning.clipsToBounds = true
         lowLightWarning.layer.cornerRadius = 7
         lowLightWarning.alpha = 0.0
-        
-        
-        //GOOGLE ADMOB SETUP
-        AdMobManager.shared.addBannerView(to: self)
-
-        
-        //GESTURES SETUP
-        //Long press to replace 3D press (for iPad that doesn't have 3D touch technology)
-        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPress))
-        longPressGesture.minimumPressDuration = 1.5
-        sceneView.addGestureRecognizer(longPressGesture)
-        
-        let popPlanetDetailsGesture = PopPlanetDetailsGesture(target: self, action: nil)
-        popPlanetDetailsGesture.popDelegate = self
-        sceneView.addGestureRecognizer(popPlanetDetailsGesture)
-        
-        let tapPlanetGesture = TapPlanetGesture(target: self, action: nil)
-        tapPlanetGesture.tapDelegate = self
-        sceneView.addGestureRecognizer(tapPlanetGesture)
-        
-        
-        //HINTS SETUP
-        hintDevice = HintView(in: sceneView, ofSize: CGSize(width: UIDevice.isiPad ? 250 : 175, height: UIDevice.isiPad ? 350 : 250), anchorToBottomRight: false)
-        hintSettings = HintView(in: sceneView, ofSize: CGSize(width: UIDevice.isiPad ? 200 : 150, height: UIDevice.isiPad ? 225 : 150), anchorToBottomRight: true)
-        hintPlanetTap = HintView(in: sceneView, ofSize: CGSize(width: UIDevice.isiPad ? 250 : 150, height: UIDevice.isiPad ? 250 : 200), anchorToBottomRight: false)
-        hintPinchZoom = HintView(in: sceneView, ofSize: CGSize(width: UIDevice.isiPad ? 250 : 150, height: UIDevice.isiPad ? 250 : 200), anchorToBottomRight: false)
     }
     
     private func layoutViews() {
@@ -214,6 +189,33 @@ class PlanetARiumController: UIViewController {
             scaleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             scaleLabel.topAnchor.constraint(equalTo: zoomScaleSlider.bottomAnchor, constant: 4)
         ])
+    }
+    
+    private func additionalSetup() {
+        //GOOGLE ADMOB SETUP
+        AdMobManager.shared.addBannerView(to: self)
+
+        
+        //GESTURES SETUP
+        //Long press to replace 3D press (for iPad that doesn't have 3D touch technology)
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPress))
+        longPressGesture.minimumPressDuration = 1.5
+        sceneView.addGestureRecognizer(longPressGesture)
+        
+        let popPlanetDetailsGesture = PopPlanetDetailsGesture(target: self, action: nil)
+        popPlanetDetailsGesture.popDelegate = self
+        sceneView.addGestureRecognizer(popPlanetDetailsGesture)
+        
+        let tapPlanetGesture = TapPlanetGesture(target: self, action: nil)
+        tapPlanetGesture.tapDelegate = self
+        sceneView.addGestureRecognizer(tapPlanetGesture)
+        
+        
+        //HINTS SETUP
+        hintDevice = HintView(in: sceneView, ofSize: CGSize(width: UIDevice.isiPad ? 250 : 175, height: UIDevice.isiPad ? 350 : 250))
+        hintSettings = HintView(in: sceneView, ofSize: CGSize(width: UIDevice.isiPad ? 200 : 150, height: 150), settingsViewAnchor: settingsButtons)
+        hintPlanetTap = HintView(in: sceneView, ofSize: CGSize(width: UIDevice.isiPad ? 250 : 150, height: UIDevice.isiPad ? 250 : 200))
+        hintPinchZoom = HintView(in: sceneView, ofSize: CGSize(width: UIDevice.isiPad ? 250 : 150, height: UIDevice.isiPad ? 250 : 200))
     }
     
     private func animateViews() {
