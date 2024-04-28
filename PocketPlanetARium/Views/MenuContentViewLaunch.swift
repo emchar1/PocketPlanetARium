@@ -10,7 +10,7 @@ import UIKit
 
 protocol MenuContentViewLaunchDelegate: AnyObject {
     func menuContentViewLaunch(_ controller: MenuContentViewLaunch, didPresentPlanetARiumController planetARiumController: PlanetARiumController)
-    func menuContentViewLaunch(_ controller: MenuContentViewLaunch, didPresentViewChangeWith alert: UIAlertController, handler: (() -> Void)?)
+    func menuContentViewLaunch(_ controller: MenuContentViewLaunch, didPresentViewChangeWith alert: UIAlertController)
 }
 
 class MenuContentViewLaunch: UIView {
@@ -422,7 +422,7 @@ class MenuContentViewLaunch: UIView {
         alert.addAction(actionVirgo)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
-        delegate?.menuContentViewLaunch(self, didPresentViewChangeWith: alert, handler: nil)
+        delegate?.menuContentViewLaunch(self, didPresentViewChangeWith: alert)
     }
     
     /**
@@ -492,8 +492,11 @@ class MenuContentViewLaunch: UIView {
         tapButton(sender)
         
         guard AudioManager.shared.checkForCamera() == .authorized else {
-            let alertController = UIAlertController(title: "⚠️Camera Denied", message: "For the best AR experience, tap Open Settings and enable Camera access.", preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "Open Settings", style: .default, handler: { _ in
+            let alertController = UIAlertController(title: "⚠️Camera Denied",
+                                                    message: "For the best AR experience, tap Open Settings and enable Camera access.",
+                                                    preferredStyle: .alert)
+            
+            alertController.addAction(UIAlertAction(title: "Open Settings", style: .default, handler: { [unowned self] _ in
                 guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
                     return
                 }
@@ -501,15 +504,18 @@ class MenuContentViewLaunch: UIView {
                 if UIApplication.shared.canOpenURL(settingsURL) {
                     UIApplication.shared.open(settingsURL)
                 }
+                
+                untapButton(sender)
             }))
             alertController.addAction(UIAlertAction(title: "Proceed Anyway", style: .default, handler: { [unowned self] _ in
                 loadPlanetARium()
-            }))
-            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-
-            delegate?.menuContentViewLaunch(self, didPresentViewChangeWith: alertController) { [unowned self] in
                 untapButton(sender)
-            }
+            }))
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [unowned self] _ in
+                untapButton(sender)
+            }))
+
+            delegate?.menuContentViewLaunch(self, didPresentViewChangeWith: alertController)
 
             return
         }
