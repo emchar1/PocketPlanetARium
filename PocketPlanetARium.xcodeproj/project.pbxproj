@@ -234,6 +234,78 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		EA5272A52BDEF7E300B79C9A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EA43284D253BAD0700BCD31F /* Sounds */,
+				EA43293C253FAF1000BCD31F /* Fonts */,
+				EA5B0BF8251055B300B1E910 /* art.scnassets */,
+				EA5B0BFF251055B300B1E910 /* Assets.xcassets */,
+				EA5B0C04251055B300B1E910 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EA5272A62BDEF80300B79C9A /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				EA5B0BF6251055B300B1E910 /* AppDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		EA5272A72BDEF82F00B79C9A /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				EA764A7A254D2C4000F1C606 /* Spells */,
+				EA91010325BAACE100733FD9 /* Extensions */,
+				EA2BCCA325180317007A13F5 /* Constants.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		EA5272A82BDEF86300B79C9A /* Engines */ = {
+			isa = PBXGroup;
+			children = (
+				EA43288B253CC9B800BCD31F /* AudioManager.swift */,
+				EAD149EE2BD19AE00047D018 /* AdMobManager.swift */,
+				EAD149F62BDBAC8B0047D018 /* NotificationsManager.swift */,
+				EA9100FF25BAABD400733FD9 /* AppStoreReviewManager.swift */,
+			);
+			path = Engines;
+			sourceTree = "<group>";
+		};
+		EA5272A92BDEFB0800B79C9A /* Interface Builder */ = {
+			isa = PBXGroup;
+			children = (
+				EA5B0C01251055B300B1E910 /* LaunchScreen.storyboard */,
+				EA5B0BFC251055B300B1E910 /* Main.storyboard */,
+			);
+			path = "Interface Builder";
+			sourceTree = "<group>";
+		};
+		EA5272AA2BDEFB1F00B79C9A /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				EA4328252539F4E600BCD31F /* MenuBezelView.swift */,
+				EA992FB92542124400992CB7 /* MenuContentViewSingle.swift */,
+				EA57370B2538BF3500CF442B /* MenuContentView.swift */,
+				EA992FC9254235D300992CB7 /* MenuContentViewLaunch.swift */,
+				EA97F8CA25698DED007A2CBB /* CreditsView.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		EA5272AB2BDEFB3C00B79C9A /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				EA43CB54252669D300102879 /* SettingsView.swift */,
+				EA9A26982B780A1500CFE30B /* SettingsSubButton.swift */,
+				EA9A269A2B78620300CFE30B /* ZoomScaleSlider.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		EA5B0BEA251055B300B1E910 = {
 			isa = PBXGroup;
 			children = (
@@ -257,18 +329,11 @@
 		EA5B0BF5251055B300B1E910 /* PocketPlanetARium */ = {
 			isa = PBXGroup;
 			children = (
-				EA5B0BF6251055B300B1E910 /* AppDelegate.swift */,
-				EA764A7A254D2C4000F1C606 /* Spells */,
-				EA91010325BAACE100733FD9 /* Extensions */,
+				EA5272A72BDEF82F00B79C9A /* Utilities */,
 				EAC1F4CE251320030097521A /* Models */,
 				EAC1F4CC25131FF40097521A /* Controllers */,
 				EAC1F4CD25131FFE0097521A /* Views */,
-				EA43284D253BAD0700BCD31F /* Sounds */,
-				EA43293C253FAF1000BCD31F /* Fonts */,
-				EA5B0BFF251055B300B1E910 /* Assets.xcassets */,
-				EA5B0BF8251055B300B1E910 /* art.scnassets */,
-				EA5B0C01251055B300B1E910 /* LaunchScreen.storyboard */,
-				EA5B0C04251055B300B1E910 /* Info.plist */,
+				EA5272A52BDEF7E300B79C9A /* Supporting Files */,
 			);
 			path = PocketPlanetARium;
 			sourceTree = "<group>";
@@ -304,6 +369,7 @@
 				EAD90A1F2B7801C600ACE934 /* Extension+UIView.swift */,
 			);
 			name = Extensions;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		EA992FA02540B4CD00992CB7 /* mainTheme */ = {
@@ -328,6 +394,7 @@
 		EAC1F4CC25131FF40097521A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				EA5272A62BDEF80300B79C9A /* Delegates */,
 				EA5736EF25317C0700CF442B /* MenuController.swift */,
 				EA5736F32532E86700CF442B /* MenuPageViewController.swift */,
 				EA5B0BFA251055B300B1E910 /* PlanetARiumController.swift */,
@@ -339,16 +406,10 @@
 		EAC1F4CD25131FFE0097521A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				EA5B0BFC251055B300B1E910 /* Main.storyboard */,
+				EA5272A92BDEFB0800B79C9A /* Interface Builder */,
+				EA5272AA2BDEFB1F00B79C9A /* Menu */,
+				EA5272AB2BDEFB3C00B79C9A /* Settings */,
 				EA9A26962B78090300CFE30B /* PlanetStatsCell.swift */,
-				EA4328252539F4E600BCD31F /* MenuBezelView.swift */,
-				EA992FB92542124400992CB7 /* MenuContentViewSingle.swift */,
-				EA57370B2538BF3500CF442B /* MenuContentView.swift */,
-				EA992FC9254235D300992CB7 /* MenuContentViewLaunch.swift */,
-				EA97F8CA25698DED007A2CBB /* CreditsView.swift */,
-				EA9A26982B780A1500CFE30B /* SettingsSubButton.swift */,
-				EA43CB54252669D300102879 /* SettingsView.swift */,
-				EA9A269A2B78620300CFE30B /* ZoomScaleSlider.swift */,
 				EA57EA7225281F0D00FC2323 /* PlanetPeekView.swift */,
 				EA13B76C2573404B00442171 /* HintView.swift */,
 			);
@@ -358,16 +419,12 @@
 		EAC1F4CE251320030097521A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				EA2BCCA325180317007A13F5 /* Constants.swift */,
-				EA43288B253CC9B800BCD31F /* AudioManager.swift */,
-				EAD149EE2BD19AE00047D018 /* AdMobManager.swift */,
-				EAD149F62BDBAC8B0047D018 /* NotificationsManager.swift */,
+				EA5272A82BDEF86300B79C9A /* Engines */,
 				EA5737022536969700CF442B /* MenuItem.swift */,
 				EA5B0C0A2510677E00B1E910 /* Planet.swift */,
 				EA40E9AF252ADFFF00726425 /* PlanetDetails.swift */,
 				EAF7BEA825203CAE00C0D1A6 /* PlanetGroup.swift */,
 				EAC1F4CF25149BD30097521A /* PlanetARium.swift */,
-				EA9100FF25BAABD400733FD9 /* AppStoreReviewManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -770,7 +827,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_TEAM = LZ8V996BTJ;
-				INFOPLIST_FILE = PocketPlanetARium/Info.plist;
+				INFOPLIST_FILE = "PocketPlanetARium/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -794,7 +851,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_TEAM = LZ8V996BTJ;
-				INFOPLIST_FILE = PocketPlanetARium/Info.plist;
+				INFOPLIST_FILE = "PocketPlanetARium/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
