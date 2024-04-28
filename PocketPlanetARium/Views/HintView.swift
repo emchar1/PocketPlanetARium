@@ -79,10 +79,8 @@ class HintView: UIView {
             trailingAnchorConstraint!.isActive = true
         }
         else {
-            topAnchorConstraint = topAnchor.constraint(equalTo: superView.safeAreaLayoutGuide.topAnchor,
-                                                       constant: topAnchorConstant)
-            leadingAnchorConstraint = leadingAnchor.constraint(equalTo: superView.safeAreaLayoutGuide.leadingAnchor,
-                                                               constant: leadingAnchorConstant)
+            topAnchorConstraint = topAnchor.constraint(equalTo: superView.safeAreaLayoutGuide.topAnchor, constant: topAnchorConstant)
+            leadingAnchorConstraint = leadingAnchor.constraint(equalTo: superView.safeAreaLayoutGuide.leadingAnchor, constant: leadingAnchorConstant)
 
             topAnchorConstraint!.isActive = true
             leadingAnchorConstraint!.isActive = true
