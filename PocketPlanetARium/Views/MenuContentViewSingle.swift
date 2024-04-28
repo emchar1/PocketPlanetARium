@@ -41,17 +41,15 @@ class MenuContentViewSingle: UIView {
         contentLabel.textColor = .white
         contentLabel.numberOfLines = 0
         contentLabel.alpha = 0.0
-        
-        superView.addSubview(contentLabel)
-  
         contentLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([contentLabel.topAnchor.constraint(equalTo: superView.safeAreaLayoutGuide.topAnchor,
-                                                                       constant: K.ScreenDimensions.padding),
-                                     contentLabel.leadingAnchor.constraint(equalTo: superView.safeAreaLayoutGuide.leadingAnchor,
-                                                                           constant: K.ScreenDimensions.padding),
-                                     superView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: contentLabel.bottomAnchor,
-                                                                                           constant: K.ScreenDimensions.padding),
-                                     superView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: contentLabel.trailingAnchor,
-                                                                                             constant: K.ScreenDimensions.padding)])
+
+        superView.addSubview(contentLabel)
+        
+        NSLayoutConstraint.activate([
+            contentLabel.topAnchor.constraint(equalTo: superView.safeAreaLayoutGuide.topAnchor, constant: K.ScreenDimensions.padding),
+            contentLabel.leadingAnchor.constraint(equalTo: superView.safeAreaLayoutGuide.leadingAnchor, constant: K.ScreenDimensions.padding),
+            superView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: contentLabel.bottomAnchor, constant: K.ScreenDimensions.padding),
+            superView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: contentLabel.trailingAnchor, constant: K.ScreenDimensions.padding)
+        ])
     }
 }
