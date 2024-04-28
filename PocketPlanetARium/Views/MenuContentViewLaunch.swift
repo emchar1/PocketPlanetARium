@@ -49,8 +49,8 @@ class MenuContentViewLaunch: UIView {
     
     // MARK: - Misc Properties
     let buttonColor = UIColor(rgb: 0x3498db)
-    let buttonPressedColor = K.color500
-    let descriptionColor = K.colorIcyBlue
+    let buttonPressedColor = UIColor.color500
+    let descriptionColor = UIColor.colorIcyBlue
     var menuItem: MenuItem
     var isMuted: Bool {
         didSet {
@@ -70,8 +70,8 @@ class MenuContentViewLaunch: UIView {
     init(in superView: MenuBezelView, with menuItem: MenuItem) {
         self.superView = superView
         self.menuItem = menuItem
-        isMuted = UserDefaults.standard.bool(forKey: K.userDefaultsKey_SoundIsMuted)
-        hintsAreOff = UserDefaults.standard.bool(forKey: K.userDefaultsKey_HintsAreOff)
+        isMuted = UserDefaults.standard.bool(forKey: UserDefaults.userDefaultsKey_SoundIsMuted)
+        hintsAreOff = UserDefaults.standard.bool(forKey: UserDefaults.userDefaultsKey_HintsAreOff)
         
         super.init(frame: CGRect(x: 0, y: 0, width: superView.frame.width, height: superView.frame.height))
         
@@ -90,14 +90,16 @@ class MenuContentViewLaunch: UIView {
         stackView.distribution = .fillEqually
         stackView.alignment = .fill
         stackView.axis = .vertical
+        stackView.translatesAutoresizingMaskIntoConstraints = false
 
         addSubview(stackView)
         
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: K.padding),
-                                     stackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: -2 * K.padding),
-                                     safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: stackView.bottomAnchor, constant: K.padding),
-                                     safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -2 * K.padding)])
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: K.ScreenDimensions.padding),
+            stackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: -2 * K.ScreenDimensions.padding),
+            safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: stackView.bottomAnchor, constant: K.ScreenDimensions.padding),
+            safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -2 * K.ScreenDimensions.padding)
+        ])
 
         setupStackTop()
         setupStackBottom()
@@ -112,7 +114,7 @@ class MenuContentViewLaunch: UIView {
         topView.clipsToBounds = true
         stackView.addArrangedSubview(topView)
         
-        let fontTitle: String = K.fontTitle
+        let fontTitle: String = UIFont.fontTitle
         let fontSize: CGFloat = UIDevice.isiPad ? 64 : 40
         let titlePadding: CGFloat = 0.0
         let textColor = UIColor.getRandom(redRange: 175...255, greenRange: 175...255, blueRange: 175...255)
@@ -153,7 +155,7 @@ class MenuContentViewLaunch: UIView {
                                                     y: frame.height / 4 + fontSize + titlePadding,
                                                     width: frame.width,
                                                     height: fontSize + 10))
-        trulyImmersiveLabel.font = UIFont(name: K.fontFace, size: K.fontSizePeekDetails)
+        trulyImmersiveLabel.font = UIFont(name: UIFont.fontFace, size: UIFont.fontSizePeekDetails)
         trulyImmersiveLabel.textColor = .white
         trulyImmersiveLabel.textAlignment = .center
         trulyImmersiveLabel.text = "A truly immersive experience!"
@@ -199,17 +201,21 @@ class MenuContentViewLaunch: UIView {
         let creditsTapGesture = UITapGestureRecognizer(target: self, action: #selector(viewCredits))
         creditsLabel = UILabel()
         creditsLabel.attributedText = attributedText
-        creditsLabel.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
+        creditsLabel.font = UIFont(name: UIFont.fontFace, size: UIFont.fontSizeMenu)
         creditsLabel.textColor = descriptionColor
         creditsLabel.textAlignment = .center
         creditsLabel.addGestureRecognizer(creditsTapGesture)
         creditsLabel.isUserInteractionEnabled = true
-        
-        credits.addSubview(creditsLabel)
         creditsLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([creditsLabel.topAnchor.constraint(equalTo: credits.safeAreaLayoutGuide.topAnchor),
-                                     credits.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: creditsLabel.bottomAnchor),
-                                     creditsLabel.centerXAnchor.constraint(equalTo: credits.centerXAnchor)])
+
+        credits.addSubview(creditsLabel)
+
+        NSLayoutConstraint.activate([
+            creditsLabel.topAnchor.constraint(equalTo: credits.safeAreaLayoutGuide.topAnchor),
+            credits.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: creditsLabel.bottomAnchor),
+            creditsLabel.centerXAnchor.constraint(equalTo: credits.centerXAnchor)
+        ])
+        
         bottomStackView.addArrangedSubview(credits)
 
         creditsView = CreditsView(in: self)
@@ -225,21 +231,23 @@ class MenuContentViewLaunch: UIView {
         launchButton = UIButton(type: .system)
         launchButton.backgroundColor = buttonColor
         launchButton.setTitle("Launch PlanetARium", for: .normal)
-        launchButton.titleLabel?.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
+        launchButton.titleLabel?.font = UIFont(name: UIFont.fontFace, size: UIFont.fontSizeMenu)
         launchButton.tintColor = .white
         launchButton.layer.cornerRadius = UIDevice.isiPad ? 37.5 : 25
         launchButton.layer.shadowRadius = UIDevice.isiPad ? 6 : 4
         launchButton.layer.shadowColor = UIColor.black.cgColor
         launchButton.layer.shadowOpacity = 0.3
         launchButton.addTarget(self, action: #selector(assessCameraAccess(_:)), for: .touchUpInside)
-
-        bottomStackView.addSubview(launchButton)
-
         launchButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([launchButton.widthAnchor.constraint(equalToConstant: UIDevice.isiPad ? 400 : 225),
-                                     launchButton.heightAnchor.constraint(equalToConstant: UIDevice.isiPad ? 75 : 50),
-                                     launchButton.centerXAnchor.constraint(equalTo: bottomStackView.centerXAnchor),
-                                     bottomStackView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: launchButton.bottomAnchor, constant: K.padding)])
+        
+        bottomStackView.addSubview(launchButton)
+        
+        NSLayoutConstraint.activate([
+            launchButton.widthAnchor.constraint(equalToConstant: UIDevice.isiPad ? 400 : 225),
+            launchButton.heightAnchor.constraint(equalToConstant: UIDevice.isiPad ? 75 : 50),
+            launchButton.centerXAnchor.constraint(equalTo: bottomStackView.centerXAnchor),
+            bottomStackView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: launchButton.bottomAnchor, constant: K.ScreenDimensions.padding)
+        ])
     }
     
     
@@ -273,39 +281,55 @@ class MenuContentViewLaunch: UIView {
             case MenuContentViewLaunch.headerView:
                 button.backgroundColor = buttonColor
                 planetARiumViewButton = button
-                leftView.addSubview(planetARiumViewButton)
                 planetARiumViewButton.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate([planetARiumViewButton.widthAnchor.constraint(equalToConstant: buttonSize),
-                                             planetARiumViewButton.heightAnchor.constraint(equalToConstant: buttonSize),
-                                             planetARiumViewButton.centerYAnchor.constraint(equalTo: leftView.safeAreaLayoutGuide.centerYAnchor),
-                                             leftView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: planetARiumViewButton.trailingAnchor)])
+
+                leftView.addSubview(planetARiumViewButton)
+                
+                NSLayoutConstraint.activate([
+                    planetARiumViewButton.widthAnchor.constraint(equalToConstant: buttonSize),
+                    planetARiumViewButton.heightAnchor.constraint(equalToConstant: buttonSize),
+                    planetARiumViewButton.centerYAnchor.constraint(equalTo: leftView.safeAreaLayoutGuide.centerYAnchor),
+                    leftView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: planetARiumViewButton.trailingAnchor)
+                ])
             case MenuContentViewLaunch.headerSound:
                 button.backgroundColor = isMuted ? buttonPressedColor : buttonColor
                 soundButton = button
-                leftView.addSubview(soundButton!)
                 soundButton!.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate([soundButton!.widthAnchor.constraint(equalToConstant: buttonSize),
-                                             soundButton!.heightAnchor.constraint(equalToConstant: buttonSize),
-                                             soundButton!.centerYAnchor.constraint(equalTo: leftView.safeAreaLayoutGuide.centerYAnchor),
-                                             leftView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: soundButton!.trailingAnchor)])
+                
+                leftView.addSubview(soundButton!)
+                
+                NSLayoutConstraint.activate([
+                    soundButton!.widthAnchor.constraint(equalToConstant: buttonSize),
+                    soundButton!.heightAnchor.constraint(equalToConstant: buttonSize),
+                    soundButton!.centerYAnchor.constraint(equalTo: leftView.safeAreaLayoutGuide.centerYAnchor),
+                    leftView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: soundButton!.trailingAnchor)
+                ])
             case MenuContentViewLaunch.headerHints:
                 button.backgroundColor = hintsAreOff ? buttonPressedColor : buttonColor
                 hintsButton = button
-                leftView.addSubview(hintsButton!)
                 hintsButton!.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate([hintsButton!.widthAnchor.constraint(equalToConstant: buttonSize),
-                                             hintsButton!.heightAnchor.constraint(equalToConstant: buttonSize),
-                                             hintsButton!.centerYAnchor.constraint(equalTo: leftView.safeAreaLayoutGuide.centerYAnchor),
-                                             leftView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: hintsButton!.trailingAnchor)])
+                
+                leftView.addSubview(hintsButton!)
+                
+                NSLayoutConstraint.activate([
+                    hintsButton!.widthAnchor.constraint(equalToConstant: buttonSize),
+                    hintsButton!.heightAnchor.constraint(equalToConstant: buttonSize),
+                    hintsButton!.centerYAnchor.constraint(equalTo: leftView.safeAreaLayoutGuide.centerYAnchor),
+                    leftView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: hintsButton!.trailingAnchor)
+                ])
             case MenuContentViewLaunch.headerMusic:
                 button.backgroundColor = buttonColor
                 musicThemeButton = button
-                leftView.addSubview(musicThemeButton!)
                 musicThemeButton!.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate([musicThemeButton!.widthAnchor.constraint(equalToConstant: buttonSize),
-                                             musicThemeButton!.heightAnchor.constraint(equalToConstant: buttonSize),
-                                             musicThemeButton!.centerYAnchor.constraint(equalTo: leftView.safeAreaLayoutGuide.centerYAnchor),
-                                             leftView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: musicThemeButton!.trailingAnchor)])
+                
+                leftView.addSubview(musicThemeButton!)
+                
+                NSLayoutConstraint.activate([
+                    musicThemeButton!.widthAnchor.constraint(equalToConstant: buttonSize),
+                    musicThemeButton!.heightAnchor.constraint(equalToConstant: buttonSize),
+                    musicThemeButton!.centerYAnchor.constraint(equalTo: leftView.safeAreaLayoutGuide.centerYAnchor),
+                    leftView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: musicThemeButton!.trailingAnchor)
+                ])
             default:
                 break
             }
@@ -315,15 +339,20 @@ class MenuContentViewLaunch: UIView {
         let midView = UIView()
         let headerLabel = UILabel()
         headerLabel.text = header
-        headerLabel.font = UIFont(name: K.fontFaceSecondary, size: K.fontSizeMenu)
+        headerLabel.font = UIFont(name: UIFont.fontFaceSecondary, size: UIFont.fontSizeMenu)
         headerLabel.textColor = .white
         headerLabel.textAlignment = .left
-        midView.addSubview(headerLabel)
         headerLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([headerLabel.topAnchor.constraint(equalTo: midView.safeAreaLayoutGuide.topAnchor),
-                                     headerLabel.leadingAnchor.constraint(equalTo: midView.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-                                     midView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: headerLabel.bottomAnchor),
-                                     midView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: headerLabel.trailingAnchor)])
+        
+        midView.addSubview(headerLabel)
+        
+        NSLayoutConstraint.activate([
+            headerLabel.topAnchor.constraint(equalTo: midView.safeAreaLayoutGuide.topAnchor),
+            headerLabel.leadingAnchor.constraint(equalTo: midView.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            midView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: headerLabel.bottomAnchor),
+            midView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: headerLabel.trailingAnchor)
+        ])
+        
         leftStackView.addArrangedSubview(leftView)
         leftStackView.addArrangedSubview(midView)
         horizontalStackView.addArrangedSubview(leftStackView)
@@ -332,43 +361,59 @@ class MenuContentViewLaunch: UIView {
         let rightView = UIView()
         let descLabel = UILabel()
         descLabel.text = description
-        descLabel.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
+        descLabel.font = UIFont(name: UIFont.fontFace, size: UIFont.fontSizeMenu)
         descLabel.textColor = descriptionColor
         descLabel.textAlignment = .left
 
         switch header {
         case MenuContentViewLaunch.headerView:
             planetARiumViewLabel = descLabel
-            rightView.addSubview(planetARiumViewLabel)
             planetARiumViewLabel.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([planetARiumViewLabel.topAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.topAnchor),
-                                         planetARiumViewLabel.leadingAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.leadingAnchor),
-                                         rightView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: planetARiumViewLabel.bottomAnchor),
-                                         rightView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: planetARiumViewLabel.trailingAnchor)])
+
+            rightView.addSubview(planetARiumViewLabel)
+            
+            NSLayoutConstraint.activate([
+                planetARiumViewLabel.topAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.topAnchor),
+                planetARiumViewLabel.leadingAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.leadingAnchor),
+                rightView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: planetARiumViewLabel.bottomAnchor),
+                rightView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: planetARiumViewLabel.trailingAnchor)
+            ])
         case MenuContentViewLaunch.headerSound:
             soundLabel = descLabel
-            rightView.addSubview(soundLabel)
             soundLabel.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([soundLabel.topAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.topAnchor),
-                                         soundLabel.leadingAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.leadingAnchor),
-                                         rightView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: soundLabel.bottomAnchor),
-                                         rightView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: soundLabel.trailingAnchor)])
+            
+            rightView.addSubview(soundLabel)
+            
+            NSLayoutConstraint.activate([
+                soundLabel.topAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.topAnchor),
+                soundLabel.leadingAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.leadingAnchor),
+                rightView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: soundLabel.bottomAnchor),
+                rightView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: soundLabel.trailingAnchor)
+            ])
         case MenuContentViewLaunch.headerHints:
             hintsLabel = descLabel
-            rightView.addSubview(hintsLabel)
             hintsLabel.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([hintsLabel.topAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.topAnchor),
-                                         hintsLabel.leadingAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.leadingAnchor),
-                                         rightView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: hintsLabel.bottomAnchor),
-                                         rightView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: hintsLabel.trailingAnchor)])
+            
+            rightView.addSubview(hintsLabel)
+            
+            NSLayoutConstraint.activate([
+                hintsLabel.topAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.topAnchor),
+                hintsLabel.leadingAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.leadingAnchor),
+                rightView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: hintsLabel.bottomAnchor),
+                rightView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: hintsLabel.trailingAnchor)
+            ])
         case MenuContentViewLaunch.headerMusic:
             musicThemeLabel = descLabel
-            rightView.addSubview(musicThemeLabel)
             musicThemeLabel.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([musicThemeLabel.topAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.topAnchor),
-                                         musicThemeLabel.leadingAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.leadingAnchor),
-                                         rightView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: musicThemeLabel.bottomAnchor),
-                                         rightView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: musicThemeLabel.trailingAnchor)])
+            
+            rightView.addSubview(musicThemeLabel)
+            
+            NSLayoutConstraint.activate([
+                musicThemeLabel.topAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.topAnchor),
+                musicThemeLabel.leadingAnchor.constraint(equalTo: rightView.safeAreaLayoutGuide.leadingAnchor),
+                rightView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: musicThemeLabel.bottomAnchor),
+                rightView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: musicThemeLabel.trailingAnchor)
+            ])
         default:
             break
         }
@@ -433,7 +478,7 @@ class MenuContentViewLaunch: UIView {
         AudioManager.shared.playSound(for: "MenuButton", currentTime: 0.0)
         
         isMuted = !isMuted
-        UserDefaults.standard.setValue(isMuted, forKey: K.userDefaultsKey_SoundIsMuted)
+        UserDefaults.standard.setValue(isMuted, forKey: UserDefaults.userDefaultsKey_SoundIsMuted)
         AudioManager.shared.updateVolumes()
         
         soundLabel.text = isMuted ? "Off" : "On"
@@ -447,7 +492,7 @@ class MenuContentViewLaunch: UIView {
         AudioManager.shared.playSound(for: "MenuButton", currentTime: 0.0)
         
         hintsAreOff = !hintsAreOff
-        UserDefaults.standard.setValue(hintsAreOff, forKey: K.userDefaultsKey_HintsAreOff)
+        UserDefaults.standard.setValue(hintsAreOff, forKey: UserDefaults.userDefaultsKey_HintsAreOff)
         
         hintsLabel.text = hintsAreOff ? "Off" : "On"
     }
@@ -551,7 +596,7 @@ class MenuContentViewLaunch: UIView {
         let duration: TimeInterval = 0.25
         
         UIView.animate(withDuration: duration, delay: duration / 2, options: .curveEaseIn, animations: {
-            self.superView.label.alpha = K.masterAlpha
+            self.superView.label.alpha = UIColor.masterAlpha
         }, completion: nil)
         
         UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut) {

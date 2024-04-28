@@ -65,7 +65,7 @@ class SettingsView: UIView {
     // MARK: - Initialization
     
     init() {
-        isMuted = UserDefaults.standard.bool(forKey: K.userDefaultsKey_SoundIsMuted)
+        isMuted = UserDefaults.standard.bool(forKey: UserDefaults.userDefaultsKey_SoundIsMuted)
 
         super.init(frame: CGRect(x: 0,
                                  y: 0,
@@ -101,23 +101,23 @@ class SettingsView: UIView {
         //The order of adding the button to the subviews MATTER!
         setupButton(&settingsSubButtons[SubButtonType.resetAnimation.rawValue],
                     systemName: "arrow.counterclockwise",
-                    backgroundColor: K.color700,
+                    backgroundColor: UIColor.color700,
                     targetAction: #selector(resetAnimationPressed))
 
         setupButton(&settingsSubButtons[SubButtonType.playPause.rawValue],
                     systemName: "pause.fill",
-                    backgroundColor: K.color500,
+                    backgroundColor: UIColor.color500,
                     targetAction: #selector(playPausePressed))
 
         setupButton(&settingsSubButtons[SubButtonType.labels.rawValue],
                     systemName: "info",
-                    backgroundColor: K.color300,
+                    backgroundColor: UIColor.color300,
                     targetAction: #selector(labelsPressed))
 
         setupButton(&settingsSubButtons[SubButtonType.sound.rawValue],
                     systemName: isMuted ? "speaker.slash.fill" : "speaker.2.fill",
-                    backgroundColor: K.color100,
-                    tintColor: K.color900,
+                    backgroundColor: UIColor.color100,
+                    tintColor: UIColor.color900,
                     targetAction: #selector(soundPressed))
 
         settingsButton.frame = CGRect(x: homePosition.x,
@@ -125,10 +125,10 @@ class SettingsView: UIView {
                                       width: SettingsView.buttonSize,
                                       height: SettingsView.buttonSize)
         settingsButton.setBackgroundImage(UIImage(named: "settings"), for: .normal)
-        settingsButton.tintColor = K.color000
+        settingsButton.tintColor = UIColor.color000
         settingsButton.layer.shadowOpacity = 0.4
         settingsButton.layer.shadowOffset = .zero
-        settingsButton.alpha = K.masterAlpha
+        settingsButton.alpha = UIColor.masterAlpha
         settingsButton.addTarget(self, action: #selector(settingsPressed), for: .touchUpInside)
         addSubview(settingsButton)
     }
@@ -253,7 +253,7 @@ class SettingsView: UIView {
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn) {
                 for (_, subButton) in self.settingsSubButtons {
                     subButton.button.isHidden = false
-                    subButton.button.alpha = K.masterAlpha
+                    subButton.button.alpha = UIColor.masterAlpha
                     
 //                    if UIDevice.current.orientation.isPortrait ||
 //                        (!UIDevice.current.orientation.isValidInterfaceOrientation && self.lastOrientation.isPortrait) {
@@ -385,7 +385,7 @@ class SettingsView: UIView {
             return
         }
                 
-        UserDefaults.standard.setValue(isMuted, forKey: K.userDefaultsKey_SoundIsMuted)
+        UserDefaults.standard.setValue(isMuted, forKey: UserDefaults.userDefaultsKey_SoundIsMuted)
         AudioManager.shared.updateVolumes()
                 
         if isMuted {
@@ -409,7 +409,7 @@ class SettingsView: UIView {
             playPauseButton.button.setImage(UIImage(systemName: "play.fill"), for: .normal)
         }
         else {
-            playPauseButton.button.stopBlink(to: K.masterAlpha)
+            playPauseButton.button.stopBlink(to: UIColor.masterAlpha)
             playPauseButton.button.setImage(UIImage(systemName: "pause.fill"), for: .normal)
         }
     }

@@ -9,6 +9,21 @@
 import UIKit
 
 extension UIColor {
+    static var colorName = "BlueGrey"
+    static let color000 = UIColor(named: "\(UIColor.colorName)000") ?? .gray
+    static let color100 = UIColor(named: "\(UIColor.colorName)100") ?? .gray
+    static let color300 = UIColor(named: "\(UIColor.colorName)300") ?? .gray
+    static let color500 = UIColor(named: "\(UIColor.colorName)500") ?? .gray
+    static let color700 = UIColor(named: "\(UIColor.colorName)700") ?? .gray
+    static let color900 = UIColor(named: "\(UIColor.colorName)900") ?? .gray
+    static let colorIcyBlue = UIColor(red: 175, green: 255, blue: 255)
+
+    /**
+     Master alpha transparency to apply across all views for a uniform appearance.
+     */
+    static let masterAlpha: CGFloat = 1.0
+    
+    
     /**
      Generates a random color
      */

@@ -17,7 +17,7 @@ class ZoomScaleSlider: UISlider {
     
     // MARK: - Properties
     
-    let sliderSize: CGSize = CGSize(width: K.screenSize.width / 2, height: 30)
+    let sliderSize: CGSize = CGSize(width: K.ScreenDimensions.screenSize.width / 2, height: 30)
     private let initialScale: Float
     private let minScale: Float
     private let maxScale: Float

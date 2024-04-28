@@ -36,7 +36,7 @@ class MenuContentViewSingle: UIView {
         attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
         
         contentLabel = UILabel()
-        contentLabel.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
+        contentLabel.font = UIFont(name: UIFont.fontFace, size: UIFont.fontSizeMenu)
         contentLabel.attributedText = attributedString
         contentLabel.textColor = .white
         contentLabel.numberOfLines = 0
@@ -46,12 +46,12 @@ class MenuContentViewSingle: UIView {
   
         contentLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([contentLabel.topAnchor.constraint(equalTo: superView.safeAreaLayoutGuide.topAnchor,
-                                                                       constant: K.padding),
+                                                                       constant: K.ScreenDimensions.padding),
                                      contentLabel.leadingAnchor.constraint(equalTo: superView.safeAreaLayoutGuide.leadingAnchor,
-                                                                           constant: K.padding),
+                                                                           constant: K.ScreenDimensions.padding),
                                      superView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: contentLabel.bottomAnchor,
-                                                                                           constant: K.padding),
+                                                                                           constant: K.ScreenDimensions.padding),
                                      superView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: contentLabel.trailingAnchor,
-                                                                                             constant: K.padding)])
+                                                                                             constant: K.ScreenDimensions.padding)])
     }
 }

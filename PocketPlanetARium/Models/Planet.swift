@@ -96,7 +96,7 @@ struct Planet {
         let labelMaterial = SCNMaterial()
         labelMaterial.diffuse.contents = labelColor
         label.materials = [labelMaterial]
-        label.font = UIFont(name: K.fontFace, size: 11)
+        label.font = UIFont(name: UIFont.fontFace, size: 11)
         
         self.labelNode = SCNNode()
         labelNode.position = SCNVector3(x: position.x, y: position.y + radius, z: position.z)
@@ -140,13 +140,13 @@ struct Planet {
      */
     func animate() {
         let orbitalCenterRotationAction = SCNAction.rotateBy(x: 0,
-                                                             y: orbitalCenterRotationSpeed == nil ? 0 : CGFloat(K.period),
+                                                             y: orbitalCenterRotationSpeed == nil ? 0 : CGFloat(K.Math.period),
                                                              z: 0,
                                                              duration: orbitalCenterRotationSpeed == nil ? 1 : orbitalCenterRotationSpeed!)
         orbitalCenterNode.runAction(SCNAction.repeatForever(orbitalCenterRotationAction), forKey: "revolvePlanet")
         
         let rotationAction = SCNAction.rotateBy(x: 0,
-                                                y: CGFloat(K.period),
+                                                y: CGFloat(K.Math.period),
                                                 z: 0,
                                                 duration: rotationSpeed)
         node.runAction(SCNAction.repeatForever(rotationAction), forKey: "rotatePlanet")
@@ -263,8 +263,8 @@ struct Planet {
      Adds the orbital path of the planet.
      */
     func addOrbitPath() {
-        let orbitalPath = SCNTube(innerRadius: CGFloat(K.hypotenuse(x: node.position.x, z: node.position.z)),
-                                  outerRadius: CGFloat(K.hypotenuse(x: node.position.x, z: node.position.z)),
+        let orbitalPath = SCNTube(innerRadius: CGFloat(K.Math.hypotenuse(x: node.position.x, z: node.position.z)),
+                                  outerRadius: CGFloat(K.Math.hypotenuse(x: node.position.x, z: node.position.z)),
                                   height: 0.001)
         let material = SCNMaterial()
         material.diffuse.contents = UIColor.white.withAlphaComponent(0.8)

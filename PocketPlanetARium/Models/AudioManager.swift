@@ -116,7 +116,7 @@ class AudioManager {
             var audioPlayer = audioItem.player
             
             audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: audioURL))
-            audioPlayer.volume = UserDefaults.standard.bool(forKey: K.userDefaultsKey_SoundIsMuted) ? 0.0 : audioItem.maxVolume
+            audioPlayer.volume = UserDefaults.standard.bool(forKey: UserDefaults.userDefaultsKey_SoundIsMuted) ? 0.0 : audioItem.maxVolume
             audioPlayer.numberOfLoops = audioItem.category == .music ? -1 : 0
             
             return audioPlayer
@@ -194,7 +194,7 @@ class AudioManager {
      */
     func updateVolumes() {
         for (_, item) in audioItems {
-            let volumeToSet: Float = UserDefaults.standard.bool(forKey: K.userDefaultsKey_SoundIsMuted) ? 0.0 : item.maxVolume
+            let volumeToSet: Float = UserDefaults.standard.bool(forKey: UserDefaults.userDefaultsKey_SoundIsMuted) ? 0.0 : item.maxVolume
             
             if item.category == .music {
                 item.player.setVolume(volumeToSet, fadeDuration: 0.25)

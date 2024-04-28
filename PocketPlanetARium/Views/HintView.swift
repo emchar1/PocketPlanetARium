@@ -73,7 +73,7 @@ class HintView: UIView {
         
         if let settingsViewAnchor = settingsViewAnchor {
             bottomAnchorConstraint = settingsViewAnchor.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0)
-            trailingAnchorConstraint = settingsViewAnchor.leadingAnchor.constraint(equalTo: trailingAnchor, constant: 8)
+            trailingAnchorConstraint = settingsViewAnchor.leadingAnchor.constraint(equalTo: trailingAnchor, constant: 12)
 
             bottomAnchorConstraint!.isActive = true
             trailingAnchorConstraint!.isActive = true

@@ -27,14 +27,14 @@ class MenuBezelView: UIView {
     
     private func setupView(showSubLabel: Bool) {
         let bezelRatio: CGFloat = 612/335
-        let possibleWidth = superView.frame.width - 2 * K.padding
-        let possibleHeight = superView.frame.height - 6 * K.padding
-        let width = bezelRatio < K.screenRatio ? possibleWidth : possibleHeight / bezelRatio
-        let height = bezelRatio < K.screenRatio ? possibleWidth * bezelRatio : possibleHeight
+        let possibleWidth = superView.frame.width - 2 * K.ScreenDimensions.padding
+        let possibleHeight = superView.frame.height - 6 * K.ScreenDimensions.padding
+        let width = bezelRatio < K.ScreenDimensions.screenRatio ? possibleWidth : possibleHeight / bezelRatio
+        let height = bezelRatio < K.ScreenDimensions.screenRatio ? possibleWidth * bezelRatio : possibleHeight
         
         frame = CGRect(x: 0, y: 0, width: width, height: height)
         center = CGPoint(x: superView.frame.width / 2, y: superView.frame.height / 2)
-        backgroundColor = K.color900
+        backgroundColor = UIColor.color900
         
         layer.cornerRadius = 18
         layer.shadowColor = UIColor.black.cgColor
@@ -50,7 +50,7 @@ class MenuBezelView: UIView {
         
         label = UILabel(frame: frame)
         label.frame.origin = .zero
-        label.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
+        label.font = UIFont(name: UIFont.fontFace, size: UIFont.fontSizeMenu)
         label.attributedText = attributedString
         label.textColor = .white
         label.numberOfLines = 0
@@ -59,7 +59,7 @@ class MenuBezelView: UIView {
         
         if showSubLabel {
             subLabel = UILabel(frame: CGRect(x: 0, y: height - 40, width: width, height: 40))
-            subLabel!.font = UIFont(name: K.fontFace, size: K.fontSizePeekDetails)
+            subLabel!.font = UIFont(name: UIFont.fontFace, size: UIFont.fontSizePeekDetails)
             subLabel!.textColor = .white
             subLabel!.textAlignment = .center
             subLabel!.text = "(Swipe left to proceed)"

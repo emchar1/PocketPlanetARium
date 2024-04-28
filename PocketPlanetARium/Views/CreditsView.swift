@@ -48,17 +48,11 @@ class CreditsView: UIView {
     
     init(in superView: UIView) {
         self.superView = superView
-        self.creditsLabel = UILabel(frame: CGRect(x: 0,
-                                                  y: 0,
-                                                  width: superView.frame.width,
-                                                  height: superView.frame.height * 1.5 + heightOffset))
+        self.creditsLabel = UILabel(frame: CGRect(x: 0, y: 0, width: superView.frame.width, height: superView.frame.height * 1.5 + heightOffset))
         
-        super.init(frame: CGRect(x: 0,
-                                 y: padding,
-                                 width: superView.frame.width,
-                                 height: superView.frame.height - 2 * padding))
+        super.init(frame: CGRect(x: 0, y: padding, width: superView.frame.width, height: superView.frame.height - 2 * padding))
         
-        backgroundColor = K.color900
+        backgroundColor = UIColor.color900
         layer.masksToBounds = true
         
         let shadowAttribute = NSShadow()
@@ -67,16 +61,16 @@ class CreditsView: UIView {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 8
         let titleAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: K.fontTitle, size: K.fontSizeMenu + 4)!,
+            .font: UIFont(name: UIFont.fontTitle, size: UIFont.fontSizeMenu + 4)!,
             .foregroundColor: UIColor.getRandom(redRange: 175...255, greenRange: 175...255, blueRange: 175...255),
             .shadow: shadowAttribute]
         let textAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: K.fontFace, size: K.fontSizeMenu)!,
+            .font: UIFont(name: UIFont.fontFace, size: UIFont.fontSizeMenu)!,
             .foregroundColor: UIColor.white,
             .paragraphStyle: paragraphStyle]
         let subtitleAttributes: [NSAttributedString.Key: Any] = [
             .underlineStyle: true,
-            .foregroundColor: K.colorIcyBlue]
+            .foregroundColor: UIColor.colorIcyBlue]
         
         let creditsAttributedText = NSMutableAttributedString(string: creditsText, attributes: nil)
         creditsAttributedText.addAttributes(textAttributes, range: NSRange(location: 0, length: creditsText.count))
@@ -94,13 +88,13 @@ class CreditsView: UIView {
         let gradientHeight: CGFloat = 80
         let gradientTop = CAGradientLayer()
         gradientTop.frame = CGRect(x: 0, y: 0, width: frame.width, height: gradientHeight)
-        gradientTop.colors = [K.color900.cgColor, K.color900.withAlphaComponent(0.0).cgColor]
+        gradientTop.colors = [UIColor.color900.cgColor, UIColor.color900.withAlphaComponent(0.0).cgColor]
         gradientTop.locations = [0, 1.0]
         layer.addSublayer(gradientTop)
         
         let gradientBottom = CAGradientLayer()
         gradientBottom.frame = CGRect(x: 0, y: frame.height - gradientHeight, width: frame.width, height: gradientHeight)
-        gradientBottom.colors = [K.color900.withAlphaComponent(0.0).cgColor, K.color900.cgColor]
+        gradientBottom.colors = [UIColor.color900.withAlphaComponent(0.0).cgColor, UIColor.color900.cgColor]
         gradientBottom.locations = [0, 1.0]
         layer.addSublayer(gradientBottom)
                 

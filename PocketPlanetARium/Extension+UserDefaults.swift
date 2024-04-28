@@ -9,6 +9,10 @@
 import Foundation
 
 extension UserDefaults {
+    static let userDefaultsKey_SoundIsMuted = "SoundIsMuted"
+    static let userDefaultsKey_HintsAreOff = "HintsAreOff"
+    static let userDefaultsKey_LaunchedBefore = "LaunchedBefore2.0"
+    
     enum Key: String {
         case reviewWorthyActionCount
         case lastReviewRequestAppVersion

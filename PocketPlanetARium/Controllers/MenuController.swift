@@ -14,7 +14,7 @@ class MenuController: UIViewController {
     
     private var pageController: UIPageViewController!
     private var menuItems: [MenuItem] = MenuItem.allCases
-    private var currentIndex = UserDefaults.standard.bool(forKey: K.userDefaultsKey_LaunchedBefore) ? MenuItem.lastItemIndex : MenuItem.firstItemIndex
+    private var currentIndex = UserDefaults.standard.bool(forKey: UserDefaults.userDefaultsKey_LaunchedBefore) ? MenuItem.lastItemIndex : MenuItem.firstItemIndex
     private var previousIndex: Int?
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
 
@@ -24,7 +24,7 @@ class MenuController: UIViewController {
     override func viewDidLoad() {
         setupPageController()
         
-        UserDefaults.standard.setValue(true, forKey: K.userDefaultsKey_LaunchedBefore)
+        UserDefaults.standard.setValue(true, forKey: UserDefaults.userDefaultsKey_LaunchedBefore)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,7 +35,7 @@ class MenuController: UIViewController {
         pageController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         pageController.dataSource = self
         pageController.delegate = self
-        pageController.view.backgroundColor = K.color500
+        pageController.view.backgroundColor = UIColor.color500
         pageController.view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         
         //Makes this ad hoc pageController a child of MenuController.

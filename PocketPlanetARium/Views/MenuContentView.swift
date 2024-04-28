@@ -37,14 +37,16 @@ class MenuContentView: UIView {
         stackView.distribution = .fillEqually
         stackView.alignment = .fill
         stackView.axis = .vertical
-        
-        addSubview(stackView)
-
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 2 * K.padding),
-                                     stackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: K.padding),
-                                     safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: stackView.bottomAnchor, constant: K.padding),
-                                     safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: K.padding)])
+
+        addSubview(stackView)
+                
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 2 * K.ScreenDimensions.padding),
+            stackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: K.ScreenDimensions.padding),
+            safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: stackView.bottomAnchor, constant: K.ScreenDimensions.padding),
+            safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: K.ScreenDimensions.padding)
+        ])
 
         setupStackTop()
         setupStackBottom()
@@ -70,16 +72,18 @@ class MenuContentView: UIView {
         playerViewController.player = AVPlayer(url: URL(fileURLWithPath: videoURL))
         playerViewController.showsPlaybackControls = false
         playerViewController.player!.actionAtItemEnd = .none
+        playerViewController.view.translatesAutoresizingMaskIntoConstraints = false
 
         view1.addSubview(playerViewController.view)
         
         NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidReachEnd(notification:)), name: .AVPlayerItemDidPlayToEndTime, object: playerViewController.player!.currentItem)
         
-        playerViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([playerViewController.view.leadingAnchor.constraint(equalTo: view1.safeAreaLayoutGuide.leadingAnchor),
-                                     view1.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: playerViewController.view.trailingAnchor),
-                                     playerViewController.view.heightAnchor.constraint(equalToConstant: playerViewController.view.frame.height),
-                                     playerViewController.view.centerYAnchor.constraint(equalTo: view1.safeAreaLayoutGuide.centerYAnchor)])
+        NSLayoutConstraint.activate([
+            playerViewController.view.leadingAnchor.constraint(equalTo: view1.safeAreaLayoutGuide.leadingAnchor),
+            view1.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: playerViewController.view.trailingAnchor),
+            playerViewController.view.heightAnchor.constraint(equalToConstant: playerViewController.view.frame.height),
+            playerViewController.view.centerYAnchor.constraint(equalTo: view1.safeAreaLayoutGuide.centerYAnchor)
+        ])
     }
     
     /**
@@ -91,20 +95,21 @@ class MenuContentView: UIView {
         
         //content label
         contentLabel = UILabel()
-        contentLabel.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
+        contentLabel.font = UIFont(name: UIFont.fontFace, size: UIFont.fontSizeMenu)
         contentLabel.textColor = .white
         contentLabel.textAlignment = .center
         contentLabel.numberOfLines = 0
         contentLabel.text = menuItem.item.description
         contentLabel.alpha = 0.0
+        contentLabel.translatesAutoresizingMaskIntoConstraints = false
         
         view2.addSubview(contentLabel)
         
-        contentLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([contentLabel.topAnchor.constraint(equalTo: view2.safeAreaLayoutGuide.topAnchor,
-                                                                       constant: 2 * K.padding),
-                                     contentLabel.leadingAnchor.constraint(equalTo: view2.safeAreaLayoutGuide.leadingAnchor),
-                                     view2.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: contentLabel.trailingAnchor)])
+        NSLayoutConstraint.activate([
+            contentLabel.topAnchor.constraint(equalTo: view2.safeAreaLayoutGuide.topAnchor, constant: 2 * K.ScreenDimensions.padding),
+            contentLabel.leadingAnchor.constraint(equalTo: view2.safeAreaLayoutGuide.leadingAnchor),
+            view2.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: contentLabel.trailingAnchor)
+        ])
     }
     
     /**

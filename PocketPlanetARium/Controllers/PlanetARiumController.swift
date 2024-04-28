@@ -99,13 +99,13 @@ class PlanetARiumController: UIViewController {
     }
     
     private func setupViews() {
-        view.backgroundColor = K.color500
+        view.backgroundColor = UIColor.color500
 
         let bezelRatio: CGFloat = 612/335
-        let possibleWidth = view.frame.width - 2 * K.padding
-        let possibleHeight = view.frame.height - 6 * K.padding
-        let width = bezelRatio < K.screenRatio ? possibleWidth : possibleHeight / bezelRatio
-        let height = bezelRatio < K.screenRatio ? possibleWidth * bezelRatio : possibleHeight
+        let possibleWidth = view.frame.width - 2 * K.ScreenDimensions.padding
+        let possibleHeight = view.frame.height - 6 * K.ScreenDimensions.padding
+        let width = bezelRatio < K.ScreenDimensions.screenRatio ? possibleWidth : possibleHeight / bezelRatio
+        let height = bezelRatio < K.ScreenDimensions.screenRatio ? possibleWidth * bezelRatio : possibleHeight
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
@@ -116,14 +116,14 @@ class PlanetARiumController: UIViewController {
         
         loadingLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
         loadingLabel.center = view.center
-        loadingLabel.font = UIFont(name: K.fontFace, size: K.fontSizeMenu)
+        loadingLabel.font = UIFont(name: UIFont.fontFace, size: UIFont.fontSizeMenu)
         loadingLabel.attributedText = attributedString
         loadingLabel.textColor = .white
         loadingLabel.numberOfLines = 0
 
         bezelView.frame = CGRect(x: 0, y: 0, width: width, height: height)
         bezelView.center = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
-        bezelView.backgroundColor = K.color900
+        bezelView.backgroundColor = UIColor.color900
         bezelView.layer.cornerRadius = 18
         bezelView.layer.shadowColor = UIColor.black.cgColor
         bezelView.layer.shadowOpacity = 0.3
@@ -149,7 +149,7 @@ class PlanetARiumController: UIViewController {
         zoomScaleSlider.translatesAutoresizingMaskIntoConstraints = false
 
         scaleLabel = UILabel()
-        scaleLabel.font = UIFont(name: K.fontFace, size: K.fontSizePeekDetails)
+        scaleLabel.font = UIFont(name: UIFont.fontFace, size: UIFont.fontSizePeekDetails)
         scaleLabel.textColor = .white
         scaleLabel.translatesAutoresizingMaskIntoConstraints = false
 
@@ -172,13 +172,13 @@ class PlanetARiumController: UIViewController {
         else {
             //This shouldn't ever happen, but just in case, need a default value here...
             NSLayoutConstraint.activate([
-                view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: settingsButtons.bottomAnchor, constant: K.paddingWithAd)
+                view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: settingsButtons.bottomAnchor, constant: K.ScreenDimensions.paddingWithAd)
             ])
         }
         
         NSLayoutConstraint.activate([
             //layout constraints for settingsButtons.bottomAnchor, above
-            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: settingsButtons.trailingAnchor, constant: K.padding),
+            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: settingsButtons.trailingAnchor, constant: K.ScreenDimensions.padding),
 
             zoomScaleSlider.widthAnchor.constraint(equalToConstant: zoomScaleSlider.sliderSize.width),
             zoomScaleSlider.heightAnchor.constraint(equalToConstant: zoomScaleSlider.sliderSize.height),
@@ -245,7 +245,7 @@ class PlanetARiumController: UIViewController {
         }
 
         UIView.animate(withDuration: duration / 2, delay: duration / 2, options: .curveEaseInOut, animations: {
-            self.settingsButtons.alpha = K.masterAlpha
+            self.settingsButtons.alpha = UIColor.masterAlpha
         }, completion: nil)
         
         
@@ -255,7 +255,7 @@ class PlanetARiumController: UIViewController {
         
         
         //Hints
-        if !UserDefaults.standard.bool(forKey: K.userDefaultsKey_HintsAreOff) {
+        if !UserDefaults.standard.bool(forKey: UserDefaults.userDefaultsKey_HintsAreOff) {
             hintDevice.showHint(text: AudioManager.shared.checkForCamera() == .authorized ? "Move your device around until you can see the planets. Try physically walking up to a planet!" : "Camera access is required for proper PlanetARium viewing. Enable this in your device Settings.",
                                 image: "hintDevice",
                                 forDuration: 7.0,
@@ -340,7 +340,7 @@ class PlanetARiumController: UIViewController {
     private func showScaleLabel() {
         let distanceToEarth = planetarium.getDistanceSunTo("Earth", scaleValue: scaleValue)
         
-        scaleLabel.alpha = K.masterAlpha
+        scaleLabel.alpha = UIColor.masterAlpha
         scaleLabel.text = distanceToEarth.text
         scaleLabel.textColor = .systemOrange//distanceToEarth.textColor
         
