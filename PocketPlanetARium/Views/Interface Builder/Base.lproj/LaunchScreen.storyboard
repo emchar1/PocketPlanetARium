@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <device id="retina6_72" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
@@ -14,17 +14,17 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="5PlayApps" translatesAutoresizingMaskIntoConstraints="NO" id="WL9-rg-B9o">
-                                <rect key="frame" x="109" y="338.66666666666669" width="175" height="175.00000000000006"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="5PlayAppsSMff0064" translatesAutoresizingMaskIntoConstraints="NO" id="xzr-fy-d3V">
+                                <rect key="frame" x="90" y="341" width="250" height="250"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="175" id="MhX-fx-JYT">
-                                        <variation key="widthClass=regular" constant="325"/>
+                                    <constraint firstAttribute="height" constant="250" id="3rk-od-6N0">
+                                        <variation key="widthClass=regular" constant="500"/>
                                     </constraint>
-                                    <constraint firstAttribute="width" constant="175" id="rO4-ha-XdC">
-                                        <variation key="widthClass=regular" constant="325"/>
+                                    <constraint firstAttribute="width" constant="250" id="Mp2-b6-6Xg">
+                                        <variation key="widthClass=regular" constant="500"/>
                                     </constraint>
                                 </constraints>
                             </imageView>
@@ -32,8 +32,8 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="WL9-rg-B9o" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="EMW-6m-EKN"/>
-                            <constraint firstItem="WL9-rg-B9o" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="uZT-hR-fGf"/>
+                            <constraint firstItem="xzr-fy-d3V" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="2sT-mi-50h"/>
+                            <constraint firstItem="xzr-fy-d3V" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="gBj-2Z-6Op"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -43,7 +43,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="5PlayApps" width="1365.3333740234375" height="341.33334350585938"/>
+        <image name="5PlayAppsSMff0064" width="341.33334350585938" height="85.333335876464844"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

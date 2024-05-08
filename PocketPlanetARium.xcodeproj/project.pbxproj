@@ -264,7 +264,7 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		EA5272A82BDEF86300B79C9A /* Engines */ = {
+		EA5272A82BDEF86300B79C9A /* Managers */ = {
 			isa = PBXGroup;
 			children = (
 				EA43288B253CC9B800BCD31F /* AudioManager.swift */,
@@ -272,7 +272,7 @@
 				EAD149F62BDBAC8B0047D018 /* NotificationsManager.swift */,
 				EA9100FF25BAABD400733FD9 /* AppStoreReviewManager.swift */,
 			);
-			path = Engines;
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		EA5272A92BDEFB0800B79C9A /* Interface Builder */ = {
@@ -419,7 +419,7 @@
 		EAC1F4CE251320030097521A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				EA5272A82BDEF86300B79C9A /* Engines */,
+				EA5272A82BDEF86300B79C9A /* Managers */,
 				EA5737022536969700CF442B /* MenuItem.swift */,
 				EA5B0C0A2510677E00B1E910 /* Planet.swift */,
 				EA40E9AF252ADFFF00726425 /* PlanetDetails.swift */,
@@ -825,7 +825,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 22;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = LZ8V996BTJ;
 				INFOPLIST_FILE = "PocketPlanetARium/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -849,7 +849,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 22;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = LZ8V996BTJ;
 				INFOPLIST_FILE = "PocketPlanetARium/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -96,6 +96,7 @@ extension AdMobManager : GADBannerViewDelegate {
     
     func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
         print("bannerView:didFailToReceiveAdWithError: \(error.localizedDescription)")
+        print("Error: \(error)")
     }
     
     func bannerViewDidRecordImpression(_ bannerView: GADBannerView) {
