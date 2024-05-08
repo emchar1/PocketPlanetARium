@@ -19,6 +19,7 @@ class CreditsView: UIView {
 
     Art Assets
     Solar System Scope
+    Freepik
     Icons8
 
 
@@ -75,10 +76,10 @@ class CreditsView: UIView {
         let creditsAttributedText = NSMutableAttributedString(string: creditsText, attributes: nil)
         creditsAttributedText.addAttributes(textAttributes, range: NSRange(location: 0, length: creditsText.count))
         creditsAttributedText.addAttributes(titleAttributes, range: NSRange(location: 0, length: 7))
-        creditsAttributedText.addAttributes(subtitleAttributes, range: NSRange(location: 7, length: 14))
-        creditsAttributedText.addAttributes(subtitleAttributes, range: NSRange(location: 49, length: 26))
-        creditsAttributedText.addAttributes(subtitleAttributes, range: NSRange(location: 170, length: 17))
-        creditsAttributedText.addAttributes(subtitleAttributes, range: NSRange(location: 224, length: 10))
+        creditsAttributedText.addAttributes(subtitleAttributes, range: NSRange(location: 10, length: 10))
+        creditsAttributedText.addAttributes(subtitleAttributes, range: NSRange(location: 57, length: 26))
+        creditsAttributedText.addAttributes(subtitleAttributes, range: NSRange(location: 178, length: 16))
+        creditsAttributedText.addAttributes(subtitleAttributes, range: NSRange(location: 232, length: 10))
         
         creditsLabel.attributedText = creditsAttributedText
         creditsLabel.textAlignment = .center
