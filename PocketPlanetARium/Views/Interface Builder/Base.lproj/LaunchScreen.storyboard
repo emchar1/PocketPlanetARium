@@ -29,11 +29,11 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="xzr-fy-d3V" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="2sT-mi-50h"/>
-                            <constraint firstAttribute="trailing" secondItem="xzr-fy-d3V" secondAttribute="trailing" constant="60" id="fUi-yB-thW">
+                            <constraint firstAttribute="trailing" secondItem="xzr-fy-d3V" secondAttribute="trailing" constant="40" id="fUi-yB-thW">
                                 <variation key="widthClass=regular" constant="160"/>
                             </constraint>
                             <constraint firstItem="xzr-fy-d3V" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="gBj-2Z-6Op"/>
-                            <constraint firstItem="xzr-fy-d3V" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="60" id="lDw-M1-6eC">
+                            <constraint firstItem="xzr-fy-d3V" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="40" id="lDw-M1-6eC">
                                 <variation key="widthClass=regular" constant="160"/>
                             </constraint>
                         </constraints>
