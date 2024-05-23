@@ -20,7 +20,7 @@ class NotificationsManager {
         return manager
     }
     
-    private static let shamelessPlug = "Visit 5playapps.com and download our other mobile apps!"
+    private static let shamelessPlug = "Visit 5playapps.com and download our other exciting mobile apps!"
     private let reminderHours: TimeInterval = 12
     
     private let randomFactoids: [String] = [
