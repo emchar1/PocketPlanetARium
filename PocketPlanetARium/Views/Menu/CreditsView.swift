@@ -43,7 +43,7 @@ class CreditsView: UIView {
     
     
     
-    ©2024 5Play Apps
+    ©2024 5Play Apps, LLC
     All rights reserved.
     """
     
