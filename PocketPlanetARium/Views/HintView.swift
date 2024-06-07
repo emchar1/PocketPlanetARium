@@ -55,10 +55,10 @@ class HintView: UIView {
     }
     
     private func setupViews() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(orientationDidChange(_:)),
-                                               name: UIDevice.orientationDidChangeNotification,
-                                               object: nil)
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: #selector(orientationDidChange(_:)),
+//                                               name: UIDevice.orientationDidChangeNotification,
+//                                               object: nil)
     }
     
     private func layoutViews() {
@@ -256,31 +256,31 @@ class HintView: UIView {
     /**
      Handles resizing of the view dimensions upon device orientation changes. Don't really need this I guess...?
      */
-    @objc private func orientationDidChange(_ notification: NSNotification) {
-        //Only need to reposition if settings are expanded and device orientation is portrait or landscape only.
-        guard UIDevice.current.orientation.isValidInterfaceOrientation else {
-            return
-        }
-        
-        topAnchorConstraint!.isActive = false
-        leadingAnchorConstraint!.isActive = false
-
-        if UIDevice.current.orientation.isLandscape {
-            topAnchorConstraint = topAnchor.constraint(equalTo: superView.safeAreaLayoutGuide.topAnchor,
-                                                       constant: leadingAnchorConstant)
-            leadingAnchorConstraint = leadingAnchor.constraint(equalTo: superView.safeAreaLayoutGuide.leadingAnchor,
-                                                               constant: topAnchorConstant)
-        }
-        else {
-            topAnchorConstraint = topAnchor.constraint(equalTo: superView.safeAreaLayoutGuide.topAnchor,
-                                                       constant: topAnchorConstant)
-            leadingAnchorConstraint = leadingAnchor.constraint(equalTo: superView.safeAreaLayoutGuide.leadingAnchor,
-                                                               constant: leadingAnchorConstant)
-        }
-        
-        topAnchorConstraint!.isActive = true
-        leadingAnchorConstraint!.isActive = true
-    }
+//    @objc private func orientationDidChange(_ notification: NSNotification) {
+//        //Only need to reposition if settings are expanded and device orientation is portrait or landscape only.
+//        guard UIDevice.current.orientation.isValidInterfaceOrientation else {
+//            return
+//        }
+//        
+//        topAnchorConstraint?.isActive = false
+//        leadingAnchorConstraint?.isActive = false
+//
+//        if UIDevice.current.orientation.isLandscape {
+//            topAnchorConstraint = topAnchor.constraint(equalTo: superView.safeAreaLayoutGuide.topAnchor,
+//                                                       constant: leadingAnchorConstant)
+//            leadingAnchorConstraint = leadingAnchor.constraint(equalTo: superView.safeAreaLayoutGuide.leadingAnchor,
+//                                                               constant: topAnchorConstant)
+//        }
+//        else {
+//            topAnchorConstraint = topAnchor.constraint(equalTo: superView.safeAreaLayoutGuide.topAnchor,
+//                                                       constant: topAnchorConstant)
+//            leadingAnchorConstraint = leadingAnchor.constraint(equalTo: superView.safeAreaLayoutGuide.leadingAnchor,
+//                                                               constant: leadingAnchorConstant)
+//        }
+//        
+//        topAnchorConstraint?.isActive = true
+//        leadingAnchorConstraint?.isActive = true
+//    }
     
     
 }

@@ -238,10 +238,10 @@ class PlanetARiumController: UIViewController {
             //Enable device rotation only after the bezel finishes animating!
             (UIApplication.shared.delegate as! AppDelegate).supportedOrientations = [.allButUpsideDown]
 
-            NotificationCenter.default.addObserver(self,
-                                                   selector: #selector(self.orientationDidChange(_:)),
-                                                   name: UIDevice.orientationDidChangeNotification,
-                                                   object: nil)
+//            NotificationCenter.default.addObserver(self,
+//                                                   selector: #selector(self.orientationDidChange(_:)),
+//                                                   name: UIDevice.orientationDidChangeNotification,
+//                                                   object: nil)
         }
 
         UIView.animate(withDuration: duration / 2, delay: duration / 2, options: .curveEaseInOut, animations: {
@@ -282,10 +282,10 @@ class PlanetARiumController: UIViewController {
         }
     }
     
-    @objc private func orientationDidChange(_ notification: NSNotification) {
-        bezelView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-        sceneView.frame = bezelView.frame
-    }
+//    @objc private func orientationDidChange(_ notification: NSNotification) {
+//        bezelView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+//        sceneView.frame = bezelView.frame
+//    }
 
     
     // MARK: - Gesture Handling
