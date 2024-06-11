@@ -14,7 +14,6 @@ struct PlanetGroup {
      */
     private var planets: [String : Planet] = [:]
     
-    
     /**
      Adds a planet to the dictionary.
      - parameter planet: the Planet object to add
