@@ -825,7 +825,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 28;
 				DEVELOPMENT_TEAM = LZ8V996BTJ;
 				INFOPLIST_FILE = "PocketPlanetARium/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -849,7 +849,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 28;
 				DEVELOPMENT_TEAM = LZ8V996BTJ;
 				INFOPLIST_FILE = "PocketPlanetARium/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
