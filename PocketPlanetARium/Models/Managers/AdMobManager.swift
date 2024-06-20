@@ -16,6 +16,11 @@ class AdMobManager: NSObject {
 //    // FIXME: - Use correct ID when shipping App!
 //    static let bannerAdUnitID = "ca-app-pub-3940256099942544/2435281174" //FOR TESTING ONLY!!! COMMENT OUT WHEN SHIPPING!
     static let bannerAdUnitID = "ca-app-pub-9970112736079022/9234968288" //THE REAL APPID. USE WHEN SHIPPING!!!
+    
+    //Test Device ID's
+//    static let iPhoneEddie = "3e6fb037c3803580c0f3fa7d30fce576" //Eddie's iPhone 14 Pro
+//    static let iPhoneEddie = "8efe992acf0ecea7399f5ab50a5901e7" //Eddie's phone as of 4/25/24 (why did it change??)
+    static let iPhoneEddie = "f54e34ece3899dee7681b0d2d9e070bd" //Eddie's phone as of 6/19/24 (it changed again?!?!)
 
     static let shared = AdMobManager()
     private(set) var bannerView: GADBannerView?
