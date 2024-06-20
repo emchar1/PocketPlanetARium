@@ -26,7 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Register testing devices here...
         GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [
             "3e6fb037c3803580c0f3fa7d30fce576", //Eddie's iPhone 14 Pro
-            "8efe992acf0ecea7399f5ab50a5901e7" //Eddie's phone as of 4/25/24 (why did it change??)
+            "8efe992acf0ecea7399f5ab50a5901e7", //Eddie's phone as of 4/25/24 (why did it change??)
+            "f54e34ece3899dee7681b0d2d9e070bd" //Eddie's phone as of 6/19/24 (it changed again?!?!)
         ]
 
         //Initialize Google AdMob
