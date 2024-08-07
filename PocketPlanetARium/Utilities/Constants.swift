@@ -31,7 +31,7 @@ struct K {
         /**
          Padding taking into account banner ad at the bottom. As per the documentation guide (https://developers.google.com/admob/ios/banner) the aspect ratio is similar to 320x50 industry standard.
          */
-        static let paddingWithAd: CGFloat = UIScreen.main.bounds.height * (50 / 320) * 0.5
+        static let paddingWithAd: CGFloat = UIScreen.main.bounds.height * (50 / 320) * 0.5 + (UIDevice.isiPad ? 20 : 10)
     }
     
     struct Math {
