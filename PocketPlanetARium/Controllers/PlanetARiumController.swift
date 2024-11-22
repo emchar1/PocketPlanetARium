@@ -475,7 +475,7 @@ extension PlanetARiumController: PlanetPeekViewDelegate {
 extension PlanetARiumController: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         guard let currentFrame = sceneView.session.currentFrame else {
-            print("sceneView.session.currentFrame not available?")
+//            print("sceneView.session.currentFrame not available?")
             return
         }
         

@@ -23,10 +23,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        //Register testing devices here...
+        
+        //IMPORTANT: To get the testing device ID, comment out the below lines, compile and run the app with the testing device attached, and look in the console for the 32-digit code for that particular testing device. It will say something to the effect of, "To get test ads on this device, set..."
         GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [
-            AdMobManager.iPhoneEddie
+            AdMobManager.iPhoneEddie, AdMobManager.iPhoneMom, AdMobManager.iPhoneDad, AdMobManager.iPadMom, AdMobManager.iPadDad
         ]
+        
 
         //Initialize Google AdMob
         GADMobileAds.sharedInstance().start(completionHandler: nil)
